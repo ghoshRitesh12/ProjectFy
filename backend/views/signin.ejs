@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> signin </title>
+</head>
+<body>
+  
+  <h1> 
+    everything is alright
+  </h1>
+
+  <form action="/signin" method="post">
+
+    <label for="emailId"> Email Id </label>
+    <input type="text" name="emailId" id="emailId" required>
+
+    <!-- <# if(data.error.emailId) { %>
+      <div class="emailId__error">
+        emailId required
+      </div>
+    <# } %> -->
+
+    <label for="password"> Password </label>
+    <input type="password" name="password" id="password" required>
+
+    <!-- <# if(data.error.password) { %>
+      <div class="password__error">
+        Password required
+      </div>
+    <# } %> -->
+    
+
+    <button type="submit"> Sign in </button>
+
+  </form>
+
+  <br>
+  <a href="/signup"> SIGN UP </a>
+
+  <p style="display: none;">
+  </p>
+
+  <script defer>
+    // const $ = a => document.querySelector(a);
+
+    // // const toke = JSON.stringify();
+    // // localStorage.setItem(JSON.stringi
+    // // const toke = JSON.stringify(;
+    // console.log($('p').innerHTML);
+
+
+
+    // $('.form').addEventListener('submit', async e => {
+    //   e.preventDefault();
+    //   try {
+    //     const resp = await fetch('/login', {
+    //       method: "POST",
+    //       body: JSON.stringify({
+    //         title: $("[data-title]").value,
+    //         note: $("[data-note]").value
+    //       }),
+    //       headers: {
+    //         "Content-Type": "application/json"
+    //       }
+    //     });
+
+    //     const data = await resp.json();
+    //     console.log(data);
+
+    //   } catch (err) {
+    //     console.log(error);
+    //   }
+    // });
+
+
+  </script>
+
+</body>
+</html>

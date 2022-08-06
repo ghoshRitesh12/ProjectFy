@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Signup </title>
+</head>
+<body>
+  
+  <form action="/signup" method="post">
+
+
+    <label for="firstName"> First Name </label>
+    <input type="text" name="firstName" id="firstName" required>
+    
+    <label for="lastName"> Last Name </label>
+    <input type="text" name="lastName" id="lastName">
+
+    <label for="emailId"> Email Id </label>
+    <input type="text" name="emailId" id="emailId" required>
+
+    <!-- <# if(data.error.emailId) { %>
+      <div class="emailId__error">
+        emailId required
+      </div>
+    <# } %> -->
+
+    <label for="password"> Password </label>
+    <input type="password" name="password" id="password" required>
+
+    <div class="password__error">
+      <%# msg %>
+    </div>
+
+    <label for="confirmPassword"> Confirm Password </label>
+    <input type="password" name="confirmPassword" id="confirmPassword" required>
+    
+
+    <button type="submit"> Create Account </button>
+
+    <h1> 
+      <%= name %>
+    </h1>
+
+    <br>
+    <a href="/signin"> SIGN IN </a>
+
+  </form>
+
+</body>
+</html>
