@@ -32,8 +32,7 @@ const handleSignout = async (req, res) => {
     res.redirect('/signin');
 
   } catch (error) {
-    // console.log(err.message);
-    res.redirect('/singin');
+    res.redirect('/');
   }
 }
 

@@ -37,7 +37,7 @@ app.use(express.urlencoded({ extended: false }));
   app.use('/signout', signoutRouter);
   app.use('/refresh', refreshTokenRouter);
   app.use('/', homeRouter);
-  app.use(userLogout);
+  // app.use(userLogout);
   app.use(verifyJwt);
   app.use('/note', noteRouter);
 

@@ -13,8 +13,7 @@ const userAuth = (req, res, next) => {
   if(!rToken) return res.render('signin');
 
   const acCookie = req.cookies?.access_token;
-  if(!acCookie) return res.redirect('/refresh');
-
+  if(!acCookie) return res.redirect('/refresh'); 
   const aToken = acCookie && acCookie.split(" ")[1];
   if(aToken == null) return res.redirect('/refresh');
 

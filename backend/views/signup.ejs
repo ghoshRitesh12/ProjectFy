@@ -13,19 +13,20 @@
 
     <label for="firstName"> First Name </label>
     <input type="text" name="firstName" id="firstName" required>
-    
+    <br>
     <label for="lastName"> Last Name </label>
     <input type="text" name="lastName" id="lastName">
-
+    <br>
     <label for="emailId"> Email Id </label>
     <input type="text" name="emailId" id="emailId" required>
 
-    <!-- <# if(data.error.emailId) { %>
+    <% if(locals.error_user) { %>
       <div class="emailId__error">
-        emailId required
+        <%= error_user %>
       </div>
-    <# } %> -->
+    <% } %>
 
+    <br>
     <label for="password"> Password </label>
     <input type="password" name="password" id="password" required>
 
@@ -33,15 +34,12 @@
       <%# msg %>
     </div>
 
+    <br>
     <label for="confirmPassword"> Confirm Password </label>
     <input type="password" name="confirmPassword" id="confirmPassword" required>
     
-
+    <br>
     <button type="submit"> Create Account </button>
-
-    <h1> 
-      <%= name %>
-    </h1>
 
     <br>
     <a href="/signin"> SIGN IN </a>

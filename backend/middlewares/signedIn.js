@@ -5,7 +5,7 @@ const signedIn = (req, res, next) => {
 
   const acCookie = req.cookies?.access_token;
   if(acCookie) return res.redirect('back');
-  
+
   // const aToken = acCookie && acCookie.split(" ")[1];
   // if(aToken == null) return res.redirect('/');
 }

@@ -2,10 +2,7 @@ const userModel = require('../models/Users');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const showSignin = async (req, res) => {
-
-  res.render('signin');
-}
+const showSignin = async (req, res) => res.render('signin');
 
 const handleSignin = async (req, res) => {
   const { emailId, password } = req.body;
@@ -14,17 +11,17 @@ const handleSignin = async (req, res) => {
 
   try {
     const foundUser = await userModel.findOne({ email: emailId });
-    if(!foundUser) return res.status(401).json({ 'message': 'Invalid Credentials.' });
+    if(!foundUser) 
+      return res.render('signin', { error_emailId: 'In-correct email id' });
 
     // checking for correct password
     if(await bcrypt.compare(password, foundUser.password)) {
-
       const accessToken = jwt.sign(
         { "uuid": foundUser.uuid },
         process.env.ACCESS_TOKEN_SECRET,
         { expiresIn: '15m' }
       );
-      
+
       const refreshToken = jwt.sign(
         { "uuid": foundUser.uuid },
         process.env.REFRESH_TOKEN_SECRET,
@@ -45,14 +42,11 @@ const handleSignin = async (req, res) => {
         { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 }
       )
 
-      res.redirect('/');
-
-    } else {
-      return res.status(401).json({ 'message': 'Invalid Credentials' });
-    }
+      return res.redirect('/');
+    } 
+    return res.render('signin', { error_password: 'Invalid Password' });
 
   } catch (err) {
-    console.log(err.message);
     res.redirect('/signin');
   }
 }

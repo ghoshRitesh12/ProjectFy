@@ -55,9 +55,10 @@
 
   
   <% let c=0; %>
-  <% notes.forEach(item => { %>
+  <% if(locals.notes) { %>
 
-    <% if(item) { %>
+    <% notes.forEach(item => { %>
+
   
       <br>
       <a href="/note?id=<%= item._id %>">
@@ -68,10 +69,11 @@
 
       </a>
       <br>
-
-    <% } %>
   
-  <% }); %>
+    <% }); %>
+
+  <% } %>
+  
   
   <br>
   <form action="/signout" method="post">

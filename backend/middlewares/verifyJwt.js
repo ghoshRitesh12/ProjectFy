@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 function verifyJwt(req, res, next) {
   const rToken = req.cookies?.refresh_token;
   if(!rToken) return res.redirect('/signin');
-
+  
   const acCookie = req.cookies?.access_token;
   if(!acCookie) return res.redirect('/refresh');
   const aToken = acCookie && acCookie.split(" ")[1];

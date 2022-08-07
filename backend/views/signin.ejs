@@ -17,20 +17,22 @@
     <label for="emailId"> Email Id </label>
     <input type="text" name="emailId" id="emailId" required>
 
-    <!-- <# if(data.error.emailId) { %>
+    <% if(locals.error_emailId) { %>
       <div class="emailId__error">
-        emailId required
+        <%= error_emailId %>
       </div>
-    <# } %> -->
+    <% } %>
 
     <label for="password"> Password </label>
     <input type="password" name="password" id="password" required>
+    
+    
 
-    <!-- <# if(data.error.password) { %>
-      <div class="password__error">
-        Password required
+    <% if(locals.error_password) { %>
+      <div class="password_error">
+        <%= error_password %>
       </div>
-    <# } %> -->
+    <% } %>
     
 
     <button type="submit"> Sign in </button>
