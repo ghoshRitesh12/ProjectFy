@@ -2,18 +2,18 @@ const jwt = require('jsonwebtoken');
 const userModel = require('../models/Users');
 
 const handleRefreshToken = async (req, res) => {
-  const rjwt = req.cookies?.rjwt;
-  if(!rjwt) { 
+  const rToken = req.cookies?.refresh_token;
+  if(!rToken) { 
     console.log('refresh Token not present');
     return res.redirect('/signin');
   }
 
   try {
-    const foundUser = await userModel.findOne({ refreshToken: rjwt });
+    const foundUser = await userModel.findOne({ refreshToken: rToken });
     if(!foundUser) return res.redirect('/signin');
 
     jwt.verify(
-      rjwt,
+      rToken,
       process.env.REFRESH_TOKEN_SECRET,
       (err, decoded) => {
         if(err || decoded.uuid !== foundUser.uuid) 
@@ -26,13 +26,13 @@ const handleRefreshToken = async (req, res) => {
         )
 
         res.cookie(
-          'ajwt',
-          newAccessToken,
+          'access_token',
+          `Bearer ${newAccessToken}`,
           { httpOnly: true, maxAge: 15 * 60 * 1000 }
         )
 
         // res.redirect('.');
-        res.redirect('..');
+        res.redirect('back');
 
       }
     )

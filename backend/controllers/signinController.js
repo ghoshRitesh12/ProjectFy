@@ -35,12 +35,12 @@ const handleSignin = async (req, res) => {
       await foundUser.save();
 
       res.cookie(
-        'ajwt',
-        accessToken,
+        'access_token',
+        `Bearer ${accessToken}`,
         { httpOnly: true, maxAge: 15 * 60 * 1000 }
       )
       res.cookie(
-        'rjwt',
+        'refresh_token',
         refreshToken,
         { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 }
       )

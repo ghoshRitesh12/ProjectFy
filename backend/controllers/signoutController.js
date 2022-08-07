@@ -1,14 +1,14 @@
 const userModel = require('../models/Users');
 
 const handleSignout = async (req, res) => {
-  const rjwt = req.cookies?.rjwt;
-  if(!rjwt) {
+  const rToken = req.cookies?.refresh_token;
+  if(!rToken) {
     res.clearCookie(
-      'rjwt',
+      'refresh_token',
       { httpOnly: true }
     )
     res.clearCookie(
-      'ajwt',
+      'access_token',
       { httpOnly: true }
     )
 
@@ -16,16 +16,16 @@ const handleSignout = async (req, res) => {
   }
 
   try {
-    const foundUser = await userModel.findOne({ refreshToken: rjwt });
+    const foundUser = await userModel.findOne({ refreshToken: rToken });
     foundUser.refreshToken = "";
     await foundUser.save();
 
     res.clearCookie(
-      'rjwt',
+      'refresh_token',
       { httpOnly: true }
     )
     res.clearCookie(
-      'ajwt',
+      'access_token',
       { httpOnly: true }
     )
 

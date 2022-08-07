@@ -1,20 +1,29 @@
 const jwt = require('jsonwebtoken');
 
 const userLogout = (req, res, next) => {
-  const rjwt = req.cookies?.rjwt;
-  if(!rjwt) return res.redirect('/signin');
+  const rToken = req.cookies?.refresh_token;
+  if(!rToken) return res.redirect('/signin');
 
   next();
 }
 
 // user Auth for rendering index.ejs and signin.ejs according to auth condition
 const userAuth = (req, res, next) => {
-  const rjwt = req.cookies?.rjwt;
-  if(!rjwt) return res.render('signin');
+  const rToken = req.cookies?.refresh_token;
+  if(!rToken) return res.render('signin');
 
-  const aToken = req.cookies?.ajwt;
-  if(!aToken) return res.redirect('/refresh');
+  const acCookie = req.cookies?.access_token;
+  if(!acCookie) return res.redirect('/refresh');
 
+  const aToken = acCookie && acCookie.split(" ")[1];
+  if(aToken == null) return res.redirect('/refresh');
+
+  jwt.verify(
+    rToken,
+    process.env.REFRESH_TOKEN_SECRET,
+    (err, decoded) => { if (err) return res.redirect('/signin'); }
+  )
+  
   jwt.verify(
     aToken,
     process.env.ACCESS_TOKEN_SECRET,

@@ -1,11 +1,19 @@
 const jwt = require('jsonwebtoken');
 
 function verifyJwt(req, res, next) {
-  const rjwt = req.cookies?.rjwt;
-  if(!rjwt) return res.redirect('/signin');
+  const rToken = req.cookies?.refresh_token;
+  if(!rToken) return res.redirect('/signin');
 
-  const aToken = req.cookies?.ajwt;
-  if(!aToken) return res.redirect('/refresh');
+  const acCookie = req.cookies?.access_token;
+  if(!acCookie) return res.redirect('/refresh');
+  const aToken = acCookie && acCookie.split(" ")[1];
+  if(aToken == null) return res.redirect('/refresh');
+
+  jwt.verify(
+    rToken,
+    process.env.REFRESH_TOKEN_SECRET,
+    (err, decoded) => { if (err) return res.redirect('/signin'); }
+  )
 
   jwt.verify(
     aToken,
