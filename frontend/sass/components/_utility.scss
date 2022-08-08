@@ -1,0 +1,29 @@
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center {
+    display: grid;
+    place-items: center;
+}
+
+.hidden {
+    visibility: hidden;
+}/*-- End General Styles --*/
+
+.skeleton {
+    animation: skeleton-loading 1s linear infinite alternate;
+
+}
+
+@keyframes skeleton-loading {
+    0% { 
+        background-color: hsl(0, 0%, 30%); 
+    }    
+
+    100% {
+        background-color: hsl(0, 0%, 20%); 
+    }
+}

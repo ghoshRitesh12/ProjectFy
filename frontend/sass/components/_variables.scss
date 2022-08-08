@@ -1,0 +1,43 @@
+/* open-sans-regular - latin */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local(''),
+         url('../fonts/open-sans-v28-latin-regular.woff2') format('woff2'),
+         url('../fonts/open-sans-v28-latin-regular.woff') format('woff'); 
+}
+  
+/* open-sans-500 - latin */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 500;
+    src: local(''),
+         url('../fonts/open-sans-v28-latin-500.woff2') format('woff2'), 
+         url('../fonts/open-sans-v28-latin-500.woff') format('woff'); 
+}
+
+/* ubuntu-500 - latin */
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 500;
+  src: local(''),
+       url('../fonts/ubuntu-v19-latin-500.woff2') format('woff2'), 
+       url('../fonts/ubuntu-v19-latin-500.woff') format('woff'); 
+}
+
+
+$content-width: 87rem;
+// $primary-clr: #2d2a31;
+$primary-clr: #1c1c1c;
+$primary-clr2: #381d74;
+$primary-clr-gradient: linear-gradient(to top, #381d74, #253686, #064b94, #005e9d, #0070a3);
+$ubuntu: 'Ubuntu', sans-serif;
+$openSans: "Open Sans", sans-serif;
+$accent-clr: hsl(0, 100%, 70%);
+$borders: .4rem;
+
+
+// $primary-clr: transparent;

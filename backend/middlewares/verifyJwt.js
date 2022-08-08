@@ -1,13 +1,14 @@
 const jwt = require('jsonwebtoken');
 
-function verifyJwt(req, res, next) {
+const verifyJwt = (req, res, next) => {
+
   const rToken = req.cookies?.refresh_token;
   if(!rToken) return res.redirect('/signin');
   
   const acCookie = req.cookies?.access_token;
-  if(!acCookie) return res.redirect('/refresh');
+  if(!acCookie) return res.redirect(`/refresh?pth=${req.originalUrl}`);
   const aToken = acCookie && acCookie.split(" ")[1];
-  if(aToken == null) return res.redirect('/refresh');
+  if(aToken == null) return res.redirect(`/refresh?pth=${req.originalUrl}`);
 
   jwt.verify(
     rToken,

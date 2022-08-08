@@ -1,0 +1,44 @@
+/*-- General Styles --*/
+*, 
+*::before, 
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    overscroll-behavior: auto;
+    scroll-behavior: smooth;
+}
+
+body {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+}
+
+svg { display: block; }
+
+img {
+    object-fit: cover;
+    max-width: 100%;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+a { text-decoration: none; }
+
+input, button,
+textarea, select {
+    font: inherit;
+}
+
+// p, 
+// h1, h2, 
+// h3, h4,
+// h5, h6 {
+//     overflow-wrap: break-word;
+// }

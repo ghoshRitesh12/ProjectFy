@@ -1,19 +1,15 @@
 const jwt = require('jsonwebtoken');
 
-const userLogout = (req, res, next) => {
-  const rToken = req.cookies?.refresh_token;
-  if(!rToken) return res.redirect('/signin');
-
-  next();
-}
-
 // user Auth for rendering index.ejs and signin.ejs according to auth condition
 const userAuth = (req, res, next) => {
   const rToken = req.cookies?.refresh_token;
   if(!rToken) return res.render('signin');
 
   const acCookie = req.cookies?.access_token;
-  if(!acCookie) return res.redirect('/refresh'); 
+  if(!acCookie) {
+    console.log('redirected to refresh');
+    return res.redirect('/refresh'); 
+  }
   const aToken = acCookie && acCookie.split(" ")[1];
   if(aToken == null) return res.redirect('/refresh');
 
@@ -35,4 +31,4 @@ const userAuth = (req, res, next) => {
   )
 }
 
-module.exports = { userAuth, userLogout }
+module.exports = { userAuth }

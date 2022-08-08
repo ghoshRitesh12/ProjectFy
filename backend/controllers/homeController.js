@@ -7,7 +7,10 @@ const getHome = async (req, res) => {
 
   try {
     const notes = await notesModel.find({ userId: uuid });
-    if(!notes) return res.render('index', { error: `Wow so empty :(` });
+    if(!notes) {
+      console.log("XD",notes);
+      return res.render('index', { error: `Wow so empty :(` });
+    }
 
     res.render('index', { notes });
 

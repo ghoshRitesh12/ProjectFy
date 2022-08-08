@@ -2,19 +2,32 @@ const jwt = require('jsonwebtoken');
 const userModel = require('../models/Users');
 
 const handleRefreshToken = async (req, res) => {
+  const { pth } = req.query;
+
+  const aToken = req.cookies?.access_token;
+  if(aToken) return res.redirect('/');
+
   const rToken = req.cookies?.refresh_token;
-  if(!rToken) return res.redirect('/signin');
+  if(!rToken) { 
+    console.log('no rtoken');
+    return res.redirect('/signin'); 
+  }
 
   try {
     const foundUser = await userModel.findOne({ refreshToken: rToken }); 
-    if(!foundUser) return res.redirect('/signin');
+    if(!foundUser) { 
+      console.log('no found user');
+      return res.redirect('/signin');
+    }
 
     jwt.verify(
       rToken,
       process.env.REFRESH_TOKEN_SECRET,
-      (err, decoded) => {
-        if(err || decoded.uuid !== foundUser.uuid) 
+      async (err, decoded) => {
+        if(err || decoded.uuid !== foundUser.uuid) {
+          console.log('rToken invalid');
           return res.redirect('/signin');
+        }
 
         const newAccessToken = jwt.sign(
           { "uuid": decoded.uuid },
@@ -22,13 +35,14 @@ const handleRefreshToken = async (req, res) => {
           { expiresIn: '15m' }
         )
 
-        res.cookie(
+        await res.cookie(
           'access_token',
           `Bearer ${newAccessToken}`,
           { httpOnly: true, maxAge: 15 * 60 * 1000 }
         )
 
-        res.redirect('back');
+        if(!pth) return res.redirect('back');
+        return res.redirect(pth);
       }
     )
   } catch (err) {
