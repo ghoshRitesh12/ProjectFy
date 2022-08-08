@@ -2,7 +2,7 @@ const genUUID = require('../config/genUUID');
 const userModel = require('../models/Users');
 const bcrypt = require('bcrypt');
 
-const showSignup = async (req, res) => res.render('signup');
+const showSignup = (req, res) => res.render('signup');
 
 const handleSignup = async (req, res) => {
   const { 

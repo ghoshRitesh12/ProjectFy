@@ -7,7 +7,7 @@ const signedIn = (req, res, next) => {
 
   const acCookie = req.cookies?.access_token;
   if(!acCookie) return res.redirect('/refresh');
-  return res.redirect('back');
+  return res.redirect('/');
 }
 
 module.exports = signedIn;

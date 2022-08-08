@@ -16,7 +16,7 @@ const homeRouter = require('./routes/home');
 const noteRouter = require('./routes/note');
 
 // middlewares
-const verifyJwt = require('./middlewares/verifyJwt');
+const userAuth = require('./middlewares/userAuth');
 
 // for changing the views directory to look in 
 app.set('views', path.join(__dirname,'.', 'views'));
@@ -35,7 +35,7 @@ app.use(express.urlencoded({ extended: false }));
   app.use('/signin', signinRouter);
   app.use('/signout', signoutRouter);
   app.use('/refresh', refreshTokenRouter);
-  app.use(verifyJwt);
+  app.use(userAuth);
   app.use('/', homeRouter);
   app.use('/note', noteRouter);
 
