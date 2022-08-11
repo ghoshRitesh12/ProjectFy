@@ -17,7 +17,7 @@
     <input type="text" name="lastName" id="lastName">
     <br>
     <label for="emailId"> Email Id </label>
-    <input type="text" name="emailId" id="emailId" required>
+    <input type="email" name="emailId" id="emailId" required>
 
     <% if(locals.error_user) { %>
       <div class="emailId__error">
@@ -29,15 +29,16 @@
     <label for="password"> Password </label>
     <input type="password" name="password" id="password" required>
 
-    <div class="password__error"> </div>
+    <span class="password__error"></span>
 
     <br>
     <label for="confirmPassword"> Confirm Password </label>
     <input type="password" name="confirmPassword" id="confirmPassword" required>
     
-    <br>
+    <br> <br>
     <button type="submit"> Create Account </button>
 
+    <br>
     <br>
     <a href="/signin"> SIGN IN </a>
 
