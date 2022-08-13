@@ -6,81 +6,81 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> signin </title>
 
+  <link rel="stylesheet" href="css/signinStyles.css">
+
   <script src="js/app.js" type="module"></script>
 </head>
+
 <body>
-  
-  <h1> 
-    everything is alright
-  </h1>
-
-  <form action="/signin" method="post">
-
-    <label for="emailId"> Email Id </label>
-    <input type="email" name="emailId" id="emailId" required>
-
-    <% if(locals.error_emailId) { %>
-      <div class="emailId__error">
-        <%= error_emailId %>
-      </div>
-    <% } %>
-
-    <label for="password"> Password </label>
-    <input type="password" name="password" id="password" required>
-    
-    
-
-    <% if(locals.error_password) { %>
-      <div class="password_error">
-        <%= error_password %>
-      </div>
-    <% } %>
-    
-
-    <button type="submit"> Sign in </button>
-
-  </form>
-
-  <br>
-  <a href="/signup"> SIGN UP </a>
-
-  <p style="display: none;">
-  </p>
-
-  <script defer>
-    // const $ = a => document.querySelector(a);
-
-    // // const toke = JSON.stringify();
-    // // localStorage.setItem(JSON.stringi
-    // // const toke = JSON.stringify(;
-    // console.log($('p').innerHTML);
 
 
+  <section id="root">
 
-    // $('.form').addEventListener('submit', async e => {
-    //   e.preventDefault();
-    //   try {
-    //     const resp = await fetch('/login', {
-    //       method: "POST",
-    //       body: JSON.stringify({
-    //         title: $("[data-title]").value,
-    //         note: $("[data-note]").value
-    //       }),
-    //       headers: {
-    //         "Content-Type": "application/json"
-    //       }
-    //     });
+    <div class="signin">
 
-    //     const data = await resp.json();
-    //     console.log(data);
+      <section class="signin__form-wrapper">
 
-    //   } catch (err) {
-    //     console.log(error);
-    //   }
-    // });
+        <form class="signin__form" action="/signin" method="post">
 
+          <div class="signin__form__email-wrapper">
+            Email<sup>*</sup>
+            <input class="signin__form__email" type="email" name="emailId" spellcheck="false" autocapitalize="none"
+              aria-label="email id" placeholder="name@company.com" required>
+            <% if(locals.error_emailId) { %>
+              <div class="emailId__error">
+                <%= error_emailId %>
+              </div>
+              <% } %>
+          </div>
 
-  </script>
+          <div class="signin__form__password-wrapper">
+            Password<sup>*</sup>
+            <input class="signin__form__password" type="password" name="password" aria-label="password" id="password"
+              placeholder="your password" required>
+
+            <em class="signin__form__show-password"> show </em>
+            <% if(locals.error_password) { %>
+            <div class="password_error">
+              <%= error_password %>
+            </div>
+             <% } %>
+          </div>
+
+          <button class="signin__form__submit-btn" type="submit"> Sign in </button>
+
+        </form>
+
+        <div class="signin__form--signupurl">
+
+          Don't have an account?
+          <a href="/signup"> Create one instead </a>
+
+        </div>
+
+      </section>
+
+      <figure class="signin__pic-eg">
+
+        <!-- <figcaption class="signin__pic-eg__caption">
+          bruh this a good notes app and maybe
+          I'll add the reminders feature
+        </figcaption> -->
+
+        <section class="signin__pic-eg__img-wrap">
+          <!-- <img class="signin__pic-eg__img"
+            src="https://images.unsplash.com/photo-1622737133809-d95047b9e673?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80"
+            alt="to-notes app demo image"> -->
+          <img class="signin__pic-eg__img"
+            src="https://cdn.dribbble.com/users/6395823/screenshots/15558762/media/59b986de0edcf301170aba02e9550ebd.png?compress=1&resize=1000x750&vertical=top"
+            alt="to-notes app demo image">
+        </section>
+
+      </figure>
+
+    </div>
+
+  </section>
 
 </body>
+
 </html>

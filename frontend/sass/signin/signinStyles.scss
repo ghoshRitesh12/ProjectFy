@@ -1,1 +1,116 @@
 @use '../components/' as *;
+
+/* Custom styles */
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  font-family: sans-serif;
+}
+
+textarea {
+  margin-inline: auto;
+  resize: none;
+  min-height: 5rem;
+  min-width: 50%;
+
+}
+
+.accent {
+  color: #784fd8;
+}
+
+
+.signin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex-direction: row;
+
+  &__form--wrapper {
+    display: block;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    // font-family: $font--baloo;
+    // outline: 1px solid salmon;
+
+    &--email-wrapper {
+      width: 100%;
+    }
+    &--email {
+      display: block;
+      margin-top: .4rem;
+      padding: .55em .75em;
+      width: 100%;
+
+      font-size: 1rem;
+      border: none;
+      outline: 1px solid #222;
+      border-radius: $borders;
+
+      &:focus {
+        outline: 2px solid hsl(258, 64%, 58%);
+      }
+
+      &:focus .signin__form {
+        color: green;
+        background-color: #222;
+      }
+    }
+
+    &--password-wrapper {
+      width: 100%;
+    }
+    &--password {
+      display: block;
+      margin-top: .4rem;
+      padding: .55em .75em;
+      width: 100%;
+
+      font-size: 1rem;
+      border: none;
+      outline: 1px solid #222;
+      border-radius: $borders;
+
+      &:focus {
+        border: none;
+        outline: 2px solid hsl(258, 64%, 58%);
+      }
+    }
+
+    &--submit-btn {
+      display: block;
+      font-size: 1.1rem;
+      padding: .6em .75em;
+      
+      text-align: center;
+      font-weight: 500;
+      border: none;
+      border-radius: $borders;
+      color: hsl(258, 64%, 58%);
+      background-color: hsla(258, 64%, 60%, 0.3);
+    }
+  }
+  
+  &__form--signupurl {
+    margin-top: 3rem;
+
+    & a {
+      color: #7e56da;
+    }
+  }
+
+  // signin: wallpaper
+  &__image {
+    display: block;
+  }
+
+}

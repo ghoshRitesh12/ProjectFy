@@ -26,6 +26,10 @@ a {
   text-decoration: none;
 }
 
+button {
+  cursor: pointer;
+}
+
 img, svg {
   display: block;
   -o-object-fit: cover;
@@ -64,4 +68,157 @@ textarea {
 
 .hidden {
   visibility: hidden;
-}/*# sourceMappingURL=signinStyles.css.map */
+}
+
+/* baloo-2-regular */
+@font-face {
+  font-family: "Baloo 2";
+  font-style: normal;
+  font-weight: 400;
+  src: local("../../frontend/public/fonts/baloo-2-v14-latin-regular.woff"), url("../fonts/baloo-2-v14-latin-regular.woff2") format("woff2"), url("../fonts/baloo-2-v14-latin-regular.woff") format("woff");
+}
+/* Custom styles */
+body {
+  font-family: sans-serif;
+}
+
+textarea {
+  margin-inline: auto;
+  resize: none;
+  min-height: 5rem;
+  min-width: 50%;
+}
+
+.accent {
+  color: hsl(199deg, 100%, 40%);
+}
+
+#root {
+  display: block;
+  margin-inline: auto;
+  padding: 0rem 1.5rem;
+  min-height: 100vh;
+  isolation: isolate;
+}
+@media (min-width: 64em) {
+  #root {
+    max-width: 100%;
+    width: 100%;
+    padding: 0rem 2rem;
+  }
+}
+
+.signin {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row;
+  min-height: inherit;
+  gap: 2rem;
+}
+.signin__form-wrapper {
+  width: 100%;
+  max-width: 20%;
+}
+.signin__form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.5rem;
+  min-width: 100%;
+}
+.signin__form__email-wrapper {
+  width: 100%;
+}
+.signin__form__email {
+  display: block;
+  margin-top: 0.4rem;
+  padding: 0.55em 0.75em;
+  width: 100%;
+  font-size: 1rem;
+  border: none;
+  outline: 1px solid #222;
+  border-radius: 0.4rem;
+}
+.signin__form__email:focus {
+  outline: 2px solid hsl(199deg, 100%, 50%);
+}
+.signin__form__password-wrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 0.7rem;
+}
+.signin__form__password {
+  display: block;
+  margin-top: 0.4rem;
+  padding: 0.55em 0.75em;
+  width: 100%;
+  font-size: 1rem;
+  border: none;
+  outline: 1px solid #222;
+  border-radius: 0.4rem;
+}
+.signin__form__password:focus {
+  border: none;
+  outline: 2px solid hsl(199deg, 100%, 50%);
+}
+.signin__form__show-password {
+  position: absolute;
+  right: 3%;
+  bottom: 10%;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  opacity: 0;
+  pointer-events: none;
+  cursor: pointer;
+  transition: 0.2s opacity;
+}
+.signin__form__show-password.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+.signin__form__submit-btn {
+  display: block;
+  font-size: 1.1rem;
+  padding: 0.45em 0.75em;
+  text-align: center;
+  font-weight: 500;
+  border: none;
+  border-radius: 0.4rem;
+  color: hsl(199deg, 100%, 38%);
+  background-color: hsla(199deg, 100%, 50%, 0.3);
+  transition: 0.3s background-color, 0.3s color;
+}
+.signin__form__submit-btn:hover {
+  background-color: hsla(199deg, 100%, 50%, 0.45);
+}
+.signin__form--signupurl {
+  display: block;
+  margin-top: 3rem;
+  margin-left: auto;
+}
+.signin__form--signupurl a {
+  color: #7e56da;
+}
+.signin__pic-eg {
+  display: none;
+  min-height: inherit;
+}
+@media (min-width: 64em) {
+  .signin__pic-eg {
+    display: block;
+  }
+}
+.signin__pic-eg__caption {
+  font-size: 1.1rem;
+}
+.signin__pic-eg__img-wrap {
+  display: grid;
+  place-items: center;
+  min-height: inherit;
+}
+.signin__pic-eg__img {
+  height: 100%;
+}/*# sourceMappingURL=signinPage.css.map */
