@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> signin </title>
+  <title> <%= info.title %> </title>
 
   <link rel="stylesheet" href="css/signinStyles.css">
 
@@ -13,37 +13,79 @@
 
 <body>
 
-
   <section id="root">
 
     <div class="signin">
 
       <section class="signin__form-wrapper">
 
+        <div class="signin__form-header">
+          <h1 class="login-text"> Sign in </h1>
+          Enter your credentials to access your account
+        </div>
+
         <form class="signin__form" action="/signin" method="post">
 
           <div class="signin__form__email-wrapper">
-            Email<sup>*</sup>
+            Email address
             <input class="signin__form__email" type="email" name="emailId" spellcheck="false" autocapitalize="none"
-              aria-label="email id" placeholder="name@company.com" required>
-            <% if(locals.error_emailId) { %>
-              <div class="emailId__error">
-                <%= error_emailId %>
+              aria-label="email id" placeholder="name@company.com" required
+              value="<%= info.emailId %>" />
+
+            <% if(locals.info.err.emailId !== null) { %>
+              <div class="signin__form__field--error">
+                <span> <%= info.err.emailId %> </span>
+                <span class="field_error-cross">x</span>
               </div>
               <% } %>
           </div>
 
           <div class="signin__form__password-wrapper">
-            Password<sup>*</sup>
-            <input class="signin__form__password" type="password" name="password" aria-label="password" id="password"
-              placeholder="your password" required>
+            Password
+            <section class="signin__form__password-cont">
+              <input class="signin__form__password" type="password" name="password" aria-label="password" id="password"
+                placeholder="min 8 chars" value="<%= info.pwd %>" required/>
+                <!-- placeholder="your password" minlength="8"  required/> -->
 
-            <em class="signin__form__show-password"> show </em>
-            <% if(locals.error_password) { %>
-            <div class="password_error">
-              <%= error_password %>
-            </div>
-             <% } %>
+              <div class="signin__form__show-password hidePwd"> <!-- showPwd hidePwd -->
+
+                <span class="pwd-hide">
+                  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
+                    preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                    <rect x="0" y="0" width="24" height="24" fill="none" stroke="none" />
+                    <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                      stroke-width="2">
+                      <path
+                        d="M6.873 17.129c-1.845-1.31-3.305-3.014-4.13-4.09a1.693 1.693 0 0 1 0-2.077C4.236 9.013 7.818 5 12 5c1.876 0 3.63.807 5.13 1.874" />
+                      <path
+                        d="M14.13 9.887a3 3 0 1 0-4.243 4.242M4 20L20 4M10 18.704A7.124 7.124 0 0 0 12 19c4.182 0 7.764-4.013 9.257-5.962a1.694 1.694 0 0 0-.001-2.078A22.939 22.939 0 0 0 19.57 9" />
+                    </g>
+                  </svg>
+                </span>
+
+                <span class="pwd-show">
+                  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
+                    preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                    <rect x="0" y="0" width="24" height="24" fill="none" stroke="none" />
+                    <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                      stroke-width="2">
+                      <path
+                        d="M21.257 10.962c.474.62.474 1.457 0 2.076C19.764 14.987 16.182 19 12 19c-4.182 0-7.764-4.013-9.257-5.962a1.692 1.692 0 0 1 0-2.076C4.236 9.013 7.818 5 12 5c4.182 0 7.764 4.013 9.257 5.962Z" />
+                      <circle cx="12" cy="12" r="3" />
+                    </g>
+                  </svg>
+                </span>
+
+              </div>
+            </section>
+
+            <% if(locals.info.err.password !== null) { %>
+              <div class="signin__form__field--error">
+                <span> <%= info.err.password %> </span>
+                <span class="field_error-cross">x</span>
+              </div>
+            <% } %>
+
           </div>
 
           <button class="signin__form__submit-btn" type="submit"> Sign in </button>
@@ -53,7 +95,7 @@
         <div class="signin__form--signupurl">
 
           Don't have an account?
-          <a href="/signup"> Create one instead </a>
+          <a href="/signup"> Create one </a>
 
         </div>
 

@@ -70,6 +70,10 @@ textarea {
   visibility: hidden;
 }
 
+.full-hide {
+  display: none;
+}
+
 /* baloo-2-regular */
 @font-face {
   font-family: "Baloo 2";
@@ -77,6 +81,10 @@ textarea {
   font-weight: 400;
   src: local("../../frontend/public/fonts/baloo-2-v14-latin-regular.woff"), url("../fonts/baloo-2-v14-latin-regular.woff2") format("woff2"), url("../fonts/baloo-2-v14-latin-regular.woff") format("woff");
 }
+span svg {
+  pointer-events: none;
+}
+
 /* Custom styles */
 body {
   font-family: sans-serif;
@@ -89,16 +97,13 @@ textarea {
   min-width: 50%;
 }
 
-.accent {
-  color: hsl(199deg, 100%, 40%);
-}
-
 #root {
   display: block;
   margin-inline: auto;
-  padding: 0rem 1.5rem;
+  padding: 0rem 1.2rem;
   min-height: 100vh;
   isolation: isolate;
+  background-color: #fff;
 }
 @media (min-width: 64em) {
   #root {
@@ -111,30 +116,87 @@ textarea {
 .signin {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  flex-direction: row;
+  justify-content: flex-end;
+  flex-direction: column-reverse;
+  gap: 1.7rem;
   min-height: inherit;
-  gap: 2rem;
+}
+@media (min-width: 64em) {
+  .signin {
+    justify-content: space-evenly;
+    flex-direction: row;
+    gap: 2rem;
+  }
+}
+.signin__form-header {
+  margin-bottom: 2.5rem;
+  color: #444;
+  text-align: left;
+  font-size: 1.1rem;
+}
+@media (min-width: 64em) {
+  .signin__form-header {
+    margin-bottom: 4rem;
+  }
+}
+.signin__form-header .login-text {
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3.5vmin, 2rem);
+  margin-bottom: 1rem;
 }
 .signin__form-wrapper {
   width: 100%;
-  max-width: 20%;
+  flex-grow: 3;
+  flex-shrink: 1;
+  color: #444;
+}
+@media (min-width: 64em) {
+  .signin__form-wrapper {
+    max-width: 20%;
+  }
 }
 .signin__form {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2rem;
   min-width: 100%;
+}
+@media (min-width: 64em) {
+  .signin__form {
+    gap: 1.5rem;
+    min-width: 100%;
+  }
+}
+.signin__form__field--error {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: hsl(0deg, 100%, 65%);
+  background-color: hsla(0deg, 100%, 66%, 0.2);
+  border-radius: 0.6rem;
+  font-size: 0.95rem;
+  margin-top: 1rem;
+  padding: 0.25em 1em;
+  width: 100%;
+}
+.signin__form__field--error.show-error {
+  display: flex;
+}
+.signin__form__field--error .field_error-cross {
+  cursor: pointer;
 }
 .signin__form__email-wrapper {
   width: 100%;
+  font-weight: 600;
+  color: #444;
 }
 .signin__form__email {
   display: block;
   margin-top: 0.4rem;
   padding: 0.55em 0.75em;
   width: 100%;
+  font-weight: 400;
   font-size: 1rem;
   border: none;
   outline: 1px solid #222;
@@ -144,15 +206,28 @@ textarea {
   outline: 2px solid hsl(199deg, 100%, 50%);
 }
 .signin__form__password-wrapper {
+  width: 100%;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+  color: #444;
+}
+@media (min-width: 64em) {
+  .signin__form__password-wrapper {
+    margin-bottom: 0.7rem;
+  }
+}
+.signin__form__password-cont {
+  display: block;
   position: relative;
   width: 100%;
-  margin-bottom: 0.7rem;
 }
 .signin__form__password {
   display: block;
   margin-top: 0.4rem;
-  padding: 0.55em 0.75em;
+  padding: 0.55em 0.8em;
   width: 100%;
+  border-right: 1px solid red;
+  font-weight: 400;
   font-size: 1rem;
   border: none;
   outline: 1px solid #222;
@@ -164,16 +239,32 @@ textarea {
 }
 .signin__form__show-password {
   position: absolute;
-  right: 3%;
-  bottom: 10%;
+  right: 0;
+  bottom: 13%;
+  margin: 0 0.4rem 0.1rem 0;
+  font-size: 1.2rem;
+  background-color: transparent;
+  padding: 0.2em;
+  opacity: 0;
+  pointer-events: none;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
-  opacity: 0;
-  pointer-events: none;
   cursor: pointer;
   transition: 0.2s opacity;
+}
+.signin__form__show-password span {
+  pointer-events: none;
+}
+.signin__form__show-password .pwd-show, .signin__form__show-password .pwd-hide {
+  display: none;
+}
+.signin__form__show-password.showPwd .pwd-show {
+  display: block;
+}
+.signin__form__show-password.hidePwd .pwd-hide {
+  display: block;
 }
 .signin__form__show-password.visible {
   opacity: 1;
@@ -198,17 +289,21 @@ textarea {
   display: block;
   margin-top: 3rem;
   margin-left: auto;
+  font-size: 1.05rem;
+  color: #444;
 }
 .signin__form--signupurl a {
   color: #7e56da;
 }
 .signin__pic-eg {
-  display: none;
-  min-height: inherit;
+  display: block;
+  margin-top: -50%;
 }
 @media (min-width: 64em) {
   .signin__pic-eg {
+    margin-top: 0;
     display: block;
+    min-height: inherit;
   }
 }
 .signin__pic-eg__caption {
@@ -217,8 +312,19 @@ textarea {
 .signin__pic-eg__img-wrap {
   display: grid;
   place-items: center;
-  min-height: inherit;
+  min-height: 50%;
+}
+@media (min-width: 64em) {
+  .signin__pic-eg__img-wrap {
+    min-height: inherit;
+  }
 }
 .signin__pic-eg__img {
+  border-radius: 0.4rem;
   height: 100%;
+}
+@media (min-width: 64em) {
+  .signin__pic-eg__img {
+    border-radius: 0;
+  }
 }/*# sourceMappingURL=signinPage.css.map */

@@ -2,17 +2,37 @@ const userModel = require('../models/Users');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const showSignin = async (req, res) => res.render('signin');
+let info = {
+  title: 'Sign in | To-Notes_App',
+  err: {
+    emailId: null,
+    password: null
+  }
+};
+
+const showSignin = (req, res) => {
+
+  res.render('signin', { info });
+  info.err.emailId = info.err.password = null;
+  info.emailId = info.pwd = null;
+  return;
+}
 
 const handleSignin = async (req, res) => {
   const { emailId, password } = req.body;
   if(!emailId || !password )
     return res.sendStatus(400); //bad request
 
+  console.log("Post req is triggered");
+
   try {
     const foundUser = await userModel.findOne({ email: emailId });
-    if(!foundUser) 
-      return res.render('signin', { error_emailId: 'In-correct email id' });
+    if(!foundUser) {
+      info.emailId = emailId;
+      info.pwd = password;
+      info.err.emailId = 'In-correct email id' ;
+      return res.redirect('/signin');
+    }
 
     // checking for correct password
     if(await bcrypt.compare(password, foundUser.password)) {
@@ -43,10 +63,15 @@ const handleSignin = async (req, res) => {
       )
 
       return res.redirect('/');
-    } 
-    return res.render('signin', { error_password: 'Invalid Password' });
+    } else {
+      info.pwd = password;
+      info.emailId = emailId;
+      info.err.password = 'Invalid Password';
+      return res.redirect('/signin');
+    }
 
   } catch (err) {
+    console.log(err.message);
     res.redirect('/signin');
   }
 }

@@ -17,24 +17,6 @@ window.addEventListener('load', e => {
 
 
 
-$('.signin__form__email').addEventListener('focus', e => {
-  e.target.parentElement.classList.add('accent');
-});
-
-$('.signin__form__email').addEventListener('blur', e => {
-  e.target.parentElement.classList.remove('accent');
-});
-
-
-$('.signin__form__password').addEventListener('focus', e => {
-  e.target.parentElement.classList.add('accent');
-});
-
-$('.signin__form__password').addEventListener('blur', e => {
-  e.target.parentElement.classList.remove('accent');
-});
-
-
 $('.signin__form__password').addEventListener('input', e => {
 
   if(e.target.value.length > 0)
@@ -45,7 +27,25 @@ $('.signin__form__password').addEventListener('input', e => {
 
 $('.signin__form__show-password').addEventListener('click', e => {
   e.target.previousElementSibling.type = (e.target.previousElementSibling.type === "password") ? "text" : "password";
-  e.target.textContent = (e.target.textContent === "hide") ? "show" : "hide";
+
+  if(e.target.classList.contains('showPwd'))
+    e.target.classList.replace('showPwd', 'hidePwd');
+  else
+    e.target.classList.replace('hidePwd', 'showPwd');
 
   e.target.previousElementSibling.focus();
+})
+
+// window.addEventListener('load', e => {
+//   $('.signin__form').reset();
+// })
+
+// $('.signin__form').addEventListener('submit', e => {
+//   e.target.reset();
+// })
+
+
+addGlobalEvL('click', '.field_error-cross', e => {
+  e.target.parentElement.style.display = "none";
+  // e.target.parentElement.classList.remove('show-error');
 })
