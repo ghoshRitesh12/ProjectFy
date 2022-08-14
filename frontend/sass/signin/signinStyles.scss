@@ -1,13 +1,13 @@
 @use '../components/' as *;
 
+span svg {
+  pointer-events: none;
+}
+
 /* Custom styles */
 body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-
   font-family: sans-serif;
+  // overflow: auto;
 }
 
 textarea {
@@ -15,66 +15,176 @@ textarea {
   resize: none;
   min-height: 5rem;
   min-width: 50%;
-
 }
 
-.accent {
-  color: #784fd8;
-}
+// .accent {
+//   // color: #784fd8;
+//   color: hsl(199 100% 40%);
+// }
 
+#root {
+  display: block;
+  margin-inline: auto;
+  min-height: 100vh;
+
+  isolation: isolate;  
+  background-color: #fff;
+  
+  @include breakpoint(medium) {
+    max-width: $content-width;
+    width: 100%;
+    padding: 0;
+  }
+
+  @include breakpoint(large) {
+    // max-width: $content-width; //112 rem
+    width: 100%;
+    padding: 0 1rem;
+  }
+}
 
 .signin {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: flex-end;
+  flex-direction: column-reverse;
 
-  flex-direction: row;
+  gap: 2rem;
+  min-height: inherit;
+  
+  @include breakpoint(medium) {
+    justify-content: space-evenly;
+    flex-direction: row;
+    gap: 1.3rem;
+    padding: 0 1rem;
+  }
 
-  &__form--wrapper {
-    display: block;
+  @include breakpoint(large) {
+    gap: 2.6rem;
+    padding: 0 2rem;
+  }
+
+  &__form-header {
+    margin-bottom: 2.5rem;
+    color: #444;
+    text-align: left;
+    font-size: 1.1rem;
+    
+    @include breakpoint(large) {
+      margin-bottom: 4rem;
+    }
+
+    .login-text {
+      color: #444;
+      font-weight: 700;
+      font-size: clamp(1.5rem, 3.5vmin, 2rem);
+      margin-bottom: 1rem;
+    }
+  }
+
+  &__form-wrapper {
+    flex: 1 1 80%;
+    // min-height: ;
+    padding: 0 1.2rem;
+    width: 98%;
+    min-height: fit-content;
+    // min-height: inherit;
+    
+    color: #444;
+
+    @include breakpoint(medium) {
+      flex: 1 1 40%;
+      padding: 0 .5rem;
+      min-height: 0;
+      
+      max-width: 21rem;
+      min-width: 16rem;
+    }
+    
+    @include breakpoint(large) {
+      flex: 1 1 40%;
+      padding: 0 1.2rem 0 .5rem;
+    }
   }
 
   &__form {
     display: flex;
+    justify-content: center;
     flex-direction: column;
-    gap: 1.5rem;
-
-    // font-family: $font--baloo;
-    // outline: 1px solid salmon;
-
-    &--email-wrapper {
-      width: 100%;
+    gap: 1.7rem;
+    
+    min-width: 100%;
+    
+    @include breakpoint(large) {
+      
+      gap: 1.5rem;
+      min-width: 100%;
     }
-    &--email {
+
+    &__field--error {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      margin-top: 1rem;
+      padding: .25em 1em;
+      width: 100%;
+
+      font-size: .95rem;
+      border-radius: .5rem;
+      color: hsl(0 100% 68%);
+      background-color: hsl(0 100% 67% / .2);
+
+      .field_error-cross { cursor: pointer; }
+    }
+
+
+    &__email-wrapper {
+      width: 100%;
+      font-weight: 600;
+      color: #444;
+    }
+    &__email {
       display: block;
       margin-top: .4rem;
       padding: .55em .75em;
       width: 100%;
 
+      font-weight: 400;
       font-size: 1rem;
       border: none;
       outline: 1px solid #222;
       border-radius: $borders;
 
       &:focus {
-        outline: 2px solid hsl(258, 64%, 58%);
-      }
-
-      &:focus .signin__form {
-        color: green;
-        background-color: #222;
+        outline: 2px solid hsl(199 100% 50%);
       }
     }
 
-    &--password-wrapper {
+    &__password-wrapper {
+      width: 100%;
+      margin: 1rem 0 .3rem 0;
+      font-weight: 600;
+      color: #444;
+      
+      @include breakpoint(large) {
+        
+        margin-bottom: .7rem;
+      }
+    }
+    &__password-cont {
+      display: block;
+      position: relative;
       width: 100%;
     }
-    &--password {
+    &__password {
       display: block;
       margin-top: .4rem;
-      padding: .55em .75em;
+      padding: .55em .8em;
       width: 100%;
+      border-right: 1px solid red;
 
+      font-weight: 400;
       font-size: 1rem;
       border: none;
       outline: 1px solid #222;
@@ -82,26 +192,69 @@ textarea {
 
       &:focus {
         border: none;
-        outline: 2px solid hsl(258, 64%, 58%);
+        outline: 2px solid hsl(199 100% 50%);
+      }
+    }
+    &__show-password {
+      position: absolute;
+      right: 0; bottom: 13%; //26
+      margin: 0 .5rem .1rem 0;
+      
+      font-size: 1.2rem;
+      background-color: transparent;
+      padding: .2em;
+
+      opacity: 0;
+      pointer-events: none;
+      user-select: none;
+      cursor: pointer;
+      
+      transition: .2s opacity;
+
+      & span {
+        pointer-events: none;
+      }
+      .pwd-show, .pwd-hide {
+        display: none;
+      }
+      &.showPwd .pwd-show {
+        display: block;
+      }
+      &.hidePwd .pwd-hide {
+        display: block;
+      }
+
+      &.visible {
+        opacity: 1;
+        pointer-events: all;
       }
     }
 
-    &--submit-btn {
+    &__submit-btn {
       display: block;
       font-size: 1.1rem;
-      padding: .6em .75em;
+      padding: .45em .75em;
       
       text-align: center;
       font-weight: 500;
       border: none;
       border-radius: $borders;
-      color: hsl(258, 64%, 58%);
-      background-color: hsla(258, 64%, 60%, 0.3);
+      color: hsl(199 100% 38%);
+      background-color: hsl(199 100% 50% / .3);
+      transition: .3s background-color, .3s color;
+
+      &:hover {
+        background-color: hsl(199 100% 50% / .45);
+      }
     }
   }
   
   &__form--signupurl {
+    display: block;
     margin-top: 3rem;
+    margin-left: auto;
+    font-size: 1.02rem;
+    color: #444;
 
     & a {
       color: #7e56da;
@@ -109,8 +262,47 @@ textarea {
   }
 
   // signin: wallpaper
-  &__image {
+  &__pic-eg {
     display: block;
-  }
+    margin-top: -45%;
+    flex: 0 1 20%;
+    padding: 0;
+    
+    @include breakpoint(medium) {
+      flex: 1 1 60%;
+      margin-top: 0;
+      padding: 0 .5rem 0 1rem;
+      min-height: inherit;
+    }
 
+    // outline: 1px solid red;
+    @include breakpoint(large) {
+      flex: 1 1 70%;
+      min-height: inherit;
+    }
+
+    &__caption {
+      font-size: 1.1rem;
+    }
+
+    &__img-wrap {
+      display: grid;
+      place-items: center;
+      min-height: 50%;
+
+      @include breakpoint(medium) {
+        min-height: inherit;
+      }
+
+      @include breakpoint(large) {
+        min-height: inherit;
+      }
+    }
+
+    &__img {
+      // border-radius: .4rem;
+      height: 100%;
+
+    }
+  }
 }

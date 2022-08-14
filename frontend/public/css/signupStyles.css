@@ -26,6 +26,10 @@ a {
   text-decoration: none;
 }
 
+button {
+  cursor: pointer;
+}
+
 img, svg {
   display: block;
   -o-object-fit: cover;
@@ -64,4 +68,8 @@ textarea {
 
 .hidden {
   visibility: hidden;
+}
+
+.full-hide {
+  display: none;
 }/*# sourceMappingURL=signupStyles.css.map */

@@ -74,13 +74,6 @@ textarea {
   display: none;
 }
 
-/* baloo-2-regular */
-@font-face {
-  font-family: "Baloo 2";
-  font-style: normal;
-  font-weight: 400;
-  src: local("../../frontend/public/fonts/baloo-2-v14-latin-regular.woff"), url("../fonts/baloo-2-v14-latin-regular.woff2") format("woff2"), url("../fonts/baloo-2-v14-latin-regular.woff") format("woff");
-}
 span svg {
   pointer-events: none;
 }
@@ -100,16 +93,21 @@ textarea {
 #root {
   display: block;
   margin-inline: auto;
-  padding: 0rem 1.2rem;
   min-height: 100vh;
   isolation: isolate;
   background-color: #fff;
 }
+@media (min-width: 40em) {
+  #root {
+    max-width: 112rem;
+    width: 100%;
+    padding: 0;
+  }
+}
 @media (min-width: 64em) {
   #root {
-    max-width: 100%;
     width: 100%;
-    padding: 0rem 2rem;
+    padding: 0 1rem;
   }
 }
 
@@ -118,14 +116,21 @@ textarea {
   align-items: center;
   justify-content: flex-end;
   flex-direction: column-reverse;
-  gap: 1.7rem;
+  gap: 2rem;
   min-height: inherit;
 }
-@media (min-width: 64em) {
+@media (min-width: 40em) {
   .signin {
     justify-content: space-evenly;
     flex-direction: row;
-    gap: 2rem;
+    gap: 1.3rem;
+    padding: 0 1rem;
+  }
+}
+@media (min-width: 64em) {
+  .signin {
+    gap: 2.6rem;
+    padding: 0 2rem;
   }
 }
 .signin__form-header {
@@ -140,26 +145,40 @@ textarea {
   }
 }
 .signin__form-header .login-text {
+  color: #444;
   font-weight: 700;
   font-size: clamp(1.5rem, 3.5vmin, 2rem);
   margin-bottom: 1rem;
 }
 .signin__form-wrapper {
-  width: 100%;
-  flex-grow: 3;
-  flex-shrink: 1;
+  flex: 1 1 80%;
+  padding: 0 1.2rem;
+  width: 98%;
+  min-height: -webkit-fit-content;
+  min-height: -moz-fit-content;
+  min-height: fit-content;
   color: #444;
+}
+@media (min-width: 40em) {
+  .signin__form-wrapper {
+    flex: 1 1 40%;
+    padding: 0 0.5rem;
+    min-height: 0;
+    max-width: 21rem;
+    min-width: 16rem;
+  }
 }
 @media (min-width: 64em) {
   .signin__form-wrapper {
-    max-width: 20%;
+    flex: 1 1 40%;
+    padding: 0 1.2rem 0 0.5rem;
   }
 }
 .signin__form {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.7rem;
   min-width: 100%;
 }
 @media (min-width: 64em) {
@@ -172,16 +191,13 @@ textarea {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: hsl(0deg, 100%, 65%);
-  background-color: hsla(0deg, 100%, 66%, 0.2);
-  border-radius: 0.6rem;
-  font-size: 0.95rem;
   margin-top: 1rem;
   padding: 0.25em 1em;
   width: 100%;
-}
-.signin__form__field--error.show-error {
-  display: flex;
+  font-size: 0.95rem;
+  border-radius: 0.5rem;
+  color: hsl(0deg, 100%, 68%);
+  background-color: hsla(0deg, 100%, 67%, 0.2);
 }
 .signin__form__field--error .field_error-cross {
   cursor: pointer;
@@ -207,7 +223,7 @@ textarea {
 }
 .signin__form__password-wrapper {
   width: 100%;
-  margin-bottom: 0.3rem;
+  margin: 1rem 0 0.3rem 0;
   font-weight: 600;
   color: #444;
 }
@@ -241,7 +257,7 @@ textarea {
   position: absolute;
   right: 0;
   bottom: 13%;
-  margin: 0 0.4rem 0.1rem 0;
+  margin: 0 0.5rem 0.1rem 0;
   font-size: 1.2rem;
   background-color: transparent;
   padding: 0.2em;
@@ -289,7 +305,7 @@ textarea {
   display: block;
   margin-top: 3rem;
   margin-left: auto;
-  font-size: 1.05rem;
+  font-size: 1.02rem;
   color: #444;
 }
 .signin__form--signupurl a {
@@ -297,12 +313,21 @@ textarea {
 }
 .signin__pic-eg {
   display: block;
-  margin-top: -50%;
+  margin-top: -45%;
+  flex: 0 1 20%;
+  padding: 0;
+}
+@media (min-width: 40em) {
+  .signin__pic-eg {
+    flex: 1 1 60%;
+    margin-top: 0;
+    padding: 0 0.5rem 0 1rem;
+    min-height: inherit;
+  }
 }
 @media (min-width: 64em) {
   .signin__pic-eg {
-    margin-top: 0;
-    display: block;
+    flex: 1 1 70%;
     min-height: inherit;
   }
 }
@@ -314,17 +339,16 @@ textarea {
   place-items: center;
   min-height: 50%;
 }
+@media (min-width: 40em) {
+  .signin__pic-eg__img-wrap {
+    min-height: inherit;
+  }
+}
 @media (min-width: 64em) {
   .signin__pic-eg__img-wrap {
     min-height: inherit;
   }
 }
 .signin__pic-eg__img {
-  border-radius: 0.4rem;
   height: 100%;
-}
-@media (min-width: 64em) {
-  .signin__pic-eg__img {
-    border-radius: 0;
-  }
-}/*# sourceMappingURL=signinPage.css.map */
+}/*# sourceMappingURL=signinStyles.css.map */

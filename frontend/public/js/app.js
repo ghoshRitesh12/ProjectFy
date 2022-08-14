@@ -6,11 +6,6 @@ $.bruh = "XD";
 
 console.log($);
 
-window.addEventListener('load', e => {
-  $('h1').style.color = "#00aeff";
-  $('body').style.backgroundColor = "#222";
-});
-
 
 // const $ = a => document.querySelector(a);
 // const $$ = bb => document.querySelectorAll(bb);

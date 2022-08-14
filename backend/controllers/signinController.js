@@ -4,16 +4,18 @@ const jwt = require('jsonwebtoken');
 
 let info = {
   title: 'Sign in | To-Notes_App',
-  err: {
-    emailId: null,
-    password: null
-  }
+  // err: {
+  //   emailId: null,
+  //   password: null
+  // }
+  error: null
 };
 
 const showSignin = (req, res) => {
 
   res.render('signin', { info });
-  info.err.emailId = info.err.password = null;
+  // info.err.emailId = info.err.password = null;
+  info.error = null;
   info.emailId = info.pwd = null;
   return;
 }
@@ -23,14 +25,12 @@ const handleSignin = async (req, res) => {
   if(!emailId || !password )
     return res.sendStatus(400); //bad request
 
-  console.log("Post req is triggered");
-
   try {
     const foundUser = await userModel.findOne({ email: emailId });
     if(!foundUser) {
       info.emailId = emailId;
       info.pwd = password;
-      info.err.emailId = 'In-correct email id' ;
+      info.error = 'In-correct email id' ;
       return res.redirect('/signin');
     }
 
@@ -66,12 +66,11 @@ const handleSignin = async (req, res) => {
     } else {
       info.pwd = password;
       info.emailId = emailId;
-      info.err.password = 'Invalid Password';
+      info.error = 'Invalid Password';
       return res.redirect('/signin');
     }
 
   } catch (err) {
-    console.log(err.message);
     res.redirect('/signin');
   }
 }

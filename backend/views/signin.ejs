@@ -31,13 +31,6 @@
             <input class="signin__form__email" type="email" name="emailId" spellcheck="false" autocapitalize="none"
               aria-label="email id" placeholder="name@company.com" required
               value="<%= info.emailId %>" />
-
-            <% if(locals.info.err.emailId !== null) { %>
-              <div class="signin__form__field--error">
-                <span> <%= info.err.emailId %> </span>
-                <span class="field_error-cross">x</span>
-              </div>
-              <% } %>
           </div>
 
           <div class="signin__form__password-wrapper">
@@ -79,9 +72,9 @@
               </div>
             </section>
 
-            <% if(locals.info.err.password !== null) { %>
+            <% if(locals.info.error !== null) { %>
               <div class="signin__form__field--error">
-                <span> <%= info.err.password %> </span>
+                <span> <%= info.error %> </span>
                 <span class="field_error-cross">x</span>
               </div>
             <% } %>
