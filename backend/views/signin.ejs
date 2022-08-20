@@ -5,22 +5,25 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> <%= info.title %> </title>
+  <!-- favicon -->
 
+  <!-- Custom CSS -->
   <link rel="stylesheet" href="css/signinStyles.css">
+  <!-- Custom JS -->
+  <script src="js/signinPage.js" type="module"></script>
 
-  <script src="js/app.js" type="module"></script>
 </head>
 
 <body>
 
-  <section id="root">
+  <main id="root">
 
     <div class="signin">
 
       <section class="signin__form-wrapper">
 
         <div class="signin__form-header">
-          <h1 class="login-text"> Sign in </h1>
+          <h1 class="signin-text"> Sign in </h1>
           Enter your credentials to access your account
         </div>
 
@@ -31,15 +34,19 @@
             <input class="signin__form__email" type="email" name="emailId" spellcheck="false" autocapitalize="none"
               aria-label="email id" placeholder="name@company.com" required
               value="<%= info.emailId %>" />
+
+            <div class="client-validate validate-email"></div>
           </div>
 
           <div class="signin__form__password-wrapper">
             Password
             <section class="signin__form__password-cont">
-              <input class="signin__form__password" type="password" name="password" aria-label="password" id="password"
-                placeholder="min 8 chars" value="<%= info.pwd %>" required/>
-                <!-- placeholder="your password" minlength="8"  required/> -->
+              <input class="signin__form__password" type="password" name="password" 
+                aria-label="password" placeholder="your password" 
+                value="<%= info.pwd %>" minlength="4" maxlength="18" required/>
 
+                <!-- value="<%= info.pwd %>" required/> -->
+                
               <div class="signin__form__show-password hidePwd"> <!-- showPwd hidePwd -->
 
                 <span class="pwd-hide">
@@ -72,6 +79,8 @@
               </div>
             </section>
 
+            <div class="client-validate validate-pwd"></div>
+
             <% if(locals.info.error !== null) { %>
               <div class="signin__form__field--error">
                 <span> <%= info.error %> </span>
@@ -88,33 +97,24 @@
         <div class="signin__form--signupurl">
 
           Don't have an account?
-          <a href="/signup"> Create one </a>
+          <a href="/signup">Create one</a>
 
         </div>
 
       </section>
 
-      <figure class="signin__pic-eg">
-
-        <!-- <figcaption class="signin__pic-eg__caption">
-          bruh this a good notes app and maybe
-          I'll add the reminders feature
-        </figcaption> -->
-
-        <section class="signin__pic-eg__img-wrap">
-          <!-- <img class="signin__pic-eg__img"
-            src="https://images.unsplash.com/photo-1622737133809-d95047b9e673?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80"
-            alt="to-notes app demo image"> -->
-          <img class="signin__pic-eg__img"
-            src="https://cdn.dribbble.com/users/6395823/screenshots/15558762/media/59b986de0edcf301170aba02e9550ebd.png?compress=1&resize=1000x750&vertical=top"
-            alt="to-notes app demo image">
+      <figure class="signin__banner">
+        <section class="signin__banner__img-wrap">
+          <img class="signin__banner__img"
+            src="images/signinPageBanner.webp"
+            alt="singin page banner image">
         </section>
 
       </figure>
 
     </div>
 
-  </section>
+  </main>
 
 </body>
 

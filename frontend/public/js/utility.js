@@ -7,4 +7,4 @@ function addGlobalEventListener(type, selector, callback) {
   });
 }
 
-export { $, $$, addGlobalEventListener as addGlobalEvL };
+export { $, $$, addGlobalEventListener };

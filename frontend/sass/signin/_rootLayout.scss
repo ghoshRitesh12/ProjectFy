@@ -1,0 +1,85 @@
+@use '../components/' as *;
+
+span svg {
+  pointer-events: none;
+}
+
+.wrong-input {
+  outline: 2px solid #ff8282;
+}
+
+/* Custom styles */
+body {
+  font-family: sans-serif;
+  min-width: 100%;
+  transition: .2s font-size;
+  
+  ::selection {
+    background-color: #0081bd;
+    color: #fff;
+  }
+
+  @include breakpoint(large) {
+    overflow-y: hidden;
+  }
+}
+
+// .accent {
+//   // color: #784fd8;
+//   color: hsl(199 100% 40%);
+// }
+
+#root {
+  display: block;
+  margin-block: auto;
+
+  min-height: 100vh;
+  // height: 100%;
+
+  isolation: isolate;  
+  background-color: #fff;
+  
+  @include breakpoint(medium) {
+    // max-width: $content-width;
+    // max-width: inherit;
+    max-width: 100%;
+    width: 100%;
+    padding: 0;
+  }
+
+  @include breakpoint(large) {
+    max-height: 100vh;
+    max-width: 100%;
+    width: 100%;
+    padding: 0 0 0 2.3rem;
+
+    overflow-y: hidden;
+  }
+}
+
+.signin {
+  display: flex;
+  align-items: center;
+  flex-direction: column-reverse;
+  gap: 0rem;
+
+  background-color: #00aeff;
+
+  min-height: inherit;
+  
+  @include breakpoint(medium) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1.3rem;
+    padding: 0 0rem 0 1rem;
+
+    background-color: #fff;
+    overflow-y: hidden;
+  }
+
+  @include breakpoint(large) {
+    gap: 2.5rem;
+    padding: 0 0rem 0 2rem;
+  }
+}

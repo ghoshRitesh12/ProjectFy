@@ -118,11 +118,9 @@ body ::selection {
 }
 @media (min-width: 64em) {
   #root {
-    max-height: 100vh;
     max-width: 100%;
     width: 100%;
     padding: 0 0 0 2.3rem;
-    overflow-y: hidden;
   }
 }
 
@@ -431,4 +429,4 @@ body ::selection {
     opacity: 1;
     margin-left: auto;
   }
-}/*# sourceMappingURL=signinStyles.css.map */
+}/*# sourceMappingURL=signinPAGE.css.map */
