@@ -4,20 +4,23 @@ function validateEmail(e) {
   const value = e.target.value.trim();
   const invalid = { msg: '', error: false };
 
+  if($('.signin__form__field--error') != null)
+    $('.signin__form__field--error').style.display = "none";
+
   if(value.length <=0) {
-    $('.validate-email').innerText = '';
+    $('.client-validate--email').innerText = '';
     e.target.classList.remove('wrong-input');
     return;
   }
 
-  const emailRegEx = /[a-zA-Z0-9]+@[a-z]+\.[a-z]{2,3}/;
+  const emailRegEx = /^(?:[a-zA-Z0-9-][\.\+]?)*@(?:[a-zA-Z0-9-]{2,})(?:\.[a-zA-Z0-9-]{2,})+$/;
   if(!emailRegEx.test(value)) {
     invalid.error = true;
     invalid.msg = 'Invalid email address, try another one';
   }
 
   e.target.classList.toggle('wrong-input', invalid.error);
-  $('.validate-email').innerText = invalid.msg;
+  $('.client-validate--email').innerText = invalid.msg;
 
   validateEmail.err = false;
   if(invalid.error) 
@@ -26,14 +29,16 @@ function validateEmail(e) {
 }
 
 function validatePwd(e) {
-  const { value } = e.target; 
-  value.trim();
+  const value = e.target.value.trim();
   const invalid = { msg: '', error: false };
   const minLength = 7, maxLength = 18;
 
+  if($('.signin__form__field--error') != null)
+    $('.signin__form__field--error').style.display = "none";
+
   if(value.length <= 0) {
     $('.signin__form__show-password').classList.remove('visible');
-    $('.validate-pwd').innerText = '';
+    $('.client-validate--pwd').innerText = '';
     e.target.classList.remove('wrong-input');
     return;
   }
@@ -49,7 +54,7 @@ function validatePwd(e) {
   }
   
   e.target.classList.toggle('wrong-input', invalid.error);
-  $('.validate-pwd').innerText = invalid.msg;
+  $('.client-validate--pwd').innerText = invalid.msg;
 
   
   validatePwd.err = false;
@@ -59,6 +64,7 @@ function validatePwd(e) {
 
 // password validation
 $('.signin__form__password').addEventListener('input', validatePwd);
+// email validation
 $('.signin__form__email').addEventListener('input', validateEmail);
 
 
