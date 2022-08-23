@@ -1,0 +1,264 @@
+@use '../parts/' as *;
+
+.signup__form-header {
+  margin-bottom: 2.5rem;
+  color: #444;
+  text-align: left;
+  font-size: clamp(1.02rem, 3.2vmin, 1.09rem);
+  
+  @include breakpoint(large) {
+    margin-bottom: 3.5rem;
+  }
+  
+  .signup-text {
+    margin-bottom: 1rem;
+    font-weight: 700;
+    font-size: clamp(1.55rem, 5vmin, 2.6rem);
+    color: #444;
+  }
+}
+
+.signup__form-wrapper {
+  flex: 1 1 80%;
+  padding: 1.3rem;
+  width: 100%;
+  min-height: fit-content;
+  
+  color: #444;
+  background-color: #fff;
+  border-radius: 1rem 1rem 0 0;
+  box-shadow: 0 0 .6rem hsl(0 0 0 / .3);
+
+  @include breakpoint(medium) {
+    flex: 1 1 40%;
+    max-width: 21rem;
+    min-width: 17rem;
+    width: 100%;
+    min-height: 0;
+    
+    padding: 0 0rem 0 .5rem;
+    box-shadow: none;
+  }
+  
+  @include breakpoint(large) {
+    max-width: 25rem;
+    min-width: 25rem; 
+    flex: 1 1 30%;
+    padding: 0 .7rem;
+    // outline: 1px solid red;
+  }
+}
+
+.signup__form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.7rem;
+  border-radius: 1rem 1rem 0 0;
+  min-width: 100%;
+  
+  @include breakpoint(large) {
+    gap: 1.2rem;
+    min-width: 100%;
+  }
+
+  .client-validate {
+    display: block;
+    position: relative;
+    width: 100%;
+
+    margin-top: .5rem;
+    padding: 0 1em;
+    font-size: .8rem;
+    color: $clr-error500;
+    background-color: transparent;
+
+    &.error {
+      display: block;
+    }
+  }
+
+  &__field--error {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: 1rem;
+    padding: .25em 1em;
+    width: 100%;
+
+    font-size: .95rem;
+    border-radius: .5rem;
+    color: $clr-error500;
+    background-color: hsl(0 100% 67% / .2);
+
+    .field_error-cross { cursor: pointer; }
+  }
+
+  &__name-wrapper {
+    display: block;
+    width: 100%;
+    font-weight: 600;
+    color: #444;
+  }
+  &__name-cont {
+    display: flex;
+    justify-content: space-between;
+    margin-top: .4rem;
+    max-width: 100%;
+    width: 100%;
+
+    font-weight: 400;
+
+    @include breakpoint(medium) {
+
+    }
+  }
+
+  &__name {
+    display: inline-block;
+    padding: .5em .5em .5em .7em;
+    max-width: 11rem;
+    width: 100%;
+
+    font-size: 1rem;
+    border: none;
+    border-radius: $borders;
+    outline: 1px solid #888;
+    border-radius: $borders;
+
+    &:focus {
+      outline: 2px solid $clr-primary400-signup;
+    }
+
+    &.wrong-input:focus {
+      outline: 2px solid $clr-error500;
+    }
+  }
+
+  &__email-wrapper {
+    width: 100%;
+    font-weight: 600;
+    color: #444;
+
+    @include breakpoint(medium) {
+      // padding-right: 1rem;
+    }
+  }
+  &__email {
+    display: block;
+    margin-top: .4rem;
+    padding: .5em .5em .5em .7em;
+    width: 100%;
+
+    font-size: 1rem;
+    font-weight: 400;
+
+    border: none;
+    border-radius: $borders;
+    outline: 1px solid #888;
+    border-radius: $borders;
+
+    &:focus {
+      outline: 2px solid $clr-primary400-signup;
+    }
+
+    &.wrong-input:focus {
+      outline: 2px solid $clr-error500;
+    }
+  }
+
+  &__password-wrapper {
+    width: 100%;
+    margin: .2rem 0 .3rem 0;
+    font-weight: 600;
+    color: #444;
+    
+    @include breakpoint(large) {
+      margin: 0 0 .4rem 0;
+    }
+
+    .show-password {
+      display: block;
+      margin: 1.3rem 0 0 .5rem;
+      font-weight: 400;
+      cursor: pointer;
+      
+      #pwd-checkbox {
+        margin-right: .3rem;
+        padding: .2rem;
+        cursor: pointer;
+        aspect-ratio: 1;
+        width: .9rem;
+        accent-color: $clr-primary450-signup;
+      }
+    }
+  }
+  &__password-cont {
+    display: flex;
+    justify-content: space-between;
+    max-width: 100%;
+    width: 100%;
+
+    font-size: 1rem;
+    font-weight: 400;
+  }
+  &__password {
+    display: inline-block;
+    padding: .5em .5em .5em .7em;
+    max-width: 11rem;
+    width: 100%;
+    margin-top: .4rem;
+
+    border: none;
+    border-radius: $borders;
+    outline: 1px solid #888;
+    border-radius: $borders;
+
+    &:focus {
+      outline: 2px solid $clr-primary400-signup;
+    }
+
+    &.wrong-input:focus {
+      outline: 2px solid $clr-error500;
+    }
+  }
+
+  &__submit-btn {
+    display: block;
+    padding: .6em .75em;      
+    
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-align: center;
+    border: none;
+    border-radius: $borders;
+    color: $clr-primary450-signup;
+    background-color: $clr-primary200-signup;
+    transition: .3s background-color;
+    
+    &:hover {
+      background-color: hsl(258 100% 76% / .4);
+    }
+  }
+
+}
+
+.signup__form--signinurl {
+  display: block;
+  position: relative;
+  margin-top: 3rem;
+  margin-left: auto;
+  font-size: clamp(1.02rem, 3.2vmin, 1.1rem);
+  color: #444;
+
+  & a {
+    position: relative;
+    color: hsl(199 100% 47%);
+    transition: .2s color;
+
+    &:hover {
+      color: $clr-primary450;
+    }
+  }
+}

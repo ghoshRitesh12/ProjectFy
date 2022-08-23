@@ -16,7 +16,7 @@
 
 <body>
 
-  <main id="root">
+  <main id="root" class="light-mode">
 
     <div class="signin">
 
@@ -35,7 +35,7 @@
               aria-label="email id" placeholder="name@company.com" required
               value="<%= info.emailId %>" />
 
-            <div class="client-validate validate-email"></div>
+            <div class="client-validate client-validate--email"></div>
           </div>
 
           <div class="signin__form__password-wrapper">
@@ -79,7 +79,7 @@
               </div>
             </section>
 
-            <div class="client-validate validate-pwd"></div>
+            <div class="client-validate client-validate--pwd"></div>
 
             <% if(locals.info.error !== null) { %>
               <div class="signin__form__field--error">

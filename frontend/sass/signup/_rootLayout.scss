@@ -1,0 +1,61 @@
+@use '../parts/' as *;
+
+// hsl(258, 64%, 58%)
+
+body {
+  font-family: sans-serif;
+  min-width: 100%;
+  
+  ::selection {
+    background-color: $clr-selection;
+    color: #fff;
+  }
+}
+
+#root {
+  display: block;
+  margin-block: auto;
+
+  min-height: 100vh;
+
+  isolation: isolate;  
+  background-color: #fff;
+  
+  @include breakpoint(medium) {
+    max-width: 100%;
+    width: 100%;
+    padding: 0;
+  }
+
+  @include breakpoint(large) {
+    max-height: 100vh;
+    max-width: 100%;
+    width: 100%;
+    padding: 0 0 0 2.3rem;
+
+    overflow-y: hidden;
+  }
+}
+
+.signup {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+  align-items: center;
+  
+  min-height: inherit;
+  background-color: $clr-primary400-signup;
+
+  @include breakpoint(medium) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: #fff;
+    padding: 0 0rem 0 1rem;
+  }
+
+  @include breakpoint(large) {
+    padding: 0 0rem 0 2rem;
+  }
+}

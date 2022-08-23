@@ -4,45 +4,108 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> Signup </title>
+  <title> <%= info.title %> </title>
+
+  <link rel="stylesheet" href="css/signupPAGE.css">
+
+  <script src="js/signupApp.js" type="module"></script>
 </head>
+
 <body>
-  
-  <form action="/signup" method="post">
 
-    <label for="firstName"> First Name </label>
-    <input type="text" name="firstName" id="firstName" required>
-    <br>
-    <label for="lastName"> Last Name </label>
-    <input type="text" name="lastName" id="lastName">
-    <br>
-    <label for="emailId"> Email Id </label>
-    <input type="email" name="emailId" id="emailId" required>
+  <main id="root">
 
-    <% if(locals.error_user) { %>
-      <div class="emailId__error">
-        <%= error_user %>
-      </div>
-    <% } %>
+    <div class="signup">
 
-    <br>
-    <label for="password"> Password </label>
-    <input type="password" name="password" id="password" required>
+      <section class="signup__form-wrapper">
 
-    <span class="password__error"></span>
+        <div class="signup__form-header">
+          <h1 class="signup-text">Sign up</h1>
+          New to typefy? Create an acccount with us and get started to create new ideas.
+        </div>
 
-    <br>
-    <label for="confirmPassword"> Confirm Password </label>
-    <input type="password" name="confirmPassword" id="confirmPassword" required>
-    
-    <br> <br>
-    <button type="submit"> Create Account </button>
+        <form class="signup__form" action="/signup" method="post">
 
-    <br>
-    <br>
-    <a href="/signin"> SIGN IN </a>
+          <div class="signup__form__name-wrapper">
+            Name
+            <section class="signup__form__name-cont">
+              <input class="signup__form__name signup__form__name--first" type="text" name="firstName" spellcheck="false"
+              aria-label="First name" placeholder="First name" required/>
+              <!-- value="<%# info.emailId %>" /> -->
+              
+              <input class="signup__form__name signup__form__name--last" type="text" name="lastName" spellcheck="false"
+              aria-label="Last name" placeholder="Last name"/>
+              <!-- value="<%# info.emailId %>" /> -->
+            </section>
 
-  </form>
+            <div class="client-validate client-validate--name"></div>
+          </div>
+
+          <div class="signup__form__email-wrapper">
+            Email address
+            <input class="signup__form__email" type="email" name="emailId" spellcheck="false" autocapitalize="none"
+              aria-label="email id" placeholder="name@company.com" value="<%= info.emailId %>" required/>
+              <!-- value="<%# info.emailId %>" /> -->
+
+            <div class="client-validate client-validate--email"></div>
+          </div>
+
+          <div class="signup__form__password-wrapper">
+            Password 
+            <section class="signup__form__password-cont">
+
+              <input class="signup__form__password" type="password" name="password" aria-label="password"
+                placeholder="Password" minlength="7" required/>
+                <!-- value="<%# info.pwd %>"/> -->
+
+              <input class="signup__form__password signup__form__password--confirm" type="password" name="confirmPassword"
+              aria-label="confirm password" placeholder="Confirm" minlength="7" required/>
+              <!-- value="<%# info.pwd %>"/> -->
+
+            </section>
+
+            <div class="client-validate client-validate--pwd"></div>
+            
+            <!-- <%# if(locals.info.error !== null) { %>
+              <div class="signup__form__field--error">
+                <span> <%# info.error %> </span>
+                <span class="field_error-cross">x</span>
+              </div>
+            <%# } %> -->
+
+            <label class="show-password" for="pwd-checkbox">
+              <input id="pwd-checkbox" type="checkbox" name="showPassword"/>
+              Show Password
+            </label>
+
+          </div>
+
+          <button class="signup__form__submit-btn" type="submit"> Create Account </button>
+
+        </form>
+
+        <div class="signup__form--signinurl">
+
+          Already an user?
+          <a href="/signin">Sign in</a>
+
+        </div>
+
+      </section>
+
+      <figure class="signup__banner">
+        <section class="signup__banner__img-wrap">
+          <img class="signup__banner__img"
+            src="./signupPageBanner.webp"
+            alt="signup page banner image">
+        </section>
+
+      </figure>
+
+    </div>
+
+  </main>
 
 </body>
+
 </html>

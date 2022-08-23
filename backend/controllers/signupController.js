@@ -2,7 +2,16 @@ const genUUID = require('../config/genUUID');
 const userModel = require('../models/Users');
 const bcrypt = require('bcrypt');
 
-const showSignup = (req, res) => res.render('signup');
+const info = {
+  title: 'Sign up | To-Notes_App',
+  error: null
+};
+
+const showSignup = (req, res) =>  {
+  res.render('signup', { info });
+  info.error = null;
+  return;
+}
 
 const handleSignup = async (req, res) => {
   const { 

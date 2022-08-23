@@ -2,12 +2,8 @@ const userModel = require('../models/Users');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-let info = {
+const info = {
   title: 'Sign in | To-Notes_App',
-  // err: {
-  //   emailId: null,
-  //   password: null
-  // }
   error: null
 };
 
