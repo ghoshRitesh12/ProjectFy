@@ -1,4 +1,4 @@
-@use '../parts/' as *;
+@use '../components/' as *;
 
 // hsl(258, 64%, 58%)
 
@@ -50,6 +50,7 @@ body {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    gap: .7rem;
 
     background-color: #fff;
     padding: 0 0rem 0 1rem;
@@ -59,3 +60,4 @@ body {
     padding: 0 0rem 0 2rem;
   }
 }
+

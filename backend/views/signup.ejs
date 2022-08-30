@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> <%= info.title %> </title>
 
-  <link rel="stylesheet" href="css/signupPAGE.css">
+  <link rel="stylesheet" href="css/signupStyles.css">
 
-  <script src="js/signupApp.js" type="module"></script>
+  <script src="js/signupPage.js" type="module"></script>
 </head>
 
 <body>
@@ -31,11 +31,11 @@
             <section class="signup__form__name-cont">
               <input class="signup__form__name signup__form__name--first" type="text" name="firstName" spellcheck="false"
               aria-label="First name" placeholder="First name" required/>
-              <!-- value="<%# info.emailId %>" /> -->
+              <!-- value="<%= info.emailId %>" /> -->
               
               <input class="signup__form__name signup__form__name--last" type="text" name="lastName" spellcheck="false"
               aria-label="Last name" placeholder="Last name"/>
-              <!-- value="<%# info.emailId %>" /> -->
+              <!-- value="<%= info.emailId %>" /> -->
             </section>
 
             <div class="client-validate client-validate--name"></div>
@@ -44,8 +44,8 @@
           <div class="signup__form__email-wrapper">
             Email address
             <input class="signup__form__email" type="email" name="emailId" spellcheck="false" autocapitalize="none"
-              aria-label="email id" placeholder="name@company.com" value="<%= info.emailId %>" required/>
-              <!-- value="<%# info.emailId %>" /> -->
+              aria-label="email id" placeholder="name@company.com" minlength="7" required/>
+              <!-- value="<%= info.emailId %>" /> -->
 
             <div class="client-validate client-validate--email"></div>
           </div>
@@ -55,27 +55,27 @@
             <section class="signup__form__password-cont">
 
               <input class="signup__form__password" type="password" name="password" aria-label="password"
-                placeholder="Password" minlength="7" required/>
-                <!-- value="<%# info.pwd %>"/> -->
+                placeholder="Password" minlength="8" required/>
+                <!-- value="<%= info.pwd %>"/> -->
 
               <input class="signup__form__password signup__form__password--confirm" type="password" name="confirmPassword"
-              aria-label="confirm password" placeholder="Confirm" minlength="7" required/>
-              <!-- value="<%# info.pwd %>"/> -->
+              aria-label="confirm password" placeholder="Confirm" minlength="8" required/>
+              <!-- value="<%= info.pwd %>"/> -->
 
             </section>
 
             <div class="client-validate client-validate--pwd"></div>
             
-            <!-- <%# if(locals.info.error !== null) { %>
+            <!-- <% if(locals.info.error !== null) { %>
               <div class="signup__form__field--error">
-                <span> <%# info.error %> </span>
+                <span> <%= info.error %> </span>
                 <span class="field_error-cross">x</span>
               </div>
-            <%# } %> -->
+            <% } %> -->
 
             <label class="show-password" for="pwd-checkbox">
-              <input id="pwd-checkbox" type="checkbox" name="showPassword"/>
-              Show Password
+              <input id="pwd-checkbox" type="checkbox" value="hide"/>
+              <span>Show Password</span> 
             </label>
 
           </div>
@@ -96,8 +96,12 @@
       <figure class="signup__banner">
         <section class="signup__banner__img-wrap">
           <img class="signup__banner__img"
-            src="./signupPageBanner.webp"
+            src="images/signinPageBanner.webp"
             alt="signup page banner image">
+
+          <!-- <img class="signup__banner__img"
+            src="https://images.unsplash.com/photo-1530303263041-b5ca33678f04?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+            alt="to-notes app demo image"> -->
         </section>
 
       </figure>

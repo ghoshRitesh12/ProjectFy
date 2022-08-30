@@ -1,6 +1,7 @@
-
 $content-width: 112rem;
 $borders: .5rem;
+
+$clr-selection: hsl(199, 100%, 37%);
 
 $clr-primary200: hsl(199 100% 50% / .3);
 $clr-primary400: hsl(199 100% 50%);
@@ -8,4 +9,7 @@ $clr-primary450: hsl(199 100% 38%);
 
 $clr-error500: hsl(0 100% 68%);
 
-// $font--baloo: 'Baloo 2', sans-serif;
+$clr-primary200-signup: hsl(258 100% 76% / .3);
+$clr-primary400-signup: hsl(258, 100%, 76%);
+$clr-primary450-signup: hsl(258, 100%, 70%);
+

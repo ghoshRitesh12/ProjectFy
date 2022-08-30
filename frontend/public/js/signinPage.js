@@ -13,7 +13,7 @@ function validateEmail(e) {
     return;
   }
 
-  const emailRegEx = /^(?:[a-zA-Z0-9-][\.\+]?)*@(?:[a-zA-Z0-9-]{2,})(?:\.[a-zA-Z0-9-]{2,})+$/;
+  const emailRegEx = /(?:[a-zA-Z0-9]{2,})(?:[\.\+]?[a-zA-Z0-9]+)*@(?:[a-zA-Z0-9]{2,})(?:\.[a-zA-Z0-9]{2,})+$/;
   if(!emailRegEx.test(value)) {
     invalid.error = true;
     invalid.msg = 'Invalid email address, try another one';

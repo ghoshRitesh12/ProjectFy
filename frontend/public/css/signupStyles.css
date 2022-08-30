@@ -403,7 +403,7 @@ body ::selection {
   margin-top: -40%;
   flex: 0 1 20%;
   padding: 0;
-  background: linear-gradient(to bottom, #008fd1 50%, #00aeff);
+  background: linear-gradient(to bottom, hsl(199deg, 100%, 50%) 38%, hsl(258deg, 100%, 76%) 85%);
 }
 @media (min-width: 40em) {
   .signup__banner {
@@ -455,4 +455,4 @@ body ::selection {
     opacity: 1;
     margin-left: auto;
   }
-}/*# sourceMappingURL=signupPAGE.css.map */
+}/*# sourceMappingURL=signupStyles.css.map */

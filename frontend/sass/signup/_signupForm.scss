@@ -1,10 +1,14 @@
-@use '../parts/' as *;
+@use '../components/' as *;
 
 .signup__form-header {
   margin-bottom: 2.5rem;
   color: #444;
   text-align: left;
   font-size: clamp(1.02rem, 3.2vmin, 1.09rem);
+
+  @include breakpoint(medium) {
+    margin-bottom: 2rem;
+  }
   
   @include breakpoint(large) {
     margin-bottom: 3.5rem;
@@ -14,7 +18,7 @@
     margin-bottom: 1rem;
     font-weight: 700;
     font-size: clamp(1.55rem, 5vmin, 2.6rem);
-    color: #444;
+    color: #555;
   }
 }
 
@@ -28,24 +32,24 @@
   background-color: #fff;
   border-radius: 1rem 1rem 0 0;
   box-shadow: 0 0 .6rem hsl(0 0 0 / .3);
-
+  // outline: 1px solid red;
+  
   @include breakpoint(medium) {
     flex: 1 1 40%;
-    max-width: 21rem;
-    min-width: 17rem;
+    max-width: 19.5rem;
+    min-width: 15rem;
     width: 100%;
     min-height: 0;
     
-    padding: 0 0rem 0 .5rem;
+    padding: 0 .2rem 0 .5rem;
     box-shadow: none;
   }
   
   @include breakpoint(large) {
-    max-width: 25rem;
-    min-width: 25rem; 
+    max-width: 24rem;
+    min-width: 19rem; 
     flex: 1 1 30%;
     padding: 0 .7rem;
-    // outline: 1px solid red;
   }
 }
 
@@ -53,10 +57,10 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  gap: 1.7rem;
+  gap: 1rem;
   border-radius: 1rem 1rem 0 0;
   min-width: 100%;
-  
+
   @include breakpoint(large) {
     gap: 1.2rem;
     min-width: 100%;
@@ -69,13 +73,17 @@
 
     margin-top: .5rem;
     padding: 0 1em;
-    font-size: .8rem;
+    font-size: .75rem;
     color: $clr-error500;
     background-color: transparent;
 
-    &.error {
-      display: block;
+    &.client-validate--email {
+      font-size: .8rem;
     }
+
+    // &.error {
+    //   display: block;
+    // }
   }
 
   &__field--error {
@@ -99,11 +107,13 @@
     display: block;
     width: 100%;
     font-weight: 600;
-    color: #444;
+    color: #666;
   }
   &__name-cont {
     display: flex;
     justify-content: space-between;
+    gap: 10%;
+
     margin-top: .4rem;
     max-width: 100%;
     width: 100%;
@@ -118,28 +128,35 @@
   &__name {
     display: inline-block;
     padding: .5em .5em .5em .7em;
-    max-width: 11rem;
+    max-width: 12rem;
     width: 100%;
 
     font-size: 1rem;
     border: none;
     border-radius: $borders;
-    outline: 1px solid #888;
+    outline: 1px solid #cdcdcd;
     border-radius: $borders;
 
     &:focus {
       outline: 2px solid $clr-primary400-signup;
     }
-
     &.wrong-input:focus {
       outline: 2px solid $clr-error500;
+    }
+
+    @include breakpoint(medium) {
+      max-width: 10rem;
+    }
+
+    @include breakpoint(large) {
+      max-width: 11rem;
     }
   }
 
   &__email-wrapper {
     width: 100%;
     font-weight: 600;
-    color: #444;
+    color: #666;
 
     @include breakpoint(medium) {
       // padding-right: 1rem;
@@ -156,7 +173,7 @@
 
     border: none;
     border-radius: $borders;
-    outline: 1px solid #888;
+    outline: 1px solid #cdcdcd;
     border-radius: $borders;
 
     &:focus {
@@ -172,24 +189,31 @@
     width: 100%;
     margin: .2rem 0 .3rem 0;
     font-weight: 600;
-    color: #444;
+    color: #666;
     
     @include breakpoint(large) {
       margin: 0 0 .4rem 0;
     }
 
     .show-password {
-      display: block;
+      display: flex;
+      align-items: center;
+
+      font-size: 1rem;
       margin: 1.3rem 0 0 .5rem;
       font-weight: 400;
       cursor: pointer;
+
+      max-width: fit-content;
+      text-align: center;
       
       #pwd-checkbox {
-        margin-right: .3rem;
-        padding: .2rem;
+        margin: 0 1rem 0 0;
+        padding: 0 .2rem;
         cursor: pointer;
         aspect-ratio: 1;
-        width: .9rem;
+        height: 1rem;
+        width: 1rem;
         accent-color: $clr-primary450-signup;
       }
     }
@@ -197,6 +221,8 @@
   &__password-cont {
     display: flex;
     justify-content: space-between;
+    gap: 10%;
+
     max-width: 100%;
     width: 100%;
 
@@ -206,21 +232,28 @@
   &__password {
     display: inline-block;
     padding: .5em .5em .5em .7em;
-    max-width: 11rem;
+    max-width: 12rem;
     width: 100%;
     margin-top: .4rem;
 
     border: none;
     border-radius: $borders;
-    outline: 1px solid #888;
+    outline: 1px solid #cdcdcd;
     border-radius: $borders;
 
     &:focus {
       outline: 2px solid $clr-primary400-signup;
     }
-
     &.wrong-input:focus {
       outline: 2px solid $clr-error500;
+    }
+
+    @include breakpoint(medium) {
+      max-width: 10rem;
+    }
+
+    @include breakpoint(large) {
+      max-width: 11rem;
     }
   }
 
@@ -247,7 +280,7 @@
 .signup__form--signinurl {
   display: block;
   position: relative;
-  margin-top: 3rem;
+  margin-top: 2.7rem;
   margin-left: auto;
   font-size: clamp(1.02rem, 3.2vmin, 1.1rem);
   color: #444;
