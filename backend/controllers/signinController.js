@@ -10,7 +10,6 @@ const info = {
 const showSignin = (req, res) => {
 
   res.render('signin', { info });
-  // info.err.emailId = info.err.password = null;
   info.error = null;
   info.emailId = info.pwd = null;
   return;
@@ -63,6 +62,7 @@ const handleSignin = async (req, res) => {
       info.pwd = password;
       info.emailId = emailId;
       info.error = 'Invalid Password';
+
       return res.redirect('/signin');
     }
 

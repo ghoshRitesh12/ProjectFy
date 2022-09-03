@@ -6,8 +6,7 @@
   flex: 0 1 20%;
   padding: 0;
 
-  // background: linear-gradient(to bottom, #008fd1 50%, #00aeff);
-  background: linear-gradient(to bottom, $clr-primary400 38%, $clr-primary400-signup 85%);
+  background: linear-gradient(to bottom, #00aeff, #a985ff 80%);
   
   @include breakpoint(medium) {
     flex: 1 1 60%;

@@ -165,6 +165,7 @@ body ::selection {
 }
 .signin__form-header .signin-text {
   font-weight: 700;
+  color: #555;
   font-size: clamp(1.65rem, 5vmin, 2.6rem);
   margin-bottom: 1rem;
 }
@@ -221,9 +222,12 @@ body ::selection {
   width: 100%;
   margin-top: 0.5rem;
   padding: 0 1em;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: hsl(0deg, 100%, 68%);
   background-color: transparent;
+}
+.signin__form .client-validate.client-validate--email {
+  font-size: 0.8rem;
 }
 .signin__form .client-validate.error {
   display: block;
@@ -246,7 +250,7 @@ body ::selection {
 .signin__form__email-wrapper {
   width: 100%;
   font-weight: 600;
-  color: #444;
+  color: #555;
 }
 .signin__form__email {
   display: block;
@@ -254,9 +258,9 @@ body ::selection {
   padding: 0.7em;
   width: 100%;
   font-weight: 400;
-  font-size: 1.05rem;
+  font-size: 1.02rem;
   border: none;
-  outline: 1px solid #222;
+  outline: 1px solid #cdcdcd;
   border-radius: 0.5rem;
 }
 .signin__form__email:focus {
@@ -269,7 +273,7 @@ body ::selection {
   width: 100%;
   margin: 1rem 0 0.3rem 0;
   font-weight: 600;
-  color: #444;
+  color: #555;
 }
 @media (min-width: 64em) {
   .signin__form__password-wrapper {
@@ -294,9 +298,9 @@ body ::selection {
   padding: 0.7em 2.45em 0.7em 0.7em;
   width: 100%;
   font-weight: 400;
-  font-size: 1.05rem;
+  font-size: 1.02rem;
   border: none;
-  outline: 1px solid #222;
+  outline: 1px solid #cdcdcd;
   border-radius: 0.5rem;
 }
 .signin__form__password:focus {
@@ -361,7 +365,7 @@ body ::selection {
   margin-top: 3rem;
   margin-left: auto;
   font-size: clamp(1.02rem, 3.2vmin, 1.1rem);
-  color: #444;
+  color: #555;
 }
 .signin__form--signupurl a {
   position: relative;
@@ -377,7 +381,7 @@ body ::selection {
   margin-top: -40%;
   flex: 0 1 20%;
   padding: 0;
-  background: linear-gradient(to bottom, #007fb9 45%, #00aeff);
+  background-image: linear-gradient(to bottom, #a985ff 58%, #00aeff);
 }
 @media (min-width: 40em) {
   .signin__banner {

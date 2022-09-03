@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 
 const userAuth = (req, res, next) => {
-
   const rToken = req.cookies?.refresh_token;
   if(!rToken) return res.redirect('/signin');
   

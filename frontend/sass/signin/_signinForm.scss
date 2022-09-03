@@ -12,6 +12,7 @@
 
   .signin-text {
     font-weight: 700;
+    color: #555;
     font-size: clamp(1.65rem, 5vmin, 2.6rem);
     margin-bottom: 1rem;
   }
@@ -67,9 +68,13 @@
 
     margin-top: .5rem;
     padding: 0 1em;
-    font-size: .8rem;
+    font-size: .75rem;
     color: $clr-error500;
     background-color: transparent;
+
+    &.client-validate--email {
+      font-size: .8rem;
+    }
 
     &.error {
       display: block;
@@ -96,7 +101,7 @@
   &__email-wrapper {
     width: 100%;
     font-weight: 600;
-    color: #444;
+    color: #555;
   }
   &__email {
     display: block;
@@ -105,9 +110,9 @@
     width: 100%;
 
     font-weight: 400;
-    font-size: 1.05rem;
+    font-size: 1.02rem;
     border: none;
-    outline: 1px solid #222;
+    outline: 1px solid #cdcdcd;
     border-radius: $borders;
 
     &:focus {
@@ -123,7 +128,7 @@
     width: 100%;
     margin: 1rem 0 .3rem 0;
     font-weight: 600;
-    color: #444;
+    color: #555;
     
     @include breakpoint(large) {
       margin-bottom: .7rem;
@@ -150,9 +155,9 @@
     width: 100%;
 
     font-weight: 400;
-    font-size: 1.05rem;
+    font-size: 1.02rem;
     border: none;
-    outline: 1px solid #222;
+    outline: 1px solid #cdcdcd;
     border-radius: $borders;
 
     &:focus {
@@ -223,7 +228,7 @@
   margin-top: 3rem;
   margin-left: auto;
   font-size: clamp(1.02rem, 3.2vmin, 1.1rem);
-  color: #444;
+  color: #555;
 
   & a {
     position: relative;

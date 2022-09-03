@@ -236,7 +236,7 @@ body ::selection {
   display: block;
   width: 100%;
   font-weight: 600;
-  color: #666;
+  color: #555;
 }
 .signup__form__name-cont {
   display: flex;
@@ -277,7 +277,7 @@ body ::selection {
 .signup__form__email-wrapper {
   width: 100%;
   font-weight: 600;
-  color: #666;
+  color: #555;
 }
 .signup__form__email {
   display: block;
@@ -301,7 +301,7 @@ body ::selection {
   width: 100%;
   margin: 0.2rem 0 0.3rem 0;
   font-weight: 600;
-  color: #666;
+  color: #555;
 }
 @media (min-width: 64em) {
   .signup__form__password-wrapper {
@@ -387,7 +387,7 @@ body ::selection {
   margin-top: 2.7rem;
   margin-left: auto;
   font-size: clamp(1.02rem, 3.2vmin, 1.1rem);
-  color: #444;
+  color: #555;
 }
 .signup__form--signinurl a {
   position: relative;
@@ -403,7 +403,7 @@ body ::selection {
   margin-top: -40%;
   flex: 0 1 20%;
   padding: 0;
-  background: linear-gradient(to bottom, hsl(199deg, 100%, 50%) 38%, hsl(258deg, 100%, 76%) 85%);
+  background: linear-gradient(to bottom, #00aeff, #a985ff 80%);
 }
 @media (min-width: 40em) {
   .signup__banner {

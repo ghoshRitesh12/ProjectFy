@@ -107,7 +107,7 @@
     display: block;
     width: 100%;
     font-weight: 600;
-    color: #666;
+    color: #555;
   }
   &__name-cont {
     display: flex;
@@ -156,7 +156,7 @@
   &__email-wrapper {
     width: 100%;
     font-weight: 600;
-    color: #666;
+    color: #555;
 
     @include breakpoint(medium) {
       // padding-right: 1rem;
@@ -189,7 +189,7 @@
     width: 100%;
     margin: .2rem 0 .3rem 0;
     font-weight: 600;
-    color: #666;
+    color: #555;
     
     @include breakpoint(large) {
       margin: 0 0 .4rem 0;
@@ -283,7 +283,7 @@
   margin-top: 2.7rem;
   margin-left: auto;
   font-size: clamp(1.02rem, 3.2vmin, 1.1rem);
-  color: #444;
+  color: #555;
 
   & a {
     position: relative;

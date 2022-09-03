@@ -32,7 +32,7 @@
           <div class="signin__form__email-wrapper">
             Email address
             <input class="signin__form__email" type="email" name="emailId" spellcheck="false" autocapitalize="none"
-              aria-label="email id" placeholder="name@company.com" required
+              aria-label="email id" placeholder="name@company.com" minlength="7" required
               value="<%= info.emailId %>" />
 
             <div class="client-validate client-validate--email"></div>
@@ -43,7 +43,7 @@
             <section class="signin__form__password-cont">
               <input class="signin__form__password" type="password" name="password" 
                 aria-label="password" placeholder="your password" 
-                value="<%= info.pwd %>" minlength="7" required/>
+                value="<%= info.pwd %>" minlength="8" required/>
 
                 <!-- value="<%= info.pwd %>" required/> -->
                 

@@ -1,5 +1,6 @@
 import { $, $$, addGlobalEventListener } from './utility.js';
 
+// functions
 function validateEmail(e) {
   const value = e.target.value.trim();
   const invalid = { msg: '', error: false };
@@ -7,16 +8,16 @@ function validateEmail(e) {
   if($('.signin__form__field--error') != null)
     $('.signin__form__field--error').style.display = "none";
 
-  if(value.length <=0) {
+  if(value.length === 0) {
     $('.client-validate--email').innerText = '';
     e.target.classList.remove('wrong-input');
     return;
   }
 
-  const emailRegEx = /(?:[a-zA-Z0-9]{2,})(?:[\.\+]?[a-zA-Z0-9]+)*@(?:[a-zA-Z0-9]{2,})(?:\.[a-zA-Z0-9]{2,})+$/;
+  const emailRegEx = /(?:[a-zA-Z0-9]{3,})(?:[\.\+]?[a-zA-Z0-9]+)*@(?:[a-zA-Z0-9]{2,})(?:\.[a-zA-Z0-9]{2,})+$/;
   if(!emailRegEx.test(value)) {
     invalid.error = true;
-    invalid.msg = 'Invalid email address, try another one';
+    invalid.msg = '! Email address is invalid';
   }
 
   e.target.classList.toggle('wrong-input', invalid.error);
@@ -25,18 +26,17 @@ function validateEmail(e) {
   validateEmail.err = false;
   if(invalid.error) 
     validateEmail.err = true;
-
 }
 
 function validatePwd(e) {
   const value = e.target.value.trim();
   const invalid = { msg: '', error: false };
-  const minLength = 7, maxLength = 18;
+  const minLength = 8, maxLength = 16;
 
   if($('.signin__form__field--error') != null)
     $('.signin__form__field--error').style.display = "none";
 
-  if(value.length <= 0) {
+  if(value.length === 0) {
     $('.signin__form__show-password').classList.remove('visible');
     $('.client-validate--pwd').innerText = '';
     e.target.classList.remove('wrong-input');
@@ -46,11 +46,11 @@ function validatePwd(e) {
   // value.length >= 1
   $('.signin__form__show-password').classList.add('visible');
   
-  const pwdRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{7,18}$)/;
+  const pwdRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*()])(?=.{8,16}$)/;
   if(!pwdRegEx.test(value)) {
     invalid.error = true;
     invalid.msg = 
-    `Password must contain min ${minLength} to max ${maxLength} characters that include at least 1 lowercase, 1 UPPERCASE, 1 number and 1 special character among (!@#$%^&*)`;
+    `! Use ${minLength} to ${maxLength} characters with a mix of letters(lower & upper case), numbers & symbols among !@#$%^&*()`;
   }
   
   e.target.classList.toggle('wrong-input', invalid.error);
@@ -90,8 +90,8 @@ addGlobalEventListener(
 
 
 $('.signin__form').addEventListener('submit', e => {
-  if(validateEmail.err) return e.preventDefault();
-  if(validatePwd.err) return e.preventDefault();
+  if(validateEmail.err || validatePwd.err) 
+    return e.preventDefault();
   
 })
 

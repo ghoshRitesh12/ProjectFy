@@ -30,12 +30,12 @@
             Name
             <section class="signup__form__name-cont">
               <input class="signup__form__name signup__form__name--first" type="text" name="firstName" spellcheck="false"
-              aria-label="First name" placeholder="First name" required/>
-              <!-- value="<%= info.emailId %>" /> -->
+              aria-label="First name" placeholder="First name" required
+              value="<%= info.firstName %>" />
               
               <input class="signup__form__name signup__form__name--last" type="text" name="lastName" spellcheck="false"
-              aria-label="Last name" placeholder="Last name"/>
-              <!-- value="<%= info.emailId %>" /> -->
+              aria-label="Last name" placeholder="Last name"
+              value="<%= info.lastName %>" />
             </section>
 
             <div class="client-validate client-validate--name"></div>
@@ -44,8 +44,8 @@
           <div class="signup__form__email-wrapper">
             Email address
             <input class="signup__form__email" type="email" name="emailId" spellcheck="false" autocapitalize="none"
-              aria-label="email id" placeholder="name@company.com" minlength="7" required/>
-              <!-- value="<%= info.emailId %>" /> -->
+              aria-label="email id" placeholder="name@company.com" minlength="7" required
+              value="<%= info.emailId %>" />
 
             <div class="client-validate client-validate--email"></div>
           </div>
@@ -55,23 +55,23 @@
             <section class="signup__form__password-cont">
 
               <input class="signup__form__password" type="password" name="password" aria-label="password"
-                placeholder="Password" minlength="8" required/>
-                <!-- value="<%= info.pwd %>"/> -->
+                placeholder="Password" minlength="8" required
+                value="<%= info.pwd %>"/>
 
               <input class="signup__form__password signup__form__password--confirm" type="password" name="confirmPassword"
-              aria-label="confirm password" placeholder="Confirm" minlength="8" required/>
-              <!-- value="<%= info.pwd %>"/> -->
+              aria-label="confirm password" placeholder="Confirm" minlength="8" required
+              value="<%= info.confirmPwd %>"/>
 
             </section>
 
             <div class="client-validate client-validate--pwd"></div>
             
-            <!-- <% if(locals.info.error !== null) { %>
+            <% if(locals.info.error !== null) { %>
               <div class="signup__form__field--error">
                 <span> <%= info.error %> </span>
                 <span class="field_error-cross">x</span>
               </div>
-            <% } %> -->
+            <% } %>
 
             <label class="show-password" for="pwd-checkbox">
               <input id="pwd-checkbox" type="checkbox" value="hide"/>

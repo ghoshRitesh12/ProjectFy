@@ -10,6 +10,8 @@ const info = {
 const showSignup = (req, res) =>  {
   res.render('signup', { info });
   info.error = null;
+  info.firstName = info.lastName = info.emailId = null;
+  info.pwd = info.confirmPwd = null;
   return;
 }
 
@@ -23,16 +25,21 @@ const handleSignup = async (req, res) => {
     return res.sendStatus(400); //bad request
 
   try {
-    const duplicateUser = await userModel.findOne({ email: emailId });
-    if(duplicateUser) 
-      return res.render('signup', { error_user: 'User with this email already exists' });
+    const duplicateUser = await userModel.findOne({ email: emailId.trim() });
+    if(duplicateUser)  {
+      info.firstName = firstName; info.lastName = lastName;
+      info.emailId = emailId;
+      info.pwd = password; info.confirmPwd = confirmPassword;
+      info.error = 'User with this email already exists';
+      return res.redirect('/signup');
+    }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password.trim(), 10);
 
     const newUser = {
       uuid: genUUID().toString(),
-      name: `${firstName.trim()} ${lastName}`,
-      email: emailId,
+      name: `${firstName.trim()} ${lastName.trim()}`,
+      email: emailId.trim(),
       password: hashedPassword
     };
 

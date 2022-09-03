@@ -5,20 +5,19 @@ const validateEmail = e => {
   const value = e.target.value.trim();
   const invalid = { msg: '', error: false };
 
-  if($('.signin__form__field--error') != null)
-    $('.signin__form__field--error').style.display = "none";
+  // if($('.signup__form__field--error') != null)
+  //   $('.signup__form__field--error').style.display = "none";
 
-  if(value.length <=0) {
+  if(value.length === 0) {
     $('.client-validate--email').innerText = '';
     e.target.classList.remove('wrong-input');
     return;
   }
 
-  // const emailRegEx = /^(?:[a-zA-Z0-9-][\.\+]?)*@(?:[a-zA-Z0-9-]{2,})(?:\.[a-zA-Z0-9-]{2,})+$/;
   const emailRegEx = /(?:[a-zA-Z0-9]{3,})(?:[\.\+]?[a-zA-Z0-9]+)*@(?:[a-zA-Z0-9]{2,})(?:\.[a-zA-Z0-9]{2,})+$/;
   if(!emailRegEx.test(value)) {
     invalid.error = true;
-    invalid.msg = 'Email address is invalid';
+    invalid.msg = '! Email address is invalid';
   }
 
   e.target.classList.toggle('wrong-input', invalid.error);
@@ -34,22 +33,21 @@ const validatePwd = e => {
   const invalid = { msg: '', error: false };
   const minLength = 8, maxLength = 16;
 
-  if($('.signin__form__field--error') != null)
-    $('.signin__form__field--error').style.display = "none";
+  // if($('.signup__form__field--error') != null)
+  //   $('.signup__form__field--error').style.display = "none";
 
-  if(value.length <= 0) {
+  if(value.length === 0) {
     $('.client-validate--pwd').innerText = '';
     e.target.classList.remove('wrong-input');
     return;
   }
 
   // value.length >= 1  
-  const pwdRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,16}$)/;
+  const pwdRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*()])(?=.{8,16}$)/;
   if(!pwdRegEx.test(value)) {
     invalid.error = true;
     invalid.msg = 
-    `Use ${minLength} to ${maxLength} characters with a mix of letters(lower & upper case), numbers & symbols among (!@#$%^&*)`;
-    // `Password must contain min ${minLength} to max ${maxLength} characters that include at least 1 lowercase, 1 UPPERCASE, 1 number and 1 special character among (!@#$%^&*)`;
+    `! Use ${minLength} to ${maxLength} characters with a mix of letters(lower & upper case), numbers & symbols among !@#$%^&*()`;
   }
  
   e.target.classList.toggle('wrong-input', invalid.error);
@@ -64,29 +62,28 @@ const validatePwd = e => {
 const validateConfirmPwd = e => {
   const value = e.target.value.trim();
   const invalid = { msg: '', error: false };
-  const minLength = 7, maxLength = 18;
+  const minLength = 8, maxLength = 16;
 
-  if($('.signin__form__field--error') != null)
-    $('.signin__form__field--error').style.display = "none";
+  // if($('.signup__form__field--error') != null)
+  //   $('.signup__form__field--error').style.display = "none";
 
-  if(value.length <= 0) {
+  if(value.length === 0) {
     $('.client-validate--pwd').innerText = '';
     e.target.classList.remove('wrong-input');
-    return;
+    // return;
   }
 
   // value.length >= 1  
-  const pwdRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*()])(?=.{7,18}$)/;
+  const pwdRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*()])(?=.{8,16}$)/;
   if(!pwdRegEx.test(value)) {
     invalid.error = true;
     invalid.msg = 
-    `Use ${minLength} to ${maxLength} characters with a mix of letters, numbers & symbols among (!@#$%^&*)`;
-    // `Password must contain min ${minLength} to max ${maxLength} characters that include at least 1 lowercase, 1 UPPERCASE, 1 number and 1 special character among (!@#$%^&*)`;
+    `! Use ${minLength} to ${maxLength} characters with a mix of letters(lower & upper case), numbers & symbols among !@#$%^&*()`;
   }
 
   if($('.signup__form__password').value !== e.target.value) {
     invalid.error = true;
-    invalid.msg = "Confirm password doesn't match new Password"
+    invalid.msg = "! Those passwords didn't match. Try again.";
   }
   
   e.target.classList.toggle('wrong-input', invalid.error);
@@ -102,6 +99,13 @@ const validateConfirmPwd = e => {
 $('.signup__form__email').addEventListener('input', validateEmail);
 $('.signup__form__password').addEventListener('input', validatePwd);
 $('.signup__form__password--confirm').addEventListener('input', validateConfirmPwd);
+
+// server side validation error cross x
+addGlobalEventListener(
+  'click', 
+  '.field_error-cross', 
+  e => e.target.parentElement.style.display = "none"
+)
 
 $('.signup__form').addEventListener('submit', e => {
   if(validateEmail.err || validatePwd.err || validateConfirmPwd.err) 
@@ -121,3 +125,6 @@ $('#pwd-checkbox').addEventListener('change', e => {
   e.target.value = state;
 })
 
+window.addEventListener('load', e => {
+  $('.signup__form__name--first').focus();
+})

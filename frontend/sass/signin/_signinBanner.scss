@@ -6,7 +6,7 @@
   flex: 0 1 20%;
   padding: 0;
 
-  background: linear-gradient(to bottom, #007fb9 45%, #00aeff);
+  background-image: linear-gradient(to bottom, #a985ff 58%, #00aeff);
   
   @include breakpoint(medium) {
     flex: 1 1 60%;
