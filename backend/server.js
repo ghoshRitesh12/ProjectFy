@@ -14,6 +14,7 @@ const signoutRouter = require('./routes/signout');
 const refreshTokenRouter = require('./routes/refreshToken');
 const homeRouter = require('./routes/home');
 const noteRouter = require('./routes/note');
+const confirmEmailRouter = require('./routes/confirmEmail');
 
 // middlewares
 const userAuth = require('./middlewares/userAuth');
@@ -35,6 +36,7 @@ app.use(express.urlencoded({ extended: false }));
   app.use('/signup', signupRouter);
   app.use('/signin', signinRouter);
   app.use('/signout', signoutRouter);
+  app.use('/confirmation', confirmEmailRouter);
   app.use('/refresh', refreshTokenRouter);
   app.use(userAuth);
   app.use('/', homeRouter);

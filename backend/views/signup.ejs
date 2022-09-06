@@ -84,12 +84,19 @@
 
         </form>
 
-        <div class="signup__form--signinurl">
+        <footer class="signup__form--signinurl">
 
           Already an user?
           <a href="/signin">Sign in</a>
 
-        </div>
+        </footer>
+
+        <% if(locals.info.emailSent !== null) { %>
+          <div class="email__sent">
+            Confirmation email sent to <%= info.emailSent %>.
+            Please check your email (& spam if needed) to confirm your account.
+          </div>
+        <% } %>
 
       </section>
 
@@ -98,15 +105,17 @@
           <img class="signup__banner__img"
             src="images/signinPageBanner.webp"
             alt="signup page banner image">
-
-          <!-- <img class="signup__banner__img"
-            src="https://images.unsplash.com/photo-1530303263041-b5ca33678f04?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-            alt="to-notes app demo image"> -->
         </section>
 
       </figure>
 
     </div>
+
+    <% if(locals.info.serverError !== null) { %>
+      <aside class="server-error__popup">
+        <%= info.serverError %>
+      </aside>
+    <% } %>
 
   </main>
 

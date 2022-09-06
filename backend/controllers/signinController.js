@@ -6,17 +6,22 @@ const { validationResult } = require('express-validator');
 
 const info = {
   title: 'Sign in | To-Notes_App',
-  error: null
+  error: null,
+  emailVerified: true
 };
 
+// get route
 const showSignin = (req, res) => {
 
   res.render('signin', { info });
   info.error = null;
   info.emailId = info.pwd = null;
+  info.emailVerified = true
   return;
 }
 
+
+// post route
 const handleSignin = async (req, res) => {
   const { emailId, password } = req.body;
   if(!emailId || !password )
@@ -43,6 +48,13 @@ const handleSignin = async (req, res) => {
 
     // checking for correct password
     if(await bcrypt.compare(password, foundUser.password)) {
+      
+      if(foundUser.verified !== true) {
+        info.emailVerified = false;
+        info.emailId = emailId; info.pwd = password;
+        return res.redirect('/signin');
+      }
+
       const accessToken = jwt.sign(
         { "uuid": foundUser.uuid },
         process.env.ACCESS_TOKEN_SECRET,

@@ -16,7 +16,8 @@ const noteSchema = new mongoose.Schema({
   userId: {
     type: String,
     trim: true,
-    immutable: true
+    immutable: true,
+    unique: true
   }
 }, { collection: collectionName });
 

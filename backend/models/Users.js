@@ -10,14 +10,16 @@ const userSchema = new mongoose.Schema({
     type: String,
     trim: true,
     required: true,
-    immutable: true
+    immutable: true,
+    unique: true
   },
   uuid: {
     type: String,
     trim: true,
     required: true,
-    minLength: 30,
-    immutable: true
+    minLength: 27,
+    immutable: true,
+    unique: true
   },
   password: {
     type: String,
@@ -28,6 +30,10 @@ const userSchema = new mongoose.Schema({
     type: String, 
     trim: true,
     default: ""
+  },
+  verified:  {
+    type: Boolean,
+    default: false
   }
 }, { collection: 'users' });
 

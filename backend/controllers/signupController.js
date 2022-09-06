@@ -1,22 +1,29 @@
 const genUUID = require('../config/genUUID');
+const sendEmail = require('../config/email');
 const userModel = require('../models/Users');
 const bcrypt = require('bcrypt');
-
+const jwt = require('jsonwebtoken');
 const { validationResult } = require('express-validator');
 
 const info = {
   title: 'Sign up | To-Notes_App',
-  error: null
+  error: null,
+  serverError: null,
+  emailSent: null
 };
 
+// get route
 const showSignup = (req, res) =>  {
   res.render('signup', { info });
   info.error = null;
   info.firstName = info.lastName = info.emailId = null;
   info.pwd = info.confirmPwd = null;
+  info.serverError = info.emailSent = null;
   return;
 }
 
+
+// post route
 const handleSignup = async (req, res) => {
   const { 
     emailId, password, confirmPassword,
@@ -55,12 +62,37 @@ const handleSignup = async (req, res) => {
       email: emailId.trim(),
       password: hashedPassword
     };
+    const currentUser = await userModel.create(newUser);
+    
+    jwt.sign(
+      { 'user': currentUser._id },
+      process.env.EMAIL_SECRET,
+      { expiresIn: '59m' },
+      async (err, emailToken) => {
+        if(err) {
+          info.serverError = 'Server error while sending confirmation email';
+          return res.redirect('/signup');
+        } 
 
-    await userModel.create(newUser);
+        const confirmUrl = `http://localhost:4000/confirmation/${emailToken}`
 
-    res.redirect('/signin');
+        await sendEmail({
+          receiver: emailId,
+          subject: 'Confirmation Email',
+          html: `Please click this email link to confirm your account LOL: <a href=${confirmUrl}>${confirmUrl}</a>`,
+          text: `Please click this link to confirm your account: ${confirmUrl}`
+        });
+
+        info.emailSent = emailId;
+        return res.redirect('/signup');
+        
+      }      
+    );
+
+    // res.redirect('/signin');
 
   } catch (err) {
+    console.log(err.message);
     res.redirect('/signup');
   }
 }
