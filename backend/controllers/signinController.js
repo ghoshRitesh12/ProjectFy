@@ -1,20 +1,21 @@
+const sendEmail = require('../config/email');
 const userModel = require('../models/Users');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-
 const { validationResult } = require('express-validator');
 
 const info = {
   title: 'Sign in | To-Notes_App',
   error: null,
-  emailVerified: true
+  emailVerified: true,
+  serverError: null
 };
 
 // get route
 const showSignin = (req, res) => {
 
   res.render('signin', { info });
-  info.error = null;
+  info.serverError = info.error = null;
   info.emailId = info.pwd = null;
   info.emailVerified = true
   return;
@@ -49,9 +50,30 @@ const handleSignin = async (req, res) => {
     // checking for correct password
     if(await bcrypt.compare(password, foundUser.password)) {
       
-      if(foundUser.verified !== true) {
+      if(foundUser.verified === false) {
         info.emailVerified = false;
         info.emailId = emailId; info.pwd = password;
+
+        jwt.sign(
+          { "user": foundUser._id },
+          process.env.EMAIL_SECRET,
+          { expiresIn: '59m' },
+          async (err, newEmailToken) => {
+            if(err) {
+              info.serverError = 'Server error while sending confirmation email';
+              return res.redirect('/signin');
+            }
+
+            const confirmUrl = `http://localhost:4000/confirmation/${newEmailToken}`
+
+            sendEmail({
+              receiver: emailId,
+              subject: 'Confirmation Email',
+              text: `Click this link to confirm and continue to your Account: ${confirmUrl}`
+            });
+          }
+        )
+        
         return res.redirect('/signin');
       }
 

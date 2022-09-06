@@ -93,7 +93,10 @@
           <button class="signin__form__submit-btn" type="submit"> Sign in </button>
 
           <% if(locals.info.emailVerified === false) { %>
-            <h4 style="color:#555"> It seems that your account is not verified </h4>
+            <h4 style="color:#555"> 
+              It seems that your account isn't verified.
+              Verification link sent to your registered email address.
+            </h4>
           <% } %>
 
         </form>

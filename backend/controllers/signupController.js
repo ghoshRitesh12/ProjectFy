@@ -80,7 +80,7 @@ const handleSignup = async (req, res) => {
           receiver: emailId,
           subject: 'Confirmation Email',
           html: `Please click this email link to confirm your account LOL: <a href=${confirmUrl}>${confirmUrl}</a>`,
-          text: `Please click this link to confirm your account: ${confirmUrl}`
+          text: `Click this link to confirm and continue to your Account: ${confirmUrl}`
         });
 
         info.emailSent = emailId;
