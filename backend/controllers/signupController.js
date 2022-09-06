@@ -2,6 +2,8 @@ const genUUID = require('../config/genUUID');
 const userModel = require('../models/Users');
 const bcrypt = require('bcrypt');
 
+const { validationResult } = require('express-validator');
+
 const info = {
   title: 'Sign up | To-Notes_App',
   error: null
@@ -23,6 +25,17 @@ const handleSignup = async (req, res) => {
 
   if(!emailId || !password || !confirmPassword || !firstName)
     return res.sendStatus(400); //bad request
+
+  // validation errors
+  const validationError = validationResult(req);
+  if(!validationError.isEmpty()) {
+    info.firstName = firstName; info.lastName = lastName;
+    info.emailId = emailId;
+    info.pwd = password; info.confirmPwd = confirmPassword;
+
+    info.error = validationError.errors[0].msg;
+    return res.redirect('/signup');
+  }
 
   try {
     const duplicateUser = await userModel.findOne({ email: emailId.trim() });

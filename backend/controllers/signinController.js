@@ -2,6 +2,8 @@ const userModel = require('../models/Users');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+const { validationResult } = require('express-validator');
+
 const info = {
   title: 'Sign in | To-Notes_App',
   error: null
@@ -20,12 +22,22 @@ const handleSignin = async (req, res) => {
   if(!emailId || !password )
     return res.sendStatus(400); //bad request
 
+  // validation errors
+  const validationError = validationResult(req);
+  if(!validationError.isEmpty()) {
+    info.emailId = emailId;
+    info.pwd = password;
+
+    info.error = validationError.errors[0].msg;
+    return res.redirect('/signin');
+  }
+
   try {
     const foundUser = await userModel.findOne({ email: emailId });
     if(!foundUser) {
       info.emailId = emailId;
       info.pwd = password;
-      info.error = 'In-correct email id' ;
+      info.error = 'In-valid credentials' ;
       return res.redirect('/signin');
     }
 
@@ -65,7 +77,6 @@ const handleSignin = async (req, res) => {
 
       return res.redirect('/signin');
     }
-
   } catch (err) {
     res.redirect('/signin');
   }

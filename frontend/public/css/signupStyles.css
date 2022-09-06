@@ -224,7 +224,7 @@ body ::selection {
   margin-top: 1rem;
   padding: 0.25em 1em;
   width: 100%;
-  font-size: 0.95rem;
+  font-size: 0.8rem;
   border-radius: 0.5rem;
   color: hsl(0deg, 100%, 68%);
   background-color: hsla(0deg, 100%, 67%, 0.2);

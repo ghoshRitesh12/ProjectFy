@@ -68,13 +68,13 @@
             
             <% if(locals.info.error !== null) { %>
               <div class="signup__form__field--error">
-                <span> <%= info.error %> </span>
+                <span class="field_error-msg"> <%= info.error %> </span>
                 <span class="field_error-cross">x</span>
               </div>
             <% } %>
 
             <label class="show-password" for="pwd-checkbox">
-              <input id="pwd-checkbox" type="checkbox" value="hide"/>
+              <input id="pwd-checkbox" type="checkbox"/>
               <span>Show Password</span> 
             </label>
 

@@ -95,5 +95,12 @@ $('.signin__form').addEventListener('submit', e => {
   
 })
 
+window.addEventListener('load', e => {
+  if($('.signin__form__email').value.length === 0)
+    $('.signin__form__email').focus();
+
+  
+})
+
 // https://unsplash.com/photos/S3JdHNXSfnA
 // #232529 darkmode

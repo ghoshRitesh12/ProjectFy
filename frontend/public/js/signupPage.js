@@ -33,9 +33,6 @@ const validatePwd = e => {
   const invalid = { msg: '', error: false };
   const minLength = 8, maxLength = 16;
 
-  // if($('.signup__form__field--error') != null)
-  //   $('.signup__form__field--error').style.display = "none";
-
   if(value.length === 0) {
     $('.client-validate--pwd').innerText = '';
     e.target.classList.remove('wrong-input');
@@ -64,9 +61,6 @@ const validateConfirmPwd = e => {
   const invalid = { msg: '', error: false };
   const minLength = 8, maxLength = 16;
 
-  // if($('.signup__form__field--error') != null)
-  //   $('.signup__form__field--error').style.display = "none";
-
   if(value.length === 0) {
     $('.client-validate--pwd').innerText = '';
     e.target.classList.remove('wrong-input');
@@ -80,16 +74,11 @@ const validateConfirmPwd = e => {
     invalid.msg = 
     `! Use ${minLength} to ${maxLength} characters with a mix of letters(lower & upper case), numbers & symbols among !@#$%^&*()`;
   }
-
-  if($('.signup__form__password').value !== e.target.value) {
-    invalid.error = true;
-    invalid.msg = "! Those passwords didn't match. Try again.";
-  }
   
   e.target.classList.toggle('wrong-input', invalid.error);
   $('.client-validate--pwd').innerText = invalid.msg;
 
-  
+
   validateConfirmPwd.err = false;
   if(invalid.error) 
     validateConfirmPwd.err = true;
@@ -120,11 +109,13 @@ $('#pwd-checkbox').addEventListener('change', e => {
   $$('.signup__form__password').forEach(field => {
     field.type = (field.type === "password") ? "text" : "password";
   })
-
-  const state = (value === "hide") ? "show" :"hide";
-  e.target.value = state;
 })
 
 window.addEventListener('load', e => {
-  $('.signup__form__name--first').focus();
+  if($('.signup__form__name--first').value.length === 0)
+    $('.signup__form__name--first').focus();
+
+  $('.signup__form__password').type = 'password';
+  $('.signup__form__password--confirm').type = 'password';
 })
+
