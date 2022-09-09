@@ -14,11 +14,12 @@ const sendEmail = async (mail) => {
       from: process.env.SENDER_EMAIL_ID,
       to:  mail.receiver,
       subject: mail.subject,
-      text: mail.text
+      text: mail.text || '',
+      html: mail.html || ''
     }
   
     await transporter.sendMail(mailOptions);
-    console.log("mail sent to", mail.receiver);
+    // console.log("mail sent to", mail.receiver);
 
   } catch (err) {
     return err.message;

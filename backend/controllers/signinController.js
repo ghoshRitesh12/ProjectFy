@@ -14,6 +14,8 @@ const info = {
 // get route
 const showSignin = (req, res) => {
 
+  // console.dir(req);
+
   res.render('signin', { info });
   info.serverError = info.error = null;
   info.emailId = info.pwd = null;
@@ -57,24 +59,31 @@ const handleSignin = async (req, res) => {
         jwt.sign(
           { "user": foundUser._id },
           process.env.EMAIL_SECRET,
-          { expiresIn: '59m' },
+          { expiresIn: '10m' },
           async (err, newEmailToken) => {
             if(err) {
               info.serverError = 'Server error while sending confirmation email';
               return res.redirect('/signin');
             }
 
-            const confirmUrl = `http://localhost:4000/confirmation/${newEmailToken}`
-
+            const confirmUrl = `${req.protocol}://${req.get('host')}/confirmation/${newEmailToken}`
             sendEmail({
               receiver: emailId,
               subject: 'Confirmation Email',
-              text: `Click this link to confirm and continue to your Account: ${confirmUrl}`
+              html: `
+              <h3 style="font-family: sans-serif; color: #333">
+              Please click this link to confirm your account: 
+              <br/> <a href="${confirmUrl}">${confirmUrl}</a>
+              <br/> Link valid upto 10 mins from arrival
+              </h3>
+              `,
+              // text: `Click this link to confirm and continue to your Account: ${confirmUrl}`,
             });
+
+            res.redirect('/signin');
           }
-        )
-        
-        return res.redirect('/signin');
+        ) 
+        return;
       }
 
       const accessToken = jwt.sign(

@@ -7,10 +7,13 @@ const confirmEmailHandler = async(req, res) => {
   jwt.verify(
     token,
     process.env.EMAIL_SECRET,
-    async (err, {user}) => {
-      if(err) return res.send('Confirmation Failed');
+    async (err, decoded) => {
+      if(err) return res.render('404', { confirmationError: 'Link validity expired, try again' });
 
-      const confirmedUser = await userModel.findById(user);
+      const confirmedUser = await userModel.findById(decoded.user);
+
+      if(confirmedUser.verified === true) return res.redirect('/signin');
+
       confirmedUser.verified = true;
       await confirmedUser.save();
 

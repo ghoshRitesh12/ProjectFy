@@ -84,19 +84,16 @@
 
         </form>
 
+        <% if(locals.info.emailSent !== null) { %>
+          <h4 class="email__sent" style="margin-bottom: .5rem; color: #9466ff;">
+            Hold tight & check your email <%= info.emailSent %> (also spam) to confirm your account.
+          </h4>
+        <% } %>
+          
         <footer class="signup__form--signinurl">
-
           Already an user?
           <a href="/signin">Sign in</a>
-
         </footer>
-
-        <% if(locals.info.emailSent !== null) { %>
-          <h5 class="email__sent" style="margin-top: 1rem; color: #555;">
-            Confirmation email sent to <%= info.emailSent %>.
-            Please check your email (& spam if needed) to confirm your account.
-          </h5>
-        <% } %>
 
       </section>
 

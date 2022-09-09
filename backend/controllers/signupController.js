@@ -18,7 +18,8 @@ const showSignup = (req, res) =>  {
   info.error = null;
   info.firstName = info.lastName = info.emailId = null;
   info.pwd = info.confirmPwd = null;
-  info.serverError = info.emailSent = null;
+  info.serverError = null;
+  // info.emailSent = null;
   return;
 }
 
@@ -67,7 +68,7 @@ const handleSignup = async (req, res) => {
     jwt.sign(
       { 'user': currentUser._id },
       process.env.EMAIL_SECRET,
-      { expiresIn: '59m' },
+      { expiresIn: '10m' },
       async (err, emailToken) => {
         if(err) {
           info.serverError = 'Server error while sending confirmation email';
@@ -76,11 +77,17 @@ const handleSignup = async (req, res) => {
 
         const confirmUrl = `http://localhost:4000/confirmation/${emailToken}`
 
-        await sendEmail({
+        // await makes it slow
+        sendEmail({
           receiver: emailId,
           subject: 'Confirmation Email',
-          html: `Please click this email link to confirm your account LOL: <a href=${confirmUrl}>${confirmUrl}</a>`,
-          text: `Click this link to confirm and continue to your Account: ${confirmUrl}`
+          html: `
+          <h3 style="font-family: sans-serif; color: #333">
+            Please click this link to confirm your account: 
+            <br/> <a href="${confirmUrl}">${confirmUrl}</a>
+            <br/> Link valid upto 10 mins from arrival
+          </h3>
+          `
         });
 
         info.emailSent = emailId;
@@ -88,11 +95,7 @@ const handleSignup = async (req, res) => {
         
       }      
     );
-
-    // res.redirect('/signin');
-
   } catch (err) {
-    console.log(err.message);
     res.redirect('/signup');
   }
 }

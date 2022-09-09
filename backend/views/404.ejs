@@ -8,11 +8,21 @@
 </head>
 <body>
   
-  oops maybe 
+  <% if(locals.confirmationError) { %>
 
-   <h1>
+    <h2>
+      <%= confirmationError %>
+    </h2>
+
+  <% } else { %>
+  <%# else { %>
+    oops maybe 
+
+    <h1>
       page not found
-   </h1>
+    </h1>
+  <% } %>
+
 
 </body>
 </html>
