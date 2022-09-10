@@ -19,7 +19,7 @@ const showSignup = (req, res) =>  {
   info.firstName = info.lastName = info.emailId = null;
   info.pwd = info.confirmPwd = null;
   info.serverError = null;
-  // info.emailSent = null;
+  info.emailSent = null;
   return;
 }
 

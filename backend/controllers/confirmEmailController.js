@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const userModel = require('../models/Users');
 
-const confirmEmailHandler = async(req, res) => {
+const confirmEmailHandler = async (req, res) => {
   const { token } = req.params;
 
   jwt.verify(
@@ -17,7 +17,7 @@ const confirmEmailHandler = async(req, res) => {
       confirmedUser.verified = true;
       await confirmedUser.save();
 
-      return res.redirect('/signin');
+      return res.redirect('/signin?vrfd=true');
     }
   )
 }

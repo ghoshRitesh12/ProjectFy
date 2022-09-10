@@ -13,10 +13,8 @@ const info = {
 
 // get route
 const showSignin = (req, res) => {
-
-  // console.dir(req);
-
   res.render('signin', { info });
+
   info.serverError = info.error = null;
   info.emailId = info.pwd = null;
   info.emailVerified = true
@@ -28,9 +26,8 @@ const showSignin = (req, res) => {
 const handleSignin = async (req, res) => {
   const { emailId, password } = req.body;
   if(!emailId || !password )
-    return res.sendStatus(400); //bad request
+    return res.sendStatus(400); 
 
-  // validation errors
   const validationError = validationResult(req);
   if(!validationError.isEmpty()) {
     info.emailId = emailId;
@@ -72,9 +69,9 @@ const handleSignin = async (req, res) => {
               subject: 'Confirmation Email',
               html: `
               <h3 style="font-family: sans-serif; color: #333">
-              Please click this link to confirm your account: 
-              <br/> <a href="${confirmUrl}">${confirmUrl}</a>
-              <br/> Link valid upto 10 mins from arrival
+                Please click this link to confirm your account: 
+                <br/> <a href="${confirmUrl}">${confirmUrl}</a>
+                <br/> Link valid upto 10 mins from arrival
               </h3>
               `,
               // text: `Click this link to confirm and continue to your Account: ${confirmUrl}`,
@@ -116,7 +113,7 @@ const handleSignin = async (req, res) => {
     } else {
       info.pwd = password;
       info.emailId = emailId;
-      info.error = 'Invalid Password';
+      info.error = 'In-valid credentials';
 
       return res.redirect('/signin');
     }
