@@ -13,7 +13,11 @@
 <body>
   
   <h1>
-    This is the index page 
+    <% if(locals.user) { %>
+      User <%= user.name %>
+    <% } else { %>
+      show login button
+    <% } %>
   </h1>
 
   
@@ -47,29 +51,6 @@
   <form action="/signout" method="post">
     <button type="submit"> Signout </button>
   </form>
-
-  <!-- <script defer>
-
-    const noteIds = document.querySelectorAll('[name="title"]');
-
-    noteIds.forEach(id => {
-      id.addEventListener('click', async e => {
-        const query = e.target.getAttribute('data-id');
-
-        try {
-          const resp = await fetch(query);
-          const data = await resp.json();
-
-          console.log(data);
-        } catch (err) {
-          console.log(err);
-        }
-
-
-        // console.log(e.target.getAttribute('data-id'));
-      })
-    })
-  </script> -->
 
 </body>
 </html>
