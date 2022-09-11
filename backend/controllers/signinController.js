@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const { validationResult } = require('express-validator');
 
 const info = {
-  title: 'Sign in | To-Notes_App',
+  title: 'ProjectFy',
   error: null,
   emailVerified: true,
   serverError: null

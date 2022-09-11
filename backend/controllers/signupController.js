@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const { validationResult } = require('express-validator');
 
 const info = {
-  title: 'Sign up | To-Notes_App',
+  title: 'Create ProjectFy Account',
   error: null,
   serverError: null,
   emailSent: null
