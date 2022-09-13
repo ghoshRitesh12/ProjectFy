@@ -147,6 +147,7 @@ body ::selection {
   align-items: center;
   flex-direction: column-reverse;
   gap: 0rem;
+  position: relative;
   background-color: #00aeff;
   min-height: inherit;
 }
@@ -330,6 +331,7 @@ body ::selection {
 .signin__form__show-password {
   position: absolute;
   inset: 0 0 auto auto;
+  isolation: isolate;
   transform: translateX(-30%) translateY(43%);
   padding: 0.2em 0.3em 0.2em 0.2em;
   font-size: 1.2rem;

@@ -29,7 +29,6 @@ body {
   margin-block: auto;
 
   min-height: 100vh;
-  // height: 100%;
 
   isolation: isolate;  
   background-color: #fff;
@@ -57,6 +56,7 @@ body {
   align-items: center;
   flex-direction: column-reverse;
   gap: 0rem;
+  position: relative;
 
   background-color: #00aeff;
 
