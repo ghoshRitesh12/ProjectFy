@@ -90,27 +90,224 @@ textarea {
   display: none;
 }
 
-/* Custom styles */
 body {
+  font-family: sans-serif;
+}
+@media (min-width: 40em) {
+  body {
+    overflow: hidden;
+  }
+}
+body ::-moz-selection {
+  overflow-y: hidden;
+  background-color: hsl(199deg, 100%, 37%);
+  color: #fff;
+}
+body ::selection {
+  overflow-y: hidden;
+  background-color: hsl(199deg, 100%, 37%);
+  color: #fff;
+}
+
+#root {
+  display: block;
+  margin-block: auto;
+  isolation: isolate;
+  background-color: #fff;
+}
+
+.projectfy {
+  display: block;
+  min-height: 100vh;
+}
+@media (min-width: 40em) {
+  .projectfy {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    max-width: 100%;
+    width: 100%;
+    max-height: 100vh;
+  }
+}
+
+.projectfy__sidepanel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  min-height: 100vh;
+  margin-block: auto;
+  padding: 0 1em;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.projectfy__sidepanel__header__logosvg {
+  pointer-events: none;
+}
+.projectfy__sidepanel__nav {
+  display: flex;
+}
+.projectfy__sidepanel__mode {
+  --active-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+  position: relative;
+  z-index: 22;
+  width: 80%;
+  margin-inline: auto;
+  padding: 0.25em 0.35em;
+  background-color: #f0f0f0;
+  border-radius: 0.5rem;
+}
+.projectfy__sidepanel__mode.dark-mode .projectfy__sidepanel__mode--dark {
+  background-color: var(--active-color);
+}
+.projectfy__sidepanel__mode.light-mode .projectfy__sidepanel__mode--light {
+  background-color: var(--active-color);
+}
+.projectfy__sidepanel__mode__LD {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-}
-
-a {
-  min-height: 6rem;
-  padding: 2rem 5rem;
-  border: 2px solid salmon;
-}
-
-textarea {
-  margin-inline: auto;
-  resize: none;
-  min-height: 5rem;
-  min-width: 50%;
-}
-
-button {
+  gap: 0.5rem;
+  padding: 0.3em 1em 0.3em 0.8em;
+  border-radius: calc(0.5em - 0.15rem);
   cursor: pointer;
+}
+.projectfy__sidepanel__mode__LD span {
+  pointer-events: none;
+}
+.projectfy__sidepanel__mode--light--icon {
+  font-size: 1rem;
+  color: #444;
+}
+.projectfy__sidepanel__mode--light--txt {
+  font-weight: 700;
+  color: #555;
+}
+.projectfy__sidepanel__mode--dark--icon {
+  font-size: 1rem;
+  color: #444;
+}
+.projectfy__sidepanel__mode--dark--txt {
+  font-weight: 700;
+  color: #555;
+}
+.projectfy__sidepanel__preferences-wrapper {
+  position: relative;
+  border-radius: 0.5rem;
+  isolation: isolate;
+}
+.projectfy__sidepanel__preferences {
+  position: relative;
+  z-index: 45;
+  border-radius: inherit;
+  padding: 1em;
+  margin-inline: 0.2rem;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(10%);
+  transition: 0.2s ease all;
+}
+.projectfy__sidepanel__preferences.open {
+  opacity: 1;
+  transform: translateY(0);
+}
+.projectfy__sidepanel__settings {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6em 0.8em;
+  color: #555;
+  border-radius: 0.5rem;
+  outline: 1px solid #f1f1f1;
+  transition: 0.2s ease all;
+}
+.projectfy__sidepanel__settings:hover {
+  background-color: #f0f0f0;
+}
+.projectfy__sidepanel__settings--icon {
+  font-size: 1.22rem;
+}
+.projectfy__sidepanel__settings--txt {
+  font-weight: 700;
+  color: inherit;
+}
+.projectfy__sidepanel__signoutForm {
+  display: block;
+  margin-bottom: 0.8rem;
+  width: 100%;
+}
+.projectfy__sidepanel__signoutForm-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5em 1.2em 0.5em 0.8em;
+  inline-size: 100%;
+  border-radius: 0.5rem;
+  color: hsl(0deg, 100%, 68%);
+  background-color: hsla(0deg, 100%, 68%, 0.15);
+  transition: 0.2s ease;
+  border: none;
+}
+.projectfy__sidepanel__signoutForm-btn:is(:hover, :focus) {
+  background-color: hsla(0deg, 100%, 68%, 0.25);
+}
+.projectfy__sidepanel__signoutForm-btn--icon {
+  font-size: 1.25rem;
+  color: hsl(0deg, 100%, 68%);
+}
+.projectfy__sidepanel__signoutForm-btn--txt {
+  font-size: 1rem;
+  font-weight: 700;
+}
+.projectfy__sidepanel__account {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin-top: 0.2rem;
+  padding: 0.8em 1.2em 0.7em 0.8em;
+  background-color: #fff;
+  cursor: pointer;
+  box-shadow: 0 0.1rem 0.3rem hsla(0deg, 0%, 0%, 0.3);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  transition: 0.2s ease all;
+}
+.projectfy__sidepanel__account:hover {
+  box-shadow: 0 0.1rem 0.3rem hsla(0deg, 0%, 0%, 0.3);
+}
+.projectfy__sidepanel__account--img {
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+.projectfy__sidepanel__account--img-src {
+  --size: 1.8rem;
+  width: var(--size);
+  height: var(--size);
+}
+.projectfy__sidepanel__account--name {
+  display: block;
+  pointer-events: none;
+  color: #555;
+  margin-inline: 0.7rem;
+  max-width: 9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 1.08rem;
+}
+.projectfy__sidepanel__account--options {
+  margin-left: auto;
+  font-size: 1rem;
+  pointer-events: none;
+  color: #555;
+  transition: 0.3s ease all;
 }/*# sourceMappingURL=homeStyles.css.map */

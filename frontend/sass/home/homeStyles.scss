@@ -1,27 +1,4 @@
-@use '../components/' as *;
+// @use '../components/' as *;
 
-/* Custom styles */
-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
+// /* Custom styles */
 
-a {
-  min-height: 6rem;
-  padding: 2rem 5rem;
-  border: 2px solid salmon;
-}
-
-textarea {
-  margin-inline: auto;
-  resize: none;
-  min-height: 5rem;
-  min-width: 50%;
-
-}
-
-button {
-  cursor: pointer;
-}

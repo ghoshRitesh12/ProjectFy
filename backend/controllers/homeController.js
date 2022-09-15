@@ -10,11 +10,11 @@ const getHome = async (req, res) => {
     const notes = await notesModel.find({ userId: uuid });
     const user = await usersModel.findOne({ uuid: uuid });
     if(!notes) {
-      console.log("XD",notes);
-      return res.render('index', { error: `Wow so empty :(` });
+      console.log("XD", notes);
+      return res.render('home', { error: `Wow so empty :(` });
     }
 
-    res.render('index', { notes, user });
+    res.render('home', { notes, user });
 
   } catch (err) {
     res.redirect('/');
