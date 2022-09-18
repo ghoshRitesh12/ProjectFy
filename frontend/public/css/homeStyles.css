@@ -92,6 +92,7 @@ textarea {
 
 body {
   font-family: sans-serif;
+  transition: 0.2s ease color, 0.2s ease background-color;
 }
 @media (min-width: 40em) {
   body {
@@ -109,11 +110,52 @@ body ::selection {
   color: #fff;
 }
 
+body[data-theme=light-mode] {
+  --clr-logo-project: #0098E0;
+  --clr-logo-Fy: #555555;
+  --clr-primary-bg: #fff;
+  --clr-primary-txt: #555;
+  --clr-primary-icon: #444;
+  --clr-secondary-txt: #000;
+  --clr-sidebar-bg: #fff;
+  --clr-navlist-hover: #f0f0f0;
+  --clr-scrlbar-track: var(--clr-sidebar-bg);
+  --clr-scrlbar-thumb: #ddd;
+  --clr-scrlbar-thumb-hover: #ccc;
+  --clr-lm-active: var(--clr-sidebar-bg);
+  --clr-dm-active: var(--clr-navlist-hover);
+  --clr-stngs-brdr: #eee;
+  --clr-signout-txt: hsl(0 100% 68%);
+  --clr-signout-bg: hsl(0 100% 68% / .15);
+  --clr-signout-bg-hover: hsl(0 100% 68% / .25);
+  --clr-acc-bxshw: hsla(0, 0%, 0%, 0.302);
+}
+body[data-theme=dark-mode] {
+  --clr-logo-project: #65ceff;
+  --clr-logo-Fy: #eee;
+  --clr-primary-bg: #181818;
+  --clr-primary-txt: #eee;
+  --clr-primary-icon: #eee;
+  --clr-secondary-txt: #eee;
+  --clr-sidebar-bg: #212121;
+  --clr-navlist-hover: #383838;
+  --clr-scrlbar-track: var(--clr-sidebar-bg);
+  --clr-scrlbar-thumb: #666;
+  --clr-scrlbar-thumb-hover: #777;
+  --clr-lm-active: var(--clr-navlist-hover);
+  --clr-dm-active: var(--clr-sidebar-bg);
+  --clr-stngs-brdr: #444;
+  --clr-signout-txt: hsl(0, 100%, 73%);
+  --clr-signout-bg: hsl(0 100% 68% / .15);
+  --clr-signout-bg-hover: hsl(0 100% 68% / .25);
+  --clr-acc-bxshw: hsla(0, 0%, 93%, 0.2);
+}
+
 #root {
   display: block;
   margin-block: auto;
   isolation: isolate;
-  background-color: #fff;
+  background-color: var(--clr-primary-bg);
 }
 
 .projectfy {
@@ -135,23 +177,283 @@ body ::selection {
 .projectfy__sidepanel {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   min-height: 100vh;
   margin-block: auto;
   padding: 0 1em;
+  background-color: var(--clr-sidebar-bg);
+  outline: 1px solid #999;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
 }
-.projectfy__sidepanel__header__logosvg {
+.projectfy__sidepanel__header {
+  margin: 1rem 0 0 0;
+}
+.projectfy__sidepanel__header__logo {
+  text-decoration: none;
+}
+.projectfy__sidepanel__header__logo:visited .logo_project, .projectfy__sidepanel__header__logo:active .logo_project {
+  color: var(--clr-logo-project);
+}
+.projectfy__sidepanel__header__logo:visited .logo_Fy, .projectfy__sidepanel__header__logo:active .logo_Fy {
+  color: var(--clr-logo-Fy);
+}
+.projectfy__sidepanel__header__logo svg {
   pointer-events: none;
 }
 .projectfy__sidepanel__nav {
+  flex-grow: 1;
+  margin: 1.5rem 0;
+  padding: 1.5rem 0 1rem 0;
+  border-top: 1px solid #ddd;
+}
+.projectfy__sidepanel__nav__list {
+  --icon-gap: 1.5rem;
+  --pad-block: .7em;
+  --item-gap: .7rem;
+  display: block;
+  max-width: 100%;
+  margin-inline: auto;
+}
+.projectfy__sidepanel__nav__list--home {
   display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: var(--item-gap);
+  padding-block: var(--pad-block);
+  padding-inline: 0.8em 0;
+  width: 100%;
+  border-radius: 0.5rem;
+  transition: 0.3s ease;
+}
+.projectfy__sidepanel__nav__list--home:hover {
+  background-color: var(--clr-navlist-hover);
+}
+.projectfy__sidepanel__nav__list--home__txt {
+  color: var(--clr-primary-txt);
+  font-weight: 700;
+  pointer-events: none;
+}
+.projectfy__sidepanel__nav__list--home__icon {
+  color: var(--clr-primary-icon);
+  font-size: 1.1rem;
+  pointer-events: none;
+}
+.projectfy__sidepanel__nav__list--projects {
+  border-radius: 0.5rem;
+  margin-bottom: var(--item-gap);
+  overflow: hidden;
+}
+.projectfy__sidepanel__nav__list--projects-container {
+  display: flex;
+  align-items: center;
+  border-radius: 0.5rem;
+  transition: 0.3s ease;
+}
+.projectfy__sidepanel__nav__list--projects-container:hover {
+  background-color: var(--clr-navlist-hover);
+}
+.projectfy__sidepanel__nav__list--projects-container__add-icon {
+  margin: 0 0.4em 0 auto;
+  padding: 0.4em;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: var(--clr-primary-icon);
+  border-radius: 50%;
+  transition: 0.3s ease;
+}
+.projectfy__sidepanel__nav__list--projects-container svg {
+  pointer-events: none;
+}
+.projectfy__sidepanel__nav__list--projects-wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--icon-gap);
+  padding-block: var(--pad-block);
+  padding-inline: 0.8em;
+  max-height: 100%;
+  cursor: pointer;
+}
+.projectfy__sidepanel__nav__list--projects-wrapper__txt {
+  color: var(--clr-primary-txt);
+  font-weight: 700;
+  pointer-events: none;
+}
+.projectfy__sidepanel__nav__list--projects-wrapper__downarrow-icon {
+  color: var(--clr-primary-icon);
+  pointer-events: none;
+  transition: 0.3s ease transform;
+  transform: rotate(0deg);
+}
+.projectfy__sidepanel__nav__list--projects-wrapper__downarrow-icon.rotated {
+  transform: rotate(180deg);
+}
+.projectfy__sidepanel__nav__list--projects-list {
+  display: block;
+  margin-inline: auto 1rem;
+  padding: 0 1em 0 0.5em;
+  width: 95%;
+  max-height: 0;
+  overflow-y: auto;
+  margin-top: 0.5rem;
+  transition: 0.2s ease-in max-height, 0.2s ease opacity;
+  border-radius: 0.5rem;
+  scrollbar-width: none;
+  scrollbar-color: var(--clr-scrlbar-thumb);
+}
+.projectfy__sidepanel__nav__list--projects-list.open {
+  max-height: 12.5rem;
+  opacity: 1;
+}
+.projectfy__sidepanel__nav__list--projects-list::-webkit-scrollbar {
+  width: 0;
+}
+.projectfy__sidepanel__nav__list--projects-list:hover::-webkit-scrollbar {
+  width: 1rem;
+}
+.projectfy__sidepanel__nav__list--projects-list::-webkit-scrollbar-thumb {
+  background-color: var(--clr-scrlbar-thumb);
+  border-radius: 1rem;
+  border: 0.3rem solid var(--clr-scrlbar-track);
+}
+.projectfy__sidepanel__nav__list--projects-list::-webkit-scrollbar-thumb:hover {
+  background-color: var(--clr-scrlbar-thumb-hover);
+}
+.projectfy__sidepanel__nav__list--projects-list::-webkit-scrollbar-track {
+  background-color: var(--clr-scrlbar-track);
+}
+.projectfy__sidepanel__nav__list--projects-list:hover {
+  scrollbar-width: thin;
+}
+.projectfy__sidepanel__nav__list--projects-listItem {
+  display: flex;
+  align-items: center;
+  margin: 0rem 0 0.5rem 0;
+  padding: 0.3em 1em 0.3em 0.8em;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: 0.2s ease all;
+  color: var(--clr-secondary-txt);
+}
+.projectfy__sidepanel__nav__list--projects-listItem.selected {
+  background-color: var(--clr-navlist-hover);
+}
+.projectfy__sidepanel__nav__list--projects-listItem:hover {
+  background-color: var(--clr-navlist-hover);
+}
+.projectfy__sidepanel__nav__list--projects-listItem:last-child {
+  margin-bottom: 0.9rem;
+}
+.projectfy__sidepanel__nav__list--labels {
+  border-radius: 0.5rem;
+  margin-bottom: var(--item-gap);
+  overflow: hidden;
+}
+.projectfy__sidepanel__nav__list--labels-container {
+  display: flex;
+  align-items: center;
+  border-radius: 0.5rem;
+  transition: 0.3s ease;
+}
+.projectfy__sidepanel__nav__list--labels-container:hover {
+  background-color: var(--clr-navlist-hover);
+}
+.projectfy__sidepanel__nav__list--labels-container__add-icon {
+  margin: 0 0.4em 0 auto;
+  padding: 0.4em;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: var(--clr-primary-icon);
+  border-radius: 50%;
+  transition: 0.3s ease;
+}
+.projectfy__sidepanel__nav__list--labels-container svg {
+  pointer-events: none;
+}
+.projectfy__sidepanel__nav__list--labels-wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--icon-gap);
+  padding-block: var(--pad-block);
+  padding-inline: 0.8em;
+  max-height: 100%;
+  cursor: pointer;
+}
+.projectfy__sidepanel__nav__list--labels-wrapper__txt {
+  color: var(--clr-primary-txt);
+  font-weight: 700;
+  pointer-events: none;
+}
+.projectfy__sidepanel__nav__list--labels-wrapper__downarrow-icon {
+  color: var(--clr-primary-icon);
+  pointer-events: none;
+  transition: 0.3s ease transform;
+  transform: rotate(0deg);
+}
+.projectfy__sidepanel__nav__list--labels-wrapper__downarrow-icon.rotated {
+  transform: rotate(180deg);
+}
+.projectfy__sidepanel__nav__list--labels-list {
+  display: block;
+  margin-inline: auto 1rem;
+  padding: 0 1em 0 0.5em;
+  width: 95%;
+  max-height: 0;
+  overflow-y: auto;
+  margin-top: 0.5rem;
+  transition: 0.2s ease-in max-height, 0.2s ease opacity;
+  border-radius: 0.5rem;
+  scrollbar-width: none;
+  scrollbar-color: var(--clr-scrlbar-thumb);
+}
+.projectfy__sidepanel__nav__list--labels-list.open {
+  max-height: 10rem;
+  opacity: 1;
+}
+.projectfy__sidepanel__nav__list--labels-list::-webkit-scrollbar {
+  width: 0;
+}
+.projectfy__sidepanel__nav__list--labels-list:hover::-webkit-scrollbar {
+  width: 1rem;
+}
+.projectfy__sidepanel__nav__list--labels-list::-webkit-scrollbar-thumb {
+  background-color: var(--clr-scrlbar-thumb);
+  border-radius: 1rem;
+  border: 0.3rem solid var(--clr-scrlbar-track);
+}
+.projectfy__sidepanel__nav__list--labels-list::-webkit-scrollbar-thumb:hover {
+  background-color: var(--clr-scrlbar-thumb-hover);
+}
+.projectfy__sidepanel__nav__list--labels-list::-webkit-scrollbar-track {
+  background-color: var(--clr-scrlbar-track);
+}
+.projectfy__sidepanel__nav__list--labels-list:hover {
+  scrollbar-width: thin;
+}
+.projectfy__sidepanel__nav__list--labels-listItem {
+  display: flex;
+  align-items: center;
+  margin: 0rem 0 0.5rem 0;
+  padding: 0.3em 1em 0.3em 0.8em;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  transition: 0.2s ease all;
+  color: var(--clr-secondary-txt);
+}
+.projectfy__sidepanel__nav__list--labels-listItem.selected {
+  background-color: var(--clr-navlist-hover);
+}
+.projectfy__sidepanel__nav__list--labels-listItem:hover {
+  background-color: var(--clr-navlist-hover);
+}
+.projectfy__sidepanel__nav__list--labels-listItem:last-child {
+  margin-bottom: 0.9rem;
+}
+.projectfy__sidepanel__preference-cont {
+  margin-top: auto;
 }
 .projectfy__sidepanel__mode {
-  --active-color: #fff;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -161,14 +463,8 @@ body ::selection {
   width: 80%;
   margin-inline: auto;
   padding: 0.25em 0.35em;
-  background-color: #f0f0f0;
+  background-color: var(--clr-navlist-hover);
   border-radius: 0.5rem;
-}
-.projectfy__sidepanel__mode.dark-mode .projectfy__sidepanel__mode--dark {
-  background-color: var(--active-color);
-}
-.projectfy__sidepanel__mode.light-mode .projectfy__sidepanel__mode--light {
-  background-color: var(--active-color);
 }
 .projectfy__sidepanel__mode__LD {
   display: flex;
@@ -182,21 +478,27 @@ body ::selection {
 .projectfy__sidepanel__mode__LD span {
   pointer-events: none;
 }
+.projectfy__sidepanel__mode--light {
+  background-color: var(--clr-lm-active);
+}
 .projectfy__sidepanel__mode--light--icon {
   font-size: 1rem;
-  color: #444;
+  color: var(--clr-primary-icon);
 }
 .projectfy__sidepanel__mode--light--txt {
   font-weight: 700;
-  color: #555;
+  color: var(--clr-primary-txt);
+}
+.projectfy__sidepanel__mode--dark {
+  background-color: var(--clr-dm-active);
 }
 .projectfy__sidepanel__mode--dark--icon {
   font-size: 1rem;
-  color: #444;
+  color: var(--clr-primary-icon);
 }
 .projectfy__sidepanel__mode--dark--txt {
   font-weight: 700;
-  color: #555;
+  color: var(--clr-primary-txt);
 }
 .projectfy__sidepanel__preferences-wrapper {
   position: relative;
@@ -210,13 +512,17 @@ body ::selection {
   padding: 1em;
   margin-inline: 0.2rem;
   overflow: hidden;
-  opacity: 0;
   transform: translateY(10%);
-  transition: 0.2s ease all;
+  opacity: 0;
+  transition: 0.15s ease-in max-height, 0.2s ease transform, 0.1s ease visibility, 0.1s ease opacity;
+  visibility: hidden;
+  max-height: 0;
 }
 .projectfy__sidepanel__preferences.open {
   opacity: 1;
   transform: translateY(0);
+  visibility: visible;
+  max-height: 7.82rem;
 }
 .projectfy__sidepanel__settings {
   display: flex;
@@ -225,18 +531,19 @@ body ::selection {
   padding: 0.6em 0.8em;
   color: #555;
   border-radius: 0.5rem;
-  outline: 1px solid #f1f1f1;
+  outline: 1px solid var(--clr-stngs-brdr);
   transition: 0.2s ease all;
 }
 .projectfy__sidepanel__settings:hover {
-  background-color: #f0f0f0;
+  background-color: var(--clr-navlist-hover);
 }
 .projectfy__sidepanel__settings--icon {
+  color: var(--clr-primary-icon);
   font-size: 1.22rem;
 }
 .projectfy__sidepanel__settings--txt {
   font-weight: 700;
-  color: inherit;
+  color: var(--clr-primary-txt);
 }
 .projectfy__sidepanel__signoutForm {
   display: block;
@@ -251,37 +558,37 @@ body ::selection {
   padding: 0.5em 1.2em 0.5em 0.8em;
   inline-size: 100%;
   border-radius: 0.5rem;
-  color: hsl(0deg, 100%, 68%);
-  background-color: hsla(0deg, 100%, 68%, 0.15);
+  background-color: var(--clr-signout-bg);
   transition: 0.2s ease;
   border: none;
 }
 .projectfy__sidepanel__signoutForm-btn:is(:hover, :focus) {
-  background-color: hsla(0deg, 100%, 68%, 0.25);
+  background-color: var(--clr-signout-bg-hover);
 }
 .projectfy__sidepanel__signoutForm-btn--icon {
   font-size: 1.25rem;
-  color: hsl(0deg, 100%, 68%);
+  color: var(--clr-signout-txt);
 }
 .projectfy__sidepanel__signoutForm-btn--txt {
   font-size: 1rem;
   font-weight: 700;
+  color: var(--clr-signout-txt);
 }
 .projectfy__sidepanel__account {
   display: flex;
   align-items: center;
   flex-direction: row;
-  margin-top: 0.2rem;
+  margin-block: 0.2rem 2rem;
   padding: 0.8em 1.2em 0.7em 0.8em;
-  background-color: #fff;
+  background-color: var(--clr-sidebar-bg);
   cursor: pointer;
-  box-shadow: 0 0.1rem 0.3rem hsla(0deg, 0%, 0%, 0.3);
+  box-shadow: 0 0 0.3rem var(--clr-acc-bxshw);
   border-radius: 0.5rem;
   overflow: hidden;
   transition: 0.2s ease all;
 }
 .projectfy__sidepanel__account:hover {
-  box-shadow: 0 0.1rem 0.3rem hsla(0deg, 0%, 0%, 0.3);
+  box-shadow: 0 0.1rem 0.4rem var(--clr-acc-bxshw);
 }
 .projectfy__sidepanel__account--img {
   display: grid;
@@ -296,7 +603,7 @@ body ::selection {
 .projectfy__sidepanel__account--name {
   display: block;
   pointer-events: none;
-  color: #555;
+  color: var(--clr-primary-txt);
   margin-inline: 0.7rem;
   max-width: 9rem;
   white-space: nowrap;
@@ -308,6 +615,10 @@ body ::selection {
   margin-left: auto;
   font-size: 1rem;
   pointer-events: none;
-  color: #555;
+  color: var(--clr-primary-icon);
   transition: 0.3s ease all;
+  transform: rotate(0deg);
+}
+.projectfy__sidepanel__account--options.rotated {
+  transform: rotate(180deg);
 }/*# sourceMappingURL=homeStyles.css.map */

@@ -14,7 +14,7 @@
   <script src="../js/homePage.js" type="module"></script>
 </head>
 
-<body>
+<body data-theme="light-mode">
 
   <div id="root">
     <section class="projectfy">
@@ -26,123 +26,240 @@
             <svg width="182" height="39" viewBox="0 0 182 39" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path class="logo_project"
                 d="M8.98875 2.96C13.1221 2.96 16.2954 3.69333 18.5088 5.16C20.7221 6.6 21.8288 8.97333 21.8288 12.28C21.8288 15.6133 20.7088 18.0267 18.4688 19.52C16.2288 20.9867 13.0288 21.72 8.86875 21.72H6.90875V31H0.66875V3.68C2.02875 3.41333 3.46875 3.22667 4.98875 3.12C6.50875 3.01333 7.84208 2.96 8.98875 2.96ZM9.38875 8.28C8.93542 8.28 8.48208 8.29333 8.02875 8.32C7.60208 8.34667 7.22875 8.37333 6.90875 8.4V16.4H8.86875C11.0288 16.4 12.6554 16.1067 13.7488 15.52C14.8421 14.9333 15.3888 13.84 15.3888 12.24C15.3888 11.4667 15.2421 10.8267 14.9488 10.32C14.6821 9.81333 14.2821 9.41333 13.7488 9.12C13.2421 8.8 12.6154 8.58667 11.8688 8.48C11.1221 8.34667 10.2954 8.28 9.38875 8.28ZM38.6909 15.24C38.1576 15.1067 37.5309 14.9733 36.8109 14.84C36.0909 14.68 35.3176 14.6 34.4909 14.6C34.1176 14.6 33.6643 14.64 33.1309 14.72C32.6243 14.7733 32.2376 14.84 31.9709 14.92V31H26.0109V11.08C27.0776 10.7067 28.3309 10.36 29.7709 10.04C31.2376 9.69333 32.8643 9.52 34.6509 9.52C34.9709 9.52 35.3576 9.54667 35.8109 9.6C36.2643 9.62667 36.7176 9.68 37.1709 9.76C37.6243 9.81333 38.0776 9.89333 38.5309 10C38.9843 10.08 39.3709 10.1867 39.6909 10.32L38.6909 15.24ZM62.1753 20.44C62.1753 22.0933 61.9353 23.6133 61.4553 25C60.9753 26.36 60.282 27.5333 59.3753 28.52C58.4686 29.48 57.3753 30.2267 56.0953 30.76C54.842 31.2933 53.4286 31.56 51.8553 31.56C50.3086 31.56 48.8953 31.2933 47.6153 30.76C46.362 30.2267 45.282 29.48 44.3753 28.52C43.4686 27.5333 42.762 26.36 42.2553 25C41.7486 23.6133 41.4953 22.0933 41.4953 20.44C41.4953 18.7867 41.7486 17.28 42.2553 15.92C42.7886 14.56 43.5086 13.4 44.4153 12.44C45.3486 11.48 46.442 10.7333 47.6953 10.2C48.9753 9.66667 50.362 9.4 51.8553 9.4C53.3753 9.4 54.762 9.66667 56.0153 10.2C57.2953 10.7333 58.3886 11.48 59.2953 12.44C60.202 13.4 60.9086 14.56 61.4153 15.92C61.922 17.28 62.1753 18.7867 62.1753 20.44ZM56.0953 20.44C56.0953 18.6 55.722 17.16 54.9753 16.12C54.2553 15.0533 53.2153 14.52 51.8553 14.52C50.4953 14.52 49.442 15.0533 48.6953 16.12C47.9486 17.16 47.5753 18.6 47.5753 20.44C47.5753 22.28 47.9486 23.7467 48.6953 24.84C49.442 25.9067 50.4953 26.44 51.8553 26.44C53.2153 26.44 54.2553 25.9067 54.9753 24.84C55.722 23.7467 56.0953 22.28 56.0953 20.44ZM64.8322 38.4C64.4589 38.4 63.9122 38.36 63.1922 38.28C62.4455 38.2 61.7522 38.0533 61.1122 37.84L61.9122 33C62.3122 33.1333 62.6855 33.2267 63.0322 33.28C63.3522 33.3333 63.7655 33.36 64.2722 33.36C65.2055 33.36 65.8589 33.08 66.2322 32.52C66.6055 31.96 66.7922 31.1467 66.7922 30.08V9.96H72.7522V30.24C72.7522 33.0133 72.0722 35.0667 70.7122 36.4C69.3522 37.7333 67.3922 38.4 64.8322 38.4ZM73.3122 3.88C73.3122 4.97333 72.9522 5.84 72.2322 6.48C71.5389 7.09333 70.7122 7.4 69.7522 7.4C68.7922 7.4 67.9522 7.09333 67.2322 6.48C66.5389 5.84 66.1922 4.97333 66.1922 3.88C66.1922 2.78667 66.5389 1.93333 67.2322 1.32C67.9522 0.679999 68.7922 0.359999 69.7522 0.359999C70.7122 0.359999 71.5389 0.679999 72.2322 1.32C72.9522 1.93333 73.3122 2.78667 73.3122 3.88ZM77.3547 20.64C77.3547 18.7733 77.6347 17.1467 78.1947 15.76C78.7814 14.3467 79.5414 13.1733 80.4747 12.24C81.408 11.3067 82.4747 10.6 83.6747 10.12C84.9014 9.64 86.1547 9.4 87.4347 9.4C90.4214 9.4 92.7814 10.32 94.5147 12.16C96.248 13.9733 97.1147 16.6533 97.1147 20.2C97.1147 20.5467 97.1014 20.9333 97.0747 21.36C97.048 21.76 97.0214 22.12 96.9947 22.44H83.4747C83.608 23.6667 84.1814 24.64 85.1947 25.36C86.208 26.08 87.568 26.44 89.2747 26.44C90.368 26.44 91.4347 26.3467 92.4747 26.16C93.5414 25.9467 94.408 25.6933 95.0747 25.4L95.8747 30.24C95.5547 30.4 95.128 30.56 94.5947 30.72C94.0614 30.88 93.4614 31.0133 92.7947 31.12C92.1547 31.2533 91.4614 31.36 90.7147 31.44C89.968 31.52 89.2214 31.56 88.4747 31.56C86.5814 31.56 84.928 31.28 83.5147 30.72C82.128 30.16 80.968 29.4 80.0347 28.44C79.128 27.4533 78.448 26.2933 77.9947 24.96C77.568 23.6267 77.3547 22.1867 77.3547 20.64ZM91.3547 18.36C91.328 17.8533 91.2347 17.36 91.0747 16.88C90.9414 16.4 90.7147 15.9733 90.3947 15.6C90.1014 15.2267 89.7147 14.92 89.2347 14.68C88.7814 14.44 88.208 14.32 87.5147 14.32C86.848 14.32 86.2747 14.44 85.7947 14.68C85.3147 14.8933 84.9147 15.1867 84.5947 15.56C84.2747 15.9333 84.0214 16.3733 83.8347 16.88C83.6747 17.36 83.5547 17.8533 83.4747 18.36H91.3547ZM100.714 20.48C100.714 18.96 100.954 17.5333 101.434 16.2C101.941 14.84 102.661 13.6667 103.594 12.68C104.527 11.6667 105.661 10.8667 106.994 10.28C108.327 9.69333 109.847 9.4 111.554 9.4C112.674 9.4 113.701 9.50667 114.634 9.72C115.567 9.90667 116.474 10.1867 117.354 10.56L116.114 15.32C115.554 15.1067 114.941 14.92 114.274 14.76C113.607 14.6 112.861 14.52 112.034 14.52C110.274 14.52 108.954 15.0667 108.074 16.16C107.221 17.2533 106.794 18.6933 106.794 20.48C106.794 22.3733 107.194 23.84 107.994 24.88C108.821 25.92 110.247 26.44 112.274 26.44C112.994 26.44 113.767 26.3733 114.594 26.24C115.421 26.1067 116.181 25.8933 116.874 25.6L117.714 30.48C117.021 30.7733 116.154 31.0267 115.114 31.24C114.074 31.4533 112.927 31.56 111.674 31.56C109.754 31.56 108.101 31.28 106.714 30.72C105.327 30.1333 104.181 29.3467 103.274 28.36C102.394 27.3733 101.741 26.2133 101.314 24.88C100.914 23.52 100.714 22.0533 100.714 20.48ZM121.514 4.72L127.474 3.76V9.96H134.634V14.92H127.474V22.32C127.474 23.5733 127.687 24.5733 128.114 25.32C128.567 26.0667 129.461 26.44 130.794 26.44C131.434 26.44 132.087 26.3867 132.754 26.28C133.447 26.1467 134.074 25.9733 134.634 25.76L135.474 30.4C134.754 30.6933 133.954 30.9467 133.074 31.16C132.194 31.3733 131.114 31.48 129.834 31.48C128.207 31.48 126.861 31.2667 125.794 30.84C124.727 30.3867 123.874 29.7733 123.234 29C122.594 28.2 122.141 27.24 121.874 26.12C121.634 25 121.514 23.76 121.514 22.4V4.72Z"
-                fill="#0098E0" />
+                fill="currentColor"/>
               <path class="logo_Fy"
                 d="M139.888 31V3.28H158.448V8.52H146.128V14.32H157.088V19.56H146.128V31H139.888ZM181.136 9.96C179.936 14.0133 178.683 17.8133 177.376 21.36C176.07 24.9067 174.643 28.3467 173.096 31.68C172.536 32.88 171.976 33.8933 171.416 34.72C170.856 35.5733 170.243 36.2667 169.576 36.8C168.91 37.36 168.15 37.76 167.296 38C166.47 38.2667 165.496 38.4 164.376 38.4C163.443 38.4 162.576 38.3067 161.776 38.12C161.003 37.96 160.363 37.7733 159.856 37.56L160.896 32.8C161.51 33.0133 162.056 33.16 162.536 33.24C163.016 33.32 163.523 33.36 164.056 33.36C165.123 33.36 165.936 33.0667 166.496 32.48C167.083 31.92 167.576 31.1333 167.976 30.12C166.616 27.4533 165.256 24.4667 163.896 21.16C162.536 17.8267 161.256 14.0933 160.056 9.96H166.376C166.643 11 166.95 12.1333 167.296 13.36C167.67 14.56 168.056 15.7867 168.456 17.04C168.856 18.2667 169.256 19.4667 169.656 20.64C170.083 21.8133 170.483 22.88 170.856 23.84C171.203 22.88 171.563 21.8133 171.936 20.64C172.31 19.4667 172.67 18.2667 173.016 17.04C173.39 15.7867 173.736 14.56 174.056 13.36C174.403 12.1333 174.71 11 174.976 9.96H181.136Z"
-                fill="#555555" />
+                fill="currentColor"/>
             </svg>
           </a>
         </header>
 
         <nav class="projectfy__sidepanel__nav">
-          <strong class="projectfy__sidepanel__nav--caption">
-            NAVIGATION
-          </strong> <br>
 
-          <details>
-            <summary> Projects </summary>
+          <section class="projectfy__sidepanel__nav__list">
 
-          </details>
+            <a class="projectfy__sidepanel__nav__list--home" href="/">
+              <span class="projectfy__sidepanel__nav__list--home__txt">
+                Home
+              </span>
 
-        </nav>
-
-        <section class="projectfy__sidepanel__mode light-mode">
-          <div class="projectfy__sidepanel__mode__LD projectfy__sidepanel__mode--light" data-mode="light-mode">
-            <span class="projectfy__sidepanel__mode--light--icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
-                viewBox="0 0 24 24">
-                <rect x="0" y="0" width="24" height="24" fill="none" stroke="none" />
-                <path fill="currentColor"
-                  d="M12 15q1.25 0 2.125-.875T15 12q0-1.25-.875-2.125T12 9q-1.25 0-2.125.875T9 12q0 1.25.875 2.125T12 15Zm0 2q-2.075 0-3.537-1.463Q7 14.075 7 12t1.463-3.538Q9.925 7 12 7t3.538 1.462Q17 9.925 17 12q0 2.075-1.462 3.537Q14.075 17 12 17ZM2 13q-.425 0-.712-.288Q1 12.425 1 12t.288-.713Q1.575 11 2 11h2q.425 0 .713.287Q5 11.575 5 12t-.287.712Q4.425 13 4 13Zm18 0q-.425 0-.712-.288Q19 12.425 19 12t.288-.713Q19.575 11 20 11h2q.425 0 .712.287q.288.288.288.713t-.288.712Q22.425 13 22 13Zm-8-8q-.425 0-.712-.288Q11 4.425 11 4V2q0-.425.288-.713Q11.575 1 12 1t.713.287Q13 1.575 13 2v2q0 .425-.287.712Q12.425 5 12 5Zm0 18q-.425 0-.712-.288Q11 22.425 11 22v-2q0-.425.288-.712Q11.575 19 12 19t.713.288Q13 19.575 13 20v2q0 .425-.287.712Q12.425 23 12 23ZM5.65 7.05L4.575 6q-.3-.275-.288-.7q.013-.425.288-.725q.3-.3.725-.3t.7.3L7.05 5.65q.275.3.275.7q0 .4-.275.7q-.275.3-.687.287q-.413-.012-.713-.287ZM18 19.425l-1.05-1.075q-.275-.3-.275-.712q0-.413.275-.688q.275-.3.688-.287q.412.012.712.287L19.425 18q.3.275.288.7q-.013.425-.288.725q-.3.3-.725.3t-.7-.3ZM16.95 7.05q-.3-.275-.287-.688q.012-.412.287-.712L18 4.575q.275-.3.7-.288q.425.013.725.288q.3.3.3.725t-.3.7L18.35 7.05q-.3.275-.7.275q-.4 0-.7-.275ZM4.575 19.425q-.3-.3-.3-.725t.3-.7l1.075-1.05q.3-.275.713-.275q.412 0 .687.275q.3.275.288.688q-.013.412-.288.712L6 19.425q-.275.3-.7.287q-.425-.012-.725-.287ZM12 12Z" />
-              </svg>
-            </span>
-            <span class="projectfy__sidepanel__mode--light--txt">Light</span>
-          </div>
-          
-          <div class="projectfy__sidepanel__mode__LD projectfy__sidepanel__mode--dark" data-mode="dark-mode">
-            <span class="projectfy__sidepanel__mode--dark--icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
-                viewBox="0 0 24 24">
-                <rect x="0" y="0" width="24" height="24" fill="none" stroke="none" />
-                <path fill="currentColor"
-                  d="M12 21q-3.775 0-6.388-2.613Q3 15.775 3 12q0-3.45 2.25-5.988Q7.5 3.475 11 3.05q.625-.075.975.45t-.025 1.1q-.425.65-.638 1.375Q11.1 6.7 11.1 7.5q0 2.25 1.575 3.825Q14.25 12.9 16.5 12.9q.775 0 1.538-.225q.762-.225 1.362-.625q.525-.35 1.075-.038q.55.313.475.988q-.35 3.45-2.937 5.725Q15.425 21 12 21Zm0-2q2.2 0 3.95-1.212q1.75-1.213 2.55-3.163q-.5.125-1 .2q-.5.075-1 .075q-3.075 0-5.238-2.162Q9.1 10.575 9.1 7.5q0-.5.075-1t.2-1q-1.95.8-3.162 2.55Q5 9.8 5 12q0 2.9 2.05 4.95Q9.1 19 12 19Zm-.25-6.75Z" />
-              </svg>
-            </span>
-            <span class="projectfy__sidepanel__mode--dark--txt">Dark</span>
-          </div>
-        </section>
-
-        <section class="projectfy__sidepanel__preferences-wrapper">
-          <div class="projectfy__sidepanel__preferences">
-            
-            <form class="projectfy__sidepanel__signoutForm" action="/signout" method="post">
-              <button class="projectfy__sidepanel__signoutForm-btn" type="submit">
-                <span class="projectfy__sidepanel__signoutForm-btn--icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
-                    viewBox="0 0 24 24">
-                    <rect x="0" y="0" width="24" height="24" fill="none" stroke="none" />
-                    <path fill="currentColor"
-                      d="M9 2h9c1.1 0 2 .9 2 2v16c0 1.1-.9 2-2 2H9c-1.1 0-2-.9-2-2v-2h2v2h9V4H9v2H7V4c0-1.1.9-2 2-2z" />
-                    <path fill="currentColor" d="M10.09 15.59L11.5 17l5-5l-5-5l-1.41 1.41L12.67 11H3v2h9.67z" />
-                  </svg>
-                </span>
-
-                <span class="projectfy__sidepanel__signoutForm-btn--txt">Sign out</span>
-              </button>
-            </form>
-
-            <a class="projectfy__sidepanel__settings" href="/account">
-              <span class="projectfy__sidepanel__settings--icon">
+              <span class="projectfy__sidepanel__nav__list--home__icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
-                  viewBox="0 0 36 36">
-                  <rect x="0" y="0" width="36" height="36" fill="none" stroke="none" />
+                  viewBox="0 0 28 28">
+                  <rect x="0" y="0" width="28" height="28" fill="none" stroke="none" />
                   <path fill="currentColor"
-                    d="M18.1 11c-3.9 0-7 3.1-7 7s3.1 7 7 7s7-3.1 7-7s-3.1-7-7-7zm0 12c-2.8 0-5-2.2-5-5s2.2-5 5-5s5 2.2 5 5s-2.2 5-5 5z"
-                    class="clr-i-outline clr-i-outline-path-1" />
-                  <path fill="currentColor"
-                    d="m32.8 14.7l-2.8-.9l-.6-1.5l1.4-2.6c.3-.6.2-1.4-.3-1.9l-2.4-2.4c-.5-.5-1.3-.6-1.9-.3l-2.6 1.4l-1.5-.6l-.9-2.8C21 2.5 20.4 2 19.7 2h-3.4c-.7 0-1.3.5-1.4 1.2L14 6c-.6.1-1.1.3-1.6.6L9.8 5.2c-.6-.3-1.4-.2-1.9.3L5.5 7.9c-.5.5-.6 1.3-.3 1.9l1.3 2.5c-.2.5-.4 1.1-.6 1.6l-2.8.9c-.6.2-1.1.8-1.1 1.5v3.4c0 .7.5 1.3 1.2 1.5l2.8.9l.6 1.5l-1.4 2.6c-.3.6-.2 1.4.3 1.9l2.4 2.4c.5.5 1.3.6 1.9.3l2.6-1.4l1.5.6l.9 2.9c.2.6.8 1.1 1.5 1.1h3.4c.7 0 1.3-.5 1.5-1.1l.9-2.9l1.5-.6l2.6 1.4c.6.3 1.4.2 1.9-.3l2.4-2.4c.5-.5.6-1.3.3-1.9l-1.4-2.6l.6-1.5l2.9-.9c.6-.2 1.1-.8 1.1-1.5v-3.4c0-.7-.5-1.4-1.2-1.6zm-.8 4.7l-3.6 1.1l-.1.5l-.9 2.1l-.3.5l1.8 3.3l-2 2l-3.3-1.8l-.5.3c-.7.4-1.4.7-2.1.9l-.5.1l-1.1 3.6h-2.8l-1.1-3.6l-.5-.1l-2.1-.9l-.5-.3l-3.3 1.8l-2-2l1.8-3.3l-.3-.5c-.4-.7-.7-1.4-.9-2.1l-.1-.5L4 19.4v-2.8l3.4-1l.2-.5c.2-.8.5-1.5.9-2.2l.3-.5l-1.7-3.3l2-2l3.2 1.8l.5-.3c.7-.4 1.4-.7 2.2-.9l.5-.2L16.6 4h2.8l1.1 3.5l.5.2c.7.2 1.4.5 2.1.9l.5.3l3.3-1.8l2 2l-1.8 3.3l.3.5c.4.7.7 1.4.9 2.1l.1.5l3.6 1.1v2.8z"
-                    class="clr-i-outline clr-i-outline-path-2" />
-                  <path fill="none" d="M0 0h36v36H0z" />
+                    d="M12.592 3.498a2.25 2.25 0 0 1 2.816 0l7.75 6.217A2.25 2.25 0 0 1 24 11.47v11.28A2.25 2.25 0 0 1 21.75 25h-2.5A2.25 2.25 0 0 1 17 22.75v-6.5a.75.75 0 0 0-.75-.75h-4.5a.75.75 0 0 0-.75.75v6.5A2.25 2.25 0 0 1 8.75 25h-2.5A2.25 2.25 0 0 1 4 22.75V11.47c0-.683.31-1.328.842-1.755l7.75-6.217Z" />
                 </svg>
               </span>
 
-              <span class="projectfy__sidepanel__settings--txt">Settings and privacy</span>
+              
             </a>
 
-          </div>
+            <div class="projectfy__sidepanel__nav__list--projects">
+              <section class="projectfy__sidepanel__nav__list--projects-container">
+                <div class="projectfy__sidepanel__nav__list--projects-wrapper">
+                  <span class="projectfy__sidepanel__nav__list--projects-wrapper__txt">
+                    Projects
+                  </span>
+                  <span class="projectfy__sidepanel__nav__list--projects-wrapper__downarrow-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 1024 1024">
+                      <rect x="0" y="0" width="1024" height="1024" fill="none" stroke="none" />
+                      <path fill="currentColor"
+                        d="M104.704 338.752a64 64 0 0 1 90.496 0l316.8 316.8l316.8-316.8a64 64 0 0 1 90.496 90.496L557.248 791.296a64 64 0 0 1-90.496 0L104.704 429.248a64 64 0 0 1 0-90.496z" />
+                    </svg>
+                  </span>
+                </div>
+
+                <span class="projectfy__sidepanel__nav__list--projects-container__add-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="0.88em" height="1em"
+                    preserveAspectRatio="xMidYMid meet" viewBox="0 0 448 512">
+                    <rect x="0" y="0" width="448" height="512" fill="none" stroke="none" />
+                    <path fill="currentColor"
+                      d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32v144H48c-17.7 0-32 14.3-32 32s14.3 32 32 32h144v144c0 17.7 14.3 32 32 32s32-14.3 32-32V288h144c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
+                  </svg>
+                </span>
+              </section>
 
 
-          <!-- account details -->
-          <section class="projectfy__sidepanel__account" role="button" title="<%= user.name %>">
-            <div class="projectfy__sidepanel__account--img">
-              <img class="projectfy__sidepanel__account--img-src"
-                src='https://avataaars.io/?avatarStyle=Circle&topType=ShortHairDreads01&accessoriesType=Blank&hairColor=BrownDark&facialHairType=BeardLight&facialHairColor=BrownDark&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light' />
+              <ul class="projectfy__sidepanel__nav__list--projects-list">
+                <li class="projectfy__sidepanel__nav__list--projects-listItem">
+                  Valorant Projekt
+                </li>
+                <li class="projectfy__sidepanel__nav__list--projects-listItem">
+                  Swinging Utopia
+                </li>
+                <li class="projectfy__sidepanel__nav__list--projects-listItem">
+                  Bily nas
+                </li>
+                <li class="projectfy__sidepanel__nav__list--projects-listItem">
+                  abfafa lnakld
+                </li>
+                <li class="projectfy__sidepanel__nav__list--projects-listItem">
+                  Project anafn
+                </li>
+                <li class="projectfy__sidepanel__nav__list--projects-listItem">
+                  XD
+                </li>
+              </ul>
+
+            </div>
+            
+            <!-- labels -->
+            <div class="projectfy__sidepanel__nav__list--labels">
+              <section class="projectfy__sidepanel__nav__list--labels-container">
+                <div class="projectfy__sidepanel__nav__list--labels-wrapper">
+                  <span class="projectfy__sidepanel__nav__list--labels-wrapper__txt">
+                    Labels
+                  </span>
+                  <span class="projectfy__sidepanel__nav__list--labels-wrapper__downarrow-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 1024 1024">
+                      <rect x="0" y="0" width="1024" height="1024" fill="none" stroke="none" />
+                      <path fill="currentColor"
+                        d="M104.704 338.752a64 64 0 0 1 90.496 0l316.8 316.8l316.8-316.8a64 64 0 0 1 90.496 90.496L557.248 791.296a64 64 0 0 1-90.496 0L104.704 429.248a64 64 0 0 1 0-90.496z" />
+                    </svg>
+                  </span>
+                </div>
+
+                <span class="projectfy__sidepanel__nav__list--labels-container__add-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="0.88em" height="1em"
+                    preserveAspectRatio="xMidYMid meet" viewBox="0 0 448 512">
+                    <rect x="0" y="0" width="448" height="512" fill="none" stroke="none" />
+                    <path fill="currentColor"
+                      d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32v144H48c-17.7 0-32 14.3-32 32s14.3 32 32 32h144v144c0 17.7 14.3 32 32 32s32-14.3 32-32V288h144c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
+                  </svg>
+                </span>
+              </section>
+
+
+              <ul class="projectfy__sidepanel__nav__list--labels-list">
+                <li class="projectfy__sidepanel__nav__list--labels-listItem">
+                  Valorant Projekt
+                </li>
+                <li class="projectfy__sidepanel__nav__list--labels-listItem">
+                  Swinging Utopia
+                </li>
+                <li class="projectfy__sidepanel__nav__list--labels-listItem">
+                  Bily nas
+                </li>
+                <li class="projectfy__sidepanel__nav__list--labels-listItem">
+                  abfafa lnakld
+                </li>
+                <li class="projectfy__sidepanel__nav__list--labels-listItem">
+                  Project anafn
+                </li>
+              </ul>
+
             </div>
 
-            <strong class="projectfy__sidepanel__account--name">
-              <% if(locals.user) { %>
-                <%= user.name %>
-              <% } else { %>
-                login button
-              <% } %>
-            </strong>
-
-            <span class="projectfy__sidepanel__account--options">
-              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
-                viewBox="0 0 1024 1024">
-                <rect x="0" y="0" width="1024" height="1024" fill="none" stroke="none" />
-                <path fill="currentColor"
-                  d="M104.704 685.248a64 64 0 0 0 90.496 0l316.8-316.8l316.8 316.8a64 64 0 0 0 90.496-90.496L557.248 232.704a64 64 0 0 0-90.496 0L104.704 594.752a64 64 0 0 0 0 90.496z" />
-              </svg>
-            </span>
           </section>
 
-        </section>
+        </nav>
+
+        <div class="projectfy__sidepanel__preference-cont">
+
+          <section class="projectfy__sidepanel__mode light-mode">
+            <div class="projectfy__sidepanel__mode__LD projectfy__sidepanel__mode--light" data-mode="light-mode">
+              <!-- <a class="projectfy__sidepanel__mode__LD projectfy__sidepanel__mode--light" href="/mode" data-mode="light-mode"> -->
+              <span class="projectfy__sidepanel__mode--light--icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 24 24">
+                  <rect x="0" y="0" width="24" height="24" fill="none" stroke="none" />
+                  <path fill="currentColor"
+                    d="M12 15q1.25 0 2.125-.875T15 12q0-1.25-.875-2.125T12 9q-1.25 0-2.125.875T9 12q0 1.25.875 2.125T12 15Zm0 2q-2.075 0-3.537-1.463Q7 14.075 7 12t1.463-3.538Q9.925 7 12 7t3.538 1.462Q17 9.925 17 12q0 2.075-1.462 3.537Q14.075 17 12 17ZM2 13q-.425 0-.712-.288Q1 12.425 1 12t.288-.713Q1.575 11 2 11h2q.425 0 .713.287Q5 11.575 5 12t-.287.712Q4.425 13 4 13Zm18 0q-.425 0-.712-.288Q19 12.425 19 12t.288-.713Q19.575 11 20 11h2q.425 0 .712.287q.288.288.288.713t-.288.712Q22.425 13 22 13Zm-8-8q-.425 0-.712-.288Q11 4.425 11 4V2q0-.425.288-.713Q11.575 1 12 1t.713.287Q13 1.575 13 2v2q0 .425-.287.712Q12.425 5 12 5Zm0 18q-.425 0-.712-.288Q11 22.425 11 22v-2q0-.425.288-.712Q11.575 19 12 19t.713.288Q13 19.575 13 20v2q0 .425-.287.712Q12.425 23 12 23ZM5.65 7.05L4.575 6q-.3-.275-.288-.7q.013-.425.288-.725q.3-.3.725-.3t.7.3L7.05 5.65q.275.3.275.7q0 .4-.275.7q-.275.3-.687.287q-.413-.012-.713-.287ZM18 19.425l-1.05-1.075q-.275-.3-.275-.712q0-.413.275-.688q.275-.3.688-.287q.412.012.712.287L19.425 18q.3.275.288.7q-.013.425-.288.725q-.3.3-.725.3t-.7-.3ZM16.95 7.05q-.3-.275-.287-.688q.012-.412.287-.712L18 4.575q.275-.3.7-.288q.425.013.725.288q.3.3.3.725t-.3.7L18.35 7.05q-.3.275-.7.275q-.4 0-.7-.275ZM4.575 19.425q-.3-.3-.3-.725t.3-.7l1.075-1.05q.3-.275.713-.275q.412 0 .687.275q.3.275.288.688q-.013.412-.288.712L6 19.425q-.275.3-.7.287q-.425-.012-.725-.287ZM12 12Z" />
+                </svg>
+              </span>
+              <span class="projectfy__sidepanel__mode--light--txt">Light</span>
+              <!-- </a> -->
+            </div>
+
+            <div class="projectfy__sidepanel__mode__LD projectfy__sidepanel__mode--dark" data-mode="dark-mode">
+              <span class="projectfy__sidepanel__mode--dark--icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 24 24">
+                  <rect x="0" y="0" width="24" height="24" fill="none" stroke="none" />
+                  <path fill="currentColor"
+                    d="M12 21q-3.775 0-6.388-2.613Q3 15.775 3 12q0-3.45 2.25-5.988Q7.5 3.475 11 3.05q.625-.075.975.45t-.025 1.1q-.425.65-.638 1.375Q11.1 6.7 11.1 7.5q0 2.25 1.575 3.825Q14.25 12.9 16.5 12.9q.775 0 1.538-.225q.762-.225 1.362-.625q.525-.35 1.075-.038q.55.313.475.988q-.35 3.45-2.937 5.725Q15.425 21 12 21Zm0-2q2.2 0 3.95-1.212q1.75-1.213 2.55-3.163q-.5.125-1 .2q-.5.075-1 .075q-3.075 0-5.238-2.162Q9.1 10.575 9.1 7.5q0-.5.075-1t.2-1q-1.95.8-3.162 2.55Q5 9.8 5 12q0 2.9 2.05 4.95Q9.1 19 12 19Zm-.25-6.75Z" />
+                </svg>
+              </span>
+              <span class="projectfy__sidepanel__mode--dark--txt">Dark</span>
+            </div>
+          </section>
+
+          <section class="projectfy__sidepanel__preferences-wrapper">
+
+            <div class="projectfy__sidepanel__preferences">
+              <form class="projectfy__sidepanel__signoutForm" action="/signout" method="post">
+                <button class="projectfy__sidepanel__signoutForm-btn" type="submit">
+                  <span class="projectfy__sidepanel__signoutForm-btn--icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 24 24">
+                      <rect x="0" y="0" width="24" height="24" fill="none" stroke="none" />
+                      <path fill="currentColor"
+                        d="M9 2h9c1.1 0 2 .9 2 2v16c0 1.1-.9 2-2 2H9c-1.1 0-2-.9-2-2v-2h2v2h9V4H9v2H7V4c0-1.1.9-2 2-2z" />
+                      <path fill="currentColor" d="M10.09 15.59L11.5 17l5-5l-5-5l-1.41 1.41L12.67 11H3v2h9.67z" />
+                    </svg>
+                  </span>
+
+                  <span class="projectfy__sidepanel__signoutForm-btn--txt">Sign out</span>
+                </button>
+              </form>
+              <a class="projectfy__sidepanel__settings" href="/account">
+                <span class="projectfy__sidepanel__settings--icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                    viewBox="0 0 36 36">
+                    <rect x="0" y="0" width="36" height="36" fill="none" stroke="none" />
+                    <path fill="currentColor"
+                      d="M18.1 11c-3.9 0-7 3.1-7 7s3.1 7 7 7s7-3.1 7-7s-3.1-7-7-7zm0 12c-2.8 0-5-2.2-5-5s2.2-5 5-5s5 2.2 5 5s-2.2 5-5 5z"
+                      class="clr-i-outline clr-i-outline-path-1" />
+                    <path fill="currentColor"
+                      d="m32.8 14.7l-2.8-.9l-.6-1.5l1.4-2.6c.3-.6.2-1.4-.3-1.9l-2.4-2.4c-.5-.5-1.3-.6-1.9-.3l-2.6 1.4l-1.5-.6l-.9-2.8C21 2.5 20.4 2 19.7 2h-3.4c-.7 0-1.3.5-1.4 1.2L14 6c-.6.1-1.1.3-1.6.6L9.8 5.2c-.6-.3-1.4-.2-1.9.3L5.5 7.9c-.5.5-.6 1.3-.3 1.9l1.3 2.5c-.2.5-.4 1.1-.6 1.6l-2.8.9c-.6.2-1.1.8-1.1 1.5v3.4c0 .7.5 1.3 1.2 1.5l2.8.9l.6 1.5l-1.4 2.6c-.3.6-.2 1.4.3 1.9l2.4 2.4c.5.5 1.3.6 1.9.3l2.6-1.4l1.5.6l.9 2.9c.2.6.8 1.1 1.5 1.1h3.4c.7 0 1.3-.5 1.5-1.1l.9-2.9l1.5-.6l2.6 1.4c.6.3 1.4.2 1.9-.3l2.4-2.4c.5-.5.6-1.3.3-1.9l-1.4-2.6l.6-1.5l2.9-.9c.6-.2 1.1-.8 1.1-1.5v-3.4c0-.7-.5-1.4-1.2-1.6zm-.8 4.7l-3.6 1.1l-.1.5l-.9 2.1l-.3.5l1.8 3.3l-2 2l-3.3-1.8l-.5.3c-.7.4-1.4.7-2.1.9l-.5.1l-1.1 3.6h-2.8l-1.1-3.6l-.5-.1l-2.1-.9l-.5-.3l-3.3 1.8l-2-2l1.8-3.3l-.3-.5c-.4-.7-.7-1.4-.9-2.1l-.1-.5L4 19.4v-2.8l3.4-1l.2-.5c.2-.8.5-1.5.9-2.2l.3-.5l-1.7-3.3l2-2l3.2 1.8l.5-.3c.7-.4 1.4-.7 2.2-.9l.5-.2L16.6 4h2.8l1.1 3.5l.5.2c.7.2 1.4.5 2.1.9l.5.3l3.3-1.8l2 2l-1.8 3.3l.3.5c.4.7.7 1.4.9 2.1l.1.5l3.6 1.1v2.8z"
+                      class="clr-i-outline clr-i-outline-path-2" />
+                    <path fill="none" d="M0 0h36v36H0z" />
+                  </svg>
+                </span>
+
+                <span class="projectfy__sidepanel__settings--txt">Settings and privacy</span>
+              </a>
+            </div>
+
+
+            <!-- account details -->
+            <section class="projectfy__sidepanel__account" role="button">
+              <div class="projectfy__sidepanel__account--img">
+                <img class="projectfy__sidepanel__account--img-src"
+                  src='https://avataaars.io/?avatarStyle=Circle&topType=ShortHairDreads01&accessoriesType=Blank&hairColor=BrownDark&facialHairType=BeardLight&facialHairColor=BrownDark&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light' />
+              </div>
+
+              <strong class="projectfy__sidepanel__account--name">
+                <!-- Valorant Popping Swing -->
+                <% if(locals.user) { %>
+                  <%= user.name %>
+                <% } else { %>
+                  login button
+                <% } %>
+              </strong>
+
+              <span class="projectfy__sidepanel__account--options">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 1024 1024">
+                  <rect x="0" y="0" width="1024" height="1024" fill="none" stroke="none" />
+                  <path fill="currentColor"
+                    d="M104.704 685.248a64 64 0 0 0 90.496 0l316.8-316.8l316.8 316.8a64 64 0 0 0 90.496-90.496L557.248 232.704a64 64 0 0 0-90.496 0L104.704 594.752a64 64 0 0 0 0 90.496z" />
+                </svg>
+              </span>
+            </section>
+
+          </section>
+
+        </div>
 
       </aside>
 
 
-      <main class="projectfy__main">
+      <main class="projecty__main">
+
         <% let c=0; %>
         <% if(locals.notes) { %>
           <% notes.forEach(item => { %>

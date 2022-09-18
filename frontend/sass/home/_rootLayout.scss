@@ -1,0 +1,103 @@
+@use '../components/' as *;
+
+body {
+  font-family: sans-serif;
+  transition: .2s ease color,
+  .2s ease background-color;
+  @include breakpoint(medium) {
+    overflow: hidden;
+  }
+  ::selection {
+    overflow-y: hidden;
+    background-color: $clr-selection;
+    color: #fff;
+  }
+}
+
+body {
+  &[data-theme="light-mode"] {
+    --clr-logo-project: #0098E0;
+    --clr-logo-Fy: #555555;
+
+    --clr-primary-bg: #fff;
+    --clr-primary-txt: #555;
+    --clr-primary-icon: #444;
+    --clr-secondary-txt: #000;
+
+    --clr-sidebar-bg: #fff;
+    --clr-navlist-hover: #f0f0f0;
+
+    --clr-scrlbar-track: var(--clr-sidebar-bg);
+    --clr-scrlbar-thumb: #ddd;
+    --clr-scrlbar-thumb-hover: #ccc;
+
+    --clr-lm-active: var(--clr-sidebar-bg);
+    --clr-dm-active: var(--clr-navlist-hover);
+
+    --clr-stngs-brdr: #eee;
+    --clr-signout-txt: hsl(0 100% 68%);
+    --clr-signout-bg: hsl(0 100% 68% / .15);
+    --clr-signout-bg-hover: hsl(0 100% 68% / .25);
+
+    --clr-acc-bxshw: hsla(0, 0%, 0%, 0.302);
+  }
+
+  &[data-theme="dark-mode"] {
+    --clr-logo-project: #65ceff;
+    --clr-logo-Fy: #eee;
+
+    --clr-primary-bg: #181818;
+    --clr-primary-txt: #eee;
+    --clr-primary-icon: #eee;
+    --clr-secondary-txt: #eee;
+
+    --clr-sidebar-bg: #212121;
+    --clr-navlist-hover: #383838;
+
+    --clr-scrlbar-track: var(--clr-sidebar-bg);
+    --clr-scrlbar-thumb: #666;
+    --clr-scrlbar-thumb-hover: #777;
+
+    --clr-lm-active: var(--clr-navlist-hover);
+    --clr-dm-active: var(--clr-sidebar-bg);
+    
+    --clr-stngs-brdr: #444;
+    --clr-signout-txt: hsl(0, 100%, 73%);
+    --clr-signout-bg: hsl(0 100% 68% / .15);
+    --clr-signout-bg-hover: hsl(0 100% 68% / .25);
+
+    --clr-acc-bxshw: hsla(0, 0%, 93%, 0.2);
+  }
+}
+
+
+#root {
+  display: block;
+  margin-block: auto;
+
+  isolation: isolate;  
+  background-color: var(--clr-primary-bg);
+  
+  // @include breakpoint(large) {
+  //   max-width: 100%;
+  //   width: 100%;
+  // }
+}
+
+.projectfy {
+  display: block;
+
+  min-height: 100vh;
+
+  @include breakpoint(medium) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+
+    max-width: 100%;
+    width: 100%;
+    max-height: 100vh;
+  }
+}
+
