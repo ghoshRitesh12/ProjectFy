@@ -34,6 +34,10 @@ const userSchema = new mongoose.Schema({
   verified:  {
     type: Boolean,
     default: false
+  },
+  userTheme: {
+    type: String,
+    default: 'light'
   }
 }, { collection: 'users' });
 

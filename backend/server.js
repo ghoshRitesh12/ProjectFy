@@ -13,6 +13,7 @@ const signinRouter = require('./routes/signin');
 const signoutRouter = require('./routes/signout');
 const refreshTokenRouter = require('./routes/refreshToken');
 const homeRouter = require('./routes/home');
+const apiRouter = require('./api/apiRoute');
 const noteRouter = require('./routes/note');
 const confirmEmailRouter = require('./routes/confirmEmail');
 
@@ -41,6 +42,7 @@ app.use(express.urlencoded({ extended: false }));
   app.use(userAuth);
   app.use('/', homeRouter);
   app.use('/note', noteRouter);
+  app.use('/api/v1', apiRouter);
 
 
   app.all('*', (req, res) => {
