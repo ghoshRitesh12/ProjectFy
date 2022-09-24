@@ -293,6 +293,12 @@ body[data-theme=dark] {
 .profy__titlebar__mode--dark--txt {
   color: var(--clr-primary-txt);
 }
+.profy__titlebar__mode__prefText {
+  margin-inline: auto;
+  max-width: inherit;
+  font-size: 0.75rem;
+  color: var(--clr-primary-txt);
+}
 .profy__titlebar__settings {
   display: flex;
   align-items: center;
