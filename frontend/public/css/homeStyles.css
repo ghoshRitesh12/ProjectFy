@@ -1,4 +1,4 @@
-/* ubuntu-regular */
+/* ubuntu-400 */
 @font-face {
   font-family: "Ubuntu";
   font-style: normal;
@@ -12,6 +12,22 @@
   font-style: normal;
   font-weight: 500;
   src: local(""), url("../fonts/ubuntu-v20-latin-500.woff2") format("woff2"), url("../fonts/ubuntu-v20-latin-500.woff") format("woff");
+  font-display: swap;
+}
+/* roboto-400 */
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  src: local(""), url("../fonts/roboto-v30-latin-regular.woff2") format("woff2"), url("../fonts/roboto-v30-latin-regular.woff") format("woff");
+  font-display: swap;
+}
+/* roboto-500 */
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  src: local(""), url("../fonts/roboto-v30-latin-500.woff2") format("woff2"), url("../fonts/roboto-v30-latin-500.woff") format("woff");
   font-display: swap;
 }
 *,
@@ -93,58 +109,81 @@ textarea {
 body {
   font-family: sans-serif;
   transition: 0.2s ease color, 0.2s ease background-color;
+  scrollbar-color: var(--clr-scrlbar-thumb);
 }
 @media (min-width: 40em) {
   body {
-    overflow: hidden;
+    overflow: auto;
   }
 }
 body ::-moz-selection {
-  overflow-y: hidden;
   background-color: hsl(199deg, 100%, 37%);
   color: #fff;
 }
 body ::selection {
-  overflow-y: hidden;
   background-color: hsl(199deg, 100%, 37%);
   color: #fff;
 }
+body:hover {
+  scrollbar-width: thin;
+}
+body::-webkit-scrollbar {
+  width: 0;
+}
+body:hover:-webkit-scrollbar {
+  width: 1rem;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: var(--clr-scrlbar-thumb);
+  border-radius: 1rem;
+  border: 0.3rem solid var(--clr-scrlbar-track);
+}
+body::-webkit-scrollbar-thumb:hover {
+  background-color: var(--clr-scrlbar-thumb-hover);
+}
+body::-webkit-scrollbar-track {
+  background-color: var(--clr-scrlbar-track);
+}
 
-body[data-theme=light-mode] {
+body[data-theme=light] {
   --clr-logo-project: #0098E0;
   --clr-logo-Fy: #555555;
   --clr-primary-bg: #fff;
   --clr-primary-txt: #555;
   --clr-primary-icon: #444;
   --clr-secondary-txt: #000;
+  --clr-secondary-bg: #f5f5f5;
   --clr-sidebar-bg: #fff;
+  --clr-dropdown-bg: rgba(255, 255, 255);
   --clr-navlist-hover: #f0f0f0;
   --clr-scrlbar-track: var(--clr-sidebar-bg);
   --clr-scrlbar-thumb: #ddd;
   --clr-scrlbar-thumb-hover: #ccc;
   --clr-lm-active: var(--clr-sidebar-bg);
   --clr-dm-active: var(--clr-navlist-hover);
-  --clr-stngs-brdr: #eee;
+  --clr-separator-brdr: #e8e8e8;
   --clr-signout-txt: hsl(0 100% 68%);
   --clr-signout-bg: hsl(0 100% 68% / .15);
   --clr-signout-bg-hover: hsl(0 100% 68% / .25);
   --clr-acc-bxshw: hsla(0, 0%, 0%, 0.302);
 }
-body[data-theme=dark-mode] {
+body[data-theme=dark] {
   --clr-logo-project: #65ceff;
   --clr-logo-Fy: #eee;
   --clr-primary-bg: #181818;
   --clr-primary-txt: #eee;
   --clr-primary-icon: #eee;
   --clr-secondary-txt: #eee;
+  --clr-secondary-bg: var(--clr-primary-bg);
   --clr-sidebar-bg: #212121;
+  --clr-dropdown-bg: rgba(33, 33, 33);
   --clr-navlist-hover: #383838;
   --clr-scrlbar-track: var(--clr-sidebar-bg);
   --clr-scrlbar-thumb: #666;
   --clr-scrlbar-thumb-hover: #777;
   --clr-lm-active: var(--clr-navlist-hover);
   --clr-dm-active: var(--clr-sidebar-bg);
-  --clr-stngs-brdr: #444;
+  --clr-separator-brdr: #383838;
   --clr-signout-txt: hsl(0, 100%, 73%);
   --clr-signout-bg: hsl(0 100% 68% / .15);
   --clr-signout-bg-hover: hsl(0 100% 68% / .25);
@@ -152,6 +191,8 @@ body[data-theme=dark-mode] {
 }
 
 #root {
+  --pad-titlebar: 1rem;
+  --top-margin: calc(var(--pad-titlebar) * 4.2);
   display: block;
   margin-block: auto;
   isolation: isolate;
@@ -161,6 +202,7 @@ body[data-theme=dark-mode] {
 .projectfy {
   display: block;
   min-height: 100vh;
+  background-color: var(--clr-secondary-bg);
 }
 @media (min-width: 40em) {
   .projectfy {
@@ -168,45 +210,306 @@ body[data-theme=dark-mode] {
     justify-content: center;
     align-items: center;
     flex-direction: row;
+    outline: 1px solid red;
     max-width: 100%;
     width: 100%;
     max-height: 100vh;
   }
 }
 
-.projectfy__sidepanel {
+.profy__titlebar {
   display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  margin-block: auto;
-  padding: 0 1em;
+  position: fixed;
+  top: 0;
+  z-index: 101;
+  isolation: isolate;
+  padding-inline: 4em;
+  padding-block: var(--pad-titlebar);
+  max-width: 100%;
+  width: 100%;
   background-color: var(--clr-sidebar-bg);
-  outline: 1px solid #999;
+}
+.profy__titlebar__logo {
+  position: relative;
+  isolation: isolate;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding-inline: 0.5rem;
+  margin-right: auto;
+  cursor: pointer;
+}
+.profy__titlebar__logo .logo_project {
+  color: var(--clr-logo-project);
+}
+.profy__titlebar__logo .logo_Fy {
+  color: var(--clr-logo-Fy);
+}
+.profy__titlebar__logo svg {
+  pointer-events: none;
+}
+.profy__titlebar__mode {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+  position: relative;
+  max-width: 12rem;
+  margin-inline: auto;
+  padding: 0.2em 0.3em;
+  background-color: var(--clr-navlist-hover);
+  border-radius: 0.5rem;
+}
+.profy__titlebar__mode__LD {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-block: auto;
+  padding: 0.3em 1em 0.3em 0.8em;
+  border-radius: calc(0.5em - 0.15rem);
+  cursor: pointer;
+}
+.profy__titlebar__mode__LD span {
+  pointer-events: none;
+}
+.profy__titlebar__mode--light {
+  background-color: var(--clr-lm-active);
+}
+.profy__titlebar__mode--light--icon {
+  font-size: 1rem;
+  color: var(--clr-primary-icon);
+}
+.profy__titlebar__mode--light--txt {
+  color: var(--clr-primary-txt);
+}
+.profy__titlebar__mode--dark {
+  background-color: var(--clr-dm-active);
+}
+.profy__titlebar__mode--dark--icon {
+  font-size: 1rem;
+  color: var(--clr-primary-icon);
+}
+.profy__titlebar__mode--dark--txt {
+  color: var(--clr-primary-txt);
+}
+.profy__titlebar__settings {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.5em 0.8em;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  transition: 0.2s ease all;
+}
+.profy__titlebar__settings:hover {
+  background-color: var(--clr-navlist-hover);
+}
+.profy__titlebar__settings--icon {
+  pointer-events: none;
+  color: var(--clr-primary-icon);
+  font-size: 1.22rem;
+}
+.profy__titlebar__settings--txt {
+  pointer-events: none;
+  color: var(--clr-primary-txt);
+  margin-right: auto;
+}
+.profy__titlebar__signoutForm {
+  display: block;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+.profy__titlebar__signoutForm-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.5em 1.2em 0.5em 0.8em;
+  inline-size: 100%;
+  margin-right: auto;
+  border-radius: 0.5rem;
+  background-color: transparent;
+  transition: 0.2s ease;
+  border: none;
+}
+.profy__titlebar__signoutForm-btn:is(:hover, :focus) {
+  background-color: var(--clr-signout-bg);
+}
+.profy__titlebar__signoutForm-btn--icon {
+  pointer-events: none;
+  font-size: 1.25rem;
+  color: var(--clr-signout-txt);
+}
+.profy__titlebar__signoutForm-btn--txt {
+  pointer-events: none;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--clr-signout-txt);
+  margin-right: auto;
+}
+.profy__titlebar__account__wrapper {
+  margin-left: auto;
+  isolation: isolate;
+  border-radius: 50%;
+  background-color: var(--clr-sidebar-bg);
+}
+.profy__titlebar__account {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  cursor: pointer;
+  border-radius: inherit;
+  overflow: hidden;
+}
+.profy__titlebar__account:is(:hover, :focus) {
+  outline: 1px solid var(--clr-logo-project);
+}
+.profy__titlebar__account--img {
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  overflow: hidden;
+  pointer-events: none;
+}
+.profy__titlebar__account--img-src {
+  --size: 2.2rem;
+  width: var(--size);
+  height: var(--size);
+}
+.profy__titlebar__account--name {
+  display: block;
+  color: var(--clr-primary-txt);
+  margin-inline: 0.7rem 0;
+  max-width: 12rem;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: "Ubuntu", sans-serif;
+  pointer-events: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.profy__titlebar__account--dropdown {
+  display: none;
+  flex-direction: column;
+  gap: 0.7rem;
+  position: fixed;
+  top: var(--top-margin);
+  right: calc(var(--top-margin) - 1rem);
+  z-index: 2022;
+  isolation: isolate;
+  min-height: 10rem;
+  padding-block: 1em 1.2em;
+  padding-inline: 1.2em;
+  background-color: var(--clr-dropdown-bg);
+  border-bottom: 1px solid var(--clr-separator-brdr);
+  border-inline: 1px solid var(--clr-separator-brdr);
+  border-radius: 0.5rem 0.5rem;
+}
+.profy__titlebar__account--dropdown.open {
+  display: flex;
+}
+.profy__titlebar__account--dropdown__info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-direction: row;
+  width: 100%;
+  padding-bottom: 1rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--clr-separator-brdr);
+  transition: 0.2s ease all;
+}
+.profy__titlebar__account--dropdown__info--img {
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  overflow: hidden;
+  pointer-events: none;
+}
+.profy__titlebar__account--dropdown__info--img-src {
+  --size: 2.5rem;
+  width: var(--size);
+  height: var(--size);
+}
+.profy__titlebar__account--dropdown__info--name {
+  display: block;
+  color: var(--clr-primary-txt);
+  max-width: 12rem;
+  margin-right: auto;
+  font-size: 1.05rem;
+  font-weight: 500;
+  font-family: "Ubuntu", sans-serif;
+  pointer-events: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.profy__titlebar [data-account-dropdown-backdrop] {
+  opacity: 0;
+  visibility: hidden;
+  position: fixed;
+  inset: 0;
+  min-width: 100vh;
+  min-height: 100vh;
+  isolation: isolate;
+  filter: blur(1rem);
+  transition: 0.15s ease;
+}
+.profy__titlebar [data-account-dropdown-backdrop][aria-hidden=false] {
+  opacity: 1;
+  visibility: visible;
+}
+
+.projectfy__sidepanel {
+  --top-margin: calc(var(--pad-titlebar) * 4.2);
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  flex: 1 1 20%;
+  position: relative;
+  z-index: 52;
+  isolation: isolate;
+  margin-block: 0 auto;
+  padding-inline: 1em;
+  padding-block: var(--top-margin) 2em;
+  min-height: 100vh;
+  max-height: calc(100vh - var(--top-margin));
+  max-width: 17.2rem;
+  min-width: 17rem;
+  font-family: "Roboto", sans-serif;
+  background-color: var(--clr-sidebar-bg);
+  overflow-y: auto;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
+  scrollbar-width: thin;
+  scrollbar-color: var(--clr-sidebar-bg) var(--clr-sidebar-bg);
 }
-.projectfy__sidepanel__header {
-  margin: 1rem 0 0 0;
+.projectfy__sidepanel:hover {
+  scrollbar-color: var(--clr-scrlbar-thumb) var(--clr-sidebar-bg);
 }
-.projectfy__sidepanel__header__logo {
-  text-decoration: none;
+.projectfy__sidepanel::-webkit-scrollbar {
+  width: 1rem;
 }
-.projectfy__sidepanel__header__logo:visited .logo_project, .projectfy__sidepanel__header__logo:active .logo_project {
-  color: var(--clr-logo-project);
+.projectfy__sidepanel:hover::-webkit-scrollbar-thumb {
+  background-color: var(--clr-scrlbar-thumb);
+  border-radius: 1rem;
+  border: 0.3rem solid var(--clr-scrlbar-track);
 }
-.projectfy__sidepanel__header__logo:visited .logo_Fy, .projectfy__sidepanel__header__logo:active .logo_Fy {
-  color: var(--clr-logo-Fy);
+.projectfy__sidepanel:hover::-webkit-scrollbar-thumb:hover {
+  background-color: var(--clr-scrlbar-thumb-hover);
 }
-.projectfy__sidepanel__header__logo svg {
-  pointer-events: none;
+.projectfy__sidepanel::-webkit-scrollbar-track {
+  margin-top: var(--top-margin);
+  background-color: var(--clr-scrlbar-track);
 }
 .projectfy__sidepanel__nav {
   flex-grow: 1;
-  margin: 1.5rem 0;
-  padding: 1.5rem 0 1rem 0;
-  border-top: 1px solid #ddd;
+  margin: 0.5rem 0 0 0;
 }
 .projectfy__sidepanel__nav__list {
   --icon-gap: 1.5rem;
@@ -226,13 +529,14 @@ body[data-theme=dark-mode] {
   width: 100%;
   border-radius: 0.5rem;
   transition: 0.3s ease;
+  cursor: pointer;
 }
 .projectfy__sidepanel__nav__list--home:hover {
   background-color: var(--clr-navlist-hover);
 }
 .projectfy__sidepanel__nav__list--home__txt {
   color: var(--clr-primary-txt);
-  font-weight: 700;
+  font-weight: 500;
   pointer-events: none;
 }
 .projectfy__sidepanel__nav__list--home__icon {
@@ -243,7 +547,6 @@ body[data-theme=dark-mode] {
 .projectfy__sidepanel__nav__list--projects {
   border-radius: 0.5rem;
   margin-bottom: var(--item-gap);
-  overflow: hidden;
 }
 .projectfy__sidepanel__nav__list--projects-container {
   display: flex;
@@ -277,7 +580,7 @@ body[data-theme=dark-mode] {
 }
 .projectfy__sidepanel__nav__list--projects-wrapper__txt {
   color: var(--clr-primary-txt);
-  font-weight: 700;
+  font-weight: 500;
   pointer-events: none;
 }
 .projectfy__sidepanel__nav__list--projects-wrapper__downarrow-icon {
@@ -294,7 +597,7 @@ body[data-theme=dark-mode] {
   margin-inline: auto 1rem;
   padding: 0 1em 0 0.5em;
   width: 95%;
-  max-height: 0;
+  height: auto;
   overflow-y: auto;
   margin-top: 0.5rem;
   transition: 0.2s ease-in max-height, 0.2s ease opacity;
@@ -303,7 +606,6 @@ body[data-theme=dark-mode] {
   scrollbar-color: var(--clr-scrlbar-thumb);
 }
 .projectfy__sidepanel__nav__list--projects-list.open {
-  max-height: 12.5rem;
   opacity: 1;
 }
 .projectfy__sidepanel__nav__list--projects-list::-webkit-scrollbar {
@@ -335,6 +637,7 @@ body[data-theme=dark-mode] {
   cursor: pointer;
   transition: 0.2s ease all;
   color: var(--clr-secondary-txt);
+  font-family: "Ubuntu", sans-serif;
 }
 .projectfy__sidepanel__nav__list--projects-listItem.selected {
   background-color: var(--clr-navlist-hover);
@@ -382,7 +685,7 @@ body[data-theme=dark-mode] {
 }
 .projectfy__sidepanel__nav__list--labels-wrapper__txt {
   color: var(--clr-primary-txt);
-  font-weight: 700;
+  font-weight: 500;
   pointer-events: none;
 }
 .projectfy__sidepanel__nav__list--labels-wrapper__downarrow-icon {
@@ -399,16 +702,16 @@ body[data-theme=dark-mode] {
   margin-inline: auto 1rem;
   padding: 0 1em 0 0.5em;
   width: 95%;
-  max-height: 0;
+  height: auto;
   overflow-y: auto;
   margin-top: 0.5rem;
   transition: 0.2s ease-in max-height, 0.2s ease opacity;
+  opacity: 1;
   border-radius: 0.5rem;
   scrollbar-width: none;
   scrollbar-color: var(--clr-scrlbar-thumb);
 }
 .projectfy__sidepanel__nav__list--labels-list.open {
-  max-height: 10rem;
   opacity: 1;
 }
 .projectfy__sidepanel__nav__list--labels-list::-webkit-scrollbar {
@@ -440,6 +743,7 @@ body[data-theme=dark-mode] {
   border-radius: 0.5rem;
   transition: 0.2s ease all;
   color: var(--clr-secondary-txt);
+  font-family: "Ubuntu", sans-serif;
 }
 .projectfy__sidepanel__nav__list--labels-listItem.selected {
   background-color: var(--clr-navlist-hover);
@@ -450,175 +754,9 @@ body[data-theme=dark-mode] {
 .projectfy__sidepanel__nav__list--labels-listItem:last-child {
   margin-bottom: 0.9rem;
 }
-.projectfy__sidepanel__preference-cont {
-  margin-top: auto;
-}
-.projectfy__sidepanel__mode {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.4rem;
-  position: relative;
-  z-index: 22;
-  width: 80%;
-  margin-inline: auto;
-  padding: 0.25em 0.35em;
-  background-color: var(--clr-navlist-hover);
-  border-radius: 0.5rem;
-}
-.projectfy__sidepanel__mode__LD {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.3em 1em 0.3em 0.8em;
-  border-radius: calc(0.5em - 0.15rem);
-  cursor: pointer;
-}
-.projectfy__sidepanel__mode__LD span {
-  pointer-events: none;
-}
-.projectfy__sidepanel__mode--light {
-  background-color: var(--clr-lm-active);
-}
-.projectfy__sidepanel__mode--light--icon {
-  font-size: 1rem;
-  color: var(--clr-primary-icon);
-}
-.projectfy__sidepanel__mode--light--txt {
-  font-weight: 700;
-  color: var(--clr-primary-txt);
-}
-.projectfy__sidepanel__mode--dark {
-  background-color: var(--clr-dm-active);
-}
-.projectfy__sidepanel__mode--dark--icon {
-  font-size: 1rem;
-  color: var(--clr-primary-icon);
-}
-.projectfy__sidepanel__mode--dark--txt {
-  font-weight: 700;
-  color: var(--clr-primary-txt);
-}
-.projectfy__sidepanel__preferences-wrapper {
-  position: relative;
-  border-radius: 0.5rem;
-  isolation: isolate;
-}
-.projectfy__sidepanel__preferences {
-  position: relative;
-  z-index: 45;
-  border-radius: inherit;
-  padding: 1em;
-  margin-inline: 0.2rem;
-  overflow: hidden;
-  transform: translateY(10%);
-  opacity: 0;
-  transition: 0.15s ease-in max-height, 0.2s ease transform, 0.1s ease visibility, 0.1s ease opacity;
-  visibility: hidden;
-  max-height: 0;
-}
-.projectfy__sidepanel__preferences.open {
-  opacity: 1;
-  transform: translateY(0);
-  visibility: visible;
-  max-height: 7.82rem;
-}
-.projectfy__sidepanel__settings {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.6em 0.8em;
-  color: #555;
-  border-radius: 0.5rem;
-  outline: 1px solid var(--clr-stngs-brdr);
-  transition: 0.2s ease all;
-}
-.projectfy__sidepanel__settings:hover {
-  background-color: var(--clr-navlist-hover);
-}
-.projectfy__sidepanel__settings--icon {
-  color: var(--clr-primary-icon);
-  font-size: 1.22rem;
-}
-.projectfy__sidepanel__settings--txt {
-  font-weight: 700;
-  color: var(--clr-primary-txt);
-}
-.projectfy__sidepanel__signoutForm {
-  display: block;
-  margin-bottom: 0.8rem;
-  width: 100%;
-}
-.projectfy__sidepanel__signoutForm-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.5em 1.2em 0.5em 0.8em;
-  inline-size: 100%;
-  border-radius: 0.5rem;
-  background-color: var(--clr-signout-bg);
-  transition: 0.2s ease;
-  border: none;
-}
-.projectfy__sidepanel__signoutForm-btn:is(:hover, :focus) {
-  background-color: var(--clr-signout-bg-hover);
-}
-.projectfy__sidepanel__signoutForm-btn--icon {
-  font-size: 1.25rem;
-  color: var(--clr-signout-txt);
-}
-.projectfy__sidepanel__signoutForm-btn--txt {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--clr-signout-txt);
-}
-.projectfy__sidepanel__account {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  margin-block: 0.2rem 2rem;
-  padding: 0.8em 1.2em 0.7em 0.8em;
-  background-color: var(--clr-sidebar-bg);
-  cursor: pointer;
-  box-shadow: 0 0 0.3rem var(--clr-acc-bxshw);
-  border-radius: 0.5rem;
-  overflow: hidden;
-  transition: 0.2s ease all;
-}
-.projectfy__sidepanel__account:hover {
-  box-shadow: 0 0.1rem 0.4rem var(--clr-acc-bxshw);
-}
-.projectfy__sidepanel__account--img {
-  display: grid;
-  place-items: center;
-  pointer-events: none;
-}
-.projectfy__sidepanel__account--img-src {
-  --size: 1.8rem;
-  width: var(--size);
-  height: var(--size);
-}
-.projectfy__sidepanel__account--name {
-  display: block;
-  pointer-events: none;
-  color: var(--clr-primary-txt);
-  margin-inline: 0.7rem;
-  max-width: 9rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-size: 1.08rem;
-}
-.projectfy__sidepanel__account--options {
-  margin-left: auto;
-  font-size: 1rem;
-  pointer-events: none;
-  color: var(--clr-primary-icon);
-  transition: 0.3s ease all;
-  transform: rotate(0deg);
-}
-.projectfy__sidepanel__account--options.rotated {
-  transform: rotate(180deg);
+
+@media (min-width: 40em) {
+  .projecty__main {
+    flex: 1 1 80%;
+  }
 }/*# sourceMappingURL=homeStyles.css.map */

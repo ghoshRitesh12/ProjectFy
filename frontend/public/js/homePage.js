@@ -1,48 +1,56 @@
 import { $, $$, addGlobalEventListener } from './utility.js';
 
 
-$('.projectfy__sidepanel__account').addEventListener('click', e => {
-  // closing labels dropdown
-  if($('.projectfy__sidepanel__nav__list--projects-list').classList.contains('open')) {
-    $('.projectfy__sidepanel__nav__list--labels-list').classList.remove('open');
-    $('.projectfy__sidepanel__nav__list--labels-wrapper__downarrow-icon').classList.remove('rotated');
+// account
+$('[data-account]').addEventListener('click', e => {
+  e.target.blur();
+  if(!$('[data-account-dropdown]').classList.contains('open')) {
+    $('[data-account-dropdown]').classList.add('open');
+    $('[data-account-dropdown-backdrop]').ariaHidden = 'false';
+    document.body.style.overflowY = 'hidden';
+  } else {
+    $('[data-account-dropdown]').classList.remove('open');
+    $('[data-account-dropdown-backdrop]').ariaHidden = 'true';
+    document.body.style.overflowY = 'auto';
   }
-
-
-  if(!$('.projectfy__sidepanel__preferences').classList.contains('open')) {
-    $('.projectfy__sidepanel__preferences').classList.add('open');
-    $('.projectfy__sidepanel__account--options').classList.add('rotated');
-  }
-  else {
-    $('.projectfy__sidepanel__preferences').classList.remove('open');
-    $('.projectfy__sidepanel__account--options').classList.remove('rotated');
-  }
+})
+// account-dropdown-backdrop
+addGlobalEventListener('click', '[data-account-dropdown-backdrop]', 
+e => {
+  e.target.ariaHidden = 'true';
+  $('[data-account-dropdown]').classList.remove('open');
+  document.body.style.overflowY = 'auto';
 })
 
 
-
-// dark mode
-addGlobalEventListener('click', '.projectfy__sidepanel__mode--light', e => {
-  if($('body').dataset.theme === "dark-mode") 
-    $('body').dataset.theme = e.target.dataset.mode;
-  
-
+// theme toggler
+addGlobalEventListener('click', '[data-mode]', async e => {
+  const mode = e.target.dataset.mode;
+  try {
+    if($('body').dataset.theme === mode) 
+      return;
+    
+    $('body').dataset.theme = mode;
+    const resp = await fetch('/api/v1/themechange', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 'themeChangedTo': mode })
+    });
+  } catch (err) {
+    location.href = '/';
+  }
 })
-addGlobalEventListener('click', '.projectfy__sidepanel__mode--dark', e => {
-  if($('body').dataset.theme === "light-mode") 
-    $('body').dataset.theme = e.target.dataset.mode;
-  
-})
+
 
 
 
 // projects nav
 $('.projectfy__sidepanel__nav__list--projects-wrapper').addEventListener('click', e => {
   // closing accounts dropdown
-  if($('.projectfy__sidepanel__nav__list--labels-list').classList.contains('open')) {
-    $('.projectfy__sidepanel__preferences').classList.remove('open');
-    $('.projectfy__sidepanel__account--options').classList.remove('rotated');
-  }
+  // if($('.projectfy__sidepanel__nav__list--labels-list').classList.contains('open')) {
+  //   $('.projectfy__sidepanel__preferences').classList.remove('open');
+  //   $('.projectfy__sidepanel__account--options').classList.remove('rotated');
+  // }
 
   if(!$('.projectfy__sidepanel__nav__list--projects-list').classList.contains('open')) {
     $('.projectfy__sidepanel__nav__list--projects-list').classList.add('open');
@@ -57,10 +65,10 @@ $('.projectfy__sidepanel__nav__list--projects-wrapper').addEventListener('click'
 // labels nav
 $('.projectfy__sidepanel__nav__list--labels-wrapper').addEventListener('click', e => {
   // closing accounts dropdown
-  if($('.projectfy__sidepanel__nav__list--projects-list').classList.contains('open')) {
-    $('.projectfy__sidepanel__preferences').classList.remove('open');
-    $('.projectfy__sidepanel__account--options').classList.remove('rotated');
-  }
+  // if($('.projectfy__sidepanel__nav__list--projects-list').classList.contains('open')) {
+  //   $('.projectfy__sidepanel__preferences').classList.remove('open');
+  //   $('.projectfy__sidepanel__account--options').classList.remove('rotated');
+  // }
 
 
   if(!$('.projectfy__sidepanel__nav__list--labels-list').classList.contains('open')) {
@@ -97,20 +105,35 @@ e => {
 
 
 // just testing stuff 😅
-$('.projectfy__sidepanel__mode--light').addEventListener('click', 
+
+
+// adding new project
+$('.projectfy__sidepanel__nav__list--projects-container__add-icon').addEventListener('click', 
 async e => {
+  $('.projectfy__sidepanel__nav__list--projects-list').classList.add('open');
 
-  // location.href = "/bruh";
-  // try {
-  //   const resp = await fetch('/signin');
-  //   const data = await resp.text();
+  const projectTemplate = $('#project-item__template').content.cloneNode(true).children[0];
+  const newProject = projectTemplate.querySelector('.newProject');
+  // const projectNameInput = await projectTemplate.querySelector('.newProjectName');
+  // projectNameInput.focus();
 
-  //   const parser = new DOMParser();
-  //   const doc = parser.parseFromString(data, 'text/html');
+  $('.newProjectTemp').append(projectTemplate);
+  projectTemplate.querySelector('.newProjectName').focus();
 
-  //   console.log(doc);
-  //   // $('.projecty__main').innerHTML = doc;
-  // } catch (error) {
-  //   console.error(error);
-  // }
-})  
+})
+
+// addGlobalEventListener('click', '[data-btn-cancel]', e => {
+//   console.log('bruh');
+// })
+
+addGlobalEventListener('input', '.newProjectName', e => {
+  console.log(e.target.parentElement.parentElement.parentElement);
+})
+
+
+// imp home navigation
+addGlobalEventListener('click', '[data-nav]', e => {
+  window.location.href = e.target.dataset.nav;
+  // window.location.href = '.';
+})
+
