@@ -13,10 +13,13 @@ const getHome = async (req, res) => {
       console.log("XD", notes);
       return res.render('home', { error: `Wow so empty :(` });
     }
+    
+    // await user.populate('projects');
 
     res.render('home', { notes, user });
 
   } catch (err) {
+    console.log(err.message);
     res.redirect('/');
   }
 }

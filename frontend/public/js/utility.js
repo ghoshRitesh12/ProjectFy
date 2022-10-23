@@ -7,4 +7,10 @@ function addGlobalEventListener(type, selector, callback) {
   });
 }
 
-export { $, $$, addGlobalEventListener };
+const randomBoxClr = () => {
+  // const hue = Math.floor(Math.random() * 180) + 170; 
+  const hue = Math.floor(Math.random() * 220) + 180; 
+  return `hsl(${hue}, 64%, 60%)`;
+}
+
+export { $, $$, addGlobalEventListener, randomBoxClr };

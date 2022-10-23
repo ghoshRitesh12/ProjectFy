@@ -1,5 +1,10 @@
 const mongoose = require('mongoose');
 
+const projectObj = {
+  type: mongoose.Schema.Types.ObjectId,
+  ref: 'notesCollection'
+};
+
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -38,7 +43,9 @@ const userSchema = new mongoose.Schema({
   userTheme: {
     type: String,
     default: 'light'
-  }
+  },
+  labels: [String],
+  projects: [projectObj]
 }, { collection: 'users' });
 
 module.exports = mongoose.model('users', userSchema);

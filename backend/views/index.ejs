@@ -9,49 +9,508 @@
   <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
   <!-- Custom CSS -->
   <link rel="stylesheet" href="/css/homeStyles.css">
-
 </head>
-<body>
+
+<body data-theme="dark">
+  <div id="root">
+
+    <header class="profy__titlebar">
+      <div class="profy__titlebar__logo" data-nav="/">
+        <svg width="129" height="32" viewBox="0 0 129 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path class="logo_project"
+            d="M8.14213 6.372C11.0355 6.372 13.2568 6.88533 14.8061 7.912C16.3555 8.92 17.1301 10.5813 17.1301 12.896C17.1301 15.2293 16.3461 16.9187 14.7781 17.964C13.2101 18.9907 10.9701 19.504 8.05813 19.504H6.68613V26H2.31813V6.876C3.27013 6.68933 4.27813 6.55867 5.34213 6.484C6.40613 6.40933 7.33946 6.372 8.14213 6.372ZM8.42213 10.096C8.10479 10.096 7.78746 10.1053 7.47012 10.124C7.17146 10.1427 6.91013 10.1613 6.68613 10.18V15.78H8.05813C9.57013 15.78 10.7088 15.5747 11.4741 15.164C12.2395 14.7533 12.6221 13.988 12.6221 12.868C12.6221 12.3267 12.5195 11.8787 12.3141 11.524C12.1275 11.1693 11.8475 10.8893 11.4741 10.684C11.1195 10.46 10.6808 10.3107 10.1581 10.236C9.63546 10.1427 9.05679 10.096 8.42213 10.096ZM28.9337 14.968C28.5603 14.8747 28.1217 14.7813 27.6177 14.688C27.1137 14.576 26.5723 14.52 25.9937 14.52C25.7323 14.52 25.415 14.548 25.0417 14.604C24.687 14.6413 24.4163 14.688 24.2297 14.744V26H20.0577V12.056C20.8043 11.7947 21.6817 11.552 22.6897 11.328C23.7163 11.0853 24.855 10.964 26.1057 10.964C26.3297 10.964 26.6003 10.9827 26.9177 11.02C27.235 11.0387 27.5523 11.076 27.8697 11.132C28.187 11.1693 28.5043 11.2253 28.8217 11.3C29.139 11.356 29.4097 11.4307 29.6337 11.524L28.9337 14.968ZM45.3727 18.608C45.3727 19.7653 45.2047 20.8293 44.8687 21.8C44.5327 22.752 44.0474 23.5733 43.4127 24.264C42.7781 24.936 42.0127 25.4587 41.1167 25.832C40.2394 26.2053 39.2501 26.392 38.1487 26.392C37.0661 26.392 36.0767 26.2053 35.1807 25.832C34.3034 25.4587 33.5474 24.936 32.9127 24.264C32.2781 23.5733 31.7834 22.752 31.4287 21.8C31.0741 20.8293 30.8967 19.7653 30.8967 18.608C30.8967 17.4507 31.0741 16.396 31.4287 15.444C31.8021 14.492 32.3061 13.68 32.9407 13.008C33.5941 12.336 34.3594 11.8133 35.2367 11.44C36.1327 11.0667 37.1034 10.88 38.1487 10.88C39.2127 10.88 40.1834 11.0667 41.0607 11.44C41.9567 11.8133 42.7221 12.336 43.3567 13.008C43.9914 13.68 44.4861 14.492 44.8407 15.444C45.1954 16.396 45.3727 17.4507 45.3727 18.608ZM41.1167 18.608C41.1167 17.32 40.8554 16.312 40.3327 15.584C39.8287 14.8373 39.1007 14.464 38.1487 14.464C37.1967 14.464 36.4594 14.8373 35.9367 15.584C35.4141 16.312 35.1527 17.32 35.1527 18.608C35.1527 19.896 35.4141 20.9227 35.9367 21.688C36.4594 22.4347 37.1967 22.808 38.1487 22.808C39.1007 22.808 39.8287 22.4347 40.3327 21.688C40.8554 20.9227 41.1167 19.896 41.1167 18.608ZM47.2325 31.18C46.9712 31.18 46.5885 31.152 46.0845 31.096C45.5619 31.04 45.0765 30.9373 44.6285 30.788L45.1885 27.4C45.4685 27.4933 45.7299 27.5587 45.9725 27.596C46.1965 27.6333 46.4859 27.652 46.8405 27.652C47.4939 27.652 47.9512 27.456 48.2125 27.064C48.4739 26.672 48.6045 26.1027 48.6045 25.356V11.272H52.7765V25.468C52.7765 27.4093 52.3005 28.8467 51.3485 29.78C50.3965 30.7133 49.0245 31.18 47.2325 31.18ZM53.1685 7.016C53.1685 7.78133 52.9165 8.388 52.4125 8.836C51.9272 9.26533 51.3485 9.48 50.6765 9.48C50.0045 9.48 49.4165 9.26533 48.9125 8.836C48.4272 8.388 48.1845 7.78133 48.1845 7.016C48.1845 6.25067 48.4272 5.65333 48.9125 5.224C49.4165 4.776 50.0045 4.552 50.6765 4.552C51.3485 4.552 51.9272 4.776 52.4125 5.224C52.9165 5.65333 53.1685 6.25067 53.1685 7.016ZM55.9983 18.748C55.9983 17.4413 56.1943 16.3027 56.5863 15.332C56.9969 14.3427 57.5289 13.5213 58.1823 12.868C58.8356 12.2147 59.5823 11.72 60.4223 11.384C61.2809 11.048 62.1583 10.88 63.0543 10.88C65.1449 10.88 66.7969 11.524 68.0103 12.812C69.2236 14.0813 69.8303 15.9573 69.8303 18.44C69.8303 18.6827 69.8209 18.9533 69.8023 19.252C69.7836 19.532 69.7649 19.784 69.7463 20.008H60.2823C60.3756 20.8667 60.7769 21.548 61.4863 22.052C62.1956 22.556 63.1476 22.808 64.3423 22.808C65.1076 22.808 65.8543 22.7427 66.5823 22.612C67.3289 22.4627 67.9356 22.2853 68.4023 22.08L68.9623 25.468C68.7383 25.58 68.4396 25.692 68.0663 25.804C67.6929 25.916 67.2729 26.0093 66.8063 26.084C66.3583 26.1773 65.8729 26.252 65.3503 26.308C64.8276 26.364 64.3049 26.392 63.7823 26.392C62.4569 26.392 61.2996 26.196 60.3103 25.804C59.3396 25.412 58.5276 24.88 57.8743 24.208C57.2396 23.5173 56.7636 22.7053 56.4463 21.772C56.1476 20.8387 55.9983 19.8307 55.9983 18.748ZM65.7983 17.152C65.7796 16.7973 65.7143 16.452 65.6023 16.116C65.5089 15.78 65.3503 15.4813 65.1263 15.22C64.9209 14.9587 64.6503 14.744 64.3143 14.576C63.9969 14.408 63.5956 14.324 63.1103 14.324C62.6436 14.324 62.2423 14.408 61.9063 14.576C61.5703 14.7253 61.2903 14.9307 61.0663 15.192C60.8423 15.4533 60.6649 15.7613 60.5343 16.116C60.4223 16.452 60.3383 16.7973 60.2823 17.152H65.7983ZM72.3498 18.636C72.3498 17.572 72.5178 16.5733 72.8538 15.64C73.2085 14.688 73.7125 13.8667 74.3658 13.176C75.0192 12.4667 75.8125 11.9067 76.7458 11.496C77.6792 11.0853 78.7432 10.88 79.9378 10.88C80.7218 10.88 81.4405 10.9547 82.0938 11.104C82.7472 11.2347 83.3818 11.4307 83.9978 11.692L83.1298 15.024C82.7378 14.8747 82.3085 14.744 81.8418 14.632C81.3752 14.52 80.8525 14.464 80.2738 14.464C79.0418 14.464 78.1178 14.8467 77.5018 15.612C76.9045 16.3773 76.6058 17.3853 76.6058 18.636C76.6058 19.9613 76.8858 20.988 77.4458 21.716C78.0245 22.444 79.0232 22.808 80.4418 22.808C80.9458 22.808 81.4872 22.7613 82.0658 22.668C82.6445 22.5747 83.1765 22.4253 83.6618 22.22L84.2498 25.636C83.7645 25.8413 83.1578 26.0187 82.4298 26.168C81.7018 26.3173 80.8992 26.392 80.0218 26.392C78.6778 26.392 77.5205 26.196 76.5498 25.804C75.5792 25.3933 74.7765 24.8427 74.1418 24.152C73.5258 23.4613 73.0685 22.6493 72.7698 21.716C72.4898 20.764 72.3498 19.7373 72.3498 18.636ZM86.9098 7.604L91.0818 6.932V11.272H96.0938V14.744H91.0818V19.924C91.0818 20.8013 91.2312 21.5013 91.5298 22.024C91.8472 22.5467 92.4725 22.808 93.4058 22.808C93.8538 22.808 94.3112 22.7707 94.7778 22.696C95.2632 22.6027 95.7018 22.4813 96.0938 22.332L96.6818 25.58C96.1778 25.7853 95.6178 25.9627 95.0018 26.112C94.3858 26.2613 93.6298 26.336 92.7338 26.336C91.5952 26.336 90.6525 26.1867 89.9058 25.888C89.1592 25.5707 88.5618 25.1413 88.1138 24.6C87.6658 24.04 87.3485 23.368 87.1618 22.584C86.9938 21.8 86.9098 20.932 86.9098 19.98V7.604Z"
+            fill="currentColor" />
+          <path class="logo_Fy"
+            d="M99.7713 26V6.596H112.763V10.264H104.139V14.324H111.811V17.992H104.139V26H99.7713ZM128.645 11.272C127.805 14.1093 126.928 16.7693 126.013 19.252C125.099 21.7347 124.1 24.1427 123.017 26.476C122.625 27.316 122.233 28.0253 121.841 28.604C121.449 29.2013 121.02 29.6867 120.553 30.06C120.087 30.452 119.555 30.732 118.957 30.9C118.379 31.0867 117.697 31.18 116.913 31.18C116.26 31.18 115.653 31.1147 115.093 30.984C114.552 30.872 114.104 30.7413 113.749 30.592L114.477 27.26C114.907 27.4093 115.289 27.512 115.625 27.568C115.961 27.624 116.316 27.652 116.689 27.652C117.436 27.652 118.005 27.4467 118.397 27.036C118.808 26.644 119.153 26.0933 119.433 25.384C118.481 23.5173 117.529 21.4267 116.577 19.112C115.625 16.7787 114.729 14.1653 113.889 11.272H118.313C118.5 12 118.715 12.7933 118.957 13.652C119.219 14.492 119.489 15.3507 119.769 16.228C120.049 17.0867 120.329 17.9267 120.609 18.748C120.908 19.5693 121.188 20.316 121.449 20.988C121.692 20.316 121.944 19.5693 122.205 18.748C122.467 17.9267 122.719 17.0867 122.961 16.228C123.223 15.3507 123.465 14.492 123.689 13.652C123.932 12.7933 124.147 12 124.333 11.272H128.645Z"
+            fill="currentColor" />
+        </svg>
+      </div>
+
+      <!-- <input type="search" name="search" class="profy__titlebar__search"> -->
+
+      <section class="profy__titlebar__account__wrapper">
+        <div class="profy__titlebar__account" role="button" tabindex="-1" data-account>
+          <div class="profy__titlebar__account--img">
+            <img class="profy__titlebar__account--img-src"
+              src='https://yt3.ggpht.com/pKWFpweWfKOduyYR1zUosjzpMiudCx_rb8AKJdBLVOtYkQi4xSrtkDoQ6v7aQtkscj7mEV6S=s88-c-k-c0x00ffffff-no-rj-mo' />
+          </div>
+          <!-- <div class="profy__titlebar__account--name">
+            Valorant Popping
+            <% if(!locals.user) { %>
+              login button
+            <% } %>
+          </div> -->
+        </div>
+
+
+        <!-- accounts dropdown -->
+        <div class="profy__titlebar__account--dropdown" data-account-dropdown>
+          <div class="profy__titlebar__account--dropdown__info">
+            <div class="profy__titlebar__account--dropdown__info--img">
+              <img class="profy__titlebar__account--dropdown__info--img-src"
+                src='https://yt3.ggpht.com/pKWFpweWfKOduyYR1zUosjzpMiudCx_rb8AKJdBLVOtYkQi4xSrtkDoQ6v7aQtkscj7mEV6S=s88-c-k-c0x00ffffff-no-rj-mo' />
+            </div>
+            <div class="profy__titlebar__account--dropdown__info--name">
+              <% if(locals.user) { %>
+                <%= locals.user.name %>
+              <% } else { %>
+                login button
+              <% } %>
+            </div>
+          </div>
+
+          <section class="profy__titlebar__settings" data-nav="/account" data-account-options>
+            <span class="profy__titlebar__settings--icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 36 36">
+                <rect x="0" y="0" width="36" height="36" fill="none" stroke="none" />
+                <path fill="currentColor"
+                  d="M18.1 11c-3.9 0-7 3.1-7 7s3.1 7 7 7s7-3.1 7-7s-3.1-7-7-7zm0 12c-2.8 0-5-2.2-5-5s2.2-5 5-5s5 2.2 5 5s-2.2 5-5 5z"
+                  class="clr-i-outline clr-i-outline-path-1" />
+                <path fill="currentColor"
+                  d="m32.8 14.7l-2.8-.9l-.6-1.5l1.4-2.6c.3-.6.2-1.4-.3-1.9l-2.4-2.4c-.5-.5-1.3-.6-1.9-.3l-2.6 1.4l-1.5-.6l-.9-2.8C21 2.5 20.4 2 19.7 2h-3.4c-.7 0-1.3.5-1.4 1.2L14 6c-.6.1-1.1.3-1.6.6L9.8 5.2c-.6-.3-1.4-.2-1.9.3L5.5 7.9c-.5.5-.6 1.3-.3 1.9l1.3 2.5c-.2.5-.4 1.1-.6 1.6l-2.8.9c-.6.2-1.1.8-1.1 1.5v3.4c0 .7.5 1.3 1.2 1.5l2.8.9l.6 1.5l-1.4 2.6c-.3.6-.2 1.4.3 1.9l2.4 2.4c.5.5 1.3.6 1.9.3l2.6-1.4l1.5.6l.9 2.9c.2.6.8 1.1 1.5 1.1h3.4c.7 0 1.3-.5 1.5-1.1l.9-2.9l1.5-.6l2.6 1.4c.6.3 1.4.2 1.9-.3l2.4-2.4c.5-.5.6-1.3.3-1.9l-1.4-2.6l.6-1.5l2.9-.9c.6-.2 1.1-.8 1.1-1.5v-3.4c0-.7-.5-1.4-1.2-1.6zm-.8 4.7l-3.6 1.1l-.1.5l-.9 2.1l-.3.5l1.8 3.3l-2 2l-3.3-1.8l-.5.3c-.7.4-1.4.7-2.1.9l-.5.1l-1.1 3.6h-2.8l-1.1-3.6l-.5-.1l-2.1-.9l-.5-.3l-3.3 1.8l-2-2l1.8-3.3l-.3-.5c-.4-.7-.7-1.4-.9-2.1l-.1-.5L4 19.4v-2.8l3.4-1l.2-.5c.2-.8.5-1.5.9-2.2l.3-.5l-1.7-3.3l2-2l3.2 1.8l.5-.3c.7-.4 1.4-.7 2.2-.9l.5-.2L16.6 4h2.8l1.1 3.5l.5.2c.7.2 1.4.5 2.1.9l.5.3l3.3-1.8l2 2l-1.8 3.3l.3.5c.4.7.7 1.4.9 2.1l.1.5l3.6 1.1v2.8z"
+                  class="clr-i-outline clr-i-outline-path-2" />
+                <path fill="none" d="M0 0h36v36H0z" />
+              </svg>
+            </span>
+            <span class="profy__titlebar__settings--txt">Settings</span>
+          </section>
+
+          <form class="profy__titlebar__signoutForm" action="/signout" method="post" data-account-options>
+            <button class="profy__titlebar__signoutForm-btn" type="submit">
+              <span class="profy__titlebar__signoutForm-btn--icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 24 24">
+                  <rect x="0" y="0" width="24" height="24" fill="none" stroke="none" />
+                  <path fill="currentColor"
+                    d="M9 2h9c1.1 0 2 .9 2 2v16c0 1.1-.9 2-2 2H9c-1.1 0-2-.9-2-2v-2h2v2h9V4H9v2H7V4c0-1.1.9-2 2-2z" />
+                  <path fill="currentColor" d="M10.09 15.59L11.5 17l5-5l-5-5l-1.41 1.41L12.67 11H3v2h9.67z" />
+                </svg>
+              </span>
+
+              <span class="profy__titlebar__signoutForm-btn--txt">Sign out</span>
+            </button>
+          </form>
+
+          <section class="profy__titlebar__mode">
+            <div class="profy__titlebar__mode__LD profy__titlebar__mode--light" data-mode="light" data-account-options>
+              <span class="profy__titlebar__mode--light--icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 24 24">
+                  <rect x="0" y="0" width="24" height="24" fill="none" stroke="none" />
+                  <path fill="currentColor"
+                    d="M12 15q1.25 0 2.125-.875T15 12q0-1.25-.875-2.125T12 9q-1.25 0-2.125.875T9 12q0 1.25.875 2.125T12 15Zm0 2q-2.075 0-3.537-1.463Q7 14.075 7 12t1.463-3.538Q9.925 7 12 7t3.538 1.462Q17 9.925 17 12q0 2.075-1.462 3.537Q14.075 17 12 17ZM2 13q-.425 0-.712-.288Q1 12.425 1 12t.288-.713Q1.575 11 2 11h2q.425 0 .713.287Q5 11.575 5 12t-.287.712Q4.425 13 4 13Zm18 0q-.425 0-.712-.288Q19 12.425 19 12t.288-.713Q19.575 11 20 11h2q.425 0 .712.287q.288.288.288.713t-.288.712Q22.425 13 22 13Zm-8-8q-.425 0-.712-.288Q11 4.425 11 4V2q0-.425.288-.713Q11.575 1 12 1t.713.287Q13 1.575 13 2v2q0 .425-.287.712Q12.425 5 12 5Zm0 18q-.425 0-.712-.288Q11 22.425 11 22v-2q0-.425.288-.712Q11.575 19 12 19t.713.288Q13 19.575 13 20v2q0 .425-.287.712Q12.425 23 12 23ZM5.65 7.05L4.575 6q-.3-.275-.288-.7q.013-.425.288-.725q.3-.3.725-.3t.7.3L7.05 5.65q.275.3.275.7q0 .4-.275.7q-.275.3-.687.287q-.413-.012-.713-.287ZM18 19.425l-1.05-1.075q-.275-.3-.275-.712q0-.413.275-.688q.275-.3.688-.287q.412.012.712.287L19.425 18q.3.275.288.7q-.013.425-.288.725q-.3.3-.725.3t-.7-.3ZM16.95 7.05q-.3-.275-.287-.688q.012-.412.287-.712L18 4.575q.275-.3.7-.288q.425.013.725.288q.3.3.3.725t-.3.7L18.35 7.05q-.3.275-.7.275q-.4 0-.7-.275ZM4.575 19.425q-.3-.3-.3-.725t.3-.7l1.075-1.05q.3-.275.713-.275q.412 0 .687.275q.3.275.288.688q-.013.412-.288.712L6 19.425q-.275.3-.7.287q-.425-.012-.725-.287ZM12 12Z" />
+                </svg>
+              </span>
+              <span class="profy__titlebar__mode--light--txt">Light</span>
+            </div>
+
+            <div class="profy__titlebar__mode__LD profy__titlebar__mode--dark" data-mode="dark" data-account-options>
+              <span class="profy__titlebar__mode--dark--icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 24 24">
+                  <rect x="0" y="0" width="24" height="24" fill="none" stroke="none" />
+                  <path fill="currentColor"
+                    d="M12 21q-3.775 0-6.388-2.613Q3 15.775 3 12q0-3.45 2.25-5.988Q7.5 3.475 11 3.05q.625-.075.975.45t-.025 1.1q-.425.65-.638 1.375Q11.1 6.7 11.1 7.5q0 2.25 1.575 3.825Q14.25 12.9 16.5 12.9q.775 0 1.538-.225q.762-.225 1.362-.625q.525-.35 1.075-.038q.55.313.475.988q-.35 3.45-2.937 5.725Q15.425 21 12 21Zm0-2q2.2 0 3.95-1.212q1.75-1.213 2.55-3.163q-.5.125-1 .2q-.5.075-1 .075q-3.075 0-5.238-2.162Q9.1 10.575 9.1 7.5q0-.5.075-1t.2-1q-1.95.8-3.162 2.55Q5 9.8 5 12q0 2.9 2.05 4.95Q9.1 19 12 19Zm-.25-6.75Z" />
+                </svg>
+              </span>
+              <span class="profy__titlebar__mode--dark--txt">Dark</span>
+            </div>
+          </section>
+          <em class="profy__titlebar__mode__prefText">
+            theme will be saved for future login
+          </em>
+
+        </div>
+        <div aria-hidden="true" aria-label="accountDropdownBackdrop" data-account-dropdown-backdrop></div>
+
+      </section>
+
+    </header>
+
+    <section class="profy">
+      <aside class="profy__sidepanel">
+
+        <nav class="profy__sidepanel__nav">
+          <section class="profy__sidepanel__nav--home" data-nav="/">
+            <span class="profy__sidepanel__nav--home__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 28 28">
+                <rect x="0" y="0" width="28" height="28" fill="none" stroke="none" />
+                <path fill="currentColor"
+                  d="M12.592 3.498a2.25 2.25 0 0 1 2.816 0l7.75 6.217A2.25 2.25 0 0 1 24 11.47v11.28A2.25 2.25 0 0 1 21.75 25h-2.5A2.25 2.25 0 0 1 17 22.75v-6.5a.75.75 0 0 0-.75-.75h-4.5a.75.75 0 0 0-.75.75v6.5A2.25 2.25 0 0 1 8.75 25h-2.5A2.25 2.25 0 0 1 4 22.75V11.47c0-.683.31-1.328.842-1.755l7.75-6.217Z" />
+              </svg>
+            </span>
+
+            <span class="profy__sidepanel__nav--home__txt">
+              Home
+            </span>
+          </section>
+
+          <section class="profy__sidepanel__nav--projects">
+            <section class="profy__sidepanel__nav--projects-container">
+              <div class="profy__sidepanel__nav--projects-wrapper">
+                <span class="profy__sidepanel__nav--projects-wrapper__txt">
+                  Projects
+                </span>
+
+                <span class="profy__sidepanel__nav--projects-wrapper__icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                    viewBox="0 0 24 24">
+                    <rect x="0" y="0" width="24" height="24" fill="none" stroke="none" />
+                    <path fill="currentColor"
+                      d="M4 11h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1zm10 0h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1zM4 21h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1zm13 0c2.206 0 4-1.794 4-4s-1.794-4-4-4s-4 1.794-4 4s1.794 4 4 4z" />
+                  </svg>
+                </span>
+                <!-- <span class="profy__sidepanel__nav--projects-wrapper__length" data-projects-length>
+                0
+                </span> -->
+              </div>
+
+              <span class="profy__sidepanel__nav--projects-container__add-icon" data-add-item="projects">
+                <svg xmlns="http://www.w3.org/2000/svg" width="0.88em" height="1em" preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 448 512">
+                  <rect x="0" y="0" width="448" height="512" fill="none" stroke="none" />
+                  <path fill="currentColor"
+                    d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32v144H48c-17.7 0-32 14.3-32 32s14.3 32 32 32h144v144c0 17.7 14.3 32 32 32s32-14.3 32-32V288h144c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
+                </svg>
+              </span>
+            </section>
+
+
+            <ul class="profy__sidepanel__nav--projects-list" data-projects-list>
+              <li class="newProjectContainer hidden" data-new-project></li>
+
+              <li class="profy__sidepanel__nav--projects-listItem">
+                <span class="profy__sidepanel__nav--projects-listItem_name">
+                  Valorant Projekt
+                </span>
+              </li>
+              <li class="profy__sidepanel__nav--projects-listItem">
+                <span class="profy__sidepanel__nav--projects-listItem_name">
+                  Swinging Utopia
+                </span>
+              </li>
+              <li class="profy__sidepanel__nav--projects-listItem">
+                <span class="profy__sidepanel__nav--projects-listItem_name">
+                  Bily nas
+                </span>
+              </li>
+              <li class="profy__sidepanel__nav--projects-listItem">
+                <span class="profy__sidepanel__nav--projects-listItem_name">
+                  abfafa lnakld
+                </span>
+              </li>
+              <li class="profy__sidepanel__nav--projects-listItem">
+                <span class="profy__sidepanel__nav--projects-listItem_name">
+                  Project anafn
+                </span>
+              </li>
+              <li class="profy__sidepanel__nav--projects-listItem">
+                <span class="profy__sidepanel__nav--projects-listItem_name">
+                  XD
+                </span>
+              </li>
+              <li class="profy__sidepanel__nav--projects-listItem">
+                <span class="profy__sidepanel__nav--projects-listItem_name">
+                  Valorant Projekt
+                </span>
+              </li>
+              <li class="profy__sidepanel__nav--projects-listItem">
+                <span class="profy__sidepanel__nav--projects-listItem_name">
+                  Swinging Utopia
+                </span>
+              </li>
+              <li class="profy__sidepanel__nav--projects-listItem">
+                <span class="profy__sidepanel__nav--projects-listItem_name">
+                  Bily nas
+                </span>
+              </li>
+              <li class="profy__sidepanel__nav--projects-listItem">
+                abfafa lnakld
+              </li>
+              <li class="profy__sidepanel__nav--projects-listItem">
+                Project anafn
+              </li>
+              <li class="profy__sidepanel__nav--projects-listItem">
+                XD
+              </li>
+            </ul>
+
+            <template id="new-project-item__template">
+              <form class="new-projectForm" method="post" action="/projects/create">
+                <input class="new-projectForm--name" type="text" name="newProjectName">
+
+                <div class="new-projectForm--btns">
+                  <button type="button" data-btn-cancel> Cancel </button>
+                  <button type="submit" data-btn-save> Save </button>
+                </div>
+              </form>
+            </template>
+
+          </section>
+
+          <!-- labels -->
+          <section class="profy__sidepanel__nav--labels" data-add-item="labels">
+            <section class="profy__sidepanel__nav--labels-container">
+              <div class="profy__sidepanel__nav--labels-wrapper">
+                <span class="profy__sidepanel__nav--labels-wrapper__txt">
+                  Labels
+                </span>
+                <!-- <span class="profy__sidepanel__nav--labels-wrapper__downarrow-icon"></span> -->
+
+                <span class="profy__sidepanel__nav--labels-wrapper__length" data-labels-length>
+                  <%= user.labels.length %> 
+                </span>
+
+              </div>
+
+              <span class="profy__sidepanel__nav--labels-container__add-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="0.88em" height="1em" preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 448 512">
+                  <rect x="0" y="0" width="448" height="512" fill="none" stroke="none" />
+                  <path fill="currentColor"
+                    d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32v144H48c-17.7 0-32 14.3-32 32s14.3 32 32 32h144v144c0 17.7 14.3 32 32 32s32-14.3 32-32V288h144c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
+                </svg>
+              </span>
+            </section>
+
+
+            <ul class="profy__sidepanel__nav--labels-list" data-labels-list>
+              <li class="profy__sidepanel__nav--labels-listItem">
+                Valorant
+              </li>
+              <li class="profy__sidepanel__nav--labels-listItem">
+                Swinging Utopia
+              </li>
+              <li class="profy__sidepanel__nav--labels-listItem">
+                Bily nas
+              </li>
+              <li class="profy__sidepanel__nav--labels-listItem">
+                abfafa lnakld
+              </li>
+              <li class="profy__sidepanel__nav--labels-listItem">
+                Project anafn
+              </li>
+              <li class="profy__sidepanel__nav--labels-listItem">
+                Swinging Utopia
+              </li>
+              <li class="profy__sidepanel__nav--labels-listItem">
+                abfafa lnakld
+              </li>
+              <li class="profy__sidepanel__nav--labels-listItem">
+                Project anafn
+              </li>
+              <li class="profy__sidepanel__nav--labels-listItem">
+                abfafa lnakld
+              </li>
+              <li class="profy__sidepanel__nav--labels-listItem">
+                Project anafn
+              </li>
+            </ul>
+
+          </section>
+        </nav>
+
+      </aside>
+
+      <main class="profy__main">
+        <div class="profy__main__path-wrap">
+          <div class="profy__main__path inactive">
+            Projects /
+          </div>
+          <div class="profy__main__path inactive">
+            <span data-project-name> Valorant Projekt </span> /
+          </div>
+          <div class="profy__main__path" data-project-section>
+            Overview
+          </div>
+        </div>
+
+        <section class="profy__main__header">
+          <div class="profy__main__header__project-name">
+            Swinging Utopia
+          </div>
+          <div class="profy__main__header__options--icon" data-project-options-icon>
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+              viewBox="0 0 16 16">
+              <rect x="0" y="0" width="16" height="16" fill="none" stroke="none" />
+              <path fill="currentColor"
+                d="M6 9a2 2 0 0 1 1.937 1.5H13.5a.5.5 0 0 1 .09.992l-.09.008l-5.563.001a2 2 0 0 1-3.874 0L2.5 11.5a.5.5 0 0 1-.09-.992l.09-.008h1.563A2 2 0 0 1 6 9Zm4-6a2 2 0 0 1 1.937 1.5H13.5a.5.5 0 0 1 .09.992l-.09.008l-1.563.001a2 2 0 0 1-3.874 0L2.5 5.5a.5.5 0 0 1-.09-.992L2.5 4.5h5.563A2 2 0 0 1 10 3Z" />
+            </svg>
+          </div>
+
+          <section class="profy__main__header__options">
+
+            <div class="project__options__dropdown" data-project-options-dropdown>
+              <section class="project__options__dropdown--share" data-project-options>
+                <span class="project__options__dropdown--share--icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                    viewBox="0 0 20 20">
+                    <rect x="0" y="0" width="20" height="20" fill="none" stroke="none" />
+                    <path fill="currentColor"
+                      d="M15 13.442c-.633 0-1.204.246-1.637.642l-5.938-3.463c.046-.188.075-.384.075-.584s-.029-.395-.075-.583L13.3 6.025A2.48 2.48 0 0 0 15 6.7c1.379 0 2.5-1.121 2.5-2.5S16.379 1.7 15 1.7s-2.5 1.121-2.5 2.5c0 .2.029.396.075.583L6.7 8.212A2.485 2.485 0 0 0 5 7.537c-1.379 0-2.5 1.121-2.5 2.5s1.121 2.5 2.5 2.5a2.48 2.48 0 0 0 1.7-.675l5.938 3.463a2.339 2.339 0 0 0-.067.546A2.428 2.428 0 1 0 15 13.442z" />
+                  </svg>
+                </span>
+                <span class="project__options__dropdown--share--txt">
+                  Share with link
+                </span>
+              </section>
+
+              <section class="project__options__dropdown--delete" data-project-options>
+                <span class="project__options__dropdown--delete--icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                    viewBox="0 0 24 24">
+                    <rect x="0" y="0" width="24" height="24" fill="none" stroke="none"></rect>
+                    <path fill="currentColor"
+                      d="M19 4h-3.5l-1-1h-5l-1 1H5v2h14M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6v12Z"></path>
+                  </svg>
+                </span>
+                <span class="project__options__dropdown--delete--txt">
+                  Delete project
+                </span>
+              </section>
+
+            </div>
+
+            <div data-project-options-backdrop aria-hidden="true" aria-label="project options dropdown backdrop"></div>
+          </section>
+
+        </section>
+
+        <div class="profy__main__section" data-active-project-section="overview">
+
+          <div class="profy__main__section__options">
+            <div class="profy__main__section__options--overview" data-project-section-options="overview">
+              Overview
+            </div>
+            <div class="profy__main__section__options--ideas" data-project-section-options="ideas">
+              Ideas
+            </div>
+            <div class="profy__main__section__options--work" data-project-section-options="work">
+              Work
+            </div>
+          </div>
+
+          <!-- overview -->
+          <section class="profy__main__section--overview">
+
+            <form class="section--overview__form" method="post" action="/PAGE_TEST_DEV/homePage.html/nigga">
+              <!-- name & date wrapper -->
+              <div class="section--overview__form__name-date--wrap">
+                <section class="section--overview__form--name">
+                  <label for="name_info"> 
+                    Project name 
+                    <input class="section--overview__form--name__field" type="text" name="" id="name_info"
+                      value="Swinging Utopia" data-overview-field readonly/>
+                  </label>
   
-  <h1>
-    <% if(locals.user) { %>
-      User <%= user.name %>
-    <% } else { %>
-      show login button
-    <% } %>
-  </h1>
-
+                  <section class="overview__change-btn">
+                    <button class="overview__edit-btn" type="button" data-overview-edit-btn>
+                      Rename
+                    </button>
+                    <button class="overview__cancel-btn" type="button" data-overview-cancel-btn>
+                      Cancel
+                    </button>
+                    <button id="overview-save-btn" type="submit" data-overview-save-btn>
+                      Save
+                    </button>
+                  </section>
+                </section>
   
-  <% let c=0; %>
-
-  <% if(locals.error) { %>
-    <%= error %>
-  <% } %>
-
-  <% if(locals.notes) { %>
-
-    <% notes.forEach(item => { %>
-
+                <section class="section--overview__form--date-wrap">
+                  <label>
+                    Proposed Schedule
+                  </label>
   
-      <br>
-      <a href="/note?id=<%= item._id %>">
+                  <div class="section--overview__form--date">
+                    <label> 
+                      Start Date 
+                      <input class="section--overview__form--date__field" type="date" value="2022-10-02" data-overview-field
+                        data-overview-start-date readonly/>
+                    </label>
+  
+                    <section class="overview__change-btn">
+                      <button class="overview__edit-btn" type="button" data-overview-edit-btn>
+                        Modify
+                      </button>
+                      <button id="overview-save-btn" type="submit" data-overview-save-btn>
+                        Save
+                      </button>
+                      <button class="overview__cancel-btn" type="button" data-overview-cancel-btn>
+                        Cancel
+                      </button>
+                    </section>
+                  </div>
+  
+                  <div class="section--overview__form--date">
+                    <label> 
+                      Due Date  
+                      <input class="section--overview__form--date__field" type="date" data-overview-field
+                        data-overview-end-date readonly/>
+                    </label>
+  
+                    <section class="overview__change-btn">
+                      <button class="overview__edit-btn" type="button" data-overview-edit-btn>
+                        Modify
+                      </button>
+                      <button id="overview-save-btn" type="submit" data-overview-save-btn>
+                        Save
+                      </button>
+                      <button class="overview__cancel-btn" type="button" data-overview-cancel-btn>
+                        Cancel
+                      </button>
+                    </section>
+                  </div>
+                </section>
+              </div>
+
+              <section class="section--overview__form--goals">
+                <label for="goals_info"> 
+                  Project Goals 
+                  <textarea class="section--overview__form--goals__field" type="text" name="" id="name_info"
+                    placeholder="About your project" data-overview-field readonly>this project is focused on nothing thanks </textarea>
+                </label>
+
+                <section class="overview__change-btn">
+                  <button class="overview__edit-btn" type="button" data-overview-edit-btn>
+                    Rename
+                  </button>
+                  <button class="overview__cancel-btn" type="button" data-overview-cancel-btn>
+                    Cancel
+                  </button>
+                  <button id="overview-save-btn" type="submit" data-overview-save-btn>
+                    Save
+                  </button>
+                </section>
+              </section>
+
+            </form>
+
+          </section>
+          <!-- ideas -->
+          <section class="profy__main__section--ideas"></section>
+          <!-- work -->
+          <section class="profy__main__section--work"></section>
+        </div>
+
+        <!-- <% let c=0; %>
+        <% if(locals.notes) { %>
+          <% notes.forEach(item => { %>
+            <br>
+            <a href="/note?id=<%= item._id %>">
+            
+              <div> Note no: <%= ++c %> </div>
       
-        <div> Note no: <%= ++c %> </div>
+              <div> Note name: <%= item.title %> </div>
+      
+            </a>
+            <br>
+          <% }); %>
+        <% } %> -->
+      </main>
+    </section>
 
-        <div> Note name: <%= item.title %> </div>
-
-      </a>
-      <br>
-  
-    <% }); %>
-
-  <% } %>
-
-  
-  <br>
-  <form action="/signout" method="post">
-    <button type="submit"> Signout </button>
-  </form>
-
+  </div>
 </body>
 </html>

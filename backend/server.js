@@ -43,6 +43,9 @@ app.use(express.urlencoded({ extended: false }));
   app.use('/', homeRouter);
   app.use('/note', noteRouter);
   app.use('/api/v1', apiRouter);
+  app.post('/project/overview/info', (req, res) => {
+    res.json(req.body);
+  })
 
 
   app.all('*', (req, res) => {
