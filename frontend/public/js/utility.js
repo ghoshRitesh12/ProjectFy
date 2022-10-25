@@ -13,4 +13,11 @@ const randomBoxClr = () => {
   return `hsl(${hue}, 64%, 60%)`;
 }
 
-export { $, $$, addGlobalEventListener, randomBoxClr };
+const elaspedTime = (startDate, endDate) => {
+  console.log(startDate, endDate);
+  const time = endDate - startDate;
+  console.log(time);
+  console.log(new Date(time));
+}
+
+export { $, $$, addGlobalEventListener, randomBoxClr, elaspedTime };

@@ -52,75 +52,29 @@ addGlobalEventListener('click', '[data-mode]', async e => {
   }
 })
 
-// project options
-$('[data-project-options-icon]').addEventListener('click', e => {
-  e.target.blur();
-  if(!$('[data-project-options-dropdown]').classList.contains('open')) {
-    $('[data-project-options-dropdown]').classList.add('open');
-    $('[data-project-options-backdrop]').setAttribute('aria-hidden', 'false');
-    document.body.style.overflowY = 'hidden';
-    return;
-  } 
 
-  $('[data-project-options-dropdown]').classList.remove('open');
-  $('[data-project-options-backdrop]').setAttribute('aria-hidden', 'true');
-  document.body.style.overflowY = 'auto';
-  
-})
-// project-options-dropdown-backdrop
-addGlobalEventListener('click', '[data-project-options-backdrop]', 
-e => {
-  e.target.setAttribute('aria-hidden', 'true');
-  $('[data-project-options-dropdown]').classList.remove('open');
-  document.body.style.overflowY = 'auto';
-})
-// data-project-options toggle
-addGlobalEventListener('click', '[data-project-options]', 
-e => {
-  $('[data-project-options-dropdown]').classList.remove('open');
-  $('[data-project-options-backdrop]').setAttribute('aria-hidden', 'true');
-  document.body.style.overflowY = 'auto';
-})
+// for adding new projects
+addGlobalEventListener('click', '[data-add-item]', e => {
+  const itemType = e.target.dataset.addItem;
+  const newItemForm = `.new-${itemType}Form`;
 
-
-
-addGlobalEventListener('click', '[data-overview-edit-btn]', async e => {
-  const inputField = e.target.parentElement.previousElementSibling.lastElementChild;
-  for(const item of $$('[data-overview-field]')) {
-    item.setAttribute('readonly', '');
+  for(const item of $$('.newItemForm')) { 
+    item.classList.add('hidden');
   }
-  inputField.removeAttribute('readonly');
-  inputField.focus();
-
-  for(const item of $$('.overview__change-btn')) {
-    item.classList.remove('edit');
-  }
-  const parentEl = e.target.parentElement;
-  parentEl.classList.add('edit');
+  $(newItemForm).classList.remove('hidden');
+  $(newItemForm).firstElementChild.focus();
 })
 
-addGlobalEventListener('click', '[data-overview-cancel-btn]', e => {
-
-  const inputField = e.target.parentElement.previousElementSibling.lastElementChild;
-  inputField.setAttribute('readonly', '');
-  inputField.blur();
-
-  const parentEl = e.target.parentElement;
-  parentEl.classList.remove('edit');
+// for canceling new project/label creation
+addGlobalEventListener('click', '[data-newItem-btn-cancel]', e => {
+  const itemForm = e.target.parentElement.parentElement;
+  itemForm.classList.add('hidden');
+  console.dir(itemForm);
 })
-
-// different project options
-addGlobalEventListener('click', '[data-project-section-options]',
-e => {
-  const option = e.target.dataset.projectSectionOptions;
-
-  for(const item of $$('[data-project-section-options]')) {
-    item.classList.remove('selected');
-  }
-  e.target.classList.add('selected');
-
-  
-})
+// addGlobalEventListener('click', '[data-newItem-btn-save]', e => {
+//   const itemForm = e.target.parentElement.parentElement;
+//   itemForm.classList.add('hidden');
+// })
 
 // -------------------------------------
 
@@ -129,23 +83,23 @@ e => {
 // just testing stuff 😅
 
 // adding new project
-$('[data-add-item="projects"]').addEventListener('click', 
-async e => {
-  $('.newProjectContainer').classList.remove('hidden');
-  $('.newProjectContainer').innerHTML = '';
-  const projectTemplate = $('#new-project-item__template').content.cloneNode(true).children[0];
+// $('[data-add-item="project"]').addEventListener('click', 
+// async e => {
+//   $('.newProjectContainer').classList.remove('hidden');
+//   $('.newProjectContainer').innerHTML = '';
+//   const projectTemplate = $('#new-project-item__template').content.cloneNode(true).children[0];
 
-  // const newProject = projectTemplate.querySelector('.newProject');
-  // const projectNameInput = await projectTemplate.querySelector('.newProjectName');
-  // projectNameInput.focus();
+//   // const newProject = projectTemplate.querySelector('.newProject');
+//   // const projectNameInput = await projectTemplate.querySelector('.newProjectName');
+//   // projectNameInput.focus();
 
-  await $('.newProjectContainer').append(projectTemplate);
+//   await $('.newProjectContainer').append(projectTemplate);
 
-  projectTemplate.querySelector('[name="newProjectName"]').focus();
-})
-addGlobalEventListener('click', '[data-btn-cancel]', e => {
-  $('.newProjectContainer').classList.add('hidden');
-})
+//   projectTemplate.querySelector('[name="newProjectName"]').focus();
+// })
+// addGlobalEventListener('click', '[data-btn-cancel]', e => {
+//   $('.newProjectContainer').classList.add('hidden');
+// })
 
 
 // imp home navigation
