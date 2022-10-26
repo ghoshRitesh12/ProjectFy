@@ -1,4 +1,4 @@
-import { $, $$, addGlobalEventListener, elaspedTime } from './utility.js';
+import { $, $$, addGlobalEventListener, elaspedTime, workCompleted } from './utility.js';
 
 
 // project options
@@ -75,22 +75,24 @@ e => {
 
 
 
-
-
-
-
-
-
-
-
-
-
 window.addEventListener('load', () => {
 
-  elaspedTime(
-    $('[data-overview-start-date]').valueAsDate,
-    $('[data-overview-end-date]').valueAsDate
-  )
+  // Time Elasped
+  const eT = elaspedTime(
+    $('[data-overview-end-date]').value,
+    $('[data-overview-start-date]').value
+  );
+  $('[data-time-progress-value]').innerText = eT.time;
+  $('.circleThumb--time').style.setProperty('--value', eT.time);
+  $('[data-time-progress-daysLeft]').innerText = eT.days;
+
+
+  // Work Completed: complete-45 total-70
+  const wC = workCompleted(45, 70);
+  $('[data-work-progress-value]').innerText = wC.work;
+  $('.circleThumb--work').style.setProperty('--value', wC.work);
+  $('[data-work-progress-daysLeft]').innerText = wC.tasks;
+
 })
 
 

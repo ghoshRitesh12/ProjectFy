@@ -158,6 +158,7 @@ body {
   --clr-secondary-bg: #f5f5f5;
   --clr-ternary-bg: #f5f5f5;
   --clr-inactive-txt: #777;
+  --clr-secondary-hover: #dedede;
   --clr-sidebar-bg: #fff;
   --clr-dropdown-bg: #ffffff;
   --clr-navlist-hover: #f0f0f0;
@@ -187,6 +188,7 @@ body[data-theme=dark] {
   --clr-secondary-bg: var(--clr-primary-bg);
   --clr-ternary-bg: #181818;
   --clr-inactive-txt: #999;
+  --clr-secondary-hover: #444;
   --clr-sidebar-bg: #212121;
   --clr-dropdown-bg: #212121;
   --clr-navlist-hover: #383838;
@@ -229,7 +231,6 @@ body[data-theme=dark] {
     justify-content: center;
     align-items: center;
     flex-direction: row;
-    outline: 1px solid red;
     max-width: 100%;
     width: 100%;
   }
@@ -660,12 +661,12 @@ body[data-theme=dark] {
   pointer-events: none;
 }
 .profy__sidepanel__nav .newItemForm {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  padding-inline: 0.2rem;
   margin-inline: auto;
   margin-block: 1rem;
-  max-width: -webkit-fit-content;
-  max-width: -moz-fit-content;
-  max-width: fit-content;
+  max-width: 100%;
   font-size: 1rem;
 }
 .profy__sidepanel__nav .newItemForm.hidden {
@@ -691,7 +692,7 @@ body[data-theme=dark] {
   max-width: fit-content;
 }
 .profy__sidepanel__nav .newItemForm .btns-wrapper button {
-  padding: 0.2em 0.7em;
+  padding: 0.12em 0.7em;
   border-radius: 0.5rem;
   border: none;
   color: var(--clr-primary-txt);
@@ -729,11 +730,11 @@ body[data-theme=dark] {
   font-size: 1.1rem;
   color: var(--clr-primary-icon);
   border-radius: 0.5rem;
-  transition: 0.3s ease;
+  transition: 0.1s ease;
   background-color: var(--clr-navlist-hover);
 }
 .profy__sidepanel__nav--projects-container__add-icon:hover {
-  background-color: var(--clr-navlist-hover);
+  background-color: var(--clr-secondary-hover);
 }
 .profy__sidepanel__nav--projects-container svg {
   pointer-events: none;
@@ -806,7 +807,7 @@ body[data-theme=dark] {
   border-radius: 0.35rem;
   pointer-events: none;
 }
-.profy__sidepanel__nav--projects-listItem:hover::before, .profy__sidepanel__nav--projects-listItem.selected::before {
+.profy__sidepanel__nav--projects-listItem.selected::before {
   content: "";
   position: absolute;
   right: 0%;
@@ -839,6 +840,9 @@ body[data-theme=dark] {
   border-radius: 0.5rem;
   transition: 0.3s ease;
   background-color: var(--clr-navlist-hover);
+}
+.profy__sidepanel__nav--labels-container__add-icon:hover {
+  background-color: var(--clr-secondary-hover);
 }
 .profy__sidepanel__nav--labels-container svg {
   pointer-events: none;
@@ -874,36 +878,50 @@ body[data-theme=dark] {
 .profy__sidepanel__nav--labels-list {
   display: flex;
   flex-wrap: wrap;
+  gap: 0.5rem;
   margin-block: 0.7rem 0;
   padding-inline: 1rem;
   border-radius: 0.5rem;
   overflow-x: hidden;
 }
 .profy__sidepanel__nav--labels-listItem {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
   padding-block: 0.2em;
-  padding-inline: 1em 2em;
+  padding-inline: 0.7em 2em;
   max-width: -webkit-fit-content;
   max-width: -moz-fit-content;
   max-width: fit-content;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  cursor: pointer;
-  border-radius: 0.5rem;
+  isolation: isolate;
+  cursor: initial;
+  border-radius: 1rem;
   transition: 0.2s ease all;
   color: var(--clr-secondary-txt);
   font-family: "Roboto", sans-serif;
-  border: 2px solid var(--clr-navlist-hover);
+  border: 1px solid var(--clr-secondary-hover);
+  background-color: var(--clr-ternary-bg);
 }
-.profy__sidepanel__nav--labels-listItem.selected {
-  background-color: var(--clr-navlist-hover);
-}
-.profy__sidepanel__nav--labels-listItem:not(:last-child) {
-  margin-bottom: 0.5rem;
+.profy__sidepanel__nav--labels-listItem--icon {
+  color: var(--rndm-clr);
 }
 .profy__sidepanel__nav--labels-listItem:hover {
-  background-color: var(--clr-primary-bg);
+  background-color: transparent;
+}
+.profy__sidepanel__nav--labels-listItem::after {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--rndm-clr);
+  filter: blur(2rem);
+  opacity: 0.5;
+  pointer-events: none;
+  border-radius: 0.5rem;
 }
 
 .profy__main {
@@ -1316,6 +1334,39 @@ body[data-theme=dark] {
 .profy__main__section--overview .section--overview__progress {
   padding: 1em 1em 2em 1em;
 }
+.profy__main__section--overview .section--overview__progress .circle {
+  --circle-size: 10rem;
+  --circumference: 27.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--circle-size);
+  aspect-ratio: 1;
+  isolation: isolate;
+}
+.profy__main__section--overview .section--overview__progress .circle svg {
+  display: block;
+  height: var(--circle-size);
+  width: var(--circle-size);
+  transform: rotate(90deg) scaleX(-1);
+}
+.profy__main__section--overview .section--overview__progress .circle svg circle {
+  height: var(--circle-size);
+  width: var(--circle-size);
+  fill: none;
+  stroke-width: 6;
+  stroke-dasharray: var(--circumference);
+  shape-rendering: geometricPrecision;
+  transition: 1s ease;
+}
+.profy__main__section--overview .section--overview__progress .circle .circleTrack {
+  stroke-dashoffset: 0;
+  stroke: var(--clr-separator-brdr);
+}
+.profy__main__section--overview .section--overview__progress .circle .circleThumb {
+  stroke-dashoffset: calc(var(--circumference) - var(--circumference) * var(--value, 73) / 100);
+  stroke-width: 10;
+}
 .profy__main__section--overview .section--overview__progress__time-elasped {
   padding: 0.3em 2em;
   background-color: var(--clr-sidebar-bg);
@@ -1332,57 +1383,31 @@ body[data-theme=dark] {
 .profy__main__section--overview .section--overview__progress__time-elasped--circle {
   display: grid;
   place-items: center;
+  position: relative;
   padding-block: 0.2em 0.5em;
   max-width: -webkit-fit-content;
   max-width: -moz-fit-content;
   max-width: fit-content;
   margin-inline: auto;
 }
-.profy__main__section--overview .section--overview__progress__time-elasped--circle .circle {
-  --circle-size: 10rem;
-  --circumference: 27.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  aspect-ratio: 1;
-  width: var(--circle-size);
-  isolation: isolate;
+.profy__main__section--overview .section--overview__progress__time-elasped--circle .circleThumb--time {
+  stroke: #00aeff;
 }
-.profy__main__section--overview .section--overview__progress__time-elasped--circle .circle::after {
-  content: attr(data-value);
+.profy__main__section--overview .section--overview__progress__time-elasped--circle [data-time-progress] {
+  display: grid;
+  place-items: center;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 1.8rem;
+  top: 25%;
+  font-size: 1.5rem;
   font-family: "Ubuntu", sans-serif;
   cursor: text;
   color: var(--clr-inactive-txt);
+  margin-inline: auto;
 }
-.profy__main__section--overview .section--overview__progress__time-elasped--circle svg {
-  display: block;
-  height: var(--circle-size);
-  width: var(--circle-size);
-  transform: rotate(90deg) scaleX(-1);
-}
-.profy__main__section--overview .section--overview__progress__time-elasped--circle svg circle {
-  height: var(--circle-size);
-  width: var(--circle-size);
-  fill: none;
-  stroke-width: 6;
-  stroke-dasharray: var(--circumference);
-  shape-rendering: geometricPrecision;
-  transition: 1s ease;
-}
-.profy__main__section--overview .section--overview__progress__time-elasped--circle .circleTrack {
-  stroke-dashoffset: 0;
-  stroke: var(--clr-separator-brdr);
-}
-.profy__main__section--overview .section--overview__progress__time-elasped--circle .circleThumb {
-  stroke-dashoffset: calc(var(--circumference) - var(--circumference) * 73 / 100);
-  stroke: #00aeff;
-  stroke-width: 10;
+.profy__main__section--overview .section--overview__progress__time-elasped--circle [data-time-progress] div:last-child {
+  margin-top: 0.5rem;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.95rem;
 }
 .profy__main__section--overview .section--overview__progress__work-done {
   margin-block: 2rem 0;
@@ -1401,58 +1426,29 @@ body[data-theme=dark] {
 .profy__main__section--overview .section--overview__progress__work-done--circle {
   display: grid;
   place-items: center;
+  position: relative;
   padding-block: 0.2em 0.5em;
   max-width: -webkit-fit-content;
   max-width: -moz-fit-content;
   max-width: fit-content;
   margin-inline: auto;
 }
-.profy__main__section--overview .section--overview__progress__work-done--circle .circle {
-  --circle-size: 10rem;
-  --circumference: 27.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  aspect-ratio: 1;
-  width: var(--circle-size);
-  isolation: isolate;
+.profy__main__section--overview .section--overview__progress__work-done--circle .circleThumb--work {
+  stroke: #ff455d;
 }
-.profy__main__section--overview .section--overview__progress__work-done--circle .circle::after {
-  content: attr(data-value);
+.profy__main__section--overview .section--overview__progress__work-done--circle [data-work-progress] {
+  display: grid;
+  place-items: center;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 1.8rem;
+  top: 25%;
+  font-size: 1.5rem;
   font-family: "Ubuntu", sans-serif;
   cursor: text;
   color: var(--clr-inactive-txt);
+  margin-inline: auto;
 }
-.profy__main__section--overview .section--overview__progress__work-done--circle svg {
-  display: block;
-  height: var(--circle-size);
-  width: var(--circle-size);
-  transform: rotate(90deg) scaleX(-1);
-}
-.profy__main__section--overview .section--overview__progress__work-done--circle svg circle {
-  --cx: calc((var(--circle-size) * 16) / 2);
-  --cy: var(--cx);
-  --radius: calc(var(--cx) - 10);
-  height: var(--circle-size);
-  width: var(--circle-size);
-  fill: none;
-  stroke-width: 6;
-  stroke-dasharray: var(--circumference);
-  shape-rendering: geometricPrecision;
-  transition: 1s ease stroke-dashoffset;
-}
-.profy__main__section--overview .section--overview__progress__work-done--circle .circleTrack {
-  stroke-dashoffset: 0;
-  stroke: var(--clr-separator-brdr);
-}
-.profy__main__section--overview .section--overview__progress__work-done--circle .circleThumb {
-  stroke-dashoffset: calc(var(--circumference) - var(--circumference) * 57 / 100);
-  stroke: #ff455d;
-  stroke-width: 10;
+.profy__main__section--overview .section--overview__progress__work-done--circle [data-work-progress] div:last-child {
+  margin-top: 0.5rem;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.95rem;
 }/*# sourceMappingURL=homeStyles.css.map */

@@ -64,17 +64,43 @@ addGlobalEventListener('click', '[data-add-item]', e => {
   $(newItemForm).classList.remove('hidden');
   $(newItemForm).firstElementChild.focus();
 })
-
 // for canceling new project/label creation
 addGlobalEventListener('click', '[data-newItem-btn-cancel]', e => {
   const itemForm = e.target.parentElement.parentElement;
   itemForm.classList.add('hidden');
-  console.dir(itemForm);
+
 })
-// addGlobalEventListener('click', '[data-newItem-btn-save]', e => {
-//   const itemForm = e.target.parentElement.parentElement;
-//   itemForm.classList.add('hidden');
-// })
+
+// for selecting projects
+addGlobalEventListener('click', '[data-project-list-items]',
+e => {
+  for (const item of $$('[data-project-list-items]')) {
+    item.classList.remove('selected');
+  }
+
+
+  e.target.classList.add('selected');
+})
+
+
+
+// imp home navigation
+addGlobalEventListener('click', '[data-nav]', 
+  e => window.location.href = e.target.dataset.nav 
+)
+
+window.addEventListener('load', () => {
+  for(const item of $$('[data-project-list-items]')) {
+    const clr = randomBoxClr();
+    item.style.setProperty('--clr-box', clr);
+  }
+
+  for(const item of $$('[data-label-list-item]')) {
+    const clr = randomBoxClr();
+    item.style.setProperty('--rndm-clr', clr);
+  }
+})
+
 
 // -------------------------------------
 
@@ -100,20 +126,6 @@ addGlobalEventListener('click', '[data-newItem-btn-cancel]', e => {
 // addGlobalEventListener('click', '[data-btn-cancel]', e => {
 //   $('.newProjectContainer').classList.add('hidden');
 // })
-
-
-// imp home navigation
-addGlobalEventListener('click', '[data-nav]', 
-  e => window.location.href = e.target.dataset.nav 
-)
-
-window.addEventListener('load', () => {
-  // console.log(randomBoxClr());
-  for(const item of $$('.profy__sidepanel__nav--projects-listItem')) {
-    const clr = randomBoxClr();
-    item.style.setProperty('--clr-box', clr);
-  }
-})
 
 
 // addGlobalEventListener('click', '.profy__sidepanel__nav__list--projects-listItem',
