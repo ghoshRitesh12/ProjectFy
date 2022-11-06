@@ -82,6 +82,15 @@ e => {
   e.target.classList.add('selected');
 })
 
+// for (const item of $$('[data-project-list-items]')) {
+//   item.addEventListener('click', e => {
+//     for (const item of $$('[data-project-list-items]')) {
+//       item.classList.remove('selected');
+//     }
+//     e.target.classList.add('selected');
+//   })
+// }
+
 
 
 // imp home navigation
@@ -103,35 +112,3 @@ window.addEventListener('load', () => {
 
 
 // -------------------------------------
-
-
-
-// just testing stuff 😅
-
-// adding new project
-// $('[data-add-item="project"]').addEventListener('click', 
-// async e => {
-//   $('.newProjectContainer').classList.remove('hidden');
-//   $('.newProjectContainer').innerHTML = '';
-//   const projectTemplate = $('#new-project-item__template').content.cloneNode(true).children[0];
-
-//   // const newProject = projectTemplate.querySelector('.newProject');
-//   // const projectNameInput = await projectTemplate.querySelector('.newProjectName');
-//   // projectNameInput.focus();
-
-//   await $('.newProjectContainer').append(projectTemplate);
-
-//   projectTemplate.querySelector('[name="newProjectName"]').focus();
-// })
-// addGlobalEventListener('click', '[data-btn-cancel]', e => {
-//   $('.newProjectContainer').classList.add('hidden');
-// })
-
-
-// addGlobalEventListener('click', '.profy__sidepanel__nav__list--projects-listItem',
-// e => {
-//   for(const item of $$('.profy__sidepanel__nav__list--projects-listItem')) {
-//     item.classList.remove('selected');
-//   }
-//   e.target.classList.add('selected');
-// })

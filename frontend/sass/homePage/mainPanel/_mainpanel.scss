@@ -1,0 +1,53 @@
+@use '../../../../frontend/sass/components/' as *;
+
+.profy__main {
+  --top-margin: calc(var(--pad-titlebar) * 4.2);
+  display: block;
+  position: relative;
+
+  // padding-block: calc(var(--top-margin) + 1rem) 0;
+  padding-inline: 1rem;
+  margin-block: 0 auto;
+
+  color: var(--clr-secondary-txt);
+  font-family: $font-secondary-r;
+
+  max-height: calc(100vh - var(--top-margin));
+  min-height: calc(100vh - var(--top-margin));
+  // max-width: 100%;
+  overflow-y: auto;
+  
+  // border: 1px solid white;
+
+  @include breakpoint(medium) {
+    flex-grow: 1;
+    padding-inline: 2rem;
+  }
+
+  @include breakpoint(large) {
+    padding-inline: 4.5rem;
+  }
+
+  &__path-wrap {
+    display: none;
+
+    word-spacing: .1rem;
+    margin-block: 2rem 0;
+    @include breakpoint(medium) {
+      display: block;
+    }
+  }
+  &__path {
+    display: inline-block;
+
+    font-size: .95rem;
+    color: inherit;
+    font-weight: 500;
+    letter-spacing: .5px;
+    &.inactive {
+      color: var(--clr-inactive-txt);
+    }
+  }
+
+}
+

@@ -1,0 +1,54 @@
+@use '../../../../frontend/sass/components/' as *;
+
+.profy__sidepanel {
+  --top-margin: calc(var(--pad-titlebar) * 4.2);
+  --sidepanel-width: 17rem;
+  display: none;
+  justify-content: flex-start;
+  flex-direction: column;
+  flex: 1 2 var(--sidepanel-width);
+
+  position: relative;
+  z-index: 52; 
+  isolation: isolate;
+
+  max-width: var(--sidepanel-width);
+  min-width: 14rem;
+
+  margin-block: 0 auto;
+  padding-inline: .8em .5em;
+  // padding-block: var(--top-margin) 2em;
+  padding-bottom: 2em;
+  max-height: calc(100vh - var(--top-margin));
+  min-height: calc(100vh - var(--top-margin));
+
+
+  font-family: $font-secondary-r;
+  background-color: var(--clr-sidebar-bg);
+  overflow-y: auto;
+  user-select: none;
+
+  scrollbar-width: thin;
+  scrollbar-color: var(--clr-sidebar-bg) var(--clr-sidebar-bg);
+  &:hover {
+    scrollbar-color: var(--clr-scrlbar-thumb) var(--clr-sidebar-bg);
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--clr-scrlbar-thumb);
+    }
+  }
+  &::-webkit-scrollbar { width: 1rem; }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--clr-scrlbar-track);
+    &:hover {
+      background-color: var(--clr-scrlbar-thumb-hover);
+    }
+  }
+  &::-webkit-scrollbar-track {
+    // margin-top: var(--top-margin);
+    background-color: var(--clr-scrlbar-track);
+  }
+
+  @include breakpoint(medium) {
+    display: flex;
+  }
+}

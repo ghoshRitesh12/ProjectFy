@@ -16,7 +16,7 @@ const randomBoxClr = () => {
 const elaspedTime = (endDate, startDate) => {
   const aDayInMs = (24 * 60 * 60 * 1000);
   const todaysDate = `${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDate()}`;
-  console.log('Start Date:', startDate,'\nEnd Date:', endDate);
+  // console.log('Start Date:', startDate,'\nEnd Date:', endDate);
 
   const endDInMs = new Date(endDate).getTime();
   let startDInMs = new Date(startDate).getTime();
@@ -35,10 +35,10 @@ const elaspedTime = (endDate, startDate) => {
   const daysLeft = totalDays - daysPassed;
   const timeElasped = Math.round((daysPassed / totalDays) * 100) || 0;
 
-  console.log('%s days total', totalDays);
-  console.log('%s days passed', daysPassed)
-  console.log('%s day(s) left', daysLeft)
-  console.log('time elasped: %f%', timeElasped);
+  // console.log('%s days total', totalDays);
+  // console.log('%s days passed', daysPassed)
+  // console.log('%s day(s) left', daysLeft)
+  // console.log('time elasped: %f%', timeElasped);
   
 
   return {
