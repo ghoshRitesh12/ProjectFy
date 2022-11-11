@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./backend/server.js",
-    "dev": "nodemon ./backend/server.js"
+    "dev": "nodemon ./backend/server.js",
+    "cpMrkp": "cat ./PAGE_TEST_DEV/homePage.html > ./backend/views/testHomePage.ejs"
   },
   "keywords": [],
   "author": "Ritesh Ghosh",
