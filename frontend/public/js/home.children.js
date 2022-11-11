@@ -67,11 +67,23 @@ addGlobalEventListener('click', '[data-overview-cancel-btn]', e => {
 
 
 //----<profy_ideas section>
-$('[data-ideas-imgUrl]').addEventListener('input', e => {
+$('[data-ideasForm-imgUrl]').addEventListener('input', e => {
   $('.ideas-form__imgUpload').classList.toggle('notouch', e.target.value);
 })
+// show/hide idea form
+$('.reveal').addEventListener('click', e => {
+  const ideasForm = e.target.parentElement;
+  const isCollapsed = ideasForm.classList.contains('collapsed') ? false : true;
+  ideasForm.classList.toggle('collapsed', isCollapsed);
+
+  $('.reveal__icon').classList.toggle('rotate');
+  if($('.reveal__txt').classList.contains('hide')) {
+    $('.reveal__txt').classList.replace('hide', 'show'); return;
+  }
+  $('.reveal__txt').classList.replace('show', 'hide');
+})
 // idea img upload 
-$('[data-ideas-imgUpload]').addEventListener('change', e => {
+$('[data-ideasForm-imgUpload]').addEventListener('change', e => {
   const file = e.target.files[0];
   $('.ideas-form__imgUrl').classList.toggle('notouch', file);
   if(file == null) {
@@ -85,7 +97,6 @@ $('[data-ideas-imgUpload]').addEventListener('change', e => {
   reader.addEventListener('load', e => {
     $('[data-imgUpload-preview-src]').setAttribute('src', e.target.result);
     $('[data-imgUpload-preview-src]').setAttribute('alt', file.name);
-    console.log(file);
   })
 })
 
@@ -107,17 +118,33 @@ addGlobalEventListener('click', '[data-idea-options]', e => {
 addGlobalEventListener('click', '[data-idea-options="edit"]', e => {
   const ideaEl = e.target.closest('.idea');
   const ideaDesc = ideaEl.querySelector('[data-idea-description]').innerText;
-  const ideaImgUrl = ideaEl.querySelector('[data-idea-imgUrl]').getAttribute('src');
-
   $('[data-idea-edit-description]').value = ideaDesc;
-  $('[data-idea-edit-imgUrl]').value = ideaImgUrl;
-  $('.edit__idea__save-btn').setAttribute('disabled','');
+
+  const ideaImg = ideaEl.querySelector('[data-idea-imgUrl]');
+  const ideaImgVal = ideaImg.dataset.ideaImgurl;
+  const ideaImgType = {
+    srcUrl() { 
+      $('.edit__idea__img').classList.remove('upload');
+      $('.edit__idea__img').classList.add('url');
+      $('[data-idea-edit-imgUrl]').value = ideaImg.getAttribute('src');
+    },
+    srcUpload() {
+      $('.edit__idea__img').classList.remove('url');
+      $('.edit__idea__img').classList.add('upload');
+      $('[data-idea-edit-imgUpload]').setAttribute('src', ideaImg.getAttribute('src'));
+    }
+  }
+  ideaImgType[ideaImgVal]();
+
 
   $('[data-ideaEdit-modal]').showModal();
 })
 addGlobalEventListener('click', '[data-ideaEdit-modal-close]', e => {
   $('[data-idea-edit-description]').value = '';
   $('[data-idea-edit-imgUrl]').value = '';
+  $('[data-idea-edit-imgUpload]').setAttribute('src','');
+  
+
   $('[data-ideaEdit-modal]').close();
 })
 // idea delete option
@@ -126,11 +153,6 @@ addGlobalEventListener('click', '[data-idea-options="delete"]', e => {
 })
 addGlobalEventListener('click', '[data-ideaDelete-modal-close]', e => {
   $('[data-ideaDelete-modal]').close();
-})
-
-// for diasbling non altered txt
-$('[data-idea-edit-description]').addEventListener('input', e => {
-  $('.edit__idea__save-btn').removeAttribute('disabled');
 })
 //----</profy_ideas section>
 
@@ -161,7 +183,7 @@ window.addEventListener('load', () => {
 
 
 
-// click event debugger
+//----click event debugger
 // document.addEventListener('click', e => {
 //   console.dir(e.target);
 // })
