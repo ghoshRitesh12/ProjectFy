@@ -6,25 +6,25 @@ $('[data-project-options-icon]').addEventListener('click', e => {
   if(!$('[data-project-options-dropdown]').classList.contains('open')) {
     $('[data-project-options-dropdown]').classList.add('open');
     $('[data-project-options-backdrop]').setAttribute('aria-hidden', 'false');
-    document.body.style.overflowY = 'hidden';
+    // document.body.style.overflowY = 'hidden';
     return;
   } 
 
   $('[data-project-options-dropdown]').classList.remove('open');
   $('[data-project-options-backdrop]').setAttribute('aria-hidden', 'true');
-  document.body.style.overflowY = 'auto';
+  // document.body.style.overflowY = 'auto';
 })
 addGlobalEventListener('click', '[data-project-options]', 
 e => {
   $('[data-project-options-dropdown]').classList.remove('open');
   $('[data-project-options-backdrop]').setAttribute('aria-hidden', 'true');
-  document.body.style.overflowY = 'auto';
+  // document.body.style.overflowY = 'auto';
 })
 addGlobalEventListener('click', '[data-project-options-backdrop]', 
 e => {
   e.target.setAttribute('aria-hidden', 'true');
   $('[data-project-options-dropdown]').classList.remove('open');
-  document.body.style.overflowY = 'auto';
+  // document.body.style.overflowY = 'auto';
 })
 //----</profy_main header>
 
@@ -96,7 +96,7 @@ $('[data-ideasForm-imgUpload]').addEventListener('change', e => {
   reader.readAsDataURL(file);
   reader.addEventListener('load', e => {
     $('[data-imgUpload-preview-src]').setAttribute('src', e.target.result);
-    $('[data-imgUpload-preview-src]').setAttribute('alt', file.name);
+    // $('[data-imgUpload-preview-src]').setAttribute('alt', file.name);
   })
 })
 
@@ -126,11 +126,13 @@ addGlobalEventListener('click', '[data-idea-options="edit"]', e => {
     srcUrl() { 
       $('.edit__idea__img').classList.remove('upload');
       $('.edit__idea__img').classList.add('url');
+      $('.edit__idea').removeAttribute('enctype');
       $('[data-idea-edit-imgUrl]').value = ideaImg.getAttribute('src');
     },
     srcUpload() {
       $('.edit__idea__img').classList.remove('url');
       $('.edit__idea__img').classList.add('upload');
+      $('.edit__idea').setAttribute('enctype', 'multipart/form-data');
       $('[data-idea-edit-imgUpload]').setAttribute('src', ideaImg.getAttribute('src'));
     }
   }

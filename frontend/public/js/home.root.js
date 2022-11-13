@@ -7,13 +7,11 @@ $('[data-account]').addEventListener('click', e => {
   if(!$('[data-account-dropdown]').classList.contains('open')) {
     $('[data-account-dropdown]').classList.add('open');
     $('[data-account-dropdown-backdrop]').setAttribute('aria-hidden', 'false');
-    document.body.style.overflowY = 'hidden';
     return;
   } 
 
   $('[data-account-dropdown]').classList.remove('open');
   $('[data-account-dropdown-backdrop]').setAttribute('aria-hidden', 'true');
-  document.body.style.overflowY = 'auto';
   
 })
 // account-dropdown-backdrop
@@ -21,14 +19,12 @@ addGlobalEventListener('click', '[data-account-dropdown-backdrop]',
 e => {
   e.target.setAttribute('aria-hidden', 'true');
   $('[data-account-dropdown]').classList.remove('open');
-  document.body.style.overflowY = 'auto';
 })
 // data-account-options toggle
 addGlobalEventListener('click', '[data-account-options]', 
 e => {
   $('[data-account-dropdown]').classList.remove('open');
   $('[data-account-dropdown-backdrop]').setAttribute('aria-hidden', 'true');
-  document.body.style.overflowY = 'auto';
 })
 
 
@@ -97,6 +93,8 @@ e => {
 addGlobalEventListener('click', '[data-nav]', 
   e => window.location.href = e.target.dataset.nav 
 )
+
+
 
 window.addEventListener('load', () => {
   for(const item of $$('[data-project-list-items]')) {

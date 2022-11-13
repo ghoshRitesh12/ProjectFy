@@ -110,17 +110,20 @@ textarea {
   --top-margin: calc(var(--pad-titlebar) * 4.2);
   display: block;
   position: relative;
-  padding-inline: 1rem;
-  margin-block: 0 auto;
+  grid-area: main;
+  padding-inline: 1.2rem;
   color: var(--clr-secondary-txt);
   font-family: "Roboto", sans-serif;
-  max-height: calc(100vh - var(--top-margin));
-  min-height: calc(100vh - var(--top-margin));
+  max-width: 100%;
+  width: 100%;
   overflow-y: auto;
+  background-color: var(--clr-secondary-bg);
 }
 @media (min-width: 40em) {
   .profy__main {
     flex-grow: 1;
+    max-height: calc(100vh - var(--top-margin));
+    min-height: calc(100vh - var(--top-margin));
     padding-inline: 2rem;
   }
 }
@@ -144,7 +147,6 @@ textarea {
   font-size: 0.95rem;
   color: inherit;
   font-weight: 500;
-  letter-spacing: 0.5px;
 }
 .profy__main__path.inactive {
   color: var(--clr-inactive-txt);
@@ -153,20 +155,31 @@ textarea {
 .profy__main__header {
   display: flex;
   align-items: center;
-  margin-block: 1.7rem 3rem;
+  position: relative;
+  margin-block: 1rem 2rem;
+}
+@media (min-width: 40em) {
+  .profy__main__header {
+    margin-block: 1.7rem 3rem;
+  }
 }
 .profy__main__header__project-name {
-  font-size: clamp(2rem, 5vmin, 4rem);
+  font-size: clamp(1.7rem, 5vmin, 4rem);
   font-family: "Ubuntu", sans-serif;
   font-weight: 500;
   color: var(--clr-primary-txt);
+  margin-right: 0.5rem;
+  max-width: 17ch;
   word-spacing: 0.3rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .profy__main__header__options {
   margin: 0;
 }
 .profy__main__header__options--icon {
-  font-size: clamp(1rem, 4vmin, 2rem);
+  font-size: clamp(1.5rem, 4vmin, 2rem);
   margin-left: auto;
   padding-block: 0.15em;
   padding-inline: 0.2em;
@@ -176,27 +189,39 @@ textarea {
   cursor: pointer;
 }
 .profy__main__header__options .project__options__dropdown {
+  display: block;
   visibility: hidden;
   opacity: 0;
   min-width: 0;
   position: absolute;
   z-index: 802;
+  top: 3.7rem;
+  right: 0;
   isolation: isolate;
-  top: calc(var(--top-margin) * 1.5);
-  right: calc(var(--top-margin) * 1.9);
-  padding: 1em 0;
+  padding: 0.7em 0;
   background-color: var(--clr-sidebar-bg);
   border-radius: 0.5rem;
-  transform: translateX(1rem);
+  transform: translateY(-1rem);
   transition: 0.1s ease;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
   overflow: hidden;
+  --option-size: clamp(.9rem, 3.2vmin, 1rem);
+}
+@media (min-width: 64em) {
+  .profy__main__header__options .project__options__dropdown {
+    top: 25%;
+    right: 4.5rem;
+    transform: translateX(1rem);
+  }
+  .profy__main__header__options .project__options__dropdown.open {
+    transform: translateX(0);
+  }
 }
 .profy__main__header__options .project__options__dropdown.open {
-  transform: translateX(0);
+  transform: translateY(0);
   visibility: visible;
   opacity: 1;
   min-width: -webkit-fit-content;
@@ -206,40 +231,40 @@ textarea {
 .profy__main__header__options .project__options__dropdown--share {
   display: flex;
   align-items: center;
-  padding: 0.5em 1em;
+  font-size: var(--option-size, 0.8rem);
+  padding: 0.5em 0.8em;
   cursor: pointer;
-  border-radius: inherit;
-  margin-bottom: 1rem;
+  margin-bottom: 0.2rem;
 }
 .profy__main__header__options .project__options__dropdown--share:hover {
   background-color: var(--clr-navlist-hover);
 }
 .profy__main__header__options .project__options__dropdown--share--icon {
-  font-size: 1.3rem;
+  color: var(--clr-primary-icon);
+  font-size: calc(var(--option-size) + 0.1rem);
   pointer-events: none;
 }
 .profy__main__header__options .project__options__dropdown--share--txt {
-  font-size: 1.05rem;
+  color: var(--clr-primary-icon);
   margin-left: 0.5rem;
   pointer-events: none;
 }
 .profy__main__header__options .project__options__dropdown--delete {
   display: flex;
   align-items: center;
-  padding: 0.5em 1em;
+  font-size: var(--option-size, 0.8rem);
+  padding: 0.5em 0.8em;
   cursor: pointer;
-  border-radius: inherit;
   color: hsl(348deg, 100%, 70%);
 }
 .profy__main__header__options .project__options__dropdown--delete:hover {
   background-color: var(--clr-navlist-hover);
 }
 .profy__main__header__options .project__options__dropdown--delete--icon {
-  font-size: 1.3rem;
+  font-size: calc(var(--option-size) + 0.1rem);
   pointer-events: none;
 }
 .profy__main__header__options .project__options__dropdown--delete--txt {
-  font-size: 1.05rem;
   margin-left: 0.5rem;
   pointer-events: none;
 }
@@ -264,11 +289,14 @@ textarea {
 .profy__main__section__options {
   display: flex;
   align-items: center;
-  gap: 3rem;
-  overflow-x: auto;
-  scrollbar-width: none;
+  gap: clamp(0.7rem, 6vmin, 3rem);
   padding-block: 0.5em 0em;
+  scrollbar-width: none;
+  overflow-x: auto;
   border-bottom: 2px solid var(--clr-separator-brdr);
+}
+.profy__main__section__options::-webkit-scrollbar {
+  display: none;
 }
 .profy__main__section__options [data-project-section-options] {
   display: flex;
@@ -280,7 +308,7 @@ textarea {
   padding-inline: 0.4em;
   isolation: isolate;
   font-family: "Roboto", sans-serif;
-  font-size: 1rem;
+  font-size: clamp(0.95rem, 3vmin, 1rem);
   cursor: pointer;
   transition: 0.1s ease;
   color: var(--clr-inactive-txt);
@@ -320,22 +348,18 @@ textarea {
   height: 0.15rem;
   width: 100%;
   background-color: var(--clr-logo-project);
-  border-radius: 1rem 1rem 0 0;
+  border-radius: 2rem 2rem 0 0;
   transition: 0.15s ease;
   transform: scale(0);
   pointer-events: none;
 }
 
 .profy__main__section--overview {
-  display: none;
-  align-items: flex-start;
-  justify-content: center;
-  flex-direction: row;
+  display: flex;
+  gap: 2rem 3rem;
   flex-wrap: wrap;
-  gap: 5rem;
-  margin-block: 3rem 0;
-  -webkit-margin-end: auto;
-          margin-inline-end: auto;
+  justify-content: center;
+  padding-block: 3em 1.5em;
   cursor: initial;
 }
 .profy__main__section--overview .overview__change-btn {
@@ -381,12 +405,12 @@ textarea {
 }
 .profy__main__section--overview .section--overview__form {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+  gap: 2rem 4rem;
+  justify-content: center;
   flex-wrap: wrap;
-  flex-direction: row;
-  gap: 5rem;
-  padding: 0.5em 0.75em;
+  flex-grow: 0;
+  max-width: 45%;
+  width: 100%;
 }
 .profy__main__section--overview .section--overview__form--name {
   display: flex;
@@ -394,17 +418,16 @@ textarea {
   justify-content: flex-end;
   flex-wrap: wrap;
   max-width: 24ch;
-  font-size: 1.2rem;
-}
-.profy__main__section--overview .section--overview__form--name:last-child {
-  margin-left: auto;
 }
 .profy__main__section--overview .section--overview__form--name label {
+  font-size: 1.1rem;
   flex-grow: 1;
   flex-shrink: 0;
   cursor: inherit;
+  color: var(--clr-inactive-txt);
 }
 .profy__main__section--overview .section--overview__form--name__field {
+  font-size: 1.05rem;
   display: block;
   padding: 0.3em 1em 0.3em 0.8em;
   min-width: 20ch;
@@ -428,6 +451,7 @@ textarea {
   display: block;
   margin-block: 2.7rem 0;
   font-size: 1.1rem;
+  color: var(--clr-inactive-txt);
 }
 .profy__main__section--overview .section--overview__form--date-wrap label {
   cursor: initial;
@@ -443,22 +467,16 @@ textarea {
   max-width: fit-content;
 }
 .profy__main__section--overview .section--overview__form--date {
-  margin-top: 2rem;
+  margin-top: 1rem;
   max-width: 90%;
+  font-size: 1.05rem;
+  color: var(--clr-primary-txt);
 }
 .profy__main__section--overview .section--overview__form--date label {
   display: block;
 }
 .profy__main__section--overview .section--overview__form--date .overview__change-btn {
   margin-left: auto;
-}
-.profy__main__section--overview .section--overview__form--date .duedate-note {
-  cursor: help;
-  margin-left: 0.3rem;
-  font-size: 0.8rem;
-}
-.profy__main__section--overview .section--overview__form--date:not(:last-child) {
-  margin-top: 1.5rem;
 }
 .profy__main__section--overview .section--overview__form--date__field {
   display: block;
@@ -487,21 +505,25 @@ textarea {
   outline: 1px solid var(--clr-separator-brdr);
 }
 .profy__main__section--overview .section--overview__form--goals {
-  max-width: 35ch;
-  font-size: 1.2rem;
+  display: block;
+  max-width: 20rem;
+  min-width: 18rem;
+  width: 100%;
+  font-size: 1.1rem;
 }
 .profy__main__section--overview .section--overview__form--goals label {
   cursor: inherit;
+  color: var(--clr-inactive-txt);
 }
 .profy__main__section--overview .section--overview__form--goals__field {
   display: block;
   padding: 0.5em 1em 0.5em 0.8em;
   margin-top: 1rem;
-  min-width: 35ch;
-  max-width: 35ch;
+  max-width: 100%;
+  width: 100%;
   max-height: 14rem;
   min-height: 14rem;
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   overflow: hidden auto;
   resize: none;
   color: var(--clr-primary-txt);
@@ -523,7 +545,11 @@ textarea {
   margin-left: auto;
 }
 .profy__main__section--overview .section--overview__progress {
+  display: inline-block;
   padding: 1em 1em 2em 1em;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
 }
 .profy__main__section--overview .section--overview__progress .circle {
   --circle-size: 10rem;
@@ -645,9 +671,10 @@ textarea {
 }
 
 .profy__main__section--ideas {
-  display: flex;
+  display: none;
   flex-wrap: wrap;
   gap: 3rem;
+  justify-content: center;
   padding-block: 3rem;
 }
 .profy__main__section--ideas--formContainer {
@@ -856,6 +883,7 @@ textarea {
   isolation: isolate;
   max-width: 20rem;
   margin-bottom: auto;
+  margin-inline: auto;
   padding-block: 0.2em 0.8em;
   overflow: hidden;
   border-radius: 0.5rem;
@@ -885,7 +913,7 @@ textarea {
 .profy__main__section--ideas--ideasContainer .idea .idea__options--wrap .idea__options {
   position: absolute;
   right: 0;
-  margin: 2.5rem 0.5rem 0 0;
+  margin: 3rem 0.5rem 0 0;
   padding-block: 0.4rem;
   overflow: hidden;
   border-radius: 0.5rem;
@@ -1161,8 +1189,8 @@ textarea {
 .profy__main__section--ideas--ideasContainer .delete__idea {
   position: relative;
   isolation: isolate;
-  min-width: 17rem;
-  max-width: 17rem;
+  min-width: 17.5rem;
+  max-width: 17.5rem;
   overflow: hidden;
   border-radius: 0.8rem;
   background-color: var(--clr-sidebar-bg);
@@ -1233,29 +1261,7 @@ textarea {
 }
 .profy__main__section--ideas--ideasContainer .delete__idea__description__btns button[type=submit]:hover {
   background-color: var(--clr-signout-bg-hover);
-}/*# sourceMappingURL=homeStyles.css.map */;
-  padding-block: 0.2em 0.5em;
-  max-width: -webkit-fit-content;
-  max-width: -moz-fit-content;
-  max-width: fit-content;
-  margin-inline: auto;
-}
-.profy__main__section--overview .section--overview__progress__time-elasped--circle .circleThumb--time {
-  stroke: #00aeff;
-}
-.profy__main__section--overview .section--overview__progress__time-elasped--circle [data-time-progress] {
-  display: grid;
-  place-items: center;
-  position: absolute;
-  top: 25%;
-  font-size: 1.5rem;
-  font-family: "Ubuntu", sans-serif;
-  cursor: text;
-  color: var(--clr-inactive-txt);
-  margin-inline: auto;
-}
-.profy__main__section--overview .section--overview__progress__time-elasped--circle [data-time-progress] div:last-child {
-  margin-top: 0.5rem;
+}/*# sourceMappingURL=homeStyles.css.map */ margin-top: 0.5rem;
   font-family: "Roboto", sans-serif;
   font-size: 0.95rem;
 }
