@@ -41,13 +41,13 @@ e => {
 
 
 //----<profy_overview section>
-addGlobalEventListener('click', '[data-overview-edit-btn]', async e => {
+addGlobalEventListener('click', '[data-overview-edit-btn]', e => {
   const inputField = e.target.parentElement.previousElementSibling.lastElementChild;
   for(const item of $$('[data-overview-field]')) {
     item.setAttribute('readonly', '');
   }
   inputField.removeAttribute('readonly');
-  inputField.focus();
+  (inputField.getAttribute('type') === 'date') ? inputField.showPicker() : inputField.focus();
 
   for(const item of $$('.overview__change-btn')) {
     item.classList.remove('edit');
@@ -88,6 +88,7 @@ $('[data-ideasForm-imgUpload]').addEventListener('change', e => {
   $('.ideas-form__imgUrl').classList.toggle('notouch', file);
   if(file == null) {
     $('[data-imgUpload-preview-wrap]').style.display = null;
+    e.target.value = '';
     return;
   }
 
@@ -132,6 +133,7 @@ addGlobalEventListener('click', '[data-idea-options="edit"]', e => {
     srcUpload() {
       $('.edit__idea__img').classList.remove('url');
       $('.edit__idea__img').classList.add('upload');
+      $('[data-idea-edit-imgUpload-preview]').classList.remove('hide');
       $('.edit__idea').setAttribute('enctype', 'multipart/form-data');
       $('[data-idea-edit-imgUpload]').setAttribute('src', ideaImg.getAttribute('src'));
     }
@@ -149,13 +151,35 @@ addGlobalEventListener('click', '[data-ideaEdit-modal-close]', e => {
 
   $('[data-ideaEdit-modal]').close();
 })
+// close edit preview img
+addGlobalEventListener('click', '[data-idea-edit-imgUpload-preview-closebtn]', e => {
+  const parentEl = e.target.parentElement;
+  parentEl.classList.add('hide');
+
+  // upload new img after closing existing
+  const fileInput = parentEl.nextElementSibling;
+  fileInput.value = '';
+  fileInput.classList.remove('notouch');
+  fileInput.setAttribute('required', '');
+})
+// idea edit img upload
+$('[data-idea-edit-imgUpload-btn]').addEventListener('change', e => {
+  const file = e.target.files[0];
+  if(file == null) {
+    $('[data-idea-edit-imgUpload-preview]').classList.add('hide'); 
+    e.target.value = '';
+    return;
+  }
+  
+  $('[data-idea-edit-imgUpload-preview]').classList.remove('hide'); 
+  const reader = new FileReader();
+  reader.addEventListener('load', e => $('[data-idea-edit-imgUpload]').setAttribute('src', e.target.result))
+  reader.readAsDataURL(file);
+})
+
 // idea delete option
-addGlobalEventListener('click', '[data-idea-options="delete"]', e => {
-  $('[data-ideaDelete-modal]').showModal();
-})
-addGlobalEventListener('click', '[data-ideaDelete-modal-close]', e => {
-  $('[data-ideaDelete-modal]').close();
-})
+addGlobalEventListener('click', '[data-idea-options="delete"]', e => $('[data-ideaDelete-modal]').showModal())
+addGlobalEventListener('click', '[data-ideaDelete-modal-close]', e => $('[data-ideaDelete-modal]').close())
 //----</profy_ideas section>
 
 
