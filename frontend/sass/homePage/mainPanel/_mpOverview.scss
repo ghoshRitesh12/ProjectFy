@@ -1,25 +1,22 @@
-@use '../../../../frontend/sass/components/' as *;
+@use '../../components/' as *;
 
 .profy__main__section {
-
   // border: 1px solid red;
-
   &__options {
     display: flex;
     align-items: center;
-    gap: 3rem;
-
-    overflow-x: auto;
-    scrollbar-width: none;
+    gap: clamp(.6rem, 6vmin, 3rem);
 
     padding-block: .5em 0em;
+    scrollbar-width: none;
+    overflow-x: auto;
     border-bottom: 2px solid var(--clr-separator-brdr);
+    &::-webkit-scrollbar { display: none; }
 
     & [data-project-section-options] {
       display: flex;
       align-items: center;
       gap: .7rem;
-
       flex-shrink: 0;
 
       position: relative;
@@ -28,7 +25,7 @@
       isolation: isolate;
 
       font-family: $font-secondary-r;
-      font-size: 1rem;
+      font-size: clamp(.92rem, 3vmin, 1rem);
       cursor: pointer;
       transition: .1s ease;
       & > * { pointer-events: none; }
@@ -67,7 +64,7 @@
         height: .15rem;
         width: 100%;
         background-color: var(--clr-logo-project);
-        border-radius: 1rem 1rem 0 0;
+        border-radius: 2rem 2rem 0 0;
         transition: .15s ease;
         transform: scale(0);
         pointer-events: none;
@@ -79,19 +76,19 @@
 .profy__main__section--overview {
   display: none;
   // display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex-direction: row;
+  gap: 2rem 2.5rem;
   flex-wrap: wrap;
-  gap: 5rem;
+  justify-content: center;
 
-  margin-block: 3rem 0;
-  margin-inline-end: auto;
-
-  // border: 1px solid white;
-
-  // max-width: 60%;
+  padding-block: 2em 1.5em;
   cursor: initial;
+  @include breakpoint(medium) { 
+    padding-inline: 0 1em; 
+    padding-block: 3em 1.5em;
+  }
+  @include breakpoint(large) { 
+    padding-inline: 0 3em; 
+  }
 
   .overview__change-btn {
     display: flex;
@@ -140,21 +137,23 @@
   
   & .section--overview__form {
     display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
+    gap: 2rem 4rem;
+    justify-content: center;
     flex-wrap: wrap;
-    flex-direction: row;
-    gap: 5rem;
 
-    padding: .5em .75em;
+    flex-grow: 0;
+    // border: 1px solid #00aeff;
+    // margin-inline: 0 auto;
+
+    max-width: 45%;
+    width: 100%;
+    // padding: .5em .75em;
 
     
-    // outline: 1px solid salmon;
+    // border: 1px solid salmon;
     // name & date wrapper
-    &__name-date--wrap {
-      
-      // outline: 1px solid rgb(255, 207, 201);
-    }
+
+    // &__name-date--wrap { }
 
     // name container
     &--name {
@@ -163,20 +162,17 @@
       justify-content: flex-end;
       flex-wrap: wrap;
 
-
       max-width: 24ch;
-      font-size: 1.2rem;
-
-      &:last-child {
-        margin-left: auto;
-      }
 
       & label {
+        font-size: 1.1rem;
         flex-grow: 1;
         flex-shrink: 0;
         cursor: inherit;
+        color: var(--clr-inactive-txt);
       }
       &__field {
+        font-size: 1.05rem;
         display: block;
         padding: .3em 1em .3em .8em;
         min-width: 20ch;
@@ -201,45 +197,30 @@
       display: block;
       margin-block: 2.7rem 0;
       font-size: 1.1rem;
-      // outline: 1px solid rgb(255, 153, 153);
-      // padding-right: 4.2rem;
+      color: var(--clr-inactive-txt);
       
       & label { cursor: initial; }
-
       .proposed-schedule-txt {
         display: block;
-        padding: 0 1em .3em 0;
+        padding: 0 .5em .2em .5em;
         border-bottom: 1px solid var(--clr-separator-brdr);
         margin-inline-end: auto;
         max-width: fit-content;
+        text-align: center;
       }
     }
     &--date {
-      // display: flex;
-      // align-items: flex-end;
-      // justify-content: flex-start;
-      margin-top: 2rem;
-      // max-width: fit-content;
+      margin-top: 1rem;
       max-width: 90%;
+      font-size: 1.05rem;
 
-      // outline: 1px solid white;
+      color: var(--clr-primary-txt);
 
-      & label {
-        display: block;
-      }
-
+      & label { display: block; }
       & .overview__change-btn { 
         margin-left: auto;
       }
-
-      & .duedate-note {
-        cursor: help;
-        margin-left: .3rem;
-        font-size: .8rem;
-      }
-      &:not(:last-child) {
-        margin-top: 1.5rem;
-      }
+      // &:not(:last-child) { margin-top: 1.5rem; }
       &__field {
         display: block;
         margin-top: .5rem;
@@ -257,9 +238,7 @@
           border: 1px solid var(--clr-separator-brdr);
           border-radius: 40%;
         }
-        &:focus {
-          outline: 1px solid var(--clr-logo-project);
-        }
+        &:focus { outline: 1px solid var(--clr-logo-project); }
         &:read-only:focus {
           outline: 1px solid var(--clr-separator-brdr);
         }
@@ -268,25 +247,35 @@
 
     // project goals container
     &--goals {
-      max-width: 35ch;
-      font-size: 1.2rem;
+      display: block;
 
-      // margin-left: auto;
-      // padding-left: 4.2rem;
+      max-width: 17rem;
+      min-width: 17rem;
+      width: 100%;
+      font-size: 1.1rem;
+      // border: 1px solid white;
+      @include breakpoint(medium) {
+        max-width: 19rem;
+        min-width: 19rem;
+      }
       
-      // outline: 1px solid white;
-      & label { cursor: inherit; }
+      & label { 
+        cursor: inherit; 
+        color: var(--clr-inactive-txt);
+      }
       &__field {
         display: block;
         padding: .5em 1em .5em .8em;
         margin-top: 1rem;
 
-        min-width: 35ch;
-        max-width: 35ch;
-        max-height: 14rem;
-        min-height: 14rem;
+        max-width: 100%;
+        width: 100%;
+        // min-width: 28ch;
+        // max-width: 28ch;
+        max-height: 12rem;
+        min-height: 12rem;
         
-        font-size: 1.15rem;
+        font-size: 1.05rem;
         overflow: hidden auto;
         resize: none;
         color: var(--clr-primary-txt);
@@ -307,10 +296,11 @@
   }
 
   & .section--overview__progress {
-
+    display: inline-block;
     padding: 1em 1em 2em 1em;
     // margin-inline: 0 auto;
     // border: 1px solid greenyellow;
+    max-width: fit-content;
 
     & .circle {
       --circle-size: 10rem;
@@ -458,9 +448,3 @@
     }
   }
 }
-
-  // &--work {
-
-  // }
-
-

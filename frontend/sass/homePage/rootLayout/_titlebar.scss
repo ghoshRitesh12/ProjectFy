@@ -1,77 +1,98 @@
-@use '../../../../frontend/sass/components/' as *;
-
+@use '../../components/' as *;
 
 .profy__titlebar {
+  --pad-inline: 1em;
+  --pad-titlebar: 1em;
+  grid-area: titlebar;
   display: flex;
   align-items: center;
-  // flex-direction: row;
+  justify-content: space-between;
 
-  // position: fixed;
   position: relative;
-  // inset: 0 0 auto 0; 
   z-index: 101;
   isolation: isolate;
 
-  padding-inline: 4em;
+  
+  margin-top: var(--pad-titlebar);
+  padding-inline: var(--pad-inline);
   padding-block: var(--pad-titlebar);
   max-width: 100%;
   width: 100%;
-
-  background-color: var(--clr-sidebar-bg);
-  box-shadow: 0 0 .2rem rgba(0, 0, 0, 0.2);
-
+  background-color: var(--clr-secondary-bg);
+  // background-color: var(--clr-primary-bg);
+  // border: 1px solid red;
+  
+  @include breakpoint(medium) { 
+    margin-top: 0;
+    --pad-inline: 3em; 
+    background-color: var(--clr-sidebar-bg);
+    // backdrop-filter: blur(1rem);
+  }
+  @include breakpoint(large) { --pad-inline: 4em; }
 
 
   &__logo {
+    flex-shrink: 0;
     position: relative;
-    // z-index: 2020;
-    isolation: isolate;
-    flex-shrink: .5;
-
     width: fit-content;
-    padding-inline: .5rem;
-    margin-right: auto;
+    isolation: isolate;
+    margin-inline: 0 1rem;
+    
     cursor: pointer;
-
+    transition: .2s ease;
     .logo_project { color: var(--clr-logo-project); }
     .logo_Fy { color: var(--clr-logo-Fy); }
-    & svg {
-      pointer-events: none;
+    & svg { pointer-events: none; }
+    & #profyLogo_desktop { display: none; }
+
+    @include breakpoint(medium) {
+      #profyLogo_mobile { display: none; }
+      #profyLogo_desktop { display: block; }
     }
   }
 
   // search bar
   &__searchbar {
-
     font-size: 1rem;
-    // margin-inline: 2rem;
-    margin-inline: auto;
-    // max-width: fit-content;
     width: 100%;
-    // outline: 1px solid white;
+    transition: .1s ease max-width;
+    // max-width: 25ch;
+    border-radius: 2rem;
+    padding-right: calc(3rem - .8rem);
+    outline: 2px solid var(--clr-separator-brdr); 
+
+    // &:focus-within { outline: 2px solid var(--clr-separator-brdr); }
+    
+    @include breakpoint(medium) { 
+      margin-inline: auto;
+      max-width: 30ch; 
+      padding-right: 0;
+      outline: 1px solid var(--clr-separator-brdr);
+      &:focus-within { outline: 1px solid var(--clr-logo-project); }
+    }
+    @include breakpoint(large) { max-width: 35ch; }
 
     &--field {
-      display: block;
-      // flex: 1 1;
+      // display: none;
       margin-inline: auto;
-      min-width: 35ch;
-      // max-width: 100%;
-      padding: .35em 2em .35em 1em;
+      padding-block: .45em;
+      padding-inline: 1.1em .8em;
+      // padding-inline: 1.2em 3em;
+      max-width: 100%;
+      width: 100%;
+      
       font-family: $font-secondary-r;
-
       color: var(--clr-primary-txt);
       background-color: var(--clr-ternary-bg);
+      outline: none;
       border: none;
-      outline: 1px solid var(--clr-separator-brdr);
-      border-radius: $borders;
-      transition: .2s ease min-width;
-      
-      &:focus {
-        outline: 2px solid var(--clr-logo-project);
-        min-width: 45ch;
-      }
-      &::placeholder {
-        color: var(--clr-inactive-txt);
+      border-radius: 2rem;
+      &::placeholder { color: var(--clr-inactive-txt); }
+
+      @include breakpoint(medium) {
+        padding-block: .35em;
+        // padding-inline: 1.2em .8em;
+        // &:focus { outline: 1px solid var(--clr-logo-project); }
       }
     }
   }
@@ -207,11 +228,15 @@
   
 
   &__account__wrapper {
+    position: absolute;
+    right: 0;
+
     flex-shrink: 0;
-    margin-left: auto;
+    margin-inline: .5rem 1.2rem;
     isolation: isolate;
     border-radius: 50%;
     background-color: var(--clr-sidebar-bg);
+    @include breakpoint(medium) { position: relative; }
   }
   &__account {
     display: flex;
@@ -221,12 +246,11 @@
     cursor: pointer;
     border-radius: inherit;
     overflow: hidden;
-    transition: .02s ease;
+    transition: .05s ease;
     outline-offset: .5px;
+    outline: 2px solid transparent;
 
-    &:is(:hover, :focus) {
-      outline: 2px solid var(--clr-logo-project);
-    }
+    &:hover { outline: 2px solid var(--clr-logo-project); }
     &--img {
       display: grid;
       place-items: center;
@@ -235,9 +259,11 @@
       pointer-events: none;
 
       &-src {
-        --size: 2.2rem;
+        --size: 2rem;
         width: var(--size);
         height: var(--size);
+
+        @include breakpoint(medium) { --size: 2.2rem }
       }
     }
     &--name {
@@ -261,11 +287,9 @@
       display: none;
       flex-direction: column;
       gap: .7rem;
-      
       position: fixed;
-      top: var(--top-margin);
-      right: calc(var(--top-margin) - 1rem);
-      // right: var(--top-margin);
+      top: calc(var(--top-margin) + 1rem);
+      right: calc(var(--top-margin) - 2.5rem);
       z-index: 2022;
       isolation: isolate;
 
@@ -277,13 +301,14 @@
       border-bottom: 1px solid var(--clr-separator-brdr);
       border-inline: 1px solid var(--clr-separator-brdr);
       border-radius: $borders $borders;
-
       transition: .05s ease;
-      &.open {
-        // opacity: 1;
-        // visibility: visible;
-        display: flex;
+
+      @include breakpoint(medium) { 
+        top: var(--top-margin);
+        right: calc(var(--top-margin) - 1rem); 
       }
+
+      &.open { display: flex; }
 
       &__info {
         display: flex;
@@ -295,8 +320,8 @@
         padding-bottom: 1rem;
         margin-bottom: .5rem;
         border-bottom: 1px solid var(--clr-separator-brdr);
+        transition: .2s ease;
 
-        transition: .2s ease all;
         &--img {
           display: grid;
           place-items: center;
@@ -305,7 +330,6 @@
 
           border-radius: 50%;
           overflow: hidden;
-          // outline: 1px solid white;
           &::after { 
             content: '';
             position: absolute;
@@ -317,11 +341,7 @@
             transition: .1s ease;
             opacity: 0;
           }
-          &:hover {
-            &::after {
-              opacity: 1;
-            }
-          }
+          &:hover { &::after { opacity: 1; } }
           
           &-src {
             --size: 2.5rem;
@@ -344,10 +364,7 @@
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
-
-          &:hover {
-            cursor: text;
-          }
+          cursor: text;
         }
       }
     }

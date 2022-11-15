@@ -1,4 +1,4 @@
-@use '../../../../frontend/sass/components/' as *;
+@use '../../components/' as *;
 
 .profy__sidepanel__nav {
   --icon-gap: 2rem;
@@ -48,7 +48,6 @@
     max-width: 100%;
     font-size: 1rem;
     // border: 1px solid red;
-
      
     &.hidden { display: none; }
 
@@ -78,15 +77,16 @@
         border: none;
         color: var(--clr-primary-txt);
         transition: .1s ease;
-        outline: 1px solid var(--clr-navlist-hover);
-        background-color: var(--clr-navlist-hover);
+        background-color: transparent;
+        outline: 1px solid transparent;
         &:hover {
-          outline: 1px solid var(--clr-inactive-txt);
+          background-color: var(--clr-navlist-hover);
+          outline: 1px solid var(--clr-navlist-hover);
         }
 
         &[data-newItem-btn-save] {
           outline: 1px solid var(--clr-edit-btn-bg);
-          margin-left: .5rem;
+          margin-left: .2rem;
           color: var(--clr-edit-btn); 
           background-color: var(--clr-edit-btn-bg);
           transition: .15s ease;

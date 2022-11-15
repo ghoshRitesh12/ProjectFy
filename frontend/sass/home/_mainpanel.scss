@@ -1,9 +1,0 @@
-@use '../components/' as *;
-
-.projecty__main {
-
-  @include breakpoint(medium) {
-
-    flex: 1 1 80%;
-  }
-}

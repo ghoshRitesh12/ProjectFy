@@ -1,8 +1,9 @@
-@use '../../../../frontend/sass/components/' as *;
+@use '../../components/' as *;
 
 .profy__sidepanel {
   --top-margin: calc(var(--pad-titlebar) * 4.2);
   --sidepanel-width: 17rem;
+  grid-area: sidepanel;
   display: none;
   justify-content: flex-start;
   flex-direction: column;
@@ -12,16 +13,17 @@
   z-index: 52; 
   isolation: isolate;
 
-  max-width: var(--sidepanel-width);
-  min-width: 14rem;
-
   margin-block: 0 auto;
-  padding-inline: .8em .5em;
-  // padding-block: var(--top-margin) 2em;
   padding-bottom: 2em;
+  padding-inline: .8em .5em;
+  // width: 90%;
+  min-width: 15rem;
+  max-width: var(--sidepanel-width); 
+  // max-width: 100%;
+  // width: 100%;
+  // margin-right: auto;
   max-height: calc(100vh - var(--top-margin));
   min-height: calc(100vh - var(--top-margin));
-
 
   font-family: $font-secondary-r;
   background-color: var(--clr-sidebar-bg);
