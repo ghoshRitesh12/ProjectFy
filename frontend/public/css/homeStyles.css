@@ -124,12 +124,12 @@ textarea {
     flex-grow: 1;
     max-height: calc(100vh - var(--top-margin));
     min-height: calc(100vh - var(--top-margin));
-    padding-inline: 2rem;
+    padding-inline: 1.8rem 2rem;
   }
 }
 @media (min-width: 64em) {
   .profy__main {
-    padding-inline: 4.5rem;
+    padding-inline: 4rem 4.5rem;
   }
 }
 .profy__main__path-wrap {
@@ -156,29 +156,92 @@ textarea {
   display: flex;
   align-items: center;
   position: relative;
-  margin-block: 1rem 2rem;
+  margin-block: 1rem 1.5rem;
+  transition: 0.2s ease;
 }
 @media (min-width: 40em) {
+  .profy__main__header {
+    margin-block: 1.7rem 2rem;
+  }
+}
+@media (min-width: 64em) {
   .profy__main__header {
     margin-block: 1.7rem 3rem;
   }
 }
-.profy__main__header__project-name {
-  font-size: clamp(1.7rem, 5vmin, 4rem);
-  font-family: "Ubuntu", sans-serif;
+.profy__main__header__name {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem 1rem;
+  flex-wrap: wrap;
+  max-width: 100%;
+  width: 100%;
+}
+@media (min-width: 64em) {
+  .profy__main__header__name {
+    margin-right: 0.5rem;
+  }
+}
+.profy__main__header__name--project {
+  flex-shrink: 2;
+  max-width: 17ch;
+  margin-right: auto;
+  font-size: clamp(1.65rem, 5vmin, 4rem);
   font-weight: 500;
   color: var(--clr-primary-txt);
-  margin-right: 0.5rem;
-  max-width: 17ch;
-  word-spacing: 0.3rem;
+  font-family: "Ubuntu", sans-serif;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+@media (min-width: 40em) {
+  .profy__main__header__name--project {
+    word-spacing: 0.3rem;
+  }
+}
+@media (min-width: 64em) {
+  .profy__main__header__name--project {
+    max-width: 30ch;
+  }
+}
+.profy__main__header__name--createdBy {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  margin-inline: 0 auto;
+  font-size: clamp(0.85rem, 3vmin, 1.05rem);
+  color: var(--clr-primary-txt);
+}
+.profy__main__header__name--createdBy .__wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.profy__main__header__name--createdBy .__wrap--avatar {
+  --size: 1.4rem;
+  display: inline-block;
+  position: relative;
+  font-size: clamp(0.75rem, 3vmin, 0.85rem);
+  min-width: var(--size);
+  min-height: var(--size);
+  padding-block: 0.15em;
+  padding-inline: 0.18em;
+  color: white;
+  background-color: hsl(354deg, 64%, 60%);
+  text-align: center;
+  border-radius: 100%;
+}
+@media (min-width: 40em) {
+  .profy__main__header__name--createdBy .__wrap--avatar {
+    --size: 1.5rem;
+  }
+}
 .profy__main__header__options {
-  margin: 0;
+  margin-top: 0;
 }
 .profy__main__header__options--icon {
+  flex-shrink: 0;
   font-size: clamp(1.5rem, 4vmin, 2rem);
   margin-left: auto;
   padding-block: 0.15em;
@@ -195,7 +258,7 @@ textarea {
   min-width: 0;
   position: absolute;
   z-index: 802;
-  top: 3.7rem;
+  top: 4.2rem;
   right: 0;
   isolation: isolate;
   padding: 0.7em 0;
@@ -209,6 +272,12 @@ textarea {
           user-select: none;
   overflow: hidden;
   --option-size: clamp(.9rem, 3.2vmin, 1rem);
+}
+@media (min-width: 40em) {
+  .profy__main__header__options .project__options__dropdown {
+    top: 5.5rem;
+    right: 0;
+  }
 }
 @media (min-width: 64em) {
   .profy__main__header__options .project__options__dropdown {
@@ -289,7 +358,7 @@ textarea {
 .profy__main__section__options {
   display: flex;
   align-items: center;
-  gap: clamp(0.7rem, 6vmin, 3rem);
+  gap: clamp(0.6rem, 6vmin, 3rem);
   padding-block: 0.5em 0em;
   scrollbar-width: none;
   overflow-x: auto;
@@ -308,7 +377,7 @@ textarea {
   padding-inline: 0.4em;
   isolation: isolate;
   font-family: "Roboto", sans-serif;
-  font-size: clamp(0.95rem, 3vmin, 1rem);
+  font-size: clamp(0.92rem, 3vmin, 1rem);
   cursor: pointer;
   transition: 0.1s ease;
   color: var(--clr-inactive-txt);
@@ -355,12 +424,23 @@ textarea {
 }
 
 .profy__main__section--overview {
-  display: flex;
-  gap: 2rem 3rem;
+  display: none;
+  gap: 2rem 2.5rem;
   flex-wrap: wrap;
   justify-content: center;
-  padding-block: 3em 1.5em;
+  padding-block: 2em 1.5em;
   cursor: initial;
+}
+@media (min-width: 40em) {
+  .profy__main__section--overview {
+    padding-inline: 0 1em;
+    padding-block: 3em 1.5em;
+  }
+}
+@media (min-width: 64em) {
+  .profy__main__section--overview {
+    padding-inline: 0 3em;
+  }
 }
 .profy__main__section--overview .overview__change-btn {
   display: flex;
@@ -458,13 +538,14 @@ textarea {
 }
 .profy__main__section--overview .section--overview__form--date-wrap .proposed-schedule-txt {
   display: block;
-  padding: 0 1em 0.3em 0;
+  padding: 0 0.5em 0.2em 0.5em;
   border-bottom: 1px solid var(--clr-separator-brdr);
   -webkit-margin-end: auto;
           margin-inline-end: auto;
   max-width: -webkit-fit-content;
   max-width: -moz-fit-content;
   max-width: fit-content;
+  text-align: center;
 }
 .profy__main__section--overview .section--overview__form--date {
   margin-top: 1rem;
@@ -506,10 +587,16 @@ textarea {
 }
 .profy__main__section--overview .section--overview__form--goals {
   display: block;
-  max-width: 20rem;
-  min-width: 18rem;
+  max-width: 17rem;
+  min-width: 17rem;
   width: 100%;
   font-size: 1.1rem;
+}
+@media (min-width: 40em) {
+  .profy__main__section--overview .section--overview__form--goals {
+    max-width: 19rem;
+    min-width: 19rem;
+  }
 }
 .profy__main__section--overview .section--overview__form--goals label {
   cursor: inherit;
@@ -521,8 +608,8 @@ textarea {
   margin-top: 1rem;
   max-width: 100%;
   width: 100%;
-  max-height: 14rem;
-  min-height: 14rem;
+  max-height: 12rem;
+  min-height: 12rem;
   font-size: 1.05rem;
   overflow: hidden auto;
   resize: none;
@@ -671,11 +758,16 @@ textarea {
 }
 
 .profy__main__section--ideas {
-  display: none;
+  display: flex;
   flex-wrap: wrap;
   gap: 3rem;
   justify-content: center;
-  padding-block: 3rem;
+  padding-block: 2em;
+}
+@media (min-width: 64em) {
+  .profy__main__section--ideas {
+    padding-block: 3em;
+  }
 }
 .profy__main__section--ideas--formContainer {
   display: block;
@@ -1104,6 +1196,8 @@ textarea {
   outline: 2px solid var(--clr-separator-brdr);
 }
 .profy__main__section--ideas--ideasContainer .edit__idea__img--upload--preview {
+  display: block;
+  position: relative;
   margin-block: 0 0.7rem;
   margin-inline: auto;
   max-width: 98%;
@@ -1112,9 +1206,28 @@ textarea {
   border-radius: 0.5rem;
   overflow: hidden;
   color: var(--clr-primary-txt);
+  scrollbar-width: thin;
+}
+.profy__main__section--ideas--ideasContainer .edit__idea__img--upload--preview.hide {
+  display: none;
 }
 .profy__main__section--ideas--ideasContainer .edit__idea__img--upload--preview--src {
   display: block;
+  border-radius: 0.5rem;
+}
+.profy__main__section--ideas--ideasContainer .edit__idea__img--upload--preview [data-idea-edit-imgUpload-preview-closebtn] {
+  display: block;
+  position: absolute;
+  inset: 0 0 auto auto;
+  padding: 0.2em;
+  margin: 0.2rem 0.25rem 0 0;
+  border-radius: 50%;
+  cursor: pointer;
+  color: whitesmoke;
+  background-color: hsla(0deg, 0%, 0%, 0.3);
+}
+.profy__main__section--ideas--ideasContainer .edit__idea__img--upload--preview [data-idea-edit-imgUpload-preview-closebtn] > * {
+  pointer-events: none;
 }
 .profy__main__section--ideas--ideasContainer .edit__idea__img--upload--btn {
   display: block;
@@ -1123,6 +1236,9 @@ textarea {
   color: var(--clr-primary-txt);
   border: none;
   cursor: pointer;
+}
+.profy__main__section--ideas--ideasContainer .edit__idea__img--upload--btn.notouch {
+  pointer-events: none;
 }
 .profy__main__section--ideas--ideasContainer .edit__idea__img--upload--btn::-webkit-file-upload-button {
   margin-right: 1rem;
@@ -1261,50 +1377,4 @@ textarea {
 }
 .profy__main__section--ideas--ideasContainer .delete__idea__description__btns button[type=submit]:hover {
   background-color: var(--clr-signout-bg-hover);
-}/*# sourceMappingURL=homeStyles.css.map */ margin-top: 0.5rem;
-  font-family: "Roboto", sans-serif;
-  font-size: 0.95rem;
-}
-.profy__main__section--overview .section--overview__progress__work-done {
-  margin-block: 2rem 0;
-  padding: 0.3em 2em;
-  background-color: var(--clr-sidebar-bg);
-  border-radius: 1rem;
-  font-size: 1.2rem;
-}
-.profy__main__section--overview .section--overview__progress__work-done--txt {
-  padding: 0.5em 1em;
-  margin-inline: auto;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-}
-.profy__main__section--overview .section--overview__progress__work-done--circle {
-  display: grid;
-  place-items: center;
-  position: relative;
-  padding-block: 0.2em 0.5em;
-  max-width: -webkit-fit-content;
-  max-width: -moz-fit-content;
-  max-width: fit-content;
-  margin-inline: auto;
-}
-.profy__main__section--overview .section--overview__progress__work-done--circle .circleThumb--work {
-  stroke: #ff455d;
-}
-.profy__main__section--overview .section--overview__progress__work-done--circle [data-work-progress] {
-  display: grid;
-  place-items: center;
-  position: absolute;
-  top: 25%;
-  font-size: 1.5rem;
-  font-family: "Ubuntu", sans-serif;
-  cursor: text;
-  color: var(--clr-inactive-txt);
-  margin-inline: auto;
-}
-.profy__main__section--overview .section--overview__progress__work-done--circle [data-work-progress] div:last-child {
-  margin-top: 0.5rem;
-  font-family: "Roboto", sans-serif;
-  font-size: 0.95rem;
 }/*# sourceMappingURL=homeStyles.css.map */

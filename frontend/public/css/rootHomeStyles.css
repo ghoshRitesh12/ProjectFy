@@ -161,6 +161,7 @@ body {
   --clr-ternary-bg: #f5f5f5;
   --clr-inactive-txt: #777;
   --clr-secondary-hover: #dedede;
+  --clr-titlebar-bg: hsl(0, 0%, 100%);
   --clr-sidebar-bg: #fff;
   --clr-dropdown-bg: #ffffff;
   --clr-navlist-hover: #f0f0f0;
@@ -193,6 +194,7 @@ body[data-theme=dark] {
   --clr-ternary-bg: #181818;
   --clr-inactive-txt: #999;
   --clr-secondary-hover: #444;
+  --clr-titlebar-bg: hsla(0, 0%, 13%);
   --clr-sidebar-bg: #212121;
   --clr-dropdown-bg: #212121;
   --clr-navlist-hover: #383838;
@@ -213,22 +215,12 @@ body[data-theme=dark] {
   --clr-edit-btn-bg: hsl(160 74% 66% / .2);
 }
 
-#root {
-  --pad-titlebar: 1rem;
-  --top-margin: calc(var(--pad-titlebar) * 4.2);
-  display: block;
-  position: relative;
-  isolation: isolate;
-  margin-block: auto;
-  margin-inline: auto;
-}
-
 .profy {
   --pad-titlebar: 1rem;
   --top-margin: calc(var(--pad-titlebar) * 4.2);
+  -webkit-tap-highlight-color: transparent;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-columns: minmax(14rem, 17rem) 1fr;
+  grid-template-columns: minmax(15rem, 0.175fr) 1fr;
   grid-template-areas: "titlebar titlebar" "main main";
   background-color: var(--clr-ternary-bg);
 }
@@ -259,7 +251,9 @@ body[data-theme=dark] {
   .profy__titlebar {
     margin-top: 0;
     --pad-inline: 3em;
-    background-color: var(--clr-sidebar-bg);
+    background-color: var(--clr-titlebar-bg);
+    -webkit-backdrop-filter: blur(1rem);
+            backdrop-filter: blur(1rem);
   }
 }
 @media (min-width: 64em) {
@@ -304,9 +298,6 @@ body[data-theme=dark] {
   transition: 0.1s ease max-width;
   border-radius: 2rem;
   padding-right: 2.2rem;
-  outline: 1px solid var(--clr-separator-brdr);
-}
-.profy__titlebar__searchbar:focus-within {
   outline: 2px solid var(--clr-separator-brdr);
 }
 @media (min-width: 40em) {
@@ -314,6 +305,7 @@ body[data-theme=dark] {
     margin-inline: auto;
     max-width: 30ch;
     padding-right: 0;
+    outline: 1px solid var(--clr-separator-brdr);
   }
   .profy__titlebar__searchbar:focus-within {
     outline: 1px solid var(--clr-logo-project);
@@ -521,7 +513,7 @@ body[data-theme=dark] {
   flex-direction: column;
   gap: 0.7rem;
   position: fixed;
-  top: calc(var(--top-margin) + 0.7rem);
+  top: calc(var(--top-margin) + 1rem);
   right: calc(var(--top-margin) - 2.5rem);
   z-index: 2022;
   isolation: isolate;
@@ -626,6 +618,8 @@ body[data-theme=dark] {
   margin-block: 0 auto;
   padding-bottom: 2em;
   padding-inline: 0.8em 0.5em;
+  min-width: 15rem;
+  max-width: var(--sidepanel-width);
   max-height: calc(100vh - var(--top-margin));
   min-height: calc(100vh - var(--top-margin));
   font-family: "Roboto", sans-serif;
