@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./backend/server.js",
     "dev": "nodemon ./backend/server.js",
-    "cpMrkp": "cat ./PAGE_TEST_DEV/homePage.html > ./backend/views/testHomePage.ejs"
+    "cpSh": "bash cpScript.sh"
   },
   "keywords": [],
   "author": "Ritesh Ghosh",
