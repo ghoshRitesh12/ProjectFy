@@ -20,7 +20,7 @@
 <!-- <body data-theme="<%=locals.user.userTheme%>"> -->
 
 <body data-theme="dark" data-scrollY="false">
-  <!-- <div id="root"> -->
+
   <div class="profy">
 
     <header class="profy__titlebar">
@@ -187,10 +187,8 @@
             <div class="profy__main__header__name--createdBy"> 
               <span> Created by </span>
               <div class="__wrap">
-                <span class="__wrap--avatar">
-                  RG
-                </span>
-                <span data-project-createdBy>Ritesh Ghosh</span>
+                <!-- <span data-project-createdBy>Ritesh Ghosh</span> -->
+                <span data-project-createdBy>Hubert Blaine Wolfeschlegel</span>
               </div>
             </div>
           </div>
@@ -256,7 +254,7 @@
                 Overview
               </div>
             </div>
-            <div class="profy__main__section__options--ideas selected" data-project-section-options="ideas">
+            <div class="profy__main__section__options--ideas" data-project-section-options="ideas">
               <span data-project-section-options-icon>
                 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
                   viewBox="0 0 512 512">
@@ -269,7 +267,7 @@
                 Ideas
               </div>
             </div>
-            <div class="profy__main__section__options--work" data-project-section-options="work">
+            <div class="profy__main__section__options--work selected" data-project-section-options="kanban">
               <span data-project-section-options-icon>
                 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
                   viewBox="0 0 16 16">
@@ -695,24 +693,119 @@
 
           </section>
 
-          <!-- work -->
-          <section class="profy__main__section--work"></section>
-        </div>
 
-        <!-- <% let c=0; %>
-        <% if(locals.notes) { %>
-          <% notes.forEach(item => { %>
-            <br>
-            <a href="/note?id=<%= item._id %>">
+          <!-- work -->
+          <section class="profy__main__section--kanban">
+            <!-- <div class="profy__main__section--kanban__todo kanban-section"> -->
             
-              <div> Note no: <%= ++c %> </div>
-      
-              <div> Note name: <%= item.title %> </div>
-      
-            </a>
-            <br>
-          <% }); %>
-        <% } %> -->
+
+            <div class="kanban-section" data-kanban-section="todo">
+              <section class="kanban-head">
+                <div class="kanban-head__info">
+                  <div class="kanban-head__info--name">
+                    To do
+                  </div>
+                  <div class="kanban-head__info--number">
+                    5
+                  </div>
+                  <div class="kanban-head__info--reveal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 1024 1024">
+                      <rect x="0" y="0" width="1024" height="1024" fill="none" stroke="none" />
+                      <path fill="currentColor"
+                        d="M104.704 685.248a64 64 0 0 0 90.496 0l316.8-316.8l316.8 316.8a64 64 0 0 0 90.496-90.496L557.248 232.704a64 64 0 0 0-90.496 0L104.704 594.752a64 64 0 0 0 0 90.496z" />
+                    </svg>
+                  </div>
+                </div>
+
+                <div data-kanban-add="todo">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="0.88em" height="1em" preserveAspectRatio="xMidYMid meet"
+                    viewBox="0 0 448 512">
+                    <rect x="0" y="0" width="448" height="512" fill="none" stroke="none" />
+                    <path fill="currentColor"
+                      d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32v144H48c-17.7 0-32 14.3-32 32s14.3 32 32 32h144v144c0 17.7 14.3 32 32 32s32-14.3 32-32V288h144c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
+                  </svg>
+                </div>
+              </section>
+
+              <section class="kanban-items kanban-items--todo"> 
+                <!-- for each kanban todo item -->
+                <!-- <div> here goes item </div> -->
+              </section>
+
+            </div>
+
+            <!-- kanban in-progress -->
+            <div class="kanban-section" data-kanban-section="inProgress">
+              <section class="kanban-head">
+                <div class="kanban-head__info">
+                  <div class="kanban-head__info--name">
+                    In Progress
+                  </div>
+                  <div class="kanban-head__info--number">
+                    9
+                  </div>
+                  <div class="kanban-head__info--reveal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 1024 1024">
+                      <rect x="0" y="0" width="1024" height="1024" fill="none" stroke="none" />
+                      <path fill="currentColor"
+                        d="M104.704 685.248a64 64 0 0 0 90.496 0l316.8-316.8l316.8 316.8a64 64 0 0 0 90.496-90.496L557.248 232.704a64 64 0 0 0-90.496 0L104.704 594.752a64 64 0 0 0 0 90.496z" />
+                    </svg>
+                  </div>
+                </div>
+
+                <div data-kanban-add="todo">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="0.88em" height="1em" preserveAspectRatio="xMidYMid meet"
+                    viewBox="0 0 448 512">
+                    <rect x="0" y="0" width="448" height="512" fill="none" stroke="none" />
+                    <path fill="currentColor"
+                      d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32v144H48c-17.7 0-32 14.3-32 32s14.3 32 32 32h144v144c0 17.7 14.3 32 32 32s32-14.3 32-32V288h144c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
+                  </svg>
+                </div>
+              </section>
+
+              <section class="kanban-item kanban-item--todo"> 
+              </section>
+            </div>
+
+            <!-- kanban completed -->
+            <div class="kanban-section" data-kanban-section="completed">
+              <section class="kanban-head">
+                <div class="kanban-head__info">
+                  <div class="kanban-head__info--name">
+                    Completed
+                  </div>
+                  <div class="kanban-head__info--number">
+                    12
+                  </div>
+                  <div class="kanban-head__info--reveal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 1024 1024">
+                      <rect x="0" y="0" width="1024" height="1024" fill="none" stroke="none" />
+                      <path fill="currentColor"
+                        d="M104.704 685.248a64 64 0 0 0 90.496 0l316.8-316.8l316.8 316.8a64 64 0 0 0 90.496-90.496L557.248 232.704a64 64 0 0 0-90.496 0L104.704 594.752a64 64 0 0 0 0 90.496z" />
+                    </svg>
+                  </div>
+                </div>
+
+                <div data-kanban-add="todo">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="0.88em" height="1em" preserveAspectRatio="xMidYMid meet"
+                    viewBox="0 0 448 512">
+                    <rect x="0" y="0" width="448" height="512" fill="none" stroke="none" />
+                    <path fill="currentColor"
+                      d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32v144H48c-17.7 0-32 14.3-32 32s14.3 32 32 32h144v144c0 17.7 14.3 32 32 32s32-14.3 32-32V288h144c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
+                  </svg>
+                </div>
+              </section>
+
+              <section class="kanban-item kanban-item--todo"> 
+              </section>
+            </div>
+            
+
+          </section>
+        </div>
       </main>
 
       <aside class="profy__sidepanel">

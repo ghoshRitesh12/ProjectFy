@@ -15,6 +15,7 @@ const refreshTokenRouter = require('./routes/refreshToken');
 const homeRouter = require('./routes/home');
 const apiRouter = require('./api/apiRoute');
 const noteRouter = require('./routes/note');
+const projectRouter = require('./routes/project');
 const confirmEmailRouter = require('./routes/confirmEmail');
 
 // middlewares
@@ -28,6 +29,7 @@ app.set('view engine', 'ejs');
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.static(path.resolve(__dirname, '..', 'frontend', 'public')));
+app.use('/project', express.static(path.resolve(__dirname, '..', 'frontend', 'public')));
 app.use(express.urlencoded({ extended: false }));
 
 
@@ -42,6 +44,7 @@ app.use(express.urlencoded({ extended: false }));
   app.use(userAuth);
   app.use('/', homeRouter);
   app.use('/note', noteRouter);
+  app.use('/project', projectRouter);
   app.use('/api/v1', apiRouter);
   app.post('/project/overview/info', (req, res) => {
     res.json(req.body);

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const projectObj = {
   type: mongoose.Schema.Types.ObjectId,
-  ref: 'notesCollection'
+  ref: 'projectsCollection'
 };
 
 const userSchema = new mongoose.Schema({
