@@ -1,4 +1,4 @@
-@use '../../components/' as *;
+@use '../../../../frontend/sass/components/' as *;
 
   
 ::-webkit-scrollbar { width: 1rem; }
@@ -99,7 +99,7 @@ body {
 
     --clr-secondary-hover: #444;
 
-    --clr-titlebar-bg: hsl(0, 0%, 13%);
+    --clr-titlebar-bg: hsla(0, 0%, 13%);
     --clr-sidebar-bg: #212121;
     --clr-dropdown-bg: #212121;
     --clr-navlist-hover: #383838;

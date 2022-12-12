@@ -118,6 +118,7 @@ textarea {
   width: 100%;
   overflow-y: auto;
   background-color: var(--clr-secondary-bg);
+  min-height: calc(100vh - var(--top-margin));
 }
 @media (min-width: 40em) {
   .profy__main {
@@ -207,35 +208,25 @@ textarea {
 .profy__main__header__name--createdBy {
   display: flex;
   align-items: center;
-  gap: 0.7rem;
+  gap: 0.3rem;
   flex-wrap: wrap;
   margin-inline: 0 auto;
   font-size: clamp(0.85rem, 3vmin, 1.05rem);
   color: var(--clr-primary-txt);
 }
+@media (min-width: 40em) {
+  .profy__main__header__name--createdBy {
+    gap: 0.5rem;
+  }
+}
 .profy__main__header__name--createdBy .__wrap {
   display: flex;
   align-items: center;
   gap: 0.3rem;
-}
-.profy__main__header__name--createdBy .__wrap--avatar {
-  --size: 1.4rem;
-  display: inline-block;
-  position: relative;
-  font-size: clamp(0.75rem, 3vmin, 0.85rem);
-  min-width: var(--size);
-  min-height: var(--size);
-  padding-block: 0.15em;
-  padding-inline: 0.18em;
-  color: white;
-  background-color: hsl(354deg, 64%, 60%);
-  text-align: center;
-  border-radius: 100%;
-}
-@media (min-width: 40em) {
-  .profy__main__header__name--createdBy .__wrap--avatar {
-    --size: 1.5rem;
-  }
+  background-color: hsla(199deg, 100%, 41%, 0.1);
+  color: var(--clr-logo-project);
+  padding: 0.05em 0.5em;
+  border-radius: 0.5rem;
 }
 .profy__main__header__options {
   margin-top: 0;
@@ -758,7 +749,7 @@ textarea {
 }
 
 .profy__main__section--ideas {
-  display: flex;
+  display: none;
   flex-wrap: wrap;
   gap: 3rem;
   justify-content: center;
@@ -1377,4 +1368,94 @@ textarea {
 }
 .profy__main__section--ideas--ideasContainer .delete__idea__description__btns button[type=submit]:hover {
   background-color: var(--clr-signout-bg-hover);
-}/*# sourceMappingURL=homeStyles.css.map */
+}
+
+.profy__main__section--kanban {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 5rem;
+  overflow: auto hidden;
+  padding-block: 2em;
+}
+@media (min-width: 40em) {
+  .profy__main__section--kanban {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(17rem, 1fr));
+    gap: 2rem;
+  }
+}
+@media (min-width: 64em) {
+  .profy__main__section--kanban {
+    padding-block: 3em;
+  }
+}
+.profy__main__section--kanban .kanban-section {
+  flex: 1 1;
+  max-width: 20rem;
+  min-width: 17rem;
+  border-radius: 0.7rem;
+  font-size: 16px;
+}
+.profy__main__section--kanban .kanban-section .kanban-head {
+  max-width: 100%;
+  width: 100%;
+}
+.profy__main__section--kanban .kanban-section .kanban-head__info {
+  display: flex;
+  align-items: flex-end;
+  gap: 1.2rem;
+  font-size: clamp(0.98rem, 3.2vmin, 1.1rem);
+}
+.profy__main__section--kanban .kanban-section .kanban-head__info--name {
+  position: relative;
+  margin-left: 0.3rem;
+  padding-left: 1rem;
+}
+.profy__main__section--kanban .kanban-section .kanban-head__info--name::before {
+  content: "";
+  position: absolute;
+  inset: 50% auto 50% 0;
+  margin-block: auto;
+  height: 0.5rem;
+  width: 0.5rem;
+  border-radius: 50%;
+  background-color: #3EC2ff;
+}
+.profy__main__section--kanban .kanban-section .kanban-head__info--number {
+  color: var(--clr-inactive-txt);
+}
+.profy__main__section--kanban .kanban-section .kanban-head__info--reveal {
+  font-size: 1rem;
+  margin-inline: auto 0.1rem;
+  padding: 0.4em 1em;
+  color: var(--clr-primary-icon);
+  background-color: var(--clr-sidebar-bg);
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+.profy__main__section--kanban .kanban-section .kanban-head__info--reveal > * {
+  pointer-events: none;
+}
+.profy__main__section--kanban .kanban-section .kanban-head [data-kanban-add] {
+  display: block;
+  width: 100%;
+  margin: 1rem 0 0 0;
+  padding: 0.7em 0;
+  font-size: 1.2rem;
+  color: var(--clr-primary-icon);
+  background-color: var(--clr-sidebar-bg);
+  border-radius: 0.7rem;
+  cursor: pointer;
+}
+.profy__main__section--kanban .kanban-section .kanban-head [data-kanban-add] > svg {
+  margin-inline: auto;
+  pointer-events: none;
+}
+.profy__main__section--kanban .kanban-section[data-kanban-section=inProgress] .kanban-head__info--name::before {
+  background-color: #F9825D;
+}
+.profy__main__section--kanban .kanban-section[data-kanban-section=completed] .kanban-head__info--name::before {
+  background-color: #66C266;
+}/*# sourceMappingURL=homeStyles.css.map */L=homeStyles.css.map */

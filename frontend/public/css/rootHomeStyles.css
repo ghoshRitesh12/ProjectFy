@@ -252,8 +252,6 @@ body[data-theme=dark] {
     margin-top: 0;
     --pad-inline: 3em;
     background-color: var(--clr-titlebar-bg);
-    -webkit-backdrop-filter: blur(1rem);
-            backdrop-filter: blur(1rem);
   }
 }
 @media (min-width: 64em) {

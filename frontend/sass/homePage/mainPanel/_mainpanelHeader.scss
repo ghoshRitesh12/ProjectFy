@@ -1,4 +1,4 @@
-@use '../../components/' as *;
+@use '../../../../frontend/sass/components/' as *;
 
 .profy__main__header {
   display: flex;
@@ -42,35 +42,21 @@
     &--createdBy {
       display: flex;
       align-items: center;
-      gap: .7rem;
+      gap: .3rem;
       flex-wrap: wrap;
 
       margin-inline: 0 auto;
       font-size: clamp(.85rem, 3vmin, 1.05rem);
       color: var(--clr-primary-txt);
+      @include breakpoint(medium) { gap: .5rem; }
       & .__wrap {
         display: flex;
         align-items: center;
         gap: .3rem;
-
-        &--avatar {
-          --size: 1.4rem;
-          display: inline-block;
-          position: relative;
-          font-size: clamp(.75rem, 3vmin, .85rem);
-
-          min-width: var(--size);
-          min-height: var(--size);
-          padding-block: .15em;
-          padding-inline: .18em;
-
-          color: white;
-          // color: var(--clr-primary-txt);
-          background-color: hsl(354, 64%, 60%);
-          text-align: center;
-          border-radius: 100%;
-          @include breakpoint(medium) { --size: 1.5rem; }
-        }
+        background-color: hsla(199, 100%, 41%, .1);
+        color: var(--clr-logo-project);
+        padding: .05em .5em;
+        border-radius: $borders;
       }      
     }
   }

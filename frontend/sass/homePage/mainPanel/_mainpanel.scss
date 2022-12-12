@@ -1,4 +1,4 @@
-@use '../../components/' as *;
+@use '../../../../frontend/sass/components/' as *;
 
 .profy__main {
   --top-margin: calc(var(--pad-titlebar) * 4.2);
@@ -18,6 +18,7 @@
   overflow-y: auto;
   background-color: var(--clr-secondary-bg);
   
+  min-height: calc(100vh - var(--top-margin));
 
   @include breakpoint(medium) {
     flex-grow: 1;
