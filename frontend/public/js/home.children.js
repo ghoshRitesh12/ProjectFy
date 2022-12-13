@@ -183,6 +183,23 @@ addGlobalEventListener('click', '[data-ideaDelete-modal-close]', e => $('[data-i
 //----</profy_ideas section>
 
 
+//----<profy_kanban section>
+
+addGlobalEventListener('click', '[data-kanban-item-option-icon]', e => {
+  const optionsEl = e.target.nextElementSibling;
+  const isOpen = (optionsEl.getAttribute('aria-hidden') === 'true') ? 'false' : 'true';
+  optionsEl.setAttribute('aria-hidden', isOpen);
+
+})
+
+addGlobalEventListener('click', '[data-kanban-move-to]', e => {
+  // send an api req to shift the kanban section
+  const sectionToMoveTo = e.target.dataset.kanbanMoveTo;
+  console.log(sectionToMoveTo);
+  // location.reload();
+})
+
+//----</profy_kanban section>
 
 
 

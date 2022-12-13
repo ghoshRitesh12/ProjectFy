@@ -36,8 +36,52 @@ body {
 
   scrollbar-width: thin;
   scrollbar-color: var(--clr-scrlbar-thumb) var(--clr-sidebar-bg);
-
 }
+
+// @media (prefers-color-scheme: dark) {
+//   body {
+//     --clr-logo-project: #65ceff;
+//     --clr-logo-Fy: #eee;
+
+//     --prim-btn-clr: hsl(199 100% 80%);
+//     --prim-btn-clr-bg: hsl(199 100% 50% / .3);
+
+//     --clr-primary-bg: #181818;
+//     // --clr-primary-bg: #0f0f0f;
+//     --clr-primary-txt: #eee;
+//     --clr-primary-icon: #eee;
+//     --clr-secondary-txt: #eee;
+//     --clr-secondary-bg: var(--clr-primary-bg);
+//     --clr-ternary-bg: #181818;
+//     --clr-inactive-txt: #999;
+
+//     --clr-secondary-hover: #444;
+
+//     --clr-titlebar-bg: hsla(0, 0%, 13%);
+//     --clr-sidebar-bg: #212121;
+//     --clr-dropdown-bg: #212121;
+//     --clr-navlist-hover: #383838;
+//     --clr-options-hover: #181818;
+
+//     --clr-scrlbar-track: var(--clr-sidebar-bg);
+//     --clr-scrlbar-thumb: #666;
+//     --clr-scrlbar-thumb-hover: #777;
+
+//     --clr-lm-active: var(--clr-navlist-hover);
+//     --clr-dm-active: var(--clr-sidebar-bg);
+    
+//     --clr-separator-brdr: #383838;
+//     --clr-signout-txt: hsl(0, 100%, 73%);
+//     --clr-signout-bg: hsl(0 100% 68% / .15);
+//     --clr-signout-bg-hover: hsl(0 100% 68% / .25);
+//     --clr-input-field: #0a0a0a;
+
+//     --clr-acc-bxshw: hsla(0, 0%, 93%, 0.2);
+//     --clr-edit-btn: hsl(160 74% 66%);
+//     --clr-edit-btn-hover: hsl(160 74% 66% / .3);
+//     --clr-edit-btn-bg: hsl(160 74% 66% / .2);
+//   }
+// }
 
 body {
   // &[data-theme="light"] {
@@ -133,24 +177,6 @@ body {
   }
 }
 
-
-// .profy {
-//   display: block;
-//   background-color: var(--clr-secondary-bg);
-
-//   max-width: 100%;
-//   width: 100%;
-
-//   @include breakpoint(medium) {
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     flex-direction: row;
-
-//     max-height: calc(100vh - var(--top-margin));
-//     min-height: calc(100vh - var(--top-margin));
-//   }
-// }
 
 .profy {
   --pad-titlebar: 1rem;

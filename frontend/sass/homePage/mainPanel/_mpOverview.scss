@@ -8,9 +8,9 @@
     gap: clamp(.6rem, 6vmin, 3rem);
 
     padding-block: .5em 0em;
-    scrollbar-width: none;
     overflow-x: auto;
     border-bottom: 2px solid var(--clr-separator-brdr);
+    scrollbar-width: none;
     &::-webkit-scrollbar { display: none; }
 
     & [data-project-section-options] {

@@ -42,13 +42,12 @@
     &--createdBy {
       display: flex;
       align-items: center;
-      gap: .3rem;
+      gap: .5rem;
       flex-wrap: wrap;
 
       margin-inline: 0 auto;
       font-size: clamp(.85rem, 3vmin, 1.05rem);
       color: var(--clr-primary-txt);
-      @include breakpoint(medium) { gap: .5rem; }
       & .__wrap {
         display: flex;
         align-items: center;

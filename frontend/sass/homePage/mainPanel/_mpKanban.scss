@@ -9,7 +9,7 @@
   // grid-template-columns: repeat(3, minmax(17rem, 1fr));
   // display: flex;
   // justify-content: space-evenly;
-  gap: 5rem;
+  gap: 3rem;
 
   overflow: auto hidden;
 
@@ -26,21 +26,19 @@
   & .kanban-section {
     // flex: 0 1 19rem;
     flex: 1 1;
-
-    // display: flex;
-    // flex-direction: column;
-    // align-items: flex-start;
-    // gap: .7rem;
-
+    
+    margin-inline: auto;
+    margin-bottom: auto;
     max-width: 20rem;
     min-width: 17rem;
-
-    //temporary
-    // background-color: var(--clr-sidebar-bg); 
-    // outline: 1px solid white;
-
-    border-radius: .7rem;
+    
     font-size: 16px;
+    border-radius: .7rem;
+    // overflow: hidden;
+    
+    // for mobile collapse
+    &.collapse { max-height: 2rem; }
+
 
     & .kanban-head {
       max-width: 100%;
@@ -73,7 +71,8 @@
           }
         }
         &--number { color: var(--clr-inactive-txt); }
-        &--reveal { 
+        &--reveal {
+          display: block;
           font-size: 1rem;
           margin-inline: auto .1rem;
           padding: .4em 1em;
@@ -84,6 +83,7 @@
           border-radius: .5rem;
           cursor: pointer;
           & > * { pointer-events: none; }
+          // @include breakpoint(medium) { display: none; }
         }
       }
 
@@ -107,7 +107,111 @@
       }
     }
 
+    & .kanban-list {
+      // border: 1px solid red;
 
+      &__item {
+        position: relative;
+        isolation: isolate;
+        z-index: 72;
+
+        margin-top: .7rem;
+        padding: 1em;
+        background-color: var(--clr-sidebar-bg);
+        border-radius: $borders;
+        // overflow-x: hidden;
+
+        &__head {
+          display: flex;
+          align-items: flex-start;
+          align-items: center;
+          justify-content: space-between;
+          gap: .5rem;
+          max-width: 100%;
+
+          &--labels {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem;
+          }
+          & .kanban-item__label {
+            // background-color: var(--clr-label);
+            color: #222;
+            background-color: #00aeff;
+
+            font-size: .85rem;
+            border-radius: 2rem;
+            padding: .2em 1em;
+            font-weight: 500;
+          }
+
+
+          &--options-wrap {
+            flex-shrink: 0;
+          }
+          & [data-kanban-item-option-icon] {
+            font-size: .9rem;
+            padding: .3em .1em .7em .6em;
+            cursor: pointer;
+            color: var(--clr-primary-icon);
+            & > * { pointer-events: none; }
+            // outline: 1px solid red;
+
+          }
+          & .kanban-item__options {
+            position: absolute;
+            right: 0;
+            z-index: 82;
+            isolation: isolate;
+
+            margin: .8rem 1rem 0 0;
+            background-color: var(--clr-primary-bg);
+            border: 1px solid var(--clr-separator-brdr);
+            overflow: hidden;
+            border-radius: $borders;
+
+            transition: .2s ease, .1s ease opacity;
+            visibility: hidden;
+            opacity: 0;
+            transform: translateY(-.5rem);
+            &[aria-hidden="false"] {
+              visibility: visible;
+              opacity: 1;
+              transform: translateY(0);
+            }
+
+            
+            & [data-kanban-item-option] {
+              margin-top: .2rem;
+              padding: .4em 1em;
+              font-size: .95rem;
+              cursor: pointer;
+              transition: .1s ease;
+              background: transparent;
+
+              &:hover { 
+                background-color: var(--clr-separator-brdr);
+              }
+              &:last-child { margin-bottom: .2rem; }
+              & > * { pointer-events: none; }
+            }
+          }
+
+        }
+
+        &__title {
+          color: var(--clr-primary-txt);
+          margin-top: .9rem;
+          font-size: 1.05rem;
+        }
+        &__description {
+          margin-top: .3rem;
+          color: var(--clr-inactive-txt);
+          font-size: .95rem;
+        }
+
+      }
+    }
 
 
     &[data-kanban-section="inProgress"] .kanban-head__info--name::before {
