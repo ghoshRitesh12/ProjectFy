@@ -39,8 +39,18 @@ const userSchema = new mongoose.Schema({
   verified:  { type: Boolean, default: false },
   profileImg: { type: String, trim: true },
   userTheme: { type: String, default: 'light' },
-  labels: [String],
-  projects: [projectObj]
+  projects: [projectObj],
+  labels: [{
+    name: {
+      type: String,
+      required: true,
+      trim: true
+    },
+    color: {
+      type: String,
+      default: "#ff7575"
+    }
+  }]
 }, { collection: 'users' });
 
 module.exports = mongoose.model('users', userSchema);
