@@ -1,8 +1,8 @@
 @use '../../../../frontend/sass/components/' as *;
 
 .profy__main__section--ideas {
-  display: none;
   // display: flex;
+  display: none;
   flex-wrap: wrap;
   gap: 3rem;
   justify-content: center;
@@ -364,6 +364,7 @@
       &:not([open]) { display: none; }
       &::backdrop {
         background-color: hsl(0 0 0 / .6);
+        backdrop-filter: blur(.3rem);
       }
     }
     & .edit__idea {
@@ -574,6 +575,7 @@
       &:not([open]) { display: none; }
       &::backdrop {
         background-color: hsl(0 0 0 / .7);
+        backdrop-filter: blur(.3rem);
       }
     }
     & .delete__idea {

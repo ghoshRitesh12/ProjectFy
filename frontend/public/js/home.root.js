@@ -89,6 +89,36 @@ e => {
 
 
 
+
+//----<profy_main header>
+$('[data-project-options-icon]').addEventListener('click', e => {
+  e.target.blur();
+  if(!$('[data-project-options-dropdown]').classList.contains('open')) {
+    $('[data-project-options-dropdown]').classList.add('open');
+    $('[data-project-options-backdrop]').setAttribute('aria-hidden', 'false');
+    // document.body.style.overflowY = 'hidden';
+    return;
+  } 
+
+  $('[data-project-options-dropdown]').classList.remove('open');
+  $('[data-project-options-backdrop]').setAttribute('aria-hidden', 'true');
+  // document.body.style.overflowY = 'auto';
+})
+addGlobalEventListener('click', '[data-project-options]', 
+e => {
+  $('[data-project-options-dropdown]').classList.remove('open');
+  $('[data-project-options-backdrop]').setAttribute('aria-hidden', 'true');
+  // document.body.style.overflowY = 'auto';
+})
+addGlobalEventListener('click', '[data-project-options-backdrop]', 
+e => {
+  e.target.setAttribute('aria-hidden', 'true');
+  $('[data-project-options-dropdown]').classList.remove('open');
+  // document.body.style.overflowY = 'auto';
+})
+//----</profy_main header>
+
+
 // imp home navigation
 addGlobalEventListener('click', '[data-nav]', 
   e => window.location.href = e.target.dataset.nav 
