@@ -1,7 +1,7 @@
 import { $, $$, addGlobalEventListener } from './utility.js';
 
 //----<profy_kanban section>
-
+// kanban item option
 addGlobalEventListener('click', '[data-kanban-item-option-icon]', e => {
   const optionsEl = e.target.nextElementSibling;
   const isOpen = (optionsEl.getAttribute('aria-hidden') === 'true') ? 'false' : 'true';
@@ -12,6 +12,7 @@ addGlobalEventListener('click', '[data-kanban-item-option]', e => {
   optionsEl.setAttribute('aria-hidden', 'true');
 })
 
+// shifting kanban item
 addGlobalEventListener('click', '[data-kanban-move-to]', e => {
   // send an api req to shift the kanban section
   const sectionToMoveTo = e.target.dataset.kanbanMoveTo;
@@ -19,29 +20,41 @@ addGlobalEventListener('click', '[data-kanban-move-to]', e => {
   // location.reload();
 })
 
-function filterLabels(allLabels, itemLabels) {
 
-}
+// create kanban item
+// EVL
 
 // edit kanban item
-addGlobalEventListener('click', '[data-kanban-item-option="edit"]', e => {
+addGlobalEventListener('click', '[data-kanban-item-option="edit"]', async e => {
   const kanbanSection = e.target.closest('.kanban-section').dataset.kanbanSection;
   const kanbanItem = e.target.closest('.kanban-list__item');
-  const allLabels = [...$$('[data-label-list-item]')].map(j => j.innerText);
-  const itemLabels = [...kanbanItem.querySelectorAll('.kanban-item__label')].map(i => i.textContent);
-  const restLabels = allLabels.filter(item => !itemLabels.includes(item));
-
-  const formAction = `/${kanbanSection}/edit/${kanbanItem.dataset.kanbanItemId}`; 
+  const formAction = `${kanbanSection}/edit/${kanbanItem.dataset.kanbanItemId}`; 
   $('.edit__kanban').setAttribute('action', formAction);
 
+  const allLabels = [...$$('[data-label-list-item]')].map(j => { 
+    return { 'text': j.innerText, 'el': j } 
+  });
+  const itemLabels = [...kanbanItem.querySelectorAll('.kanban-item__label')].map(i => { 
+    return { 'text': i.textContent, 'el': i } 
+  });
+  const restLabels = allLabels.filter(item => {
+    const iL = itemLabels.map(i => i.text.trim());
+    if(!iL.includes(item.text.trim())) 
+      return { 'text': item.textContent, 'el': item }
+  });
+
   for(const i of itemLabels) {
+    const labelColor = getComputedStyle(i.el).getPropertyValue('--clr-label') || '#00AEFF';
     const existingLabel = $('#template_existing-label').content.cloneNode(true).children[0];
-    existingLabel.querySelector('.existing-label__item--name').innerText = i;
+    existingLabel.style.setProperty('--clr-existing-label', labelColor);
+    existingLabel.querySelector('.existing-label__item--name').textContent = i.text;
     $('.edit__kanban__existing-labels').append(existingLabel);
   }
   for(const i of restLabels) {
+    const labelColor = getComputedStyle(i.el).getPropertyValue('--rndm-clr');
     const restLabel = $('#template_rest-label').content.cloneNode(true).children[0];
-    restLabel.querySelector('.rest-label__item--name').innerText = i;
+    restLabel.style.setProperty('--clr-rest-label', labelColor);
+    restLabel.querySelector('.rest-label__item--name').textContent = i.text;
     $('.edit__kanban__rest-labels').append(restLabel);
   }
 
@@ -50,11 +63,11 @@ addGlobalEventListener('click', '[data-kanban-item-option="edit"]', e => {
   $('[data-kanban-edit-title]').value = kanbanItemTitle;
   $('[data-kanban-edit-description]').textContent = kanbanItemDescription;
 
-
   // console.log(allLabels);
   // console.log(itemLabels);
   // console.log(restLabels);
 
+  document.body.dataset.scrolly = 'false';
   $('[data-kanban-edit-modal]').showModal();
 })
 addGlobalEventListener('click', '[data-kanban-edit-modal-close]', e => {
@@ -62,8 +75,9 @@ addGlobalEventListener('click', '[data-kanban-edit-modal-close]', e => {
   $('.edit__kanban__rest-labels').innerHTML = '';
   $('[data-kanban-edit-title]').value = '';
   $('[data-kanban-edit-description]').textContent = '';
+  $('.edit__kanban').setAttribute('action', '');
   
-
+  document.body.dataset.scrolly = 'true';
   $('[data-kanban-edit-modal]').close();
 })
 
@@ -72,36 +86,88 @@ addGlobalEventListener('click', '[data-kanban-edit-existing-label-delete]',
 e => {
   const currentLabel = e.target.parentElement;
   const currentLabelName = e.target.previousElementSibling.innerText;
-
+  const labelColor = getComputedStyle(currentLabel).getPropertyValue('--clr-existing-label') || '#00AEFF';
+  
   const restLabel = $('#template_rest-label').content.cloneNode(true).children[0];
   restLabel.querySelector('.rest-label__item--name').innerText = currentLabelName;
+  restLabel.style.setProperty('--clr-rest-label', labelColor);
   $('.edit__kanban__rest-labels').append(restLabel);
 
+  restLabel.parentElement.scrollLeft = restLabel.parentElement.scrollWidth;
   currentLabel.remove();
 })
-
 // kanban item add rest label
 addGlobalEventListener('click', '[data-kanban-edit-rest-label-add]',
 e => {
   const currentLabel = e.target.parentElement;
   const currentLabelName = e.target.previousElementSibling.innerText;
+  const labelColor = getComputedStyle(currentLabel).getPropertyValue('--clr-rest-label') || '#00AEFF';
 
   const existingLabel = $('#template_existing-label').content.cloneNode(true).children[0];
   existingLabel.querySelector('.existing-label__item--name').innerText = currentLabelName;
+  existingLabel.style.setProperty('--clr-existing-label', labelColor);
   $('.edit__kanban__existing-labels').append(existingLabel);
 
+  existingLabel.parentElement.scrollLeft = existingLabel.parentElement.scrollWidth;
   currentLabel.remove();
 })
 
 
-
-// addGlobalEventListener('click', '[data-kanban-item-option="delete"]', e => {})
-
 // kanban delete option
-addGlobalEventListener('click', '[data-kanban-item-option="delete"]', e => $('[data-kanban-delete-modal]').showModal())
-addGlobalEventListener('click', '[data-kanban-delete-modal-close]', e => $('[data-kanban-delete-modal]').close())
+addGlobalEventListener('click', '[data-kanban-item-option="delete"]', e => {
+  const kanbanItem = e.target.closest('.kanban-list__item');
+  const formAction = `/delete/${kanbanItem.dataset.kanbanItemId}`; 
+  $('.delete__kanban').setAttribute('action', formAction);
+
+  document.body.dataset.scrolly = 'false';
+  $('[data-kanban-delete-modal]').showModal();
+})
+addGlobalEventListener('click', '[data-kanban-delete-modal-close]', e => {
+  $('.delete__kanban').setAttribute('action', '');
+  
+  document.body.dataset.scrolly = 'true';
+  $('[data-kanban-delete-modal]').close()
+})
+
+
+// kanban edit form submit
+$('.edit__kanban').addEventListener('submit', async e => {
+  e.preventDefault();
+  const url = `${location.href}/${e.target.getAttribute('action').trim()}`;
+  const kanbanTitle = e.target.querySelector('[data-kanban-edit-title]').value.trim();
+  const kanbanDescription = e.target.querySelector('[data-kanban-edit-description]').textContent.trim();
+  const kanbanLabels = [...$$('.existing-label__item')].map(i => {
+    return {
+      name: i.querySelector('.existing-label__item--name').textContent.trim(),
+      color: getComputedStyle(i).getPropertyValue('--clr-existing-label')
+    }
+  })
+  const kanbanItemInfo = {
+    kanbanTitle,
+    kanbanDescription,
+    kanbanLabels
+  };
+  console.log(kanbanItemInfo);
+
+  try {
+    const resp = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(kanbanItemInfo)
+    })
+    
+    console.log(resp);
+
+  } catch (err) {
+    console.log(err.message);
+  }
+})
+
 
 //----</profy_kanban section>
 
 // /project/175437521742/kanban/todo/create 
 // /project/175437521742/kanban/todo/edit/8647264 : 8647264 is kanban item id
+

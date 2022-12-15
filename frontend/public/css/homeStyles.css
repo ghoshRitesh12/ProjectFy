@@ -1487,7 +1487,7 @@ textarea {
 }
 .profy__main__section--kanban .kanban-section .kanban-list__item__head .kanban-item__label {
   color: #222;
-  background-color: #00aeff;
+  background-color: var(--clr-label, #00aeff);
   font-size: 0.85rem;
   border-radius: 2rem;
   padding: 0.2em 1em;
@@ -1584,8 +1584,8 @@ textarea {
 .profy__main__section--kanban .edit__kanban {
   position: relative;
   isolation: isolate;
-  min-width: 17rem;
-  max-width: 17rem;
+  min-width: 17.5rem;
+  max-width: 17.5rem;
   overflow: hidden;
   border-radius: 0.8rem;
   background-color: var(--clr-sidebar-bg);
@@ -1601,14 +1601,14 @@ textarea {
 .profy__main__section--kanban .edit__kanban__header--txt {
   color: var(--clr-primary-txt);
   margin-left: auto;
-  word-spacing: 0.3rem;
-  font-size: 1.2rem;
+  word-spacing: 0.2rem;
+  font-size: 1.1rem;
 }
 .profy__main__section--kanban .edit__kanban__header--cancelIcon {
   display: block;
   margin-inline: auto 0;
-  font-size: 1.1rem;
   padding: 0.3em;
+  font-size: 1.1rem;
   background-color: var(--clr-separator-brdr);
   color: var(--clr-inactive-txt);
   border-radius: 50%;
@@ -1652,7 +1652,6 @@ textarea {
   gap: 0.3rem;
   font-size: 0.9rem;
   padding: 0.2em 0em 0.2em 0.8em;
-  background-color: #F9825D;
   border-radius: 2rem;
   overflow: hidden;
 }
@@ -1699,7 +1698,6 @@ textarea {
   gap: 0.3rem;
   font-size: 0.9rem;
   padding: 0.2em 0em 0.2em 0.8em;
-  background-color: #f95d77;
   border-radius: 2rem;
   overflow: hidden;
 }
@@ -1708,7 +1706,7 @@ textarea {
   font-weight: 500;
 }
 .profy__main__section--kanban .edit__kanban__rest-labels .rest-label__item--plus {
-  color: #333;
+  color: #222;
   padding: 0.2em 0.4em 0.2em 0.3em;
 }
 .profy__main__section--kanban .edit__kanban__title {
@@ -1749,8 +1747,8 @@ textarea {
   padding: 0.4em 0.7em;
   max-width: 100%;
   width: 100%;
-  min-height: 6rem;
-  max-height: 6rem;
+  min-height: 7rem;
+  max-height: 7rem;
   overflow: hidden auto;
   resize: none;
   background-color: var(--clr-primary-bg);
@@ -1884,4 +1882,4 @@ textarea {
 }
 .profy__main__section--kanban .delete__kanban__description__btns button[type=submit]:hover {
   background-color: var(--clr-signout-bg-hover);
-}/*# sourceMappingURL=homeStyles.css.map */
+}/*# sourceMappingURL=homeStyles.css.map */urceMappingURL=homeStyles.css.map */
