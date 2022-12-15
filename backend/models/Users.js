@@ -5,6 +5,17 @@ const projectObj = {
   ref: 'projectsCollection'
 };
 
+const labelSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    trim: true
+  },
+  color: {
+    type: String,
+    default: "hsl(0, 100%, 73%)"
+  }
+})
+
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -40,17 +51,7 @@ const userSchema = new mongoose.Schema({
   profileImg: { type: String, trim: true },
   userTheme: { type: String, default: 'light' },
   projects: [projectObj],
-  labels: [{
-    name: {
-      type: String,
-      required: true,
-      trim: true
-    },
-    color: {
-      type: String,
-      default: "#ff7575"
-    }
-  }]
+  labels: [labelSchema]
 }, { collection: 'users' });
 
 module.exports = mongoose.model('users', userSchema);
