@@ -47,77 +47,78 @@ const handleSignin = async (req, res) => {
     }
 
     // checking for correct password
-    if(await bcrypt.compare(password, foundUser.password)) {
-      
-      if(foundUser.verified === false) {
-        info.emailVerified = false;
-        info.emailId = emailId; info.pwd = password;
-
-        jwt.sign(
-          { "user": foundUser._id },
-          process.env.EMAIL_SECRET,
-          { expiresIn: '10m' },
-          async (err, newEmailToken) => {
-            if(err) {
-              info.serverError = 'Server error while sending confirmation email';
-              return res.redirect('/signin');
-            }
-
-            const confirmUrl = `${req.protocol}://${req.get('host')}/confirmation/${newEmailToken}`
-            sendEmail({
-              receiver: emailId,
-              subject: 'Confirmation Email',
-              html: `
-              <h3 style="font-family: sans-serif; color: #333">
-                Please click this link to confirm your account: 
-                <br/> <a href="${confirmUrl}">${confirmUrl}</a>
-                <br/> Link valid upto 10 mins from arrival
-              </h3>
-              `,
-              // text: `Click this link to confirm and continue to your Account: ${confirmUrl}`,
-            });
-
-            res.redirect('/signin');
-          }
-        ) 
-        return;
-      }
-
-      const accessToken = jwt.sign(
-        { "uuid": foundUser.uuid },
-        process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: '15m' }
-      );
-
-      const refreshToken = jwt.sign(
-        { "uuid": foundUser.uuid },
-        process.env.REFRESH_TOKEN_SECRET,
-        { expiresIn: '1d' }
-      );
-
-      foundUser.refreshToken = refreshToken;
-      await foundUser.save();
-
-      res.cookie(
-        'access_token',
-        `Bearer ${accessToken}`,
-        { httpOnly: true, maxAge: 15 * 60 * 1000 }
-      )
-      res.cookie(
-        'refresh_token',
-        refreshToken,
-        { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 }
-      )
-
-      return res.redirect('/');
-    } else {
+    if(!await bcrypt.compare(password, foundUser.password)) {
       info.pwd = password;
       info.emailId = emailId;
       info.error = 'In-valid credentials';
 
       return res.redirect('/signin');
     }
+      
+    if(foundUser.verified === false) {
+      info.emailVerified = false;
+      info.emailId = emailId; info.pwd = password;
+
+      jwt.sign(
+        { "user": foundUser._id },
+        process.env.EMAIL_SECRET,
+        { expiresIn: '10m' },
+        async (err, newEmailToken) => {
+          if(err) {
+            info.serverError = 'Server error while sending confirmation email';
+            return res.redirect('/signin');
+          }
+
+          const confirmUrl = `${req.protocol}://${req.get('host')}/confirmation/${newEmailToken}`
+          sendEmail({
+            receiver: emailId,
+            subject: 'Confirmation Email',
+            html: `
+            <h3 style="font-family: sans-serif; color: #333">
+              Please click this link to confirm your account: 
+              <br/> <a href="${confirmUrl}">${confirmUrl}</a>
+              <br/> Link valid upto 10 mins from arrival
+            </h3>
+            `,
+            // text: `Click this link to confirm and continue to your Account: ${confirmUrl}`,
+          });
+
+          res.redirect('/signin');
+        }
+      ) 
+      return;
+    }
+
+    const accessToken = jwt.sign(
+      { "uuid": foundUser.uuid },
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: '15m' }
+    );
+
+    const refreshToken = jwt.sign(
+      { "uuid": foundUser.uuid },
+      process.env.REFRESH_TOKEN_SECRET,
+      { expiresIn: '1d' }
+    );
+
+    foundUser.refreshToken = refreshToken;
+    await foundUser.save();
+
+    res.cookie(
+      'access_token',
+      `Bearer ${accessToken}`,
+      { httpOnly: true, maxAge: 15 * 60 * 1000 }
+    )
+    res.cookie(
+      'refresh_token',
+      refreshToken,
+      { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 }
+    )
+
+    return res.redirect('/');
+    
   } catch (err) {
+    console.log(err.message);
     res.redirect('/signin');
   }
 }
