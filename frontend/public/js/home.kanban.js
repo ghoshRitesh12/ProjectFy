@@ -157,8 +157,9 @@ $('.edit__kanban').addEventListener('submit', async e => {
       },
       body: JSON.stringify(kanbanItemInfo)
     })
-    
+
     console.log(resp);
+    // location.reload();
 
   } catch (err) {
     console.log(err.message);
