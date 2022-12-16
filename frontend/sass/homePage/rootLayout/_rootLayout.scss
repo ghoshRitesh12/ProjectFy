@@ -20,13 +20,13 @@ body {
   .2s ease-in background-color;
   min-width: 100%;
 
-  & [data-scrollY="true"] {
-    overflow-y: auto;
+  &[data-scrolly="false"] {
+    overflow-y: hidden;
   }
 
   @include breakpoint(medium) {
     // overflow: hidden;
-    overflow: auto;
+    // overflow: auto;
     min-width: 100%;
   }
   ::selection {

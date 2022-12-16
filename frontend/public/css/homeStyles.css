@@ -410,7 +410,7 @@ textarea {
 }
 
 .profy__main__section--overview {
-  display: none;
+  display: flex;
   gap: 2rem 2.5rem;
   flex-wrap: wrap;
   justify-content: center;
@@ -620,9 +620,16 @@ textarea {
 .profy__main__section--overview .section--overview__progress {
   display: inline-block;
   padding: 1em 1em 2em 1em;
+  isolation: isolate;
   max-width: -webkit-fit-content;
   max-width: -moz-fit-content;
   max-width: fit-content;
+  transform: scale(-0.82) rotate(180deg);
+}
+@media (min-width: 40em) {
+  .profy__main__section--overview .section--overview__progress {
+    transform: scale(1) rotate(0);
+  }
 }
 .profy__main__section--overview .section--overview__progress .circle {
   --circle-size: 10rem;
@@ -638,7 +645,7 @@ textarea {
   display: block;
   height: var(--circle-size);
   width: var(--circle-size);
-  transform: rotate(90deg) scaleX(-1);
+  transform: rotate(-90deg);
 }
 .profy__main__section--overview .section--overview__progress .circle svg circle {
   height: var(--circle-size);
@@ -1374,7 +1381,7 @@ textarea {
 }
 
 .profy__main__section--kanban {
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
@@ -1384,7 +1391,7 @@ textarea {
 }
 @media (min-width: 40em) {
   .profy__main__section--kanban {
-    display: grid;
+    display: none;
     grid-template-columns: repeat(3, minmax(17rem, 1fr));
     gap: 2rem;
   }
@@ -1882,4 +1889,4 @@ textarea {
 }
 .profy__main__section--kanban .delete__kanban__description__btns button[type=submit]:hover {
   background-color: var(--clr-signout-bg-hover);
-}/*# sourceMappingURL=homeStyles.css.map */urceMappingURL=homeStyles.css.map */
+}/*# sourceMappingURL=homeStyles.css.map */

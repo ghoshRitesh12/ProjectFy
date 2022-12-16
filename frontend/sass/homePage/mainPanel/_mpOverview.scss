@@ -74,8 +74,8 @@
 }
 
 .profy__main__section--overview {
-  display: none;
-  // display: flex;
+  // display: none;
+  display: flex;
   gap: 2rem 2.5rem;
   flex-wrap: wrap;
   justify-content: center;
@@ -298,9 +298,13 @@
   & .section--overview__progress {
     display: inline-block;
     padding: 1em 1em 2em 1em;
-    // margin-inline: 0 auto;
-    // border: 1px solid greenyellow;
+    isolation: isolate;
     max-width: fit-content;
+    
+    transform: scale(-.82) rotate(180deg);
+    @include breakpoint(medium) {
+      transform: scale(1) rotate(0);
+    }
 
     & .circle {
       --circle-size: 10rem;
@@ -317,7 +321,8 @@
         display: block;
         height: var(--circle-size);
         width: var(--circle-size);
-        transform: rotate(90deg) scaleX(-1);
+        transform: rotate(-90deg);
+        // transform: rotate(90deg) scaleX(-1);
       }
       svg circle {
         height: var(--circle-size);
