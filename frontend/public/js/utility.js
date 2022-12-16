@@ -13,33 +13,31 @@ const randomBoxClr = () => {
   return `hsl(${hue}, 64%, 60%)`;
 }
 
+
 const elaspedTime = (endDate, startDate) => {
-  const aDayInMs = (24 * 60 * 60 * 1000);
+  const DAY_IN_MS = (24 * 60 * 60 * 1000);
   const todaysDate = `${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDate()}`;
+  const endDInMs = new Date(endDate).getTime();
+  const startDInMs = new Date(startDate).getTime();
+  let todayDInMs = new Date(todaysDate).getTime();
   // console.log('Start Date:', startDate,'\nEnd Date:', endDate);
 
-  const endDInMs = new Date(endDate).getTime();
-  let startDInMs = new Date(startDate).getTime();
-  let todayDInMs = new Date(todaysDate).getTime();
-
   const totalTimeDiff = endDInMs - startDInMs;
-  const totalDays = totalTimeDiff / aDayInMs;
-  if(startDInMs > endDInMs)
-    startDInMs = endDInMs;
-
-  if(todayDInMs > endDInMs)
-    todayDInMs = endDInMs;
-  const currentTimeDiff = todayDInMs - startDInMs;
-  const daysPassed = currentTimeDiff / aDayInMs;
-
-  const daysLeft = totalDays - daysPassed;
-  const timeElasped = Math.round((daysPassed / totalDays) * 100) || 0;
-
-  // console.log('%s days total', totalDays);
-  // console.log('%s days passed', daysPassed)
-  // console.log('%s day(s) left', daysLeft)
-  // console.log('time elasped: %f%', timeElasped);
+  const totalDays = totalTimeDiff / DAY_IN_MS;
   
+  if(startDInMs > todayDInMs) todayDInMs = startDInMs
+  if(endDInMs < todayDInMs) todayDInMs = endDInMs
+  
+  const currentTimeDiff = todayDInMs - startDInMs;
+  const daysPassed = currentTimeDiff / DAY_IN_MS;
+  const daysLeft = totalDays - daysPassed;
+  
+  let timeElasped = Math.round((daysPassed / totalDays) * 100);
+  timeElasped = isNaN(timeElasped) ? 100 : timeElasped;
+  
+  // console.log('Total Days ', totalDays);
+  // console.log('Days Left ', daysLeft);
+  // console.log(`Time Elasped: ${timeElasped}%`);  
 
   return {
     time: timeElasped,
@@ -49,7 +47,6 @@ const elaspedTime = (endDate, startDate) => {
 
 
 const workCompleted = (completedTasks, totalTasks) => {
-
   const workDone = Math.round((completedTasks / totalTasks) * 100);
   const tasksLeft = totalTasks - completedTasks;
 
