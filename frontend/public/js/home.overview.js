@@ -19,12 +19,14 @@ addGlobalEventListener('click', '[data-overview-edit-btn]', e => {
   }
   inputField.removeAttribute('readonly');
   (inputField.getAttribute('type') === 'date') ? inputField.showPicker() : inputField.focus();
-
   for(const item of $$('.overview__change-btn')) {
     item.classList.remove('edit');
   }
   const parentEl = e.target.parentElement;
   parentEl.classList.add('edit');
+  
+  const changedElementName = inputField.dataset.overviewField;
+  $('.section--overview__form').dataset.overviewFieldChange = changedElementName;
 })
 
 addGlobalEventListener('click', '[data-overview-cancel-btn]', e => {
@@ -32,9 +34,51 @@ addGlobalEventListener('click', '[data-overview-cancel-btn]', e => {
   inputField.setAttribute('readonly', '');
   inputField.blur();
 
+  $('.section--overview__form').dataset.overviewFieldChange = '';
   const parentEl = e.target.parentElement;
   parentEl.classList.remove('edit');
 })
+
+
+// edit overview form
+$('.section--overview__form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const changedElementName = e.target.dataset.overviewFieldChange;
+  const formAction = `${location.href}/edit/${changedElementName}`;
+  const changedElement = e.target.querySelector(`[data-overview-field="${changedElementName}"]`);
+  const changedElementValue = (changedElement.type !== "textarea") ? changedElement.value.trim() : changedElement.textContent.trim();
+
+  try {
+    const resp = await fetch(formAction, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ changedElementValue })
+    })
+
+    console.log('req sent \n', resp);
+    // location.reload();
+
+  } catch (err) {
+    console.log(err.message);
+  }
+})
+
+
+
+$('[data-overview-field="startDate"]').addEventListener('change', e => {
+  $('[data-overview-field="endDate"]').setAttribute('min', e.target.value);
+})
+
+$('[data-overview-field="endDate"]').addEventListener('change', e => {
+  $('[data-overview-field="startDate"]').setAttribute('max', e.target.value);
+})
+
+
+
+
+
 
 //----</profy_overview section>
 
@@ -46,8 +90,8 @@ addGlobalEventListener('click', '[data-overview-cancel-btn]', e => {
 window.addEventListener('load', () => {
   // Time Elasped
   const eT = elaspedTime(
-    $('[data-overview-end-date]').value,
-    $('[data-overview-start-date]').value
+    $('[data-overview-field="endDate"]').value,
+    $('[data-overview-field="startDate"]').value
   );
   $('[data-time-progress-value]').innerText = eT.time;
   $('.circleThumb--time').style.setProperty('--value', eT.time);
