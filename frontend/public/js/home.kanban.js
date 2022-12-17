@@ -5,6 +5,9 @@ import { $, $$, addGlobalEventListener } from './utility.js';
 addGlobalEventListener('click', '[data-kanban-item-option-icon]', e => {
   const optionsEl = e.target.nextElementSibling;
   const isOpen = (optionsEl.getAttribute('aria-hidden') === 'true') ? 'false' : 'true';
+  for (const item of $$('.kanban-item__options')) {
+    item.setAttribute('aria-hidden', 'true');
+  }
   optionsEl.setAttribute('aria-hidden', isOpen);
 })
 addGlobalEventListener('click', '[data-kanban-item-option]', e => {
@@ -12,17 +15,64 @@ addGlobalEventListener('click', '[data-kanban-item-option]', e => {
   optionsEl.setAttribute('aria-hidden', 'true');
 })
 
-// shifting kanban item
-addGlobalEventListener('click', '[data-kanban-move-to]', e => {
-  // send an api req to shift the kanban section
-  const sectionToMoveTo = e.target.dataset.kanbanMoveTo;
-  console.log(sectionToMoveTo);
-  // location.reload();
+// collapse kanban section for mobile
+addGlobalEventListener('click', '[data-hide-kanban-section]', e => {
+  const parentElement = e.target.closest('.kanban-section');
+  const collapseIcon = e.target.firstElementChild;
+
+  const isSectionCollapsed = !parentElement.classList.contains('collapse');
+  parentElement.classList.toggle('collapse', isSectionCollapsed);
+  collapseIcon.classList.toggle('rotate', isSectionCollapsed);
 })
 
 
+
+// shifting kanban item
+addGlobalEventListener('click', '[data-kanban-move-to]', async e => {
+  const sectionToMoveTo = e.target.dataset.kanbanMoveTo;
+  const kanbanSection = e.target.closest('.kanban-section').dataset.kanbanSection;
+  const kanbanItem = e.target.closest('.kanban-list__item');
+  const url = `${location.href}/${kanbanSection}/moveto/${kanbanItem.dataset.kanbanItemId}`
+  
+  try {
+    const resp = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ sectionToMoveTo })
+    });
+
+    console.log(resp);
+    // location.reload();
+
+  } catch (err) {
+    console.log(err)
+  }
+})
+
 // create kanban item
-// EVL
+addGlobalEventListener('click', '[data-create-kanban]', async e => {
+  const kanbanSection = e.target.dataset.createKanban;
+  const formAction = `${kanbanSection}/create`;
+  $('.edit__kanban').setAttribute('action', formAction);
+  $('.edit__kanban__header--txt').innerText = 'Create kanban';
+  $('[data-rest-labels-txt]').innerText = 'All Labels';
+
+  const allLabels = [...$$('[data-label-list-item]')].map(j => { 
+    return { 'text': j.innerText, 'el': j } 
+  });
+  for(const i of allLabels) {
+    const labelColor = getComputedStyle(i.el).getPropertyValue('--rndm-clr');
+    const restLabel = $('#template_rest-label').content.cloneNode(true).children[0];
+    restLabel.style.setProperty('--clr-rest-label', labelColor);
+    restLabel.querySelector('.rest-label__item--name').textContent = i.text;
+    $('.edit__kanban__rest-labels').append(restLabel);
+  }
+
+
+  $('[data-kanban-edit-modal]').showModal();
+})
 
 // edit kanban item
 addGlobalEventListener('click', '[data-kanban-item-option="edit"]', async e => {
@@ -30,6 +80,8 @@ addGlobalEventListener('click', '[data-kanban-item-option="edit"]', async e => {
   const kanbanItem = e.target.closest('.kanban-list__item');
   const formAction = `${kanbanSection}/edit/${kanbanItem.dataset.kanbanItemId}`; 
   $('.edit__kanban').setAttribute('action', formAction);
+  $('.edit__kanban__header--txt').innerText = 'Edit kanban';
+  $('[data-rest-labels-txt]').innerText = 'Rest Labels';
 
   const allLabels = [...$$('[data-label-list-item]')].map(j => { 
     return { 'text': j.innerText, 'el': j } 
@@ -61,21 +113,17 @@ addGlobalEventListener('click', '[data-kanban-item-option="edit"]', async e => {
   const kanbanItemTitle = kanbanItem.querySelector('[data-kanban-title]').innerText;
   const kanbanItemDescription = kanbanItem.querySelector('[data-kanban-description]').innerText;
   $('[data-kanban-edit-title]').value = kanbanItemTitle;
-  $('[data-kanban-edit-description]').textContent = kanbanItemDescription;
-
-  // console.log(allLabels);
-  // console.log(itemLabels);
-  // console.log(restLabels);
+  $('[data-kanban-edit-description]').value = kanbanItemDescription;
 
   document.body.dataset.scrolly = 'false';
   $('[data-kanban-edit-modal]').showModal();
 })
 addGlobalEventListener('click', '[data-kanban-edit-modal-close]', e => {
+  $('.edit__kanban').setAttribute('action', '');
   $('.edit__kanban__existing-labels').innerHTML = '';
   $('.edit__kanban__rest-labels').innerHTML = '';
   $('[data-kanban-edit-title]').value = '';
-  $('[data-kanban-edit-description]').textContent = '';
-  $('.edit__kanban').setAttribute('action', '');
+  $('[data-kanban-edit-description]').value = '';
   
   document.body.dataset.scrolly = 'true';
   $('[data-kanban-edit-modal]').close();
@@ -115,8 +163,9 @@ e => {
 
 // kanban delete option
 addGlobalEventListener('click', '[data-kanban-item-option="delete"]', e => {
+  const kanbanSection = e.target.closest('.kanban-section').dataset.kanbanSection;
   const kanbanItem = e.target.closest('.kanban-list__item');
-  const formAction = `/delete/${kanbanItem.dataset.kanbanItemId}`; 
+  const formAction = `${kanbanSection}/delete/${kanbanItem.dataset.kanbanItemId}`; 
   $('.delete__kanban').setAttribute('action', formAction);
 
   document.body.dataset.scrolly = 'false';
@@ -130,12 +179,13 @@ addGlobalEventListener('click', '[data-kanban-delete-modal-close]', e => {
 })
 
 
-// kanban edit form submit
+// create/edit kanban form submit
 $('.edit__kanban').addEventListener('submit', async e => {
   e.preventDefault();
   const url = `${location.href}/${e.target.getAttribute('action').trim()}`;
+
   const kanbanTitle = e.target.querySelector('[data-kanban-edit-title]').value.trim();
-  const kanbanDescription = e.target.querySelector('[data-kanban-edit-description]').textContent.trim();
+  const kanbanDescription = e.target.querySelector('[data-kanban-edit-description]').value.trim();
   const kanbanLabels = [...$$('.existing-label__item')].map(i => {
     return {
       name: i.querySelector('.existing-label__item--name').textContent.trim(),
@@ -147,7 +197,6 @@ $('.edit__kanban').addEventListener('submit', async e => {
     kanbanDescription,
     kanbanLabels
   };
-  console.log(kanbanItemInfo);
 
   try {
     const resp = await fetch(url, {
@@ -157,8 +206,7 @@ $('.edit__kanban').addEventListener('submit', async e => {
       },
       body: JSON.stringify(kanbanItemInfo)
     })
-
-    console.log(resp);
+    // console.log(resp);
     // location.reload();
 
   } catch (err) {
@@ -166,6 +214,21 @@ $('.edit__kanban').addEventListener('submit', async e => {
   }
 })
 
+// delete kanban form submit
+$('.delete__kanban').addEventListener('submit', async e => {
+  e.preventDefault();
+  const url = `${location.href}/${e.target.getAttribute('action')}`; 
+  console.log(url);
+
+  try {
+    const resp = await fetch(url, { method: 'POST' });
+    // console.log(resp);
+    // location.reload();
+
+  } catch (err) {
+    console.log(err.message);
+  }
+})
 
 //----</profy_kanban section>
 
