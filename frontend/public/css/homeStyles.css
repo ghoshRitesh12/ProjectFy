@@ -410,8 +410,8 @@ textarea {
 }
 
 .profy__main__section--overview {
-  display: flex;
-  gap: 2rem 2.5rem;
+  display: none;
+  gap: 0.5rem;
   flex-wrap: wrap;
   justify-content: center;
   padding-block: 2em 1.5em;
@@ -419,6 +419,7 @@ textarea {
 }
 @media (min-width: 40em) {
   .profy__main__section--overview {
+    gap: 2rem 2.5rem;
     padding-inline: 0 1em;
     padding-block: 3em 1.5em;
   }
@@ -619,7 +620,6 @@ textarea {
 }
 .profy__main__section--overview .section--overview__progress {
   display: inline-block;
-  padding: 1em 1em 2em 1em;
   isolation: isolate;
   max-width: -webkit-fit-content;
   max-width: -moz-fit-content;
@@ -629,6 +629,7 @@ textarea {
 @media (min-width: 40em) {
   .profy__main__section--overview .section--overview__progress {
     transform: scale(1) rotate(0);
+    padding: 1em 1em 2em 1em;
   }
 }
 .profy__main__section--overview .section--overview__progress .circle {
@@ -661,7 +662,7 @@ textarea {
   stroke: var(--clr-separator-brdr);
 }
 .profy__main__section--overview .section--overview__progress .circle .circleThumb {
-  stroke-dashoffset: calc(var(--circumference) - var(--circumference) * var(--value, 73) / 100);
+  stroke-dashoffset: calc(var(--circumference) - var(--circumference) * var(--value, 0) / 100);
   stroke-width: 10;
 }
 .profy__main__section--overview .section--overview__progress__time-elasped {
@@ -688,7 +689,7 @@ textarea {
   margin-inline: auto;
 }
 .profy__main__section--overview .section--overview__progress__time-elasped--circle .circleThumb--time {
-  stroke: #00aeff;
+  stroke: #54c9ff;
 }
 .profy__main__section--overview .section--overview__progress__time-elasped--circle [data-time-progress] {
   display: grid;
@@ -707,11 +708,16 @@ textarea {
   font-size: 0.95rem;
 }
 .profy__main__section--overview .section--overview__progress__work-done {
-  margin-block: 2rem 0;
+  margin-block: 4rem 0;
   padding: 0.3em 2em;
   background-color: var(--clr-sidebar-bg);
   border-radius: 1rem;
   font-size: 1.2rem;
+}
+@media (min-width: 40em) {
+  .profy__main__section--overview .section--overview__progress__work-done {
+    margin-block: 2rem 0;
+  }
 }
 .profy__main__section--overview .section--overview__progress__work-done--txt {
   padding: 0.5em 1em;
@@ -1381,7 +1387,7 @@ textarea {
 }
 
 .profy__main__section--kanban {
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
@@ -1391,7 +1397,7 @@ textarea {
 }
 @media (min-width: 40em) {
   .profy__main__section--kanban {
-    display: none;
+    display: grid;
     grid-template-columns: repeat(3, minmax(17rem, 1fr));
     gap: 2rem;
   }
@@ -1409,9 +1415,19 @@ textarea {
   min-width: 17rem;
   font-size: 16px;
   border-radius: 0.7rem;
+  transition: 0.2s ease max-height;
 }
 .profy__main__section--kanban .kanban-section.collapse {
+  overflow: hidden;
   max-height: 2rem;
+}
+@media (min-width: 40em) {
+  .profy__main__section--kanban .kanban-section.collapse {
+    overflow: visible;
+    max-height: -webkit-fit-content;
+    max-height: -moz-fit-content;
+    max-height: fit-content;
+  }
 }
 .profy__main__section--kanban .kanban-section .kanban-head {
   max-width: 100%;
@@ -1441,7 +1457,7 @@ textarea {
 .profy__main__section--kanban .kanban-section .kanban-head__info--number {
   color: var(--clr-inactive-txt);
 }
-.profy__main__section--kanban .kanban-section .kanban-head__info--reveal {
+.profy__main__section--kanban .kanban-section .kanban-head__info [data-hide-kanban-section] {
   display: block;
   font-size: 1rem;
   margin-inline: auto 0.1rem;
@@ -1451,10 +1467,20 @@ textarea {
   border-radius: 0.5rem;
   cursor: pointer;
 }
-.profy__main__section--kanban .kanban-section .kanban-head__info--reveal > * {
+.profy__main__section--kanban .kanban-section .kanban-head__info [data-hide-kanban-section] svg {
   pointer-events: none;
+  transition: 0.3s ease;
+  transform: rotate(0);
 }
-.profy__main__section--kanban .kanban-section .kanban-head [data-kanban-add] {
+.profy__main__section--kanban .kanban-section .kanban-head__info [data-hide-kanban-section] svg.rotate {
+  transform: rotate(180deg);
+}
+@media (min-width: 40em) {
+  .profy__main__section--kanban .kanban-section .kanban-head__info [data-hide-kanban-section] svg.rotate {
+    transform: rotate(0);
+  }
+}
+.profy__main__section--kanban .kanban-section .kanban-head [data-create-kanban] {
   display: block;
   width: 100%;
   margin: 1rem 0 0 0;
@@ -1465,9 +1491,18 @@ textarea {
   border-radius: 0.7rem;
   cursor: pointer;
 }
-.profy__main__section--kanban .kanban-section .kanban-head [data-kanban-add] > svg {
+.profy__main__section--kanban .kanban-section .kanban-head [data-create-kanban] > svg {
   margin-inline: auto;
   pointer-events: none;
+}
+.profy__main__section--kanban .kanban-section[data-kanban-section=todo] [data-kanban-move-to=todo] {
+  display: none;
+}
+.profy__main__section--kanban .kanban-section[data-kanban-section=inProgress] [data-kanban-move-to=inProgress] {
+  display: none;
+}
+.profy__main__section--kanban .kanban-section[data-kanban-section=completed] [data-kanban-move-to=completed] {
+  display: none;
 }
 .profy__main__section--kanban .kanban-section .kanban-list__item {
   position: relative;
@@ -1519,6 +1554,7 @@ textarea {
   z-index: 82;
   isolation: isolate;
   margin: 0.8rem 1rem 0 0;
+  padding-block: 0.3rem;
   background-color: var(--clr-primary-bg);
   border: 1px solid var(--clr-separator-brdr);
   overflow: hidden;
@@ -1534,7 +1570,6 @@ textarea {
   transform: translateY(0);
 }
 .profy__main__section--kanban .kanban-section .kanban-list__item__head .kanban-item__options [data-kanban-item-option] {
-  margin-top: 0.2rem;
   padding: 0.4em 1em;
   font-size: 0.95rem;
   cursor: pointer;
@@ -1543,9 +1578,6 @@ textarea {
 }
 .profy__main__section--kanban .kanban-section .kanban-list__item__head .kanban-item__options [data-kanban-item-option]:hover {
   background-color: var(--clr-separator-brdr);
-}
-.profy__main__section--kanban .kanban-section .kanban-list__item__head .kanban-item__options [data-kanban-item-option]:last-child {
-  margin-bottom: 0.2rem;
 }
 .profy__main__section--kanban .kanban-section .kanban-list__item__head .kanban-item__options [data-kanban-item-option] > * {
   pointer-events: none;
@@ -1663,11 +1695,12 @@ textarea {
   overflow: hidden;
 }
 .profy__main__section--kanban .edit__kanban__existing-labels .existing-label__item--name {
-  color: #222;
+  color: #111;
   font-weight: 500;
 }
 .profy__main__section--kanban .edit__kanban__existing-labels .existing-label__item--cross {
   color: #333;
+  font-size: 1rem;
   padding: 0.2em 0.4em 0.2em 0.2em;
 }
 .profy__main__section--kanban .edit__kanban [data-rest-labels-txt] {
@@ -1709,12 +1742,13 @@ textarea {
   overflow: hidden;
 }
 .profy__main__section--kanban .edit__kanban__rest-labels .rest-label__item--name {
-  color: #222;
+  color: #111;
   font-weight: 500;
 }
 .profy__main__section--kanban .edit__kanban__rest-labels .rest-label__item--plus {
+  font-size: 1rem;
   color: #222;
-  padding: 0.2em 0.4em 0.2em 0.3em;
+  padding: 0.2em 0.5em 0.2em 0.3em;
 }
 .profy__main__section--kanban .edit__kanban__title {
   display: block;

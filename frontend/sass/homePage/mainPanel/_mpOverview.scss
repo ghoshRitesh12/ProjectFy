@@ -74,15 +74,16 @@
 }
 
 .profy__main__section--overview {
-  // display: none;
-  display: flex;
-  gap: 2rem 2.5rem;
+  display: none;
+  // display: flex;
+  gap: .5rem;
   flex-wrap: wrap;
   justify-content: center;
 
   padding-block: 2em 1.5em;
   cursor: initial;
   @include breakpoint(medium) { 
+    gap: 2rem 2.5rem;
     padding-inline: 0 1em; 
     padding-block: 3em 1.5em;
   }
@@ -297,13 +298,13 @@
 
   & .section--overview__progress {
     display: inline-block;
-    padding: 1em 1em 2em 1em;
     isolation: isolate;
     max-width: fit-content;
     
     transform: scale(-.82) rotate(180deg);
     @include breakpoint(medium) {
       transform: scale(1) rotate(0);
+      padding: 1em 1em 2em 1em;
     }
 
     & .circle {
@@ -341,7 +342,7 @@
       .circleThumb {
         // 440 - (440 * <value>) / 100
         
-        stroke-dashoffset: calc(var(--circumference) - (var(--circumference) * var(--value, 73)) / 100);
+        stroke-dashoffset: calc(var(--circumference) - (var(--circumference) * var(--value, 0)) / 100);
         stroke-width : 10;
       }
     }
@@ -371,7 +372,7 @@
         // outline: 1px solid red;
 
         & .circleThumb--time {
-          stroke: #00aeff;
+          stroke: #54c9ff;
         }
 
         & [data-time-progress] {
@@ -400,11 +401,15 @@
 
     // work completed circular progress
     &__work-done {
-      margin-block: 2rem 0;
+      margin-block: 4rem 0;
       padding: .3em 2em;
       background-color: var(--clr-sidebar-bg);
       border-radius: 1rem;
       font-size: 1.2rem;
+      
+      @include breakpoint(medium) {
+        margin-block: 2rem 0;
+      }
       
       // outline: 1px solid white;
       &--txt {
