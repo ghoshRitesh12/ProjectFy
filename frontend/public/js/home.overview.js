@@ -76,14 +76,7 @@ $('[data-overview-field="endDate"]').addEventListener('change', e => {
 })
 
 
-
-
-
-
 //----</profy_overview section>
-
-
-
 
 
 // overview timeElasped & workDone 
