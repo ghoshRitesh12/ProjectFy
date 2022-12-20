@@ -15,14 +15,12 @@ $('[data-account]').addEventListener('click', e => {
   
 })
 // account-dropdown-backdrop
-addGlobalEventListener('click', '[data-account-dropdown-backdrop]', 
-e => {
+addGlobalEventListener('click', '[data-account-dropdown-backdrop]', e => {
   e.target.setAttribute('aria-hidden', 'true');
   $('[data-account-dropdown]').classList.remove('open');
 })
 // data-account-options toggle
-addGlobalEventListener('click', '[data-account-options]', 
-e => {
+addGlobalEventListener('click', '[data-account-options]', e => {
   $('[data-account-dropdown]').classList.remove('open');
   $('[data-account-dropdown-backdrop]').setAttribute('aria-hidden', 'true');
 })
@@ -41,7 +39,7 @@ addGlobalEventListener('click', '[data-mode]', async e => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ 'themeChangedTo': mode })
     });
-    // window.history.go();
+    // location.reload();
 
   } catch (err) {
     location.href = '/';
@@ -49,7 +47,8 @@ addGlobalEventListener('click', '[data-mode]', async e => {
 })
 
 
-// for adding new projects
+
+// adding new projects/labels
 addGlobalEventListener('click', '[data-add-item]', e => {
   const itemType = e.target.dataset.addItem;
   const newItemForm = `.new-${itemType}Form`;
@@ -60,12 +59,187 @@ addGlobalEventListener('click', '[data-add-item]', e => {
   $(newItemForm).classList.remove('hidden');
   $(newItemForm).firstElementChild.focus();
 })
-// for canceling new project/label creation
+
+// canceling new project/label creation
 addGlobalEventListener('click', '[data-newItem-btn-cancel]', e => {
+  for (const item of $$('.field_empty')) { item.style.display = null; }
+  // nulling the label & project input fields
+  for (const item of [...$$('.newItemForm')].map(i => i.querySelector('input'))) { item.value = ''; }
+
   const itemForm = e.target.parentElement.parentElement;
   itemForm.classList.add('hidden');
-
 })
+
+// form submit event to create projects and labels
+addGlobalEventListener('submit', '.newItemForm', async e => {
+  e.preventDefault();
+  const itemType = e.target.dataset.itemName;
+  const formAction = e.target.getAttribute('action');
+  const emptyFieldEle = e.target.querySelector('.field_empty');
+
+  const itemAction = {
+    project() {
+      const currentDate = `${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDate()}`;
+      const projectName = e.target.querySelector('input[name="newProjectName"]').value.trim();
+      const projectStartDate = currentDate;
+      if(projectName === '') {
+        emptyFieldEle.style.display = 'block';
+        e.target.querySelector('input[name="newProjectName"]').focus();
+        return null;
+      }
+
+      return { projectName, projectStartDate };
+    },
+    label() {
+      const labelName = e.target.querySelector('input[name="newLabelName"]').value.trim();
+      const labelColor = randomBoxClr();
+      if(labelName === '') {
+        emptyFieldEle.style.display = 'block';
+        e.target.querySelector('input[name="newLabelName"]').focus();
+        return null;
+      }
+
+      return { labelName, labelColor };
+    }
+  }
+
+  const itemInfo = itemAction[itemType]();
+  if(itemInfo == null) return;
+
+  try {
+    const resp = await fetch(formAction, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(itemInfo)
+    });
+
+    console.log(resp);
+    // location.reload();
+
+  } catch (err) {
+    console.log(err.message);
+  }
+})
+
+
+
+//-----<data project options>
+// project options
+addGlobalEventListener('click', '[data-project-options]', e => {
+  const projectId = e.target.closest('.profy__main').dataset.projectId;
+  const projectOption = e.target.dataset.projectOptions;
+  const optionUrl = `${e.target.dataset.optionAction}/${projectId}`;
+  console.log({ projectId, projectOption, optionUrl });
+  document.body.dataset.scrolly = 'false';
+
+  if(projectOption === "delete") {
+    $('.delete__project').setAttribute('action', optionUrl);
+    $('[data-project-delete-modal]').showModal();
+    return;
+  }
+
+  // for share
+  $('.share__project').setAttribute('action', optionUrl);
+  $('[data-project-share-modal]').showModal();
+})
+
+
+// share: project share form submit
+addGlobalEventListener('submit', '.share__project', async e => {
+  e.preventDefault();
+  const submitter = e.submitter.dataset.shareLinkSubmitter;
+  const formAction = $('.share__project').getAttribute('action');
+
+  try {
+    if(submitter === "getShareLink") {
+      $('[data-share-link-submitter="getShareLink"]').textContent = 'Just a sec...';
+      
+      const resp = await fetch(formAction, { method: 'POST' });
+      // const respLink = await resp.json().shareLink;
+      const respLink = 'http://127.0.0.1:5500/niqqaaXafafafafafafafhquirghqDD/homePage.html'.trim();
+      
+      // below setTimeout is for mimicking response - respLink
+      setTimeout(() => {
+        $('[data-share-link-submitter="getShareLink"]').textContent = 'Get link';
+        $('[data-share-link-submitter="getShareLink"]').style.pointerEvents = 'none';
+        $('[data-project-share-link]').textContent = respLink;
+
+        $('[data-project-share-wrapper]').classList.add('show');
+        console.log(resp);
+      }, 2000)
+  
+      return;
+    }
+
+    // makeShareLinkPrivate
+    const privateFormAction = formAction.replace('share-link', 'make-link-private');
+    $('[data-share-link-submitter="makeShareLinkPrivate"]').textContent = 'Invalidating link....';
+    
+    const resp = await fetch(privateFormAction, { method: 'POST' });
+    const respTxt = await resp.json().msg;
+    // below setTimeouts are for mimicking ajax response
+    setTimeout(() => {
+      $('[data-share-link-submitter="makeShareLinkPrivate"]').textContent = respTxt || 'Link invalidated';
+      $('[data-share-link-submitter="makeShareLinkPrivate"]').style.pointerEvents = 'none';
+    }, 1000)
+
+
+  } catch (err) {
+    console.log(err) 
+  }
+})  
+
+// share: copy share link to clipboard
+addGlobalEventListener('click', '[data-project-share-link-copy]', e => {
+  const shareLinkEle = e.target.previousElementSibling;
+
+  navigator.clipboard.writeText(shareLinkEle.textContent.trim());
+  e.target.textContent = 'copied link';
+  setTimeout(() => e.target.textContent = 'copy', 700)
+})
+
+// share: close share project modal
+addGlobalEventListener('click', '[data-project-share-modal-close]', e => {
+  $('.share__project').setAttribute('action', '');
+  $('[data-project-share-link]').textContent = '';
+  $('[data-project-share-wrapper]').classList.remove('show');
+  $('[data-share-link-submitter="getShareLink"]').style.pointerEvents = 'all';
+  $('[data-share-link-submitter="makeShareLinkPrivate"]').style.pointerEvents = 'all';
+
+  document.body.dataset.scrolly = 'true';
+  $('[data-project-share-modal]').close();
+})
+
+
+
+// delete: delete project form submit
+addGlobalEventListener('submit', '.delete__project', async e => {
+  e.preventDefault();
+  const formAction = e.target.getAttribute('action');
+
+  try {
+    const resp = await fetch(formAction, { method: 'POST' });
+    console.log(resp);
+    // after deleting project redirect back to '/' home page
+
+  } catch (err) {
+    console.log(err);
+  }
+})
+
+// delete: close delete project modal
+addGlobalEventListener('click', '[data-project-delete-modal-close]', e => {
+  $('.delete__project').setAttribute('action', '');
+  document.body.dataset.scrolly = 'true';
+  $('[data-project-delete-modal]').close();
+})
+
+//-----</data project options>
+
+
+
 
 // for selecting projects
 addGlobalEventListener('click', '[data-project-list-items]',
@@ -73,8 +247,6 @@ e => {
   for (const item of $$('[data-project-list-items]')) {
     item.classList.remove('selected');
   }
-
-
   e.target.classList.add('selected');
 })
 
@@ -86,6 +258,9 @@ e => {
 //     e.target.classList.add('selected');
 //   })
 // }
+
+
+
 
 
 
