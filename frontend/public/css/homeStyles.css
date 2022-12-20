@@ -340,6 +340,263 @@ textarea {
 .profy__main__header__options svg {
   pointer-events: none;
 }
+.profy__main__header [data-project-delete-modal] {
+  position: fixed;
+  margin-block: auto;
+  margin-inline: auto;
+  isolation: isolate;
+  border: none;
+  overflow: hidden;
+  background-color: transparent;
+}
+.profy__main__header [data-project-delete-modal]:not([open]) {
+  display: none;
+}
+.profy__main__header [data-project-delete-modal]::-webkit-backdrop {
+  background-color: hsla(0deg, 0%, 0%, 0.7);
+  -webkit-backdrop-filter: blur(0.3rem);
+          backdrop-filter: blur(0.3rem);
+}
+.profy__main__header [data-project-delete-modal]::backdrop {
+  background-color: hsla(0deg, 0%, 0%, 0.7);
+  -webkit-backdrop-filter: blur(0.3rem);
+          backdrop-filter: blur(0.3rem);
+}
+.profy__main__header .delete__project {
+  position: relative;
+  isolation: isolate;
+  min-width: 17.5rem;
+  max-width: 17.5rem;
+  overflow: hidden;
+  border-radius: 0.8rem;
+  background-color: var(--clr-sidebar-bg);
+  border: 1px solid var(--clr-separator-brdr);
+}
+.profy__main__header .delete__project__header {
+  display: flex;
+  align-items: center;
+  padding-block: 0.5em;
+  padding-inline: 1em;
+  border-bottom: 1px solid var(--clr-separator-brdr);
+}
+.profy__main__header .delete__project__header--txt {
+  margin-left: auto;
+  font-size: 1.1rem;
+  word-spacing: 0.2rem;
+  color: var(--clr-primary-txt);
+}
+.profy__main__header .delete__project__header--cancelIcon {
+  display: block;
+  margin-inline: auto 0;
+  padding: 0.3em;
+  font-size: 1.1rem;
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--clr-inactive-txt);
+  background-color: var(--clr-separator-brdr);
+}
+.profy__main__header .delete__project__header--cancelIcon > * {
+  pointer-events: none;
+}
+.profy__main__header .delete__project__description {
+  display: block;
+  position: relative;
+  margin-block: 0.8rem 1rem;
+  padding-inline: 1rem;
+  max-width: 100%;
+  width: 100%;
+}
+.profy__main__header .delete__project__description__txt {
+  line-height: 1.7;
+  color: var(--clr-primary-txt);
+  margin-bottom: 0.7rem;
+}
+.profy__main__header .delete__project__description__btns {
+  display: block;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  margin-left: auto;
+}
+.profy__main__header .delete__project__description__btns button {
+  padding: 0.25em 0.8em;
+  border-radius: 0.5rem;
+  background-color: transparent;
+  color: var(--clr-primary-txt);
+  outline: none;
+  border: none;
+  transition: 0.15s ease;
+}
+.profy__main__header .delete__project__description__btns button:hover {
+  background-color: var(--clr-separator-brdr);
+}
+.profy__main__header .delete__project__description__btns button[type=submit] {
+  margin-left: 0.2rem;
+  color: var(--clr-signout-txt);
+  background-color: var(--clr-signout-bg);
+}
+.profy__main__header .delete__project__description__btns button[type=submit]:hover {
+  background-color: var(--clr-signout-bg-hover);
+}
+.profy__main__header [data-project-share-modal] {
+  position: fixed;
+  margin-block: auto;
+  margin-inline: auto;
+  isolation: isolate;
+  border: none;
+  overflow: hidden;
+  background-color: transparent;
+}
+.profy__main__header [data-project-share-modal]:not([open]) {
+  display: none;
+}
+.profy__main__header [data-project-share-modal]::-webkit-backdrop {
+  background-color: hsla(0deg, 0%, 0%, 0.7);
+  -webkit-backdrop-filter: blur(0.3rem);
+          backdrop-filter: blur(0.3rem);
+}
+.profy__main__header [data-project-share-modal]::backdrop {
+  background-color: hsla(0deg, 0%, 0%, 0.7);
+  -webkit-backdrop-filter: blur(0.3rem);
+          backdrop-filter: blur(0.3rem);
+}
+.profy__main__header .share__project {
+  position: relative;
+  isolation: isolate;
+  min-width: 18rem;
+  max-width: 18rem;
+  overflow: hidden;
+  border-radius: 0.8rem;
+  background-color: var(--clr-sidebar-bg);
+  border: 1px solid var(--clr-separator-brdr);
+}
+.profy__main__header .share__project__header {
+  display: flex;
+  align-items: center;
+  padding-block: 0.5em;
+  padding-inline: 1em;
+  border-bottom: 1px solid var(--clr-separator-brdr);
+}
+.profy__main__header .share__project__header--txt {
+  margin-left: auto;
+  font-size: 1.1rem;
+  word-spacing: 0.2rem;
+  color: var(--clr-primary-txt);
+}
+.profy__main__header .share__project__header--cancelIcon {
+  display: block;
+  margin-inline: auto 0;
+  padding: 0.3em;
+  font-size: 1.1rem;
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--clr-inactive-txt);
+  background-color: var(--clr-separator-brdr);
+}
+.profy__main__header .share__project__header--cancelIcon > * {
+  pointer-events: none;
+}
+.profy__main__header .share__project__description {
+  display: block;
+  position: relative;
+  margin-block: 0.8rem 0;
+  padding-inline: 1rem;
+  max-width: 100%;
+  width: 100%;
+}
+.profy__main__header .share__project__description__txt {
+  color: var(--clr-primary-txt);
+  color: var(--clr-inactive-txt);
+}
+.profy__main__header .share__project__btns {
+  display: block;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  margin: 0 0 1rem auto;
+}
+.profy__main__header .share__project__btns button {
+  padding: 0.25em 0.8em;
+  border-radius: 0.5rem;
+  background-color: transparent;
+  color: var(--clr-primary-txt);
+  outline: none;
+  border: none;
+  transition: 0.2s ease;
+  background-color: transparent;
+  outline: 1px solid var(--clr-separator-brdr);
+}
+.profy__main__header .share__project__btns button:hover {
+  background-color: var(--clr-separator-brdr);
+}
+.profy__main__header .share__project__btns button[data-share-link-submitter=makeShareLinkPrivate] {
+  margin-top: 1rem;
+  outline: none;
+  color: var(--clr-signout-txt);
+  background-color: var(--clr-signout-bg);
+}
+.profy__main__header .share__project__btns button[data-share-link-submitter=makeShareLinkPrivate]:hover {
+  background-color: var(--clr-signout-bg-hover);
+}
+.profy__main__header .share__project [data-project-share-wrapper] {
+  display: none;
+}
+.profy__main__header .share__project [data-project-share-wrapper].show {
+  display: block;
+}
+.profy__main__header .share__project .project__share-link-wrap {
+  display: flex;
+  align-items: center;
+  margin-block: 0.5rem 2rem;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--clr-primary-bg);
+  border-radius: 0.5rem;
+}
+.profy__main__header .share__project .project__share-link-wrap.show {
+  display: flex;
+}
+.profy__main__header .share__project .project__share-link-wrap [data-project-share-link] {
+  padding: 0.7em 1.2em 0.7em 1em;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  overflow: auto hidden;
+  color: var(--clr-primary-txt);
+  scrollbar-width: none;
+}
+.profy__main__header .share__project .project__share-link-wrap [data-project-share-link]::-webkit-scrollbar {
+  display: none;
+}
+.profy__main__header .share__project .project__share-link-wrap [data-project-share-link-copy] {
+  min-width: -webkit-fit-content;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+  padding: 0.5em 1em;
+  margin-right: 0.05rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: 0.2s ease;
+  border-radius: 0.5rem;
+  text-transform: uppercase;
+  color: var(--clr-inactive-txt);
+  background-color: var(--clr-sidebar-bg);
+  border: 2px solid var(--clr-primary-bg);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  cursor: pointer;
+}
+.profy__main__header .share__project .project__share-link-wrap [data-project-share-link-copy] > * {
+  pointer-events: none;
+}
+.profy__main__header .share__project .project__share-link-wrap [data-make-sharelink-private] {
+  flex: 1;
+  min-width: 100%;
+}
+.profy__main__header .share__project:last-child {
+  margin-bottom: 1rem;
+}
 
 .profy__main__section__options {
   display: flex;
@@ -757,13 +1014,13 @@ textarea {
 }
 
 .profy__main__section--ideas {
-  display: none;
+  display: flex;
   flex-wrap: wrap;
   gap: 3rem;
   justify-content: center;
-  padding-block: 2em;
+  padding-block: 2em 5em;
 }
-@media (min-width: 64em) {
+@media (min-width: 40em) {
   .profy__main__section--ideas {
     padding-block: 3em;
   }
@@ -868,7 +1125,15 @@ textarea {
 .profy__main__section--ideas--formContainer .ideas-form__description--field:focus {
   outline: 2px solid var(--clr-separator-brdr);
 }
+.profy__main__section--ideas--formContainer .ideas-form__imgUrl {
+  transition: 0.2s ease;
+}
 .profy__main__section--ideas--formContainer .ideas-form__imgUrl.notouch {
+  opacity: 0.4;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   pointer-events: none;
 }
 .profy__main__section--ideas--formContainer .ideas-form__imgUrl--field {
@@ -885,6 +1150,11 @@ textarea {
   outline: 2px solid var(--clr-separator-brdr);
 }
 .profy__main__section--ideas--formContainer .ideas-form__imgUpload.notouch {
+  opacity: 0.4;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   pointer-events: none;
 }
 .profy__main__section--ideas--formContainer .ideas-form__imgUpload .linkOrUpload-txt {
@@ -931,6 +1201,7 @@ textarea {
 }
 .profy__main__section--ideas--formContainer .ideas-form__imgUpload__preview {
   display: none;
+  position: relative;
   margin-top: 0.7rem;
   max-width: 100%;
   width: 100%;
@@ -944,6 +1215,21 @@ textarea {
 }
 .profy__main__section--ideas--formContainer .ideas-form__imgUpload__preview--src:hover {
   transform: scale(1.05);
+}
+.profy__main__section--ideas--formContainer .ideas-form__imgUpload__preview [data-idea-imgUpload-preview-closebtn] {
+  display: inline-block;
+  position: absolute;
+  position: absolute;
+  inset: 0 0 auto auto;
+  padding: 0.2em;
+  margin: 0.2rem 0.25rem 0 0;
+  border-radius: 50%;
+  cursor: pointer;
+  color: whitesmoke;
+  background-color: hsla(0deg, 0%, 0%, 0.3);
+}
+.profy__main__section--ideas--formContainer .ideas-form__imgUpload__preview [data-idea-imgUpload-preview-closebtn] > * {
+  pointer-events: none;
 }
 .profy__main__section--ideas--formContainer .ideas-form__submit {
   font-size: 0.95rem;
@@ -1081,7 +1367,30 @@ textarea {
   border-radius: 0.5rem;
   overflow: hidden;
 }
-.profy__main__section--ideas--ideasContainer [data-ideaEdit-modal] {
+.profy__main__section--ideas--ideasContainer .idea__img--src {
+  --size: 13.5;
+  position: relative;
+  aspect-ratio: 12/9;
+  max-width: var(--size);
+  width: 100%;
+  max-height: var(--size);
+  background-color: var(--clr-primary-bg);
+  -o-object-position: center;
+     object-position: center;
+  border-radius: 0.5rem;
+  scale: 1;
+  transition: 0.4s ease;
+}
+.profy__main__section--ideas--ideasContainer .idea__img--src:hover {
+  cursor: zoom-in;
+  scale: 1.2;
+}
+.profy__main__section--ideas--ideasContainer .idea__img--src::after {
+  content: "not found / valid";
+  position: absolute;
+  margin-inline: 0.4rem 1rem;
+}
+.profy__main__section--ideas--ideasContainer [data-idea-edit-modal] {
   position: fixed;
   margin-block: auto;
   margin-inline: auto;
@@ -1091,15 +1400,15 @@ textarea {
   overflow: hidden;
   background-color: transparent;
 }
-.profy__main__section--ideas--ideasContainer [data-ideaEdit-modal]:not([open]) {
+.profy__main__section--ideas--ideasContainer [data-idea-edit-modal]:not([open]) {
   display: none;
 }
-.profy__main__section--ideas--ideasContainer [data-ideaEdit-modal]::-webkit-backdrop {
+.profy__main__section--ideas--ideasContainer [data-idea-edit-modal]::-webkit-backdrop {
   background-color: hsla(0deg, 0%, 0%, 0.6);
   -webkit-backdrop-filter: blur(0.3rem);
           backdrop-filter: blur(0.3rem);
 }
-.profy__main__section--ideas--ideasContainer [data-ideaEdit-modal]::backdrop {
+.profy__main__section--ideas--ideasContainer [data-idea-edit-modal]::backdrop {
   background-color: hsla(0deg, 0%, 0%, 0.6);
   -webkit-backdrop-filter: blur(0.3rem);
           backdrop-filter: blur(0.3rem);
@@ -1125,7 +1434,7 @@ textarea {
   color: var(--clr-primary-txt);
   margin-left: auto;
   word-spacing: 0.3rem;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 .profy__main__section--ideas--ideasContainer .edit__idea__header--cancelIcon {
   display: block;
@@ -1157,6 +1466,7 @@ textarea {
   max-height: 8rem;
   overflow: hidden auto;
   resize: none;
+  background-color: var(--clr-primary-bg);
   background-color: transparent;
   color: var(--clr-primary-txt);
   border: none;
@@ -1164,6 +1474,7 @@ textarea {
   border-radius: 0.5rem;
   scrollbar-width: thin;
   overflow-wrap: break-word;
+  outline: 1px solid var(--clr-separator-brdr);
 }
 .profy__main__section--ideas--ideasContainer .edit__idea__description__content:focus {
   outline: 2px solid var(--clr-separator-brdr);
@@ -1207,7 +1518,7 @@ textarea {
   width: 100%;
   aspect-ratio: 18/9;
   border-radius: 0.5rem;
-  overflow: hidden;
+  overflow: hidden scroll;
   color: var(--clr-primary-txt);
   scrollbar-width: thin;
 }
@@ -1217,9 +1528,15 @@ textarea {
 .profy__main__section--ideas--ideasContainer .edit__idea__img--upload--preview--src {
   display: block;
   border-radius: 0.5rem;
+  transform: scale(1);
+  transition: 0.2s ease;
+}
+.profy__main__section--ideas--ideasContainer .edit__idea__img--upload--preview--src:hover {
+  transform: scale(1.1);
 }
 .profy__main__section--ideas--ideasContainer .edit__idea__img--upload--preview [data-idea-edit-imgUpload-preview-closebtn] {
-  display: block;
+  display: inline-block;
+  position: absolute;
   position: absolute;
   inset: 0 0 auto auto;
   padding: 0.2em;
@@ -1287,7 +1604,7 @@ textarea {
 .profy__main__section--ideas--ideasContainer .edit__idea__save-btn:hover {
   background-color: hsla(199deg, 100%, 50%, 0.4);
 }
-.profy__main__section--ideas--ideasContainer [data-ideaDelete-modal] {
+.profy__main__section--ideas--ideasContainer [data-idea-delete-modal] {
   position: fixed;
   margin-block: auto;
   margin-inline: auto;
@@ -1296,15 +1613,15 @@ textarea {
   overflow: hidden;
   background-color: transparent;
 }
-.profy__main__section--ideas--ideasContainer [data-ideaDelete-modal]:not([open]) {
+.profy__main__section--ideas--ideasContainer [data-idea-delete-modal]:not([open]) {
   display: none;
 }
-.profy__main__section--ideas--ideasContainer [data-ideaDelete-modal]::-webkit-backdrop {
+.profy__main__section--ideas--ideasContainer [data-idea-delete-modal]::-webkit-backdrop {
   background-color: hsla(0deg, 0%, 0%, 0.7);
   -webkit-backdrop-filter: blur(0.3rem);
           backdrop-filter: blur(0.3rem);
 }
-.profy__main__section--ideas--ideasContainer [data-ideaDelete-modal]::backdrop {
+.profy__main__section--ideas--ideasContainer [data-idea-delete-modal]::backdrop {
   background-color: hsla(0deg, 0%, 0%, 0.7);
   -webkit-backdrop-filter: blur(0.3rem);
           backdrop-filter: blur(0.3rem);
@@ -1328,7 +1645,7 @@ textarea {
 }
 .profy__main__section--ideas--ideasContainer .delete__idea__header--txt {
   margin-left: auto;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   word-spacing: 0.2rem;
   color: var(--clr-primary-txt);
 }
@@ -1387,7 +1704,7 @@ textarea {
 }
 
 .profy__main__section--kanban {
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
@@ -1397,7 +1714,7 @@ textarea {
 }
 @media (min-width: 40em) {
   .profy__main__section--kanban {
-    display: grid;
+    display: none;
     grid-template-columns: repeat(3, minmax(17rem, 1fr));
     gap: 2rem;
   }

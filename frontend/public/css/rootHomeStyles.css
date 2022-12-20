@@ -175,7 +175,7 @@ body {
   --clr-signout-bg: hsl(0 100% 68% / .15);
   --clr-signout-bg-hover: hsl(0 100% 68% / .25);
   --clr-input-field: #fff;
-  --clr-acc-bxshw: hsla(0, 0%, 0%, 0.302);
+  --clr-acc-bxshw: hsla(0, 0%, 100%, 0.4);
   --clr-edit-btn: hsl(110, 100%, 32%);
   --clr-edit-btn-hover: hsl(140 100% 40% / 0.3);
   --clr-edit-btn-bg: hsl(140 100% 40% / 0.2);
@@ -208,7 +208,7 @@ body[data-theme=dark] {
   --clr-signout-bg: hsl(0 100% 68% / .15);
   --clr-signout-bg-hover: hsl(0 100% 68% / .25);
   --clr-input-field: #0a0a0a;
-  --clr-acc-bxshw: hsla(0, 0%, 93%, 0.2);
+  --clr-acc-bxshw: hsla(0, 0%, 0%, 0.4);
   --clr-edit-btn: hsl(160 74% 66%);
   --clr-edit-btn-hover: hsl(160 74% 66% / .3);
   --clr-edit-btn-bg: hsl(160 74% 66% / .2);
@@ -226,6 +226,54 @@ body[data-theme=dark] {
 @media (min-width: 40em) {
   .profy {
     grid-template-areas: "titlebar titlebar" "sidepanel main";
+  }
+}
+.profy #preloader {
+  display: none;
+  place-items: center;
+  position: fixed;
+  isolation: isolate;
+  z-index: 10000000;
+  inset: 0;
+  background-color: var(--clr-acc-bxshw);
+}
+.profy #preloader.showPreloader {
+  display: grid;
+}
+.profy #preloader .circle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 3rem;
+  height: 2rem;
+  background-color: transparent;
+  -webkit-animation: rotate 0.6s infinite 1s;
+          animation: rotate 0.6s infinite 1s;
+}
+.profy #preloader .circle .circleOne,
+.profy #preloader .circle .circleTwo,
+.profy #preloader .circle .circleThree {
+  --size: .6rem;
+  width: var(--size);
+  height: var(--size);
+  background-color: var(--clr-logo-project);
+  background-color: #76cff8;
+  border-radius: 50%;
+}
+@-webkit-keyframes rotate {
+  from {
+    transform: rotate(-180deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+@keyframes rotate {
+  from {
+    transform: rotate(-180deg);
+  }
+  to {
+    transform: rotate(0deg);
   }
 }
 
@@ -653,43 +701,6 @@ body[data-theme=dark] {
   }
 }
 
-.profy__sidepanel__create {
-  display: none;
-  position: absolute;
-  bottom: 0;
-  z-index: 62;
-  isolation: isolate;
-  padding-block: 0.5em 1em;
-  background-color: var(--clr-navlist-hover);
-  color: var(--clr-primary-txt);
-}
-.profy__sidepanel__create__project {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-inline: auto;
-  padding: 0.4em 1.5em;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  background-color: var(--clr-ternary-bg);
-}
-.profy__sidepanel__create__project > * {
-  pointer-events: none;
-}
-.profy__sidepanel__create__label {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-top: 0.5rem;
-  margin-inline: auto;
-  padding: 0.4em 1.9em;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  background-color: var(--clr-ternary-bg);
-}
-.profy__sidepanel__create__label > * {
-  pointer-events: none;
-}
 .profy__sidepanel__nav {
   --icon-gap: 2rem;
   --pad-block: .5em;
@@ -746,6 +757,17 @@ body[data-theme=dark] {
 .profy__sidepanel__nav .newItemForm input[type=text]:focus {
   outline: 2px solid var(--clr-separator-brdr);
 }
+.profy__sidepanel__nav .newItemForm .field_empty {
+  display: none;
+  position: relative;
+  padding-block: 0.5rem 0;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  margin-inline: auto;
+  color: var(--clr-signout-txt);
+  font-size: 0.9rem;
+}
 .profy__sidepanel__nav .newItemForm .btns-wrapper {
   display: block;
   margin-top: 1rem;
@@ -786,6 +808,15 @@ body[data-theme=dark] {
   align-items: center;
   border-radius: 0.5rem;
   transition: 0.3s ease;
+  padding-block: var(--pad-block);
+  padding-inline: 1em 0;
+}
+.profy__sidepanel__nav--projects-container__txt {
+  color: var(--clr-inactive-txt);
+  font-size: 0.95rem;
+  font-weight: 500;
+  pointer-events: none;
+  text-transform: uppercase;
 }
 .profy__sidepanel__nav--projects-container__add-icon {
   margin: 0 0.2em 0 auto;
@@ -802,30 +833,6 @@ body[data-theme=dark] {
 }
 .profy__sidepanel__nav--projects-container svg {
   pointer-events: none;
-}
-.profy__sidepanel__nav--projects-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding-block: var(--pad-block);
-  padding-inline: 1em;
-}
-.profy__sidepanel__nav--projects-wrapper__txt {
-  color: var(--clr-inactive-txt);
-  font-size: 0.95rem;
-  font-weight: 500;
-  pointer-events: none;
-  text-transform: uppercase;
-}
-.profy__sidepanel__nav--projects-wrapper__icon {
-  display: none;
-  font-size: 1.2rem;
-  color: var(--clr-primary-icon);
-  pointer-events: none;
-}
-.profy__sidepanel__nav--projects-wrapper__length {
-  color: var(--clr-primary-txt);
-  font-size: 0.9rem;
 }
 .profy__sidepanel__nav--projects-list {
   display: block;
@@ -942,6 +949,12 @@ body[data-theme=dark] {
   color: var(--clr-primary-txt);
   font-size: 0.9rem;
 }
+.profy__sidepanel__nav--labels-wrapper__icon {
+  position: absolute;
+  inset-inline: 0;
+  font-size: 1.1rem;
+  color: var(--clr-primary-icon);
+}
 .profy__sidepanel__nav--labels-list {
   display: flex;
   flex-wrap: wrap;
@@ -979,4 +992,48 @@ body[data-theme=dark] {
 }
 .profy__sidepanel__nav--labels-listItem:hover {
   background-color: transparent;
+}
+
+.profy__bottompanel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+  z-index: 112;
+  isolation: isolate;
+  padding-inline: 1em;
+  max-width: 100%;
+  width: 100%;
+  background-color: var(--clr-sidebar-bg);
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+@media (min-width: 40em) {
+  .profy__bottompanel {
+    display: none;
+  }
+}
+.profy__bottompanel__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding-block: 0.7em 0.5em;
+  padding-inline: 2.2em;
+  color: var(--clr-inactive-txt);
+  cursor: pointer;
+}
+.profy__bottompanel__item > * {
+  pointer-events: none;
+}
+.profy__bottompanel__item.selected {
+  color: var(--clr-logo-project);
+}
+.profy__bottompanel__item--icon {
+  font-size: 1.2rem;
+}
+.profy__bottompanel__item--name {
+  font-size: 0.8rem;
+  font-family: "Roboto", sans-serif;
 }/*# sourceMappingURL=rootHomeStyles.css.map */
