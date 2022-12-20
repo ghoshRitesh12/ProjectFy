@@ -1,6 +1,6 @@
 import { $, $$, addGlobalEventListener } from './utility.js';
 
-//----<profy_ideas section>
+//----<profy_ideas form_section>
 $('[data-ideasForm-imgUrl]').addEventListener('input', e => {
   $('.ideas-form__imgUpload').classList.toggle('notouch', e.target.value);
 })
@@ -10,7 +10,7 @@ $('.reveal').addEventListener('click', e => {
   const ideasForm = e.target.parentElement;
   const isCollapsed = ideasForm.classList.contains('collapsed') ? false : true;
   ideasForm.classList.toggle('collapsed', isCollapsed);
-
+  
   $('.reveal__icon').classList.toggle('rotate');
   if($('.reveal__txt').classList.contains('hide')) {
     $('.reveal__txt').classList.replace('hide', 'show'); return;
@@ -20,23 +20,49 @@ $('.reveal').addEventListener('click', e => {
 
 // idea img upload 
 $('[data-ideasForm-imgUpload]').addEventListener('change', e => {
+  $('.ideas-form').setAttribute('enctype', 'multipart/form-data');
   const file = e.target.files[0];
   $('.ideas-form__imgUrl').classList.toggle('notouch', file);
+
   if(file == null) {
+    $('.ideas-form').removeAttribute('enctype');
     $('[data-imgUpload-preview-wrap]').style.display = null;
     e.target.value = '';
     return;
   }
-
-  $('[data-imgUpload-preview-wrap]').style.display = 'block';
+  $('[data-imgUpload-preview-src]').setAttribute('src', '');
+  $('[data-imgUpload-preview-src]').setAttribute('alt', '');
+  
   const reader = new FileReader();
   reader.readAsDataURL(file);
   reader.addEventListener('load', e => {
     $('[data-imgUpload-preview-src]').setAttribute('src', e.target.result);
-    // $('[data-imgUpload-preview-src]').setAttribute('alt', file.name);
+    $('[data-imgUpload-preview-src]').setAttribute('alt', file.name);
   })
+  $('[data-imgUpload-preview-wrap]').style.display = 'block';
 })
 
+// idea img upload preview close button
+addGlobalEventListener('click', '[data-idea-imgUpload-preview-closebtn]', e => {
+  $('.ideas-form').removeAttribute('enctype');
+  const parentEl = e.target.parentElement;
+  parentEl.style.display = null;
+  
+  // upload new img after closing existing
+  const fileInput = parentEl.previousElementSibling;
+  fileInput.value = '';
+  $('[data-imgUpload-preview-src]').setAttribute('src', '');
+  $('[data-imgUpload-preview-src]').setAttribute('alt', '');
+  $('.ideas-form__imgUrl').classList.remove('notouch');
+})
+
+//----</profy_ideas form_section>
+
+
+
+
+
+//----<profy_ideas idea_section>
 // project idea options icon
 addGlobalEventListener('click', '[data-idea-options-icon]', e => {
   const optionEle = e.target.nextElementSibling;
@@ -49,9 +75,11 @@ addGlobalEventListener('click', '[data-idea-options-icon]', e => {
 
 // for each project idea option
 addGlobalEventListener('click', '[data-idea-options]', e => {
-  const optionEle = e.target.parentElement;
+  const optionEle = e.target.parentElement; 
   optionEle.setAttribute('aria-hidden', 'true');
 })
+
+
 
 // idea edit option
 addGlobalEventListener('click', '[data-idea-options="edit"]', e => {
@@ -79,15 +107,16 @@ addGlobalEventListener('click', '[data-idea-options="edit"]', e => {
   ideaImgType[ideaImgVal]();
 
 
-  $('[data-ideaEdit-modal]').showModal();
+  document.body.dataset.scrolly = 'false';
+  $('[data-idea-edit-modal]').showModal();
 })
-addGlobalEventListener('click', '[data-ideaEdit-modal-close]', e => {
+addGlobalEventListener('click', '[data-idea-edit-modal-close]', e => {
   $('[data-idea-edit-description]').value = '';
   $('[data-idea-edit-imgUrl]').value = '';
   $('[data-idea-edit-imgUpload]').setAttribute('src','');
   
-
-  $('[data-ideaEdit-modal]').close();
+  document.body.dataset.scrolly = 'true';
+  $('[data-idea-edit-modal]').close();
 })
 
 // close edit preview img
@@ -118,7 +147,8 @@ $('[data-idea-edit-imgUpload-btn]').addEventListener('change', e => {
 })
 
 // idea delete option
-addGlobalEventListener('click', '[data-idea-options="delete"]', e => $('[data-ideaDelete-modal]').showModal())
-addGlobalEventListener('click', '[data-ideaDelete-modal-close]', e => $('[data-ideaDelete-modal]').close())
-//----</profy_ideas section>
+addGlobalEventListener('click', '[data-idea-options="delete"]', e => $('[data-idea-delete-modal]').showModal())
+addGlobalEventListener('click', '[data-idea-delete-modal-close]', e => $('[data-idea-delete-modal]').close())
+
+//----</profy_ideas idea_section>
 
