@@ -1,23 +1,19 @@
 @use '../../../../frontend/sass/components/' as *;
 
 .profy__main__section--kanban {
-  // display: none;
-  display: flex;
+  display: none;
+  // display: flex;
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-  // grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
-  // grid-template-columns: repeat(3, minmax(17rem, 1fr));
-  // display: flex;
-  // justify-content: space-evenly;
   gap: 3rem;
 
   overflow: auto hidden;
 
   padding-block: 2em;
   @include breakpoint(medium) {
-    // display: none;
-    display: grid;
+    display: none;
+    // display: grid;
     grid-template-columns: repeat(3, minmax(17rem, 1fr));
     gap: 2rem;
   }

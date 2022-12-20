@@ -64,6 +64,17 @@
         outline: 2px solid var(--clr-separator-brdr);
       }
     }
+
+    & .field_empty {
+      display: none;
+      position: relative;
+      padding-block: .5rem 0;
+      max-width: fit-content;
+      margin-inline: auto;
+      color: var(--clr-signout-txt);
+      font-size: .9rem;
+    }
+
     & .btns-wrapper {
       display: block;
       margin-top: 1rem;
@@ -109,8 +120,17 @@
       display: flex;
       align-items: center;
       border-radius: $borders;
-      
       transition: .3s ease;
+      padding-block: var(--pad-block);
+      padding-inline: 1em 0; 
+      
+      &__txt {
+        color: var(--clr-inactive-txt);
+        font-size: .95rem;
+        font-weight: 500;
+        pointer-events: none;
+        text-transform: uppercase;
+      }
 
       &__add-icon { 
         margin: 0 .2em 0 auto;
@@ -127,35 +147,7 @@
           background-color: var(--clr-secondary-hover);
         }
       }
-      & svg {
-        pointer-events: none;
-      }
-    }
-
-    &-wrapper {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding-block: var(--pad-block);
-      padding-inline: 1em;
-
-      &__txt {
-        color: var(--clr-inactive-txt);
-        font-size: .95rem;
-        font-weight: 500;
-        pointer-events: none;
-        text-transform: uppercase;
-      }
-      &__icon {
-        display: none;
-        font-size: 1.2rem;
-        color: var(--clr-primary-icon);
-        pointer-events: none;
-      }
-      &__length {
-        color: var(--clr-primary-txt);
-        font-size: .9rem;
-      }
+      & svg { pointer-events: none; }
     }
 
     // project r list
@@ -289,13 +281,17 @@
         transition: .3s ease transform;
         transform: rotate(0deg);
 
-        &.rotated {
-          transform: rotate(180deg);
-        }
+        &.rotated { transform: rotate(180deg); }
       }
       &__length {
         color: var(--clr-primary-txt);
         font-size: .9rem;
+      }
+      &__icon {
+        position: absolute;
+        inset-inline: 0;
+        font-size: 1.1rem;
+        color: var(--clr-primary-icon);
       }
     }
 
@@ -350,3 +346,4 @@
     }
   }
 }
+
