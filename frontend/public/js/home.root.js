@@ -94,6 +94,15 @@ addGlobalEventListener('submit', '.newItemForm', async e => {
       const labelName = e.target.querySelector('input[name="newLabelName"]').value.trim();
       const labelColor = randomBoxClr();
       if(labelName === '') {
+        emptyFieldEle.textContent = '! Enter valid label name';
+        emptyFieldEle.style.display = 'block';
+        e.target.querySelector('input[name="newLabelName"]').focus();
+        return null;
+      }
+
+      const allLabels = [...$$('[data-label-list-item]')].map(i => i.firstElementChild.textContent.toLowerCase().trim());
+      if(allLabels.includes(labelName.toLowerCase())) {
+        emptyFieldEle.textContent = '! Label aleady exists';
         emptyFieldEle.style.display = 'block';
         e.target.querySelector('input[name="newLabelName"]').focus();
         return null;
@@ -146,7 +155,7 @@ addGlobalEventListener('click', '[data-project-options]', e => {
 })
 
 
-// share: project share form submit
+// share: project share *form submit*
 addGlobalEventListener('submit', '.share__project', async e => {
   e.preventDefault();
   const submitter = e.submitter.dataset.shareLinkSubmitter;
@@ -238,6 +247,54 @@ addGlobalEventListener('click', '[data-project-delete-modal-close]', e => {
 
 //-----</data project options>
 
+
+
+//----<labels section>
+
+// label delete icon
+addGlobalEventListener('click', '[data-label-delete-icon]', e => {
+  const labelElement = e.target.closest('[data-label-id]');
+  const labelId = labelElement.dataset.labelId;
+  const labelName = labelElement.firstElementChild.textContent.trim();
+
+  const formAction = `/labels/delete/${labelId}`
+  $('.delete__label').setAttribute('action', formAction);
+  $('[data-label-delete-name]').textContent = labelName;
+
+  document.body.dataset.scrolly = 'false';
+  $('[data-label-delete-modal]').showModal();
+})
+
+// close label delete modal
+addGlobalEventListener('click', '[data-label-delete-modal-close]', e => {
+  $('.delete__label').setAttribute('action', '');
+  document.body.dataset.scrolly = 'true';
+  $('[data-label-delete-modal]').close();
+})
+
+// label delete *form submit*
+addGlobalEventListener('submit', '.delete__label', async e => {
+  e.preventDefault();
+  // label belonging to project
+  const labelOfProjectId = $('.profy__main').dataset.projectId;
+  const url = e.target.getAttribute('action');
+
+  try {
+    const resp = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ labelOfProjectId })
+    }) 
+
+    console.log(resp);
+    // location.reload();
+
+  } catch (err) {
+    console.log(err);
+  }
+})
+
+//----</labels section>
 
 
 
