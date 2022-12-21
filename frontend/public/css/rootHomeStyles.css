@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* ubuntu-400 */
 @font-face {
   font-family: "Ubuntu";
@@ -967,14 +968,14 @@ body[data-theme=dark] {
 .profy__sidepanel__nav--labels-listItem {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
   position: relative;
-  padding-block: 0.3em;
-  padding-inline: 0.7em 2em;
+  padding-block: 0.4em;
+  padding-inline: 0.75em 0;
   max-width: -webkit-fit-content;
   max-width: -moz-fit-content;
   max-width: fit-content;
   isolation: isolate;
+  overflow: hidden;
   border-radius: 1rem;
   transition: 0.2s ease all;
   color: var(--clr-secondary-txt);
@@ -982,16 +983,133 @@ body[data-theme=dark] {
   border: 1px solid var(--clr-secondary-hover);
   background-color: var(--clr-ternary-bg);
 }
-.profy__sidepanel__nav--labels-listItem--icon {
-  flex-shrink: 0;
-  color: var(--rndm-clr);
+.profy__sidepanel__nav--labels-listItem:hover [data-label-delete-icon] {
+  opacity: 1;
+  visibility: visible;
 }
 .profy__sidepanel__nav--labels-listItem--name {
+  position: relative;
   line-height: 1.2;
   cursor: initial;
+  padding-inline: 1.4em 0;
+  font-size: 1rem;
 }
-.profy__sidepanel__nav--labels-listItem:hover {
+.profy__sidepanel__nav--labels-listItem--name::before {
+  content: "☗";
+  display: block;
+  position: absolute;
+  left: 0;
+  isolation: isolate;
+  transform: rotate(90deg);
+  color: var(--rndm-clr);
+  pointer-events: none;
+}
+.profy__sidepanel__nav--labels-listItem [data-label-delete-icon] {
+  display: block;
+  padding-inline: 0.7em;
+  opacity: 1;
+  opacity: 0;
+  visibility: visible;
+  visibility: hidden;
+  transition: 0.2s ease;
+}
+.profy__sidepanel__nav [data-label-delete-modal] {
+  position: fixed;
+  margin-block: auto;
+  margin-inline: auto;
+  isolation: isolate;
+  border: none;
+  overflow: hidden;
   background-color: transparent;
+}
+.profy__sidepanel__nav [data-label-delete-modal]:not([open]) {
+  display: none;
+}
+.profy__sidepanel__nav [data-label-delete-modal]::-webkit-backdrop {
+  background-color: hsla(0deg, 0%, 0%, 0.7);
+  -webkit-backdrop-filter: blur(0.3rem);
+          backdrop-filter: blur(0.3rem);
+}
+.profy__sidepanel__nav [data-label-delete-modal]::backdrop {
+  background-color: hsla(0deg, 0%, 0%, 0.7);
+  -webkit-backdrop-filter: blur(0.3rem);
+          backdrop-filter: blur(0.3rem);
+}
+.profy__sidepanel__nav .delete__label {
+  position: relative;
+  isolation: isolate;
+  min-width: 17.5rem;
+  max-width: 17.5rem;
+  overflow: hidden;
+  border-radius: 0.8rem;
+  background-color: var(--clr-sidebar-bg);
+  border: 1px solid var(--clr-separator-brdr);
+}
+.profy__sidepanel__nav .delete__label__header {
+  display: flex;
+  align-items: center;
+  padding-block: 0.5em;
+  padding-inline: 1em;
+  border-bottom: 1px solid var(--clr-separator-brdr);
+}
+.profy__sidepanel__nav .delete__label__header--txt {
+  margin-left: auto;
+  font-size: 1.1rem;
+  word-spacing: 0.2rem;
+  color: var(--clr-primary-txt);
+}
+.profy__sidepanel__nav .delete__label__header--cancelIcon {
+  display: block;
+  margin-inline: auto 0;
+  padding: 0.3em;
+  font-size: 1.1rem;
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--clr-inactive-txt);
+  background-color: var(--clr-separator-brdr);
+}
+.profy__sidepanel__nav .delete__label__header--cancelIcon > * {
+  pointer-events: none;
+}
+.profy__sidepanel__nav .delete__label__description {
+  display: block;
+  position: relative;
+  margin-block: 0.8rem 1rem;
+  padding-inline: 1rem;
+  max-width: 100%;
+  width: 100%;
+}
+.profy__sidepanel__nav .delete__label__description__txt {
+  line-height: 1.7;
+  color: var(--clr-primary-txt);
+  margin-bottom: 0.7rem;
+}
+.profy__sidepanel__nav .delete__label__description__btns {
+  display: block;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  margin-left: auto;
+}
+.profy__sidepanel__nav .delete__label__description__btns button {
+  padding: 0.25em 0.8em;
+  border-radius: 0.5rem;
+  background-color: transparent;
+  color: var(--clr-primary-txt);
+  outline: none;
+  border: none;
+  transition: 0.15s ease;
+}
+.profy__sidepanel__nav .delete__label__description__btns button:hover {
+  background-color: var(--clr-separator-brdr);
+}
+.profy__sidepanel__nav .delete__label__description__btns button[type=submit] {
+  margin-left: 0.2rem;
+  color: var(--clr-signout-txt);
+  background-color: var(--clr-signout-bg);
+}
+.profy__sidepanel__nav .delete__label__description__btns button[type=submit]:hover {
+  background-color: var(--clr-signout-bg-hover);
 }
 
 .profy__bottompanel {

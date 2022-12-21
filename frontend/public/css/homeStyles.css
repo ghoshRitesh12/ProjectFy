@@ -552,6 +552,7 @@ textarea {
   overflow: hidden;
   background-color: var(--clr-primary-bg);
   border-radius: 0.5rem;
+  outline: 1px solid var(--clr-separator-brdr);
 }
 .profy__main__header .share__project .project__share-link-wrap.show {
   display: flex;
@@ -589,13 +590,6 @@ textarea {
 }
 .profy__main__header .share__project .project__share-link-wrap [data-project-share-link-copy] > * {
   pointer-events: none;
-}
-.profy__main__header .share__project .project__share-link-wrap [data-make-sharelink-private] {
-  flex: 1;
-  min-width: 100%;
-}
-.profy__main__header .share__project:last-child {
-  margin-bottom: 1rem;
 }
 
 .profy__main__section__options {
@@ -2239,5 +2233,7 @@ textarea {
   background-color: var(--clr-signout-bg);
 }
 .profy__main__section--kanban .delete__kanban__description__btns button[type=submit]:hover {
+  background-color: var(--clr-signout-bg-hover);
+}/*# sourceMappingURL=homeStyles.css.map */delete__kanban__description__btns button[type=submit]:hover {
   background-color: var(--clr-signout-bg-hover);
 }/*# sourceMappingURL=homeStyles.css.map */
