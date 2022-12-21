@@ -382,6 +382,7 @@
       overflow: hidden;
       background-color: var(--clr-primary-bg);
       border-radius: $borders;
+      outline: 1px solid var(--clr-separator-brdr);
 
       &.show { display: flex; }
 
@@ -414,15 +415,6 @@
         & > * { pointer-events: none; }
       }
 
-      & [data-make-sharelink-private] {
-        flex: 1;
-        min-width: 100%;
-      }
-
-    }
-
-    &:last-child {
-      margin-bottom: 1rem;
     }
   }
 
