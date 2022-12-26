@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* ubuntu-400 */
 @font-face {
   font-family: "Ubuntu";
@@ -108,7 +109,7 @@ textarea {
 
 .profy__main {
   --top-margin: calc(var(--pad-titlebar) * 4.2);
-  display: block;
+  display: none;
   position: relative;
   grid-area: main;
   padding-inline: 1.2rem;
@@ -187,7 +188,7 @@ textarea {
   flex-shrink: 2;
   max-width: 17ch;
   margin-right: auto;
-  font-size: clamp(1.65rem, 5vmin, 4rem);
+  font-size: clamp(1.7rem, 5vmin, 4rem);
   font-weight: 500;
   color: var(--clr-primary-txt);
   font-family: "Ubuntu", sans-serif;
@@ -228,7 +229,7 @@ textarea {
 }
 .profy__main__header__options--icon {
   flex-shrink: 0;
-  font-size: clamp(1.5rem, 4vmin, 2rem);
+  font-size: clamp(1.6rem, 4vmin, 2rem);
   margin-left: auto;
   padding-block: 0.15em;
   padding-inline: 0.2em;
@@ -661,18 +662,18 @@ textarea {
 }
 
 .profy__main__section--overview {
-  display: none;
+  display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
   justify-content: center;
-  padding-block: 2em 1.5em;
+  padding-block: 2em 3em;
   cursor: initial;
 }
 @media (min-width: 40em) {
   .profy__main__section--overview {
     gap: 2rem 2.5rem;
     padding-inline: 0 1em;
-    padding-block: 3em 1.5em;
+    padding-block: 3em 2em;
   }
 }
 @media (min-width: 64em) {
@@ -1008,7 +1009,7 @@ textarea {
 }
 
 .profy__main__section--ideas {
-  display: flex;
+  display: none;
   flex-wrap: wrap;
   gap: 3rem;
   justify-content: center;
@@ -2234,6 +2235,965 @@ textarea {
 }
 .profy__main__section--kanban .delete__kanban__description__btns button[type=submit]:hover {
   background-color: var(--clr-signout-bg-hover);
-}/*# sourceMappingURL=homeStyles.css.map */delete__kanban__description__btns button[type=submit]:hover {
-  background-color: var(--clr-signout-bg-hover);
+}
+
+.profy__home {
+  display: none;
+  grid-area: main;
+  padding-block: 1.5em 6em;
+  padding-inline: 1.2rem;
+  max-width: 100%;
+  width: 100%;
+  color: var(--clr-secondary-txt);
+  font-family: "Roboto", sans-serif;
+  background-color: var(--clr-secondary-bg);
+  overflow-y: auto;
+}
+@media (min-width: 40em) {
+  .profy__home {
+    max-height: calc(100vh - var(--top-margin));
+    min-height: calc(100vh - var(--top-margin));
+    padding-inline: 1.8rem 2rem;
+    padding-block: 3em;
+  }
+}
+@media (min-width: 64em) {
+  .profy__home {
+    padding-inline: 4rem 4.5rem;
+    padding-block: 4em;
+  }
+}
+.profy__home__greet {
+  transition: 0.2s ease;
+}
+.profy__home__greet [data-home-greet-time] {
+  font-size: clamp(0.95rem, 3vmin, 1.08rem);
+  word-spacing: 0.1rem;
+  color: var(--clr-inactive-txt);
+}
+.profy__home__greet [data-home-greet-name], .profy__home__greet [data-home-greet-msg] {
+  font-size: clamp(1.8rem, 5vmin, 4rem);
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 500;
+}
+.profy__home__nearing-duedate-txt {
+  color: var(--clr-primary-txt);
+  font-size: clamp(1.05rem, 3vmin, 1.4rem);
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  margin-inline: 0 auto;
+  margin-block: 1rem;
+}
+@media (min-width: 40em) {
+  .profy__home__nearing-duedate-txt {
+    margin-block: 2rem;
+  }
+}
+.profy__home__project-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 2.5rem;
+  margin-top: 2rem;
+  transition: 0.2s ease;
+}
+@media (min-width: 40em) {
+  .profy__home__project-list {
+    margin-top: 3rem;
+  }
+}
+@media (min-width: 64em) {
+  .profy__home__project-list {
+    margin-top: 4rem;
+  }
+}
+.profy__home .home-project {
+  --random-clr: hsl(2 64% 60%);
+  position: relative;
+  isolation: isolate;
+  padding: 0.6em 0.9em;
+  margin-inline: 0.5rem;
+  border-radius: 0.8rem;
+  font-family: "Roboto", sans-serif;
+  cursor: pointer;
+}
+.profy__home .home-project:hover::before {
+  opacity: 0.5;
+}
+.profy__home .home-project > * {
+  pointer-events: none;
+}
+.profy__home .home-project::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  z-index: -1;
+  opacity: 0.3;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  transition: 0.3s ease;
+  border-radius: 0.8rem;
+  background-color: var(--random-clr, hsl(0deg, 64%, 60%));
+}
+.profy__home .home-project__name {
+  font-size: clamp(1.4rem, 3vmin, 2.7rem);
+  color: var(--clr-ternary-txt);
+  color: var(--clr-secondary-txt);
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+}
+.profy__home .home-project__goals {
+  position: relative;
+  font-size: clamp(0.9rem, 2.5vmin, 1.05rem);
+  color: var(--clr-inactive-txt2);
+  line-height: 1.4;
+  max-height: 2.6rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+@media (min-width: 40em) {
+  .profy__home .home-project__goals {
+    max-height: 3rem;
+  }
+}
+.profy__home .home-project__work-progress {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem;
+  margin-block: 0.5rem;
+}
+.profy__home .home-project__work-progress__bar {
+  flex: 1;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  border-radius: 1rem;
+  max-height: 0.5rem;
+  overflow: hidden;
+  background-color: #fdfdfd;
+  overflow: hidden;
+}
+.profy__home .home-project__work-progress__bar[value]::-webkit-progress-bar {
+  background-color: #fdfdfd;
+}
+.profy__home .home-project__work-progress__bar[value]::-moz-progress-bar {
+  background-color: var(--random-clr, hsl(0deg, 64%, 60%));
+  border-radius: 1rem;
+}
+.profy__home .home-project__work-progress__bar[value]::-webkit-progress-value {
+  border-radius: 1rem;
+  background-color: var(--random-clr, hsl(0deg, 64%, 60%));
+}
+.profy__home .home-project__work-progress__txt {
+  color: var(--clr-secondary-txt);
+  font-family: "Ubuntu", sans-serif;
+}
+.profy__home .home-project__due-date-wrapper {
+  margin-inline: auto 0;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  font-size: clamp(0.85rem, 2.5vmin, 0.95rem);
+  color: var(--clr-ternary-txt);
+  font-weight: 500;
+}
+.profy__home .home-project__due-date-wrapper [data-home-project-due-date] {
+  position: relative;
+  margin-left: 0.3rem;
+}
+
+.profy__settings {
+  display: none;
+  grid-area: main;
+  padding-block: 1.5em 5em;
+  padding-inline: 1.2rem;
+  max-width: 100%;
+  width: 100%;
+  color: var(--clr-secondary-txt);
+  font-family: "Roboto", sans-serif;
+  background-color: var(--clr-secondary-bg);
+  overflow-y: auto;
+}
+@media (min-width: 40em) {
+  .profy__settings {
+    max-height: calc(100vh - var(--top-margin));
+    min-height: calc(100vh - var(--top-margin));
+    padding-inline: 1.8rem 2rem;
+    padding-block: 3em;
+  }
+}
+@media (min-width: 64em) {
+  .profy__settings {
+    padding-inline: 4rem 4.5rem;
+    padding-block: 4em;
+  }
+}
+.profy__settings__txt {
+  transition: 0.2s ease;
+}
+.profy__settings__txt-heading {
+  color: var(--clr-primary-txt);
+  font-size: clamp(1.8rem, 5vmin, 4rem);
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 500;
+  word-spacing: 0.3rem;
+}
+.profy__settings__txt-description {
+  margin-top: 1rem;
+  color: var(--clr-inactive-txt);
+  font-size: clamp(1rem, 2.5vmin, 1.2rem);
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+}
+.profy__settings__personal-details {
+  position: relative;
+  padding-top: 1.5rem;
+}
+.profy__settings .details__profile-pic {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding-block: 2em;
+  border-top: 1px solid var(--clr-separator-brdr);
+}
+.profy__settings .details__profile-pic--txt {
+  color: var(--clr-logo-project);
+  margin-right: auto;
+  font-weight: 500;
+}
+.profy__settings .details__profile-pic [data-pfp-and-pfpupload-wrap] {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-inline: 0 auto;
+}
+@media (min-width: 40em) {
+  .profy__settings .details__profile-pic [data-pfp-and-pfpupload-wrap] {
+    margin-inline: 0 auto;
+  }
+}
+.profy__settings .details__profile-pic [data-details-profile-pic-wrap] {
+  --size: 6.5rem;
+  max-width: var(--size);
+  width: 100%;
+  min-height: var(--size);
+  overflow: hidden;
+}
+.profy__settings .details__profile-pic [data-details-profile-pic-wrap][data-active-profile-pic=dummy] [data-details-profile-pic=dummy] {
+  display: grid;
+}
+.profy__settings .details__profile-pic [data-details-profile-pic-wrap][data-active-profile-pic=real] [data-details-profile-pic=real] {
+  display: grid;
+}
+.profy__settings .details__profile-pic [data-details-profile-pic-wrap] [data-details-profile-pic] {
+  display: none;
+  place-items: center;
+  min-height: inherit;
+  max-width: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+  color: var(--clr-primary-txt);
+}
+.profy__settings .details__profile-pic [data-details-profile-pic-wrap] [data-details-profile-pic=dummy] {
+  background-color: rgb(255, 92, 146);
+  color: var(--clr-primary-bg);
+  font-size: clamp(1.2rem, 3vmin, 1.5rem);
+}
+.profy__settings .details__profile-pic--upload-wrap [data-profile-pic-upload-field] {
+  display: block;
+  padding: 0.2em;
+  max-width: 100%;
+  color: var(--clr-primary-txt);
+  border: none;
+}
+.profy__settings .details__profile-pic--upload-wrap [data-profile-pic-upload-field]::-webkit-file-upload-button {
+  margin-right: 1rem;
+  padding: 0.5em 1em;
+  color: var(--clr-primary-txt);
+  background-color: var(--clr-input-field);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  border: none;
+  outline: 1px solid var(--clr-separator-brdr);
+}
+.profy__settings .details__profile-pic--upload-wrap [data-profile-pic-upload-field]::file-selector-button {
+  margin-right: 1rem;
+  padding: 0.5em 1em;
+  color: var(--clr-primary-txt);
+  background-color: var(--clr-input-field);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  border: none;
+  outline: 1px solid var(--clr-separator-brdr);
+}
+.profy__settings .details__profile-pic--upload-wrap [data-profile-pic-upload-field]::-webkit-file-upload-button:hover {
+  outline: 2px solid var(--clr-separator-brdr);
+}
+.profy__settings .details__profile-pic--upload-wrap [data-profile-pic-upload-field]::file-selector-button:hover {
+  outline: 2px solid var(--clr-separator-brdr);
+}
+.profy__settings .details__name {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  position: relative;
+  border-top: 1px solid var(--clr-separator-brdr);
+  padding-block: 3em 1.5em;
+}
+.profy__settings .details__name--txt {
+  color: var(--clr-logo-project);
+  margin-right: auto;
+  font-weight: 500;
+}
+.profy__settings .details__name [data-details-name-wrap] {
+  display: block;
+  position: relative;
+  max-width: 35ch;
+  width: 100%;
+  margin-inline: 0 auto;
+}
+@media (min-width: 40em) {
+  .profy__settings .details__name [data-details-name-wrap] {
+    margin-inline: 3.5rem auto;
+  }
+}
+.profy__settings .details__name--field {
+  word-spacing: 0.3rem;
+  width: 100%;
+}
+.profy__settings .details__name .profile-name__change-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  isolation: isolate;
+  margin-right: 0.1rem;
+  transform: translateY(-50%);
+  background-color: var(--clr-input-field);
+  border-block: 1px solid var(--clr-input-field);
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  font-size: 1rem;
+}
+.profy__settings .details__name .profile-name__change-btn.edit [data-profile-name-cancel-btn], .profy__settings .details__name .profile-name__change-btn.edit [data-profile-name-save-btn] {
+  display: inline-block;
+}
+.profy__settings .details__name .profile-name__change-btn.edit [data-profile-name-edit-btn] {
+  display: none;
+}
+.profy__settings .details__name .profile-name__change-btn [data-profile-name-edit-btn] {
+  isolation: isolate;
+  transform: scaleX(-1);
+}
+.profy__settings .details__name .profile-name__change-btn button {
+  display: none;
+  padding: 0.2em 1em;
+  border-radius: 0.5rem;
+  border: none;
+  transition: 0.15s ease;
+  color: var(--clr-primary-txt);
+  background-color: var(--clr-primary-bg);
+  border: 1px solid var(--clr-separator-brdr);
+}
+.profy__settings .details__name .profile-name__change-btn button:hover {
+  background-color: var(--clr-separator-brdr);
+}
+.profy__settings .details__name .profile-name__change-btn button:first-child {
+  display: block;
+}
+.profy__settings .details__name .profile-name__change-btn button[data-profile-name-save-btn] {
+  color: var(--clr-edit-btn);
+  background-color: var(--clr-edit-btn-bg);
+  border: none;
+  transition: 0.15s ease;
+}
+.profy__settings .details__name .profile-name__change-btn button[data-profile-name-save-btn]:hover {
+  background-color: var(--clr-edit-btn-hover);
+}
+.profy__settings .details__email {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  border-top: 2px solid var(--clr-separator-brdr);
+  border-top: 1px solid var(--clr-separator-brdr);
+  padding-block: 1.5em;
+}
+.profy__settings .details__email--txt {
+  color: var(--clr-logo-project);
+  margin-right: auto;
+  font-weight: 500;
+}
+.profy__settings .details__email [data-details-email-wrap] {
+  position: relative;
+  margin-inline: 0 auto;
+  max-width: 35ch;
+  width: 100%;
+}
+.profy__settings .details__email [data-details-email-wrap]::before {
+  content: "✉";
+  display: block;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 0.5rem;
+  color: var(--clr-inactive-txt);
+  font-size: 1.3rem;
+  pointer-events: none;
+}
+.profy__settings .details__email [data-details-email-wrap] [data-settings-details-field] {
+  width: 100%;
+  padding-inline: 2.5em 0;
+}
+.profy__settings .details__password {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  border-top: 2px solid var(--clr-separator-brdr);
+  border-top: 1px solid var(--clr-separator-brdr);
+  padding-block: 1.5em;
+}
+.profy__settings .details__password--txt {
+  color: var(--clr-logo-project);
+  margin-right: auto;
+  font-weight: 500;
+}
+.profy__settings .details__password [data-details-password-wrap] {
+  position: relative;
+  margin-inline: 2rem auto;
+  max-width: 35ch;
+  width: 100%;
+}
+@media (min-width: 40em) {
+  .profy__settings .details__password [data-details-password-wrap] {
+    margin-inline: 2rem auto;
+  }
+}
+.profy__settings .details__password [data-details-password-wrap] [data-settings-details-field] {
+  width: 100%;
+}
+.profy__settings .details__password [data-settings-show-password] {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  isolation: isolate;
+  margin-right: 0.1rem;
+  padding: 0.5em 0.75em;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  font-weight: 500;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  transition: 0.2s ease;
+  transform: translateY(-50%);
+  border-radius: 0.5rem;
+  color: var(--clr-inactive-txt);
+  background-color: var(--clr-secondary-bg);
+  border: 1px solid var(--clr-separator-brdr);
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.profy__settings .details__password [data-settings-show-password] > * {
+  pointer-events: none;
+}
+.profy__settings .details__delete-account {
+  border-top: 1px solid var(--clr-separator-brdr);
+  padding-block: 2em 1em;
+}
+.profy__settings .details__delete-account--txt {
+  color: var(--clr-signout-txt);
+  margin-right: auto;
+  font-weight: 500;
+  font-size: clamp(1.15rem, 2.5vmin, 1.4rem);
+}
+.profy__settings .details__delete-account [data-details-delete-accountBtn-wrap] {
+  position: relative;
+}
+.profy__settings .details__delete-account [data-details-delete-accountBtn-wrap] [data-settings-delete-account-txt] {
+  font-size: 0.98rem;
+  margin-top: 0.5rem;
+  color: var(--clr-primary-txt);
+}
+.profy__settings .details__delete-account [data-details-delete-accountBtn-wrap] [data-settings-delete-account-btn] {
+  margin-top: 1.5rem;
+  border: none;
+  transition: 0.2s ease;
+  padding: 0.4em 1em;
+  border-radius: 0.5rem;
+  color: var(--clr-signout-txt);
+  background-color: transparent;
+  outline: 1px solid var(--clr-signout-txt);
+}
+.profy__settings .details__delete-account [data-details-delete-accountBtn-wrap] [data-settings-delete-account-btn]:hover {
+  background-color: var(--clr-signout-bg);
+}
+.profy__settings .details__delete-account [data-details-delete-accountBtn-wrap] [data-settings-delete-account-btn] > * {
+  pointer-events: none;
+}
+.profy__settings [data-settings-details-field] {
+  font-size: 1.02rem;
+  padding: 0.4em 0.8em;
+  color: var(--clr-primary-txt);
+  background-color: var(--clr-input-field);
+  outline: 1px solid var(--clr-separator-brdr);
+  border-radius: 0.5rem;
+  border: none;
+}
+.profy__settings [data-settings-details-field]:focus {
+  outline: 2px solid var(--clr-separator-brdr);
+}
+.profy__settings [data-settings-details-field]:-moz-read-only:focus {
+  outline: 1px solid var(--clr-separator-brdr);
+}
+.profy__settings [data-settings-details-field]:read-only:focus {
+  outline: 1px solid var(--clr-separator-brdr);
+}
+
+.profy__projects {
+  display: none;
+  grid-area: main;
+  padding-inline: 1.2rem;
+  padding-block: 1.5em 6em;
+  min-width: 100%;
+  width: 100%;
+  overflow-y: auto;
+  color: var(--clr-secondary-txt);
+  font-family: "Roboto", sans-serif;
+  background-color: var(--clr-secondary-bg);
+}
+@media (min-width: 40em) {
+  .profy__projects {
+    max-height: calc(100vh - var(--top-margin));
+    min-height: calc(100vh - var(--top-margin));
+    padding-inline: 1.8rem 2rem;
+    padding-block: 3em;
+  }
+}
+@media (min-width: 64em) {
+  .profy__projects {
+    padding-inline: 4rem 4.5rem;
+    padding-block: 4em;
+  }
+}
+.profy__projects__header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+.profy__projects__header__txt {
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  font-size: clamp(1.7rem, 4.5vmin, 4rem);
+  font-weight: 500;
+  font-family: "Ubuntu", sans-serif;
+  color: var(--clr-primary-txt);
+}
+.profy__projects__header [data-add-item] {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-inline: auto 0;
+  padding: 0.55em 0.75em;
+  border-radius: 0.7rem;
+  color: var(--clr-primary-icon);
+  background-color: var(--clr-sidebar-bg);
+  outline: 1px solid var(--clr-separator-brdr);
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+.profy__projects__header [data-add-item]:hover {
+  background-color: var(--clr-separator-brdr);
+}
+.profy__projects__header [data-add-item] > * {
+  flex-shrink: 0;
+  pointer-events: none;
+}
+.profy__projects__header [data-add-item] p {
+  font-size: 0.9rem;
+}
+.profy__projects .newItemForm {
+  display: flex;
+  flex-direction: column;
+  padding-inline: 0.2rem;
+  margin-inline: auto;
+  margin-block: 1rem;
+  max-width: 85%;
+  font-size: 1rem;
+}
+.profy__projects .newItemForm.hidden {
+  display: none;
+}
+.profy__projects .newItemForm input[type=text] {
+  padding: 0.4em 1em;
+  border: none;
+  border-radius: 0.7rem;
+  color: var(--clr-primary-txt);
+  background-color: var(--clr-sidebar-bg);
+  outline: 1px solid var(--clr-separator-brdr);
+}
+.profy__projects .newItemForm input[type=text]:focus {
+  outline: 2px solid var(--clr-separator-brdr);
+}
+.profy__projects .newItemForm .field_empty {
+  display: none;
+  position: relative;
+  padding-block: 0.5rem 0;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  margin-inline: auto;
+  color: var(--clr-signout-txt);
+  font-size: 0.9rem;
+}
+.profy__projects .newItemForm .btns-wrapper {
+  display: block;
+  margin-top: 1.5rem;
+  margin-left: auto;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+}
+.profy__projects .newItemForm .btns-wrapper button {
+  padding: 0.28em 0.8em;
+  border-radius: 0.7rem;
+  border: none;
+  color: var(--clr-primary-txt);
+  transition: 0.1s ease;
+  background-color: transparent;
+  outline: 1px solid transparent;
+}
+.profy__projects .newItemForm .btns-wrapper button:hover {
+  background-color: var(--clr-navlist-hover);
+  outline: 1px solid var(--clr-navlist-hover);
+}
+.profy__projects .newItemForm .btns-wrapper button[data-newItem-btn-save] {
+  outline: 1px solid var(--clr-edit-btn-bg);
+  margin-left: 0.4rem;
+  color: var(--clr-edit-btn);
+  background-color: var(--clr-edit-btn-bg);
+  transition: 0.15s ease;
+}
+.profy__projects .newItemForm .btns-wrapper button[data-newItem-btn-save]:hover {
+  background-color: var(--clr-edit-btn-hover);
+}
+.profy__projects__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 2.5rem;
+  transition: 0.2s ease;
+  padding-top: 1rem;
+}
+.profy__projects .project {
+  --random-clr: hsl(2 64% 60%);
+  position: relative;
+  isolation: isolate;
+  padding: 0.6em 0.9em;
+  margin-inline: 0.5rem;
+  border-radius: 0.8rem;
+  font-family: "Roboto", sans-serif;
+  cursor: pointer;
+}
+.profy__projects .project:hover::before {
+  opacity: 0.5;
+}
+.profy__projects .project > * {
+  pointer-events: none;
+}
+.profy__projects .project::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  z-index: -1;
+  opacity: 0.3;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  transition: 0.3s ease;
+  border-radius: 0.8rem;
+  background-color: var(--random-clr, hsl(0deg, 64%, 60%));
+}
+.profy__projects .project__name {
+  font-size: clamp(1.4rem, 3vmin, 2.7rem);
+  color: var(--clr-ternary-txt);
+  color: var(--clr-secondary-txt);
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+}
+.profy__projects .project__goals {
+  position: relative;
+  font-size: clamp(0.9rem, 2.5vmin, 1.05rem);
+  color: var(--clr-inactive-txt2);
+  line-height: 1.4;
+  max-height: 3.9rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+@media (min-width: 40em) {
+  .profy__projects .project__goals {
+    max-height: -webkit-fit-content;
+    max-height: -moz-fit-content;
+    max-height: fit-content;
+  }
+}
+.profy__projects .project__work-progress {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem;
+  margin-block: 0.5rem;
+}
+.profy__projects .project__work-progress__bar {
+  flex: 1;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  border-radius: 1rem;
+  max-height: 0.5rem;
+  overflow: hidden;
+  background-color: #fdfdfd;
+  overflow: hidden;
+}
+.profy__projects .project__work-progress__bar[value]::-webkit-progress-bar {
+  background-color: #fdfdfd;
+}
+.profy__projects .project__work-progress__bar[value]::-moz-progress-bar {
+  background-color: var(--random-clr, hsl(0deg, 64%, 60%));
+  border-radius: 1rem;
+}
+.profy__projects .project__work-progress__bar[value]::-webkit-progress-value {
+  border-radius: 1rem;
+  background-color: var(--random-clr, hsl(0deg, 64%, 60%));
+}
+.profy__projects .project__work-progress__txt {
+  color: var(--clr-secondary-txt);
+  font-family: "Ubuntu", sans-serif;
+}
+.profy__projects .project__due-date-wrapper {
+  margin-inline: auto 0;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  font-size: clamp(0.85rem, 2.5vmin, 0.95rem);
+  color: var(--clr-ternary-txt);
+  font-weight: 500;
+}
+.profy__projects .project__due-date-wrapper [data-home-project-due-date] {
+  position: relative;
+  margin-left: 0.3rem;
+}
+
+.profy__labels {
+  display: block;
+  grid-area: main;
+  padding-inline: 1.2rem;
+  padding-block: 1.5em 6em;
+  min-width: 100%;
+  width: 100%;
+  overflow-y: auto;
+  color: var(--clr-secondary-txt);
+  font-family: "Roboto", sans-serif;
+  background-color: var(--clr-secondary-bg);
+}
+@media (min-width: 40em) {
+  .profy__labels {
+    max-height: calc(100vh - var(--top-margin));
+    min-height: calc(100vh - var(--top-margin));
+    padding-inline: 1.8rem 2rem;
+    padding-block: 3em;
+  }
+}
+@media (min-width: 64em) {
+  .profy__labels {
+    padding-inline: 4rem 4.5rem;
+    padding-block: 4em;
+  }
+}
+.profy__labels__header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+.profy__labels__header__txt {
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  font-size: clamp(1.7rem, 4.5vmin, 4rem);
+  font-weight: 500;
+  font-family: "Ubuntu", sans-serif;
+  color: var(--clr-primary-txt);
+}
+.profy__labels__header [data-add-item] {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-inline: auto 0;
+  padding: 0.55em 0.75em;
+  border-radius: 0.7rem;
+  color: var(--clr-primary-icon);
+  background-color: var(--clr-sidebar-bg);
+  outline: 1px solid var(--clr-separator-brdr);
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+.profy__labels__header [data-add-item]:hover {
+  background-color: var(--clr-separator-brdr);
+}
+.profy__labels__header [data-add-item] > * {
+  flex-shrink: 0;
+  pointer-events: none;
+}
+.profy__labels__header [data-add-item] p {
+  font-size: 0.9rem;
+}
+.profy__labels .newItemForm {
+  display: flex;
+  flex-direction: column;
+  padding-inline: 0.2rem;
+  margin-inline: auto;
+  margin-block: 1rem;
+  max-width: 85%;
+  font-size: 1rem;
+}
+.profy__labels .newItemForm.hidden {
+  display: none;
+}
+.profy__labels .newItemForm input[type=text] {
+  padding: 0.4em 1em;
+  border: none;
+  border-radius: 0.7rem;
+  color: var(--clr-primary-txt);
+  background-color: var(--clr-sidebar-bg);
+  outline: 1px solid var(--clr-separator-brdr);
+}
+.profy__labels .newItemForm input[type=text]:focus {
+  outline: 2px solid var(--clr-separator-brdr);
+}
+.profy__labels .newItemForm .field_empty {
+  display: none;
+  position: relative;
+  padding-block: 0.5rem 0;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  margin-inline: auto;
+  color: var(--clr-signout-txt);
+  font-size: 0.9rem;
+}
+.profy__labels .newItemForm .btns-wrapper {
+  display: block;
+  margin-top: 1.5rem;
+  margin-left: auto;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+}
+.profy__labels .newItemForm .btns-wrapper button {
+  padding: 0.28em 0.8em;
+  border-radius: 0.7rem;
+  border: none;
+  color: var(--clr-primary-txt);
+  transition: 0.1s ease;
+  background-color: transparent;
+  outline: 1px solid transparent;
+}
+.profy__labels .newItemForm .btns-wrapper button:hover {
+  background-color: var(--clr-navlist-hover);
+  outline: 1px solid var(--clr-navlist-hover);
+}
+.profy__labels .newItemForm .btns-wrapper button[data-newItem-btn-save] {
+  outline: 1px solid var(--clr-edit-btn-bg);
+  margin-left: 0.4rem;
+  color: var(--clr-edit-btn);
+  background-color: var(--clr-edit-btn-bg);
+  transition: 0.15s ease;
+}
+.profy__labels .newItemForm .btns-wrapper button[data-newItem-btn-save]:hover {
+  background-color: var(--clr-edit-btn-hover);
+}
+.profy__labels__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 2rem;
+  transition: 0.2s ease;
+  padding-top: 1rem;
+}
+.profy__labels .label {
+  --rndm-clr: hsl(0 64% 60%);
+  display: flex;
+  align-items: center;
+  position: relative;
+  isolation: isolate;
+  padding: 0.3em 0 0.3em 1em;
+  margin-inline: 1rem;
+  overflow: hidden;
+  border-radius: 0.8rem;
+  font-family: "Roboto", sans-serif;
+  outline: 1px solid var(--rndm-clr, hsl(0deg, 64%, 60%));
+}
+.profy__labels .label::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  z-index: -1;
+  opacity: 0.08;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  transition: 0.3s ease;
+  border-radius: 0.8rem;
+  background-color: var(--rndm-clr, hsl(0deg, 64%, 60%));
+}
+.profy__labels .label__name {
+  position: relative;
+  padding-inline: 1.4em 0;
+  line-height: 1.2;
+  font-weight: 500;
+  color: var(--clr-secondary-txt);
+  font-size: clamp(1.2rem, 2.5vmin, 2rem);
+}
+.profy__labels .label__name::before {
+  content: "☗";
+  display: block;
+  position: absolute;
+  left: 0;
+  isolation: isolate;
+  transform: rotate(90deg);
+  color: var(--rndm-clr);
+  pointer-events: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.profy__labels .label [data-label-delete-icon] {
+  flex-shrink: 0;
+  display: block;
+  margin-left: auto;
+  font-size: 1.1rem;
+  padding-block: 0.3em;
+  padding-inline: 0.5em 0.8em;
+  color: var(--clr-primary-icon);
+  cursor: pointer;
+}
+.profy__labels .label [data-label-delete-icon] > * {
+  pointer-events: none;
 }/*# sourceMappingURL=homeStyles.css.map */
