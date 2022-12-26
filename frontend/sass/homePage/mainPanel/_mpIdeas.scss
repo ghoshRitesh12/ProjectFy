@@ -1,8 +1,8 @@
 @use '../../../../frontend/sass/components/' as *;
 
 .profy__main__section--ideas {
-  display: flex;
-  // display: none;
+  // display: flex;
+  display: none;
   flex-wrap: wrap;
   gap: 3rem;
   justify-content: center;

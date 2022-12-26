@@ -1,0 +1,192 @@
+@use '../../../../frontend/sass/components/' as *;
+
+.profy__home {
+  // display: block;
+  display: none;
+  grid-area: main;
+
+  padding-block: 1.5em 6em;
+  padding-inline: 1.2rem;
+  max-width: 100%;
+  width: 100%;
+
+
+  color: var(--clr-secondary-txt);
+  font-family: $font-secondary-r;
+  background-color: var(--clr-secondary-bg);
+  overflow-y: auto;
+
+  @include breakpoint(medium) {
+    max-height: calc(100vh - var(--top-margin));
+    min-height: calc(100vh - var(--top-margin));
+    padding-inline: 1.8rem 2rem;
+    padding-block: 3em;
+  }
+
+  @include breakpoint(large) {
+    padding-inline: 4rem 4.5rem;
+    padding-block: 4em;
+  }
+
+
+  &__greet {
+    transition: .2s ease;
+
+    & [data-home-greet-time] {
+      font-size: clamp(.95rem, 3vmin, 1.08rem);
+      word-spacing: .1rem;
+      color: var(--clr-inactive-txt);
+    }
+    
+    & [data-home-greet-name],
+    & [data-home-greet-msg] {
+      font-size: clamp(1.8rem, 5vmin, 4rem);
+      font-family: $font-primary-u;
+      font-weight: 500;
+    }
+  }
+
+  &__nearing-duedate-txt {
+    color: var(--clr-primary-txt);
+    font-size: clamp(1.05rem, 3vmin, 1.4rem);
+
+    max-width: fit-content;
+    margin-inline: 0 auto;
+    margin-block: 1rem;
+    
+    @include breakpoint(medium) { margin-block: 2rem; }
+  }
+
+
+  &__project-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    gap: 2.5rem;
+    
+    margin-top: 2rem;
+
+    transition: .2s ease;
+    @include breakpoint(medium) { margin-top: 3rem; }
+    @include breakpoint(large) { margin-top: 4rem; }
+  }
+  & .home-project {
+    --random-clr: hsl(2 64% 60%);
+    position: relative;
+    isolation: isolate;
+    padding: .6em .9em;
+    margin-inline: .5rem;
+
+    border-radius: .8rem;    
+    font-family: $font-secondary-r;
+    
+    &:hover {
+      &::before { opacity: .5; }
+    }
+    cursor: pointer;
+    & > * { pointer-events: none; }
+    
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0 auto auto 0;
+      z-index: -1;
+      
+      opacity: .3;
+      height: 100%;
+      width: 100%;
+      pointer-events: none;
+      transition: .3s ease;
+      border-radius: .8rem;
+      background-color: var(--random-clr, hsl(0 64% 60%));
+    }
+
+
+    &__name {
+      font-size: clamp(1.4rem, 3vmin, 2.7rem);
+      color: var(--clr-ternary-txt);
+      color: var(--clr-secondary-txt);
+      margin-bottom: .4rem;
+      font-weight: 500;
+    }
+
+    &__goals {
+      position: relative;
+      font-size: clamp(.9rem, 2.5vmin, 1.05rem);
+      color: var(--clr-inactive-txt2);
+
+      // outline: 1px solid black;
+      line-height: 1.4;
+      max-height: 2.6rem;
+      text-overflow: ellipsis;
+      overflow: hidden;
+
+      @include breakpoint(medium) { 
+        max-height: 3rem; 
+      }
+
+    }
+
+    &__work-progress {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .7rem;
+
+      margin-block: .5rem;
+
+      // border: 1px solid salmon;
+
+      &__bar { 
+        flex: 1; 
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border: none;
+        border-radius: 1rem;
+        max-height: .5rem;
+        overflow: hidden;
+        background-color: #fdfdfd;
+        overflow: hidden;
+
+
+        &[value] {
+          &::-webkit-progress-bar {
+            background-color: #fdfdfd;
+          }
+
+          &::-moz-progress-bar {
+            background-color: var(--random-clr, hsl(0 64% 60%));
+            border-radius: 1rem;
+          }
+          &::-webkit-progress-value {
+            border-radius: 1rem;
+            background-color: var(--random-clr, hsl(0 64% 60%));
+          }
+        }
+      }
+
+      &__txt {
+        color: var(--clr-secondary-txt);
+        font-family: $font-primary-u;
+      }
+    }
+
+    &__due-date-wrapper {
+      margin-inline: auto 0;
+      max-width: fit-content;
+      font-size: clamp(.85rem, 2.5vmin, .95rem);
+      color: var(--clr-ternary-txt);
+      font-weight: 500;
+
+      & [data-home-project-due-date] {
+        position: relative;
+        margin-left: .3rem;
+
+      }
+    }
+
+  }
+
+
+}
+

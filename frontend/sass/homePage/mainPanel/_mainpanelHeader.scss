@@ -27,7 +27,8 @@
       max-width: 17ch;
       // width: 100%;
       margin-right: auto;
-      font-size: clamp(1.65rem, 5vmin, 4rem);
+      // font-size: clamp(1.75rem, 5vmin, 4rem);
+      font-size: clamp(1.7rem, 5vmin, 4rem);
       font-weight: 500;
       color: var(--clr-primary-txt);
       font-family: $font-primary-u;
@@ -65,7 +66,7 @@
     
     &--icon {
       flex-shrink: 0;
-      font-size: clamp(1.5rem, 4vmin, 2rem);
+      font-size: clamp(1.6rem, 4vmin, 2rem);
       margin-left: auto;
       padding-block: .15em;
       padding-inline: .2em;

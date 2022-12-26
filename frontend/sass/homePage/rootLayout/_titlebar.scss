@@ -13,7 +13,7 @@
   isolation: isolate;
 
   
-  margin-top: var(--pad-titlebar);
+  margin-top: 2rem;
   padding-inline: var(--pad-inline);
   padding-block: var(--pad-titlebar);
   max-width: 100%;
@@ -74,7 +74,7 @@
     &--field {
       // display: none;
       margin-inline: auto;
-      padding-block: .45em;
+      padding-block: .6em;
       padding-inline: 1.1em .8em;
       // padding-inline: 1.2em 3em;
       max-width: 100%;
@@ -90,8 +90,6 @@
 
       @include breakpoint(medium) {
         padding-block: .35em;
-        // padding-inline: 1.2em .8em;
-        // &:focus { outline: 1px solid var(--clr-logo-project); }
       }
     }
   }
@@ -228,14 +226,17 @@
 
   &__account__wrapper {
     position: absolute;
-    right: 0;
+    right: .05rem;
 
     flex-shrink: 0;
     margin-inline: .5rem 1.2rem;
     isolation: isolate;
     border-radius: 50%;
     background-color: var(--clr-sidebar-bg);
-    @include breakpoint(medium) { position: relative; }
+    @include breakpoint(medium) { 
+      position: relative; 
+      right: auto;
+    }
   }
   &__account {
     display: flex;
@@ -258,7 +259,7 @@
       pointer-events: none;
 
       &-src {
-        --size: 2rem;
+        --size: 2.2rem;
         width: var(--size);
         height: var(--size);
 
@@ -287,7 +288,7 @@
       flex-direction: column;
       gap: .7rem;
       position: fixed;
-      top: calc(var(--top-margin) + 1rem);
+      top: calc(var(--top-margin) + 2rem);
       right: calc(var(--top-margin) - 2.5rem);
       z-index: 2022;
       isolation: isolate;

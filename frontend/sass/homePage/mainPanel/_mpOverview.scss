@@ -74,18 +74,18 @@
 }
 
 .profy__main__section--overview {
-  display: none;
-  // display: flex;
+  // display: none;
+  display: flex;
   gap: .5rem;
   flex-wrap: wrap;
   justify-content: center;
 
-  padding-block: 2em 1.5em;
+  padding-block: 2em 3em;
   cursor: initial;
   @include breakpoint(medium) { 
     gap: 2rem 2.5rem;
     padding-inline: 0 1em; 
-    padding-block: 3em 1.5em;
+    padding-block: 3em 2em;
   }
   @include breakpoint(large) { 
     padding-inline: 0 3em; 

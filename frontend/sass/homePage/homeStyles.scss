@@ -5,4 +5,9 @@
 // @use './rootLayout/' as *;
 // @use './sidePanel/' as *;
 @use './mainPanel/' as *;
+@use './homeSection/' as *;
+@use './settingsSection/' as *;
+
+@use './projectsSection/' as *;
+@use './labelsSection/' as *;
 

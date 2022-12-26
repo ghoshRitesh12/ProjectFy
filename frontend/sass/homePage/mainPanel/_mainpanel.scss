@@ -2,7 +2,8 @@
 
 .profy__main {
   --top-margin: calc(var(--pad-titlebar) * 4.2);
-  display: block;
+  // display: block;
+  display: none;
   position: relative;
 
   grid-area: main;
