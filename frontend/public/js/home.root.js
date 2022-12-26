@@ -1,4 +1,7 @@
-import { $, $$, addGlobalEventListener, randomBoxClr } from './utility.js';
+import { 
+  $, $$, addGlobalEventListener, randomBoxClr, 
+  greetUser, getHomeDate  
+} from './utility.js';
 
 
 // account
@@ -50,21 +53,27 @@ addGlobalEventListener('click', '[data-mode]', async e => {
 
 // adding new projects/labels
 addGlobalEventListener('click', '[data-add-item]', e => {
+  const parentElement = e.target.parentElement.parentElement;
   const itemType = e.target.dataset.addItem;
-  const newItemForm = `.new-${itemType}Form`;
-
+  const newItemForm = parentElement.querySelector(`.new-${itemType}Form`);
+  
   for(const item of $$('.newItemForm')) { 
     item.classList.add('hidden');
   }
-  $(newItemForm).classList.remove('hidden');
-  $(newItemForm).firstElementChild.focus();
+  
+  newItemForm.classList.remove('hidden');
+  newItemForm.firstElementChild.focus();
 })
 
 // canceling new project/label creation
 addGlobalEventListener('click', '[data-newItem-btn-cancel]', e => {
-  for (const item of $$('.field_empty')) { item.style.display = null; }
+  for (const item of $$('.field_empty')) { 
+    item.style.display = null; 
+  }
   // nulling the label & project input fields
-  for (const item of [...$$('.newItemForm')].map(i => i.querySelector('input'))) { item.value = ''; }
+  for (const item of [...$$('.newItemForm')].map(i => i.querySelector('input'))) { 
+    item.value = ''; 
+  }
 
   const itemForm = e.target.parentElement.parentElement;
   itemForm.classList.add('hidden');
@@ -118,14 +127,18 @@ addGlobalEventListener('submit', '.newItemForm', async e => {
   try {
     const resp = await fetch(formAction, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(itemInfo)
     });
-
-    console.log(resp);
-    // location.reload();
+    
+    if(resp.redirected === true) {
+      location.reload();
+      return;
+    } 
+    const data = await resp.json();
+    const redirectTo = data && data.redirectTo;
+    if(redirectTo == null) return;
+    location.href = redirectTo;
 
   } catch (err) {
     console.log(err.message);
@@ -148,8 +161,10 @@ addGlobalEventListener('click', '[data-project-options]', e => {
     $('[data-project-delete-modal]').showModal();
     return;
   }
-
+  
   // for share
+  $('[data-share-link-submitter="makeShareLinkPrivate"]').textContent = 'Make project private';
+  $('[data-share-link-submitter="getShareLink"]').textContent = 'Get link';
   $('.share__project').setAttribute('action', optionUrl);
   $('[data-project-share-modal]').showModal();
 })
@@ -166,34 +181,37 @@ addGlobalEventListener('submit', '.share__project', async e => {
       $('[data-share-link-submitter="getShareLink"]').textContent = 'Just a sec...';
       
       const resp = await fetch(formAction, { method: 'POST' });
-      // const respLink = await resp.json().shareLink;
-      const respLink = 'http://127.0.0.1:5500/niqqaaXafafafafafafafhquirghqDD/homePage.html'.trim();
-      
-      // below setTimeout is for mimicking response - respLink
-      setTimeout(() => {
-        $('[data-share-link-submitter="getShareLink"]').textContent = 'Get link';
-        $('[data-share-link-submitter="getShareLink"]').style.pointerEvents = 'none';
-        $('[data-project-share-link]').textContent = respLink;
+      // console.log('data' in (await resp.json()));
+      // const data = await resp.json() || 'http://127.0.0.1:5500/niqqaaXafafafafafafafhquirghqDD/homePage.html';
+      const data = await resp.json();
 
-        $('[data-project-share-wrapper]').classList.add('show');
-        console.log(resp);
-      }, 2000)
-  
+      if(data.status !== 'ok') {
+        $('[data-share-link-submitter="getShareLink"]').textContent = data.msg;
+        return;
+      }
+      
+      $('[data-share-link-submitter="getShareLink"]').textContent = 'Link fetched';
+      $('[data-share-link-submitter="getShareLink"]').style.pointerEvents = 'none';
+      $('[data-project-share-link]').textContent = data.msg || data;
+      $('[data-project-share-wrapper]').classList.add('show');
+      
       return;
     }
 
     // makeShareLinkPrivate
-    const privateFormAction = formAction.replace('share-link', 'make-link-private');
+    const privateFormAction = formAction.replace('gen-sharelink', 'make-sharelink-private');
     $('[data-share-link-submitter="makeShareLinkPrivate"]').textContent = 'Invalidating link....';
     
     const resp = await fetch(privateFormAction, { method: 'POST' });
-    const respTxt = await resp.json().msg;
-    // below setTimeouts are for mimicking ajax response
-    setTimeout(() => {
-      $('[data-share-link-submitter="makeShareLinkPrivate"]').textContent = respTxt || 'Link invalidated';
-      $('[data-share-link-submitter="makeShareLinkPrivate"]').style.pointerEvents = 'none';
-    }, 1000)
+    const data = await resp.json() || 'Link invalidated';
 
+    if(data.status !== 'ok') {
+      $('[data-share-link-submitter="makeShareLinkPrivate"]').textContent = data.msg;
+      return;
+    }
+
+    $('[data-share-link-submitter="makeShareLinkPrivate"]').textContent = data.msg || data;
+    $('[data-share-link-submitter="makeShareLinkPrivate"]').style.pointerEvents = 'none';
 
   } catch (err) {
     console.log(err) 
@@ -230,8 +248,14 @@ addGlobalEventListener('submit', '.delete__project', async e => {
 
   try {
     const resp = await fetch(formAction, { method: 'POST' });
-    console.log(resp);
-    // after deleting project redirect back to '/' home page
+    if(resp.redirected === true) {
+      location.reload();
+      return;
+    }
+
+    const data = await resp.json();
+    if(data.redirectTo == null) return;
+    location.href = data.redirectTo;
 
   } catch (err) {
     console.log(err);
@@ -250,7 +274,6 @@ addGlobalEventListener('click', '[data-project-delete-modal-close]', e => {
 
 
 //----<labels section>
-
 // label delete icon
 addGlobalEventListener('click', '[data-label-delete-icon]', e => {
   const labelElement = e.target.closest('[data-label-id]');
@@ -275,19 +298,11 @@ addGlobalEventListener('click', '[data-label-delete-modal-close]', e => {
 // label delete *form submit*
 addGlobalEventListener('submit', '.delete__label', async e => {
   e.preventDefault();
-  // label belonging to project
-  const labelOfProjectId = $('.profy__main').dataset.projectId;
   const url = e.target.getAttribute('action');
 
   try {
-    const resp = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ labelOfProjectId })
-    }) 
-
-    console.log(resp);
-    // location.reload();
+    await fetch(url, { method: 'POST' }); 
+    location.reload();
 
   } catch (err) {
     console.log(err);
@@ -295,6 +310,99 @@ addGlobalEventListener('submit', '.delete__label', async e => {
 })
 
 //----</labels section>
+
+
+
+
+//----<profile_settings section>
+// settings: show user profile password
+addGlobalEventListener('click', '[data-settings-show-password]', e => {
+  const passwordField = e.target.previousElementSibling;
+  const isHidden = (passwordField.getAttribute('type') === 'text') ? 'password' : 'text';
+  passwordField.setAttribute('type', isHidden);
+
+  if(isHidden === 'text') e.target.textContent = 'hide';
+  else e.target.textContent = 'show';
+})
+
+// settings: edit profile name
+addGlobalEventListener('click', '[data-profile-name-edit-btn]', e => {
+  const inputField = e.target.parentElement.previousElementSibling;
+  const parentEl = e.target.parentElement;
+
+  inputField.removeAttribute('readonly');
+  inputField.focus();
+  parentEl.classList.add('edit');
+  
+  const formAction = `/profile-settings/profileNameChange`;
+  $('[data-profile-settings-form]').setAttribute('action', formAction);
+})
+
+// settings: cancel edit profile name
+addGlobalEventListener('click', '[data-profile-name-cancel-btn]', e => {
+  const inputField = e.target.parentElement.previousElementSibling;
+  inputField.setAttribute('readonly', '');
+  inputField.blur();
+
+  $('[data-profile-settings-form]').setAttribute('action', '');
+  const parentEl = e.target.parentElement;
+  parentEl.classList.remove('edit');
+})
+
+// settings: submit form -name
+addGlobalEventListener('submit', '[data-profile-settings-form]', async e => {
+  e.preventDefault();
+  const url = e.target.getAttribute('action');
+  const changedName = e.target.querySelector('.details__name--field').value.trim();
+
+  try {
+    const resp = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'applicaiton/json'
+      },
+      body: JSON.stringify({ changedName })
+    })
+    
+    console.log(resp);
+    return;
+    if(resp.redirected === true) {
+      location.reload();
+      return;
+    } 
+    const data = await resp.json();
+    if(data.redirectTo == null) return;
+    location.href = data.redirectTo;
+
+  } catch (err) {
+    console.log(err);
+  }
+})
+
+// settings: account deletion
+addGlobalEventListener('click', '[data-settings-delete-account-btn]', async e => {
+  const url = `/profile-settings/deleteAccount`;
+
+  try {
+    const resp = await fetch(url, { method: 'POST' });
+    
+    console.log(resp);
+    return;
+    if(resp.redirected === true) {
+      location.reload();
+      return;
+    } 
+    const data = await resp.json();
+    if(data.redirectTo == null) return;
+    location.href = data.redirectTo;
+
+  } catch (err) {
+    console.log(err);
+  }
+})
+
+//----</profile_settings section>
+
 
 
 
@@ -368,7 +476,27 @@ window.addEventListener('load', () => {
     const clr = randomBoxClr();
     item.style.setProperty('--rndm-clr', clr);
   }
+
+
+  if($('.profy__home') != null) {
+    $('[data-home-greet-time]').textContent = getHomeDate();
+    $('[data-home-greet-msg]').textContent = `${greetUser()},`;
+  }
+
+
 })
+
+
+// window.addEventListener('resize', e => {
+//   const prevUrl = location.href;
+
+//   if(e.target.innerWidth >= 640) 
+//     location.href = '/';
+//   else 
+//     location.href = prevUrl;
+//   console.log(prevUrl);
+
+// })
 
 
 // -------------------------------------
