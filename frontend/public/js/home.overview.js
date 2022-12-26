@@ -57,8 +57,13 @@ $('.section--overview__form').addEventListener('submit', async e => {
       body: JSON.stringify({ changedElementValue })
     })
 
-    console.log('req sent \n', resp);
-    // location.reload();
+    if(resp.redirected === true) {
+      location.reload();
+      return;
+    } 
+    const data = await resp.json();
+    if(data.redirectTo == null) return;
+    location.href = data.redirectTo;
 
   } catch (err) {
     console.log(err.message);
@@ -92,7 +97,7 @@ window.addEventListener('load', () => {
 
 
   // Work Completed: complete-45 total-70
-  const wC = workCompleted(45, 70);
+  const wC = workCompleted(78, 100);
   $('[data-work-progress-value]').innerText = wC.work;
   $('.circleThumb--work').style.setProperty('--value', wC.work);
   $('[data-work-progress-daysLeft]').innerText = wC.tasks;
