@@ -43,8 +43,13 @@ addGlobalEventListener('click', '[data-kanban-move-to]', async e => {
       body: JSON.stringify({ sectionToMoveTo })
     });
 
-    console.log(resp);
-    // location.reload();
+    if(resp.redirected === true) {
+      location.reload();
+      return;
+    } 
+    const data = await resp.json();
+    if(data.redirectTo == null) return;
+    location.href = data.redirectTo;
 
   } catch (err) {
     console.log(err)
@@ -81,7 +86,7 @@ addGlobalEventListener('click', '[data-kanban-item-option="edit"]', async e => {
   const formAction = `${kanbanSection}/edit/${kanbanItem.dataset.kanbanItemId}`; 
   $('.edit__kanban').setAttribute('action', formAction);
   $('.edit__kanban__header--txt').innerText = 'Edit kanban';
-  $('[data-rest-labels-txt]').innerText = 'Rest Labels';
+  $('[data-rest-labels-txt]').innerText = 'Other Labels';
 
   const allLabels = [...$$('[data-label-list-item]')].map(j => { 
     return { 'text': j.innerText, 'el': j } 
@@ -206,8 +211,14 @@ $('.edit__kanban').addEventListener('submit', async e => {
       },
       body: JSON.stringify(kanbanItemInfo)
     })
-    // console.log(resp);
-    // location.reload();
+
+    if(resp.redirected === true) {
+      location.reload();
+      return;
+    } 
+    const data = await resp.json();
+    if(data.redirectTo == null) return;
+    location.href = data.redirectTo;
 
   } catch (err) {
     console.log(err.message);
@@ -222,8 +233,14 @@ $('.delete__kanban').addEventListener('submit', async e => {
 
   try {
     const resp = await fetch(url, { method: 'POST' });
-    // console.log(resp);
-    // location.reload();
+    
+    if(resp.redirected === true) {
+      location.reload();
+      return;
+    } 
+    const data = await resp.json();
+    if(data.redirectTo == null) return;
+    location.href = data.redirectTo;
 
   } catch (err) {
     console.log(err.message);
