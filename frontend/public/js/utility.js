@@ -47,7 +47,8 @@ const elaspedTime = (endDate, startDate) => {
 
 
 const workCompleted = (completedTasks, totalTasks) => {
-  const workDone = Math.round((completedTasks / totalTasks) * 100);
+  let workDone = Math.round((completedTasks / totalTasks) * 100);
+  workDone = isFinite(workDone) ? workDone : 0;
   const tasksLeft = totalTasks - completedTasks;
 
   return {
@@ -56,4 +57,34 @@ const workCompleted = (completedTasks, totalTasks) => {
   };
 }
 
-export { $, $$, addGlobalEventListener, randomBoxClr, elaspedTime, workCompleted };
+
+function greetUser() {
+  const hour = new Date().getHours();
+
+  if (hour < 12) return 'Good Morning 🌞';
+  else if (hour >= 12 && hour <= 16) return 'Good Afternoon 🌵';
+  else if (hour >= 16 && hour <= 24) return 'Good Evening 🌃';
+}
+
+function getHomeDate() {
+  const days = [
+    'Sunday', 'Monday', 'Tuesday', 'Wednesday', 
+    'Thursday', 'Friday', 'Saturday'
+  ];
+  const months = [
+    'January', 'February', 'March', 'April', 'May', 'June', 
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ];
+
+  const d = new Date();
+  return `${days[d.getDay()]}, ${months[d.getMonth()]} ${d.getDate()}`;
+}
+
+const convertDbDate = date => `${date.split('-').reverse().join('-').replace('-', '.')}`;
+
+export { 
+  $, $$, addGlobalEventListener, 
+  randomBoxClr, elaspedTime, workCompleted, 
+  greetUser, getHomeDate, convertDbDate
+};
+
