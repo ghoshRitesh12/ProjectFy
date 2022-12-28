@@ -332,6 +332,61 @@ body ::selection {
 .profy .delete__label__description__btns button[type=submit]:hover {
   background-color: var(--clr-signout-bg-hover);
 }
+.profy .error_notify {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: nowrap;
+  position: fixed;
+  inset: auto 1.2rem 5rem auto;
+  isolation: isolate;
+  z-index: 150;
+  padding-block: 0.3em;
+  padding-inline: 0.8em 0;
+  border-radius: 0.5rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  font-size: clamp(0.95rem, 2vmin, 1.05rem);
+  color: var(--clr-primary-bg);
+  background-color: var(--clr-primary-txt);
+  transition: 0.3s ease;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0);
+}
+.profy .error_notify.show {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+@media (min-width: 40em) {
+  .profy .error_notify {
+    right: 3rem;
+  }
+}
+@media (min-width: 64em) {
+  .profy .error_notify {
+    right: 5rem;
+  }
+}
+.profy .error_notify [data-error-notify-msg] {
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+}
+.profy .error_notify [data-error-notify-close] {
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  padding-block: 0.3em;
+  padding-inline: 0.5em 0.7em;
+  cursor: pointer;
+}
+.profy .error_notify [data-error-notify-close] > * {
+  pointer-events: none;
+}
 
 .profy__titlebar {
   --pad-inline: 1em;
@@ -719,7 +774,7 @@ body ::selection {
   isolation: isolate;
   margin-block: 0 auto;
   padding-bottom: 2em;
-  padding-inline: 0.8em 0.5em;
+  padding-inline: 0.8em 0.6em;
   min-width: 15rem;
   max-width: var(--sidepanel-width);
   max-height: calc(100vh - var(--top-margin));
@@ -761,7 +816,7 @@ body ::selection {
 .profy__sidepanel__nav {
   --icon-gap: 2rem;
   --pad-block: .5em;
-  --item-gap: .4rem;
+  --item-gap: .5rem;
   display: block;
   flex-grow: 1;
   margin: 0.5rem 0 0 0.2rem;
@@ -777,6 +832,9 @@ body ::selection {
   border-radius: 0.5rem;
   cursor: pointer;
   transition: 0.3s ease;
+}
+.profy__sidepanel__nav--home.selected {
+  background-color: var(--clr-navlist-hover);
 }
 .profy__sidepanel__nav--home:hover {
   background-color: var(--clr-navlist-hover);
@@ -858,7 +916,7 @@ body ::selection {
 }
 .profy__sidepanel__nav--projects {
   border-radius: 0.5rem;
-  margin-bottom: var(--item-gap);
+  margin-bottom: 1rem;
 }
 .profy__sidepanel__nav--projects-container {
   display: flex;
@@ -927,7 +985,7 @@ body ::selection {
 .profy__sidepanel__nav--projects-listItem.selected, .profy__sidepanel__nav--projects-listItem:hover {
   background-color: var(--clr-navlist-hover);
 }
-.profy__sidepanel__nav--projects-listItem::after {
+.profy__sidepanel__nav--projects-listItem::before {
   content: "";
   position: absolute;
   left: 1rem;
@@ -938,8 +996,8 @@ body ::selection {
   border-radius: 0.35rem;
   pointer-events: none;
 }
-.profy__sidepanel__nav--projects-listItem.selected::before {
-  content: "";
+.profy__sidepanel__nav--projects-listItem::after {
+  content: none;
   position: absolute;
   right: 0%;
   pointer-events: none;
@@ -948,6 +1006,9 @@ body ::selection {
   background-color: var(--clr-box);
   border-radius: 0.5rem;
   opacity: 0.8;
+}
+.profy__sidepanel__nav--projects-listItem.selected::after {
+  content: "";
 }
 .profy__sidepanel__nav--projects-listItem_name {
   margin-inline: 0 auto;
@@ -1015,7 +1076,7 @@ body ::selection {
 .profy__sidepanel__nav--labels-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.7rem;
   margin-block: 0.7rem 0;
   padding-inline: 1rem;
   border-radius: 0.5rem;
@@ -1045,10 +1106,12 @@ body ::selection {
 }
 .profy__sidepanel__nav--labels-listItem--name {
   position: relative;
-  line-height: 1.2;
+  line-height: 1.3;
   cursor: initial;
   padding-inline: 1.4em 0;
   font-size: 1rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .profy__sidepanel__nav--labels-listItem--name::before {
   content: "☗";
@@ -1057,15 +1120,14 @@ body ::selection {
   left: 0;
   isolation: isolate;
   transform: rotate(90deg);
-  color: var(--rndm-clr);
+  color: var(--rndm-clr, #56c7fc);
   pointer-events: none;
 }
 .profy__sidepanel__nav--labels-listItem [data-label-delete-icon] {
+  flex-shrink: 0;
   display: block;
   padding-inline: 0.7em;
-  opacity: 1;
   opacity: 0;
-  visibility: visible;
   visibility: hidden;
   transition: 0.2s ease;
 }

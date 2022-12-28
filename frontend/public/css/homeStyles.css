@@ -109,7 +109,7 @@ textarea {
 
 .profy__main {
   --top-margin: calc(var(--pad-titlebar) * 4.2);
-  display: none;
+  display: block;
   position: relative;
   grid-area: main;
   padding-inline: 1.2rem;
@@ -152,6 +152,9 @@ textarea {
 }
 .profy__main__path.inactive {
   color: var(--clr-inactive-txt);
+}
+.profy__main__path[data-project-section] {
+  text-transform: capitalize;
 }
 
 .profy__main__header {
@@ -236,6 +239,7 @@ textarea {
   color: var(--clr-primary-icon);
   background-color: var(--clr-sidebar-bg);
   border-radius: 0.5rem;
+  outline: 1px solid var(--clr-separator-brdr);
   cursor: pointer;
 }
 .profy__main__header__options .project__options__dropdown {
@@ -1009,7 +1013,7 @@ textarea {
 }
 
 .profy__main__section--ideas {
-  display: none;
+  display: flex;
   flex-wrap: wrap;
   gap: 3rem;
   justify-content: center;
@@ -1699,17 +1703,17 @@ textarea {
 }
 
 .profy__main__section--kanban {
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
   gap: 3rem;
   overflow: auto hidden;
-  padding-block: 2em;
+  padding-block: 2em 6em;
 }
 @media (min-width: 40em) {
   .profy__main__section--kanban {
-    display: none;
+    display: grid;
     grid-template-columns: repeat(3, minmax(17rem, 1fr));
     gap: 2rem;
   }
@@ -1778,6 +1782,11 @@ textarea {
   background-color: var(--clr-sidebar-bg);
   border-radius: 0.5rem;
   cursor: pointer;
+}
+@media (min-width: 40em) {
+  .profy__main__section--kanban .kanban-section .kanban-head__info [data-hide-kanban-section] {
+    display: none;
+  }
 }
 .profy__main__section--kanban .kanban-section .kanban-head__info [data-hide-kanban-section] svg {
   pointer-events: none;
@@ -2238,7 +2247,7 @@ textarea {
 }
 
 .profy__home {
-  display: none;
+  display: block;
   grid-area: main;
   padding-block: 1.5em 6em;
   padding-inline: 1.2rem;
@@ -2406,7 +2415,7 @@ textarea {
 }
 
 .profy__settings {
-  display: none;
+  display: block;
   grid-area: main;
   padding-block: 1.5em 5em;
   padding-inline: 1.2rem;
@@ -2428,7 +2437,7 @@ textarea {
 @media (min-width: 64em) {
   .profy__settings {
     padding-inline: 4rem 4.5rem;
-    padding-block: 4em;
+    padding-block: 3.5em;
   }
 }
 .profy__settings__txt {
@@ -2444,7 +2453,7 @@ textarea {
 .profy__settings__txt-description {
   margin-top: 1rem;
   color: var(--clr-inactive-txt);
-  font-size: clamp(1rem, 2.5vmin, 1.2rem);
+  font-size: clamp(1rem, 2.5vmin, 1.15rem);
   font-family: "Roboto", sans-serif;
   font-weight: 400;
 }
@@ -2547,7 +2556,7 @@ textarea {
   gap: 1.5rem;
   position: relative;
   border-top: 1px solid var(--clr-separator-brdr);
-  padding-block: 3em 1.5em;
+  padding-block: 1.5em;
 }
 .profy__settings .details__name--txt {
   color: var(--clr-logo-project);
@@ -2566,9 +2575,10 @@ textarea {
     margin-inline: 3.5rem auto;
   }
 }
-.profy__settings .details__name--field {
+.profy__settings .details__name .details__name--field {
   word-spacing: 0.3rem;
   width: 100%;
+  padding-inline: 0.8em 7em;
 }
 .profy__settings .details__name .profile-name__change-btn {
   display: flex;
@@ -2578,10 +2588,11 @@ textarea {
   top: 50%;
   right: 0;
   isolation: isolate;
-  margin-right: 0.1rem;
+  margin-right: 0.15rem;
   transform: translateY(-50%);
   background-color: var(--clr-input-field);
   border-block: 1px solid var(--clr-input-field);
+  border-radius: 0.5rem;
   max-width: -webkit-fit-content;
   max-width: -moz-fit-content;
   max-width: fit-content;
@@ -2599,12 +2610,12 @@ textarea {
 }
 .profy__settings .details__name .profile-name__change-btn button {
   display: none;
-  padding: 0.2em 1em;
+  padding: 0.3em 1em;
   border-radius: 0.5rem;
   border: none;
   transition: 0.15s ease;
   color: var(--clr-primary-txt);
-  background-color: var(--clr-primary-bg);
+  background-color: var(--clr-secondary-bg);
   border: 1px solid var(--clr-separator-brdr);
 }
 .profy__settings .details__name .profile-name__change-btn button:hover {
@@ -2624,7 +2635,7 @@ textarea {
 }
 .profy__settings .details__email {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   flex-wrap: wrap;
   gap: 1.5rem;
   border-top: 2px solid var(--clr-separator-brdr);
@@ -2691,7 +2702,7 @@ textarea {
   top: 50%;
   isolation: isolate;
   margin-right: 0.1rem;
-  padding: 0.5em 0.75em;
+  padding: 0.6em 0.75em;
   max-width: -webkit-fit-content;
   max-width: -moz-fit-content;
   max-width: fit-content;
@@ -2749,7 +2760,7 @@ textarea {
 }
 .profy__settings [data-settings-details-field] {
   font-size: 1.02rem;
-  padding: 0.4em 0.8em;
+  padding: 0.5em 0.8em;
   color: var(--clr-primary-txt);
   background-color: var(--clr-input-field);
   outline: 1px solid var(--clr-separator-brdr);
@@ -2765,9 +2776,107 @@ textarea {
 .profy__settings [data-settings-details-field]:read-only:focus {
   outline: 1px solid var(--clr-separator-brdr);
 }
+.profy__settings [data-account-delete-modal] {
+  position: fixed;
+  margin-block: auto;
+  margin-inline: auto;
+  isolation: isolate;
+  border: none;
+  overflow: hidden;
+  background-color: transparent;
+}
+.profy__settings [data-account-delete-modal]:not([open]) {
+  display: none;
+}
+.profy__settings [data-account-delete-modal]::-webkit-backdrop {
+  background-color: hsla(0deg, 0%, 0%, 0.7);
+  -webkit-backdrop-filter: blur(0.3rem);
+          backdrop-filter: blur(0.3rem);
+}
+.profy__settings [data-account-delete-modal]::backdrop {
+  background-color: hsla(0deg, 0%, 0%, 0.7);
+  -webkit-backdrop-filter: blur(0.3rem);
+          backdrop-filter: blur(0.3rem);
+}
+.profy__settings .delete__account {
+  position: relative;
+  isolation: isolate;
+  min-width: 17.5rem;
+  max-width: 17.5rem;
+  overflow: hidden;
+  border-radius: 0.8rem;
+  background-color: var(--clr-sidebar-bg);
+  border: 1px solid var(--clr-separator-brdr);
+}
+.profy__settings .delete__account__header {
+  display: flex;
+  align-items: center;
+  padding-block: 0.5em;
+  padding-inline: 1em;
+  border-bottom: 1px solid var(--clr-separator-brdr);
+}
+.profy__settings .delete__account__header--txt {
+  margin-left: auto;
+  font-size: 1.1rem;
+  word-spacing: 0.2rem;
+  color: var(--clr-primary-txt);
+}
+.profy__settings .delete__account__header--cancelIcon {
+  display: block;
+  margin-inline: auto 0;
+  padding: 0.3em;
+  font-size: 1.1rem;
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--clr-inactive-txt);
+  background-color: var(--clr-separator-brdr);
+}
+.profy__settings .delete__account__header--cancelIcon > * {
+  pointer-events: none;
+}
+.profy__settings .delete__account__description {
+  display: block;
+  position: relative;
+  margin-block: 0.8rem 1rem;
+  padding-inline: 1rem;
+  max-width: 100%;
+  width: 100%;
+}
+.profy__settings .delete__account__description__txt {
+  line-height: 1.5;
+  color: var(--clr-primary-txt);
+  margin-bottom: 0.7rem;
+}
+.profy__settings .delete__account__description__btns {
+  display: block;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  margin-left: auto;
+}
+.profy__settings .delete__account__description__btns button {
+  padding: 0.25em 0.8em;
+  border-radius: 0.5rem;
+  background-color: transparent;
+  color: var(--clr-primary-txt);
+  outline: none;
+  border: none;
+  transition: 0.15s ease;
+}
+.profy__settings .delete__account__description__btns button:hover {
+  background-color: var(--clr-separator-brdr);
+}
+.profy__settings .delete__account__description__btns button[type=submit] {
+  margin-left: 0.2rem;
+  color: var(--clr-signout-txt);
+  background-color: var(--clr-signout-bg);
+}
+.profy__settings .delete__account__description__btns button[type=submit]:hover {
+  background-color: var(--clr-signout-bg-hover);
+}
 
 .profy__projects {
-  display: none;
+  display: block;
   grid-area: main;
   padding-inline: 1.2rem;
   padding-block: 1.5em 6em;
@@ -2902,7 +3011,6 @@ textarea {
   padding-top: 1rem;
 }
 .profy__projects .project {
-  --random-clr: hsl(2 64% 60%);
   position: relative;
   isolation: isolate;
   padding: 0.6em 0.9em;
@@ -2912,7 +3020,7 @@ textarea {
   cursor: pointer;
 }
 .profy__projects .project:hover::before {
-  opacity: 0.5;
+  opacity: 0.45;
 }
 .profy__projects .project > * {
   pointer-events: none;
@@ -2922,13 +3030,13 @@ textarea {
   position: absolute;
   inset: 0 auto auto 0;
   z-index: -1;
-  opacity: 0.3;
+  opacity: 0.25;
   height: 100%;
   width: 100%;
   pointer-events: none;
   transition: 0.3s ease;
   border-radius: 0.8rem;
-  background-color: var(--random-clr, hsl(0deg, 64%, 60%));
+  background-color: var(--clr-box, hsl(0deg, 64%, 60%));
 }
 .profy__projects .project__name {
   font-size: clamp(1.4rem, 3vmin, 2.7rem);
@@ -2976,12 +3084,12 @@ textarea {
   background-color: #fdfdfd;
 }
 .profy__projects .project__work-progress__bar[value]::-moz-progress-bar {
-  background-color: var(--random-clr, hsl(0deg, 64%, 60%));
+  background-color: var(--clr-box, hsl(0deg, 64%, 60%));
   border-radius: 1rem;
 }
 .profy__projects .project__work-progress__bar[value]::-webkit-progress-value {
   border-radius: 1rem;
-  background-color: var(--random-clr, hsl(0deg, 64%, 60%));
+  background-color: var(--clr-box, hsl(0deg, 64%, 60%));
 }
 .profy__projects .project__work-progress__txt {
   color: var(--clr-secondary-txt);
@@ -3169,6 +3277,8 @@ textarea {
   font-weight: 500;
   color: var(--clr-secondary-txt);
   font-size: clamp(1.2rem, 2.5vmin, 2rem);
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .profy__labels .label__name::before {
   content: "☗";
@@ -3190,7 +3300,7 @@ textarea {
   margin-left: auto;
   font-size: 1.1rem;
   padding-block: 0.3em;
-  padding-inline: 0.5em 0.8em;
+  padding-inline: 0.6em 0.8em;
   color: var(--clr-primary-icon);
   cursor: pointer;
 }
