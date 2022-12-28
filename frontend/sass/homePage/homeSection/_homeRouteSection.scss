@@ -1,8 +1,8 @@
 @use '../../../../frontend/sass/components/' as *;
 
 .profy__home {
-  // display: block;
-  display: none;
+  display: block;
+  // display: none;
   grid-area: main;
 
   padding-block: 1.5em 6em;

@@ -193,6 +193,9 @@
       color: var(--clr-secondary-txt);
       font-size: clamp(1.2rem, 2.5vmin, 2rem);
 
+      text-overflow: ellipsis;
+      overflow: hidden;
+
       &::before {
         content: '\2617';
         display: block;
@@ -215,7 +218,7 @@
 
       font-size: 1.1rem;
       padding-block: .3em;
-      padding-inline: .5em .8em;
+      padding-inline: .6em .8em;
       color: var(--clr-primary-icon);
       // outline: 1px solid black;
 

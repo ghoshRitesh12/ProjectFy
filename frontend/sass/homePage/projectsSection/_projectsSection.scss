@@ -1,8 +1,8 @@
 @use '../../../../frontend/sass/components/' as *;
 
 .profy__projects {
-  display: none;
-  // display: block;
+  // display: none;
+  display: block;
   grid-area: main;
 
   padding-inline: 1.2rem;
@@ -155,7 +155,6 @@
   }
 
   & .project {
-    --random-clr: hsl(2 64% 60%);
     position: relative;
     isolation: isolate;
     padding: .6em .9em;
@@ -165,7 +164,7 @@
     font-family: $font-secondary-r;
     
     &:hover {
-      &::before { opacity: .5; }
+      &::before { opacity: .45; }
     }
     cursor: pointer;
     & > * { pointer-events: none; }
@@ -176,13 +175,13 @@
       inset: 0 auto auto 0;
       z-index: -1;
       
-      opacity: .3;
+      opacity: .25;
       height: 100%;
       width: 100%;
       pointer-events: none;
       transition: .3s ease;
       border-radius: .8rem;
-      background-color: var(--random-clr, hsl(0 64% 60%));
+      background-color: var(--clr-box, hsl(0 64% 60%));
     }
 
 
@@ -238,12 +237,12 @@
           }
 
           &::-moz-progress-bar {
-            background-color: var(--random-clr, hsl(0 64% 60%));
+            background-color: var(--clr-box, hsl(0 64% 60%));
             border-radius: 1rem;
           }
           &::-webkit-progress-value {
             border-radius: 1rem;
-            background-color: var(--random-clr, hsl(0 64% 60%));
+            background-color: var(--clr-box, hsl(0 64% 60%));
           }
         }
       }

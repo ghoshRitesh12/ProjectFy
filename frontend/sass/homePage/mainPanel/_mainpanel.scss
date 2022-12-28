@@ -2,8 +2,8 @@
 
 .profy__main {
   --top-margin: calc(var(--pad-titlebar) * 4.2);
-  // display: block;
-  display: none;
+  // display: none;
+  display: block;
   position: relative;
 
   grid-area: main;
@@ -49,6 +49,10 @@
     font-weight: 500;
     &.inactive {
       color: var(--clr-inactive-txt);
+    }
+
+    &[data-project-section] {
+      text-transform: capitalize;
     }
   }
 
