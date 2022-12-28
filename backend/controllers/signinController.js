@@ -69,7 +69,7 @@ const handleSignin = async (req, res) => {
             return res.redirect('/signin');
           }
 
-          const confirmUrl = `${req.protocol}://${req.get('host')}/confirmation/${newEmailToken}`
+          const confirmUrl = `${req.protocol}://${req.get('host')}/confirmation/${newEmailToken}`;
           sendEmail({
             receiver: emailId,
             subject: 'Confirmation Email',

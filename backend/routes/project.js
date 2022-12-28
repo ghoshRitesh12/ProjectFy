@@ -1,11 +1,20 @@
 const router = require('express').Router();
 const projectController = require('../controllers/projectController');
+const overviewController = require('../controllers/overviewController');
+// const ideasController
+// const kanbanController
 
-router.route('/')
-  .get(projectController.getProject)
+router.get('/', (req, res) => res.redirect('back'));
 
-router.route('/:projectId/:section')
-  .get(projectController.getProject);
+router.get('/:projectID', (req, res) => {
+  res.redirect(`${req.baseUrl}${req.url}/overview`);
+});
+
+// show one project
+router.get('/:projectID/:subSection', projectController.getProject);
+
+// modify overview content
+router.post('/:projectID/overview/edit/:changedElementName', overviewController.modifyOverview);
 
 
 module.exports = router;
