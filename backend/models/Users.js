@@ -1,20 +1,14 @@
 const mongoose = require('mongoose');
 
-const projectObj = {
+const projectsObj = {
   type: mongoose.Schema.Types.ObjectId,
   ref: 'projectsCollection'
 };
 
-const labelSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    trim: true
-  },
-  color: {
-    type: String,
-    default: "hsl(0, 100%, 73%)"
-  }
-})
+const labelsObj = {
+  type: mongoose.Schema.Types.ObjectId,
+  ref: 'labelsCollection'
+}
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -48,10 +42,10 @@ const userSchema = new mongoose.Schema({
     default: ""
   },
   verified:  { type: Boolean, default: false },
-  profileImg: { type: String, trim: true },
+  profileImg: { type: String, trim: true, default: null },
   userTheme: { type: String, default: 'light' },
-  projects: [projectObj],
-  labels: [labelSchema]
+  projects: [projectsObj],
+  labels: [labelsObj]
 }, { collection: 'users' });
 
 module.exports = mongoose.model('users', userSchema);
