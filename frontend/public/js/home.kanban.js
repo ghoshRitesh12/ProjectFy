@@ -75,7 +75,7 @@ addGlobalEventListener('click', '[data-create-kanban]', async e => {
     $('.edit__kanban__rest-labels').append(restLabel);
   }
 
-
+  document.body.dataset.scrolly = 'false';
   $('[data-kanban-edit-modal]').showModal();
 })
 
@@ -185,7 +185,7 @@ addGlobalEventListener('click', '[data-kanban-delete-modal-close]', e => {
 
 
 // create/edit kanban form submit
-$('.edit__kanban').addEventListener('submit', async e => {
+addGlobalEventListener('submit', '.edit__kanban', async e => {
   e.preventDefault();
   const url = `${location.href}/${e.target.getAttribute('action').trim()}`;
 
@@ -226,7 +226,7 @@ $('.edit__kanban').addEventListener('submit', async e => {
 })
 
 // delete kanban form submit
-$('.delete__kanban').addEventListener('submit', async e => {
+addGlobalEventListener('submit', '.delete__kanban', async e => {
   e.preventDefault();
   const url = `${location.href}/${e.target.getAttribute('action')}`; 
   console.log(url);

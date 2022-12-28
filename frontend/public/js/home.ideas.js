@@ -1,12 +1,12 @@
 import { $, $$, addGlobalEventListener } from './utility.js';
 
 //----<profy_ideas form_section>
-$('[data-ideasForm-imgUrl]').addEventListener('input', e => {
+addGlobalEventListener('input', '[data-ideasForm-imgUrl]', e => {
   $('.ideas-form__imgUpload').classList.toggle('notouch', e.target.value);
 })
 
 // show/hide idea form
-$('.reveal').addEventListener('click', e => {
+addGlobalEventListener('click', '.reveal', e => {
   const ideasForm = e.target.parentElement;
   const isCollapsed = ideasForm.classList.contains('collapsed') ? false : true;
   ideasForm.classList.toggle('collapsed', isCollapsed);
@@ -19,7 +19,7 @@ $('.reveal').addEventListener('click', e => {
 })
 
 // idea img upload 
-$('[data-ideasForm-imgUpload]').addEventListener('change', e => {
+addGlobalEventListener('change', '[data-ideasForm-imgUpload]', e => {
   $('.ideas-form').setAttribute('enctype', 'multipart/form-data');
   const file = e.target.files[0];
   $('.ideas-form__imgUrl').classList.toggle('notouch', file);
@@ -132,7 +132,7 @@ addGlobalEventListener('click', '[data-idea-edit-imgUpload-preview-closebtn]', e
 })
 
 // idea edit img upload
-$('[data-idea-edit-imgUpload-btn]').addEventListener('change', e => {
+addGlobalEventListener('change', '[data-idea-edit-imgUpload-btn]', e => {
   const file = e.target.files[0];
   if(file == null) {
     $('[data-idea-edit-imgUpload-preview]').classList.add('hide'); 

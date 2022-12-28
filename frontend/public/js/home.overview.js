@@ -41,12 +41,13 @@ addGlobalEventListener('click', '[data-overview-cancel-btn]', e => {
 
 
 // edit overview form
-$('.section--overview__form').addEventListener('submit', async e => {
+addGlobalEventListener('submit', '.section--overview__form', async e => {
   e.preventDefault();
   const changedElementName = e.target.dataset.overviewFieldChange;
   const formAction = `${location.href}/edit/${changedElementName}`;
   const changedElement = e.target.querySelector(`[data-overview-field="${changedElementName}"]`);
-  const changedElementValue = (changedElement.type !== "textarea") ? changedElement.value.trim() : changedElement.textContent.trim();
+  // const changedElementValue = (changedElement.type !== "textarea") ? changedElement.value.trim() : changedElement.textContent.trim();
+  const changedElementValue = changedElement.value.trim();
 
   try {
     const resp = await fetch(formAction, {
@@ -61,22 +62,29 @@ $('.section--overview__form').addEventListener('submit', async e => {
       location.reload();
       return;
     } 
-    const data = await resp.json();
-    if(data.redirectTo == null) return;
-    location.href = data.redirectTo;
+
+    const data = resp && (await resp.json());
+    if(data.status !== 'ok') {
+      $('[data-error-notify-msg]').textContent = data.msg;
+      $('.error_notify').classList.add('show');
+      return;
+    }
+    location.reload();
+
 
   } catch (err) {
+    location.reload();
     console.log(err.message);
   }
 })
 
 
 
-$('[data-overview-field="startDate"]').addEventListener('change', e => {
+addGlobalEventListener('change', '[data-overview-field="startDate"]', e => {
   $('[data-overview-field="endDate"]').setAttribute('min', e.target.value);
 })
 
-$('[data-overview-field="endDate"]').addEventListener('change', e => {
+addGlobalEventListener('change', '[data-overview-field="endDate"]', e => {
   $('[data-overview-field="startDate"]').setAttribute('max', e.target.value);
 })
 
@@ -87,19 +95,24 @@ $('[data-overview-field="endDate"]').addEventListener('change', e => {
 // overview timeElasped & workDone 
 window.addEventListener('load', () => {
   // Time Elasped
-  const eT = elaspedTime(
-    $('[data-overview-field="endDate"]').value,
-    $('[data-overview-field="startDate"]').value
-  );
-  $('[data-time-progress-value]').innerText = eT.time;
-  $('.circleThumb--time').style.setProperty('--value', eT.time);
-  $('[data-time-progress-daysLeft]').innerText = eT.days;
+
+  if($('.profy__main__section--overview') !== null) {
+    const eT = elaspedTime(
+      $('[data-overview-field="endDate"]').value,
+      $('[data-overview-field="startDate"]').value
+    );
+    $('[data-time-progress-value]').innerText = eT.time;
+    $('.circleThumb--time').style.setProperty('--value', eT.time);
+    $('[data-time-progress-daysLeft]').innerText = eT.days;
+  }
 
 
-  // Work Completed: complete-45 total-70
-  const wC = workCompleted(78, 100);
-  $('[data-work-progress-value]').innerText = wC.work;
-  $('.circleThumb--work').style.setProperty('--value', wC.work);
-  $('[data-work-progress-daysLeft]').innerText = wC.tasks;
+  if($('.profy__main__section--overview') !== null) {
+    // Work Completed: complete-45 total-70
+    const wC = workCompleted(78, 100);
+    $('[data-work-progress-value]').innerText = wC.work;
+    $('.circleThumb--work').style.setProperty('--value', wC.work);
+    $('[data-work-progress-daysLeft]').innerText = wC.tasks;
+  }
 })
 

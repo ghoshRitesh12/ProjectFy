@@ -42,7 +42,7 @@ addGlobalEventListener('click', '[data-mode]', async e => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ 'themeChangedTo': mode })
     });
-    // location.reload();
+    location.reload();
 
   } catch (err) {
     location.href = '/';
@@ -137,7 +137,10 @@ addGlobalEventListener('submit', '.newItemForm', async e => {
     } 
     const data = await resp.json();
     const redirectTo = data && data.redirectTo;
-    if(redirectTo == null) return;
+    if(redirectTo == null) {
+      location.reload();
+      return;
+    }
     location.href = redirectTo;
 
   } catch (err) {
@@ -301,8 +304,16 @@ addGlobalEventListener('submit', '.delete__label', async e => {
   const url = e.target.getAttribute('action');
 
   try {
-    await fetch(url, { method: 'POST' }); 
-    location.reload();
+    const resp = await fetch(url, { method: 'POST' }); 
+
+    if(resp.redirected === true) {
+      location.reload();
+      return;
+    } 
+
+    const data = await resp.json();
+    const redirectTo = data && data.redirectTo;
+    if(redirectTo == null) location.reload();
 
   } catch (err) {
     console.log(err);
@@ -349,7 +360,7 @@ addGlobalEventListener('click', '[data-profile-name-cancel-btn]', e => {
   parentEl.classList.remove('edit');
 })
 
-// settings: submit form -name
+// settings: submit form -name change
 addGlobalEventListener('submit', '[data-profile-settings-form]', async e => {
   e.preventDefault();
   const url = e.target.getAttribute('action');
@@ -359,40 +370,59 @@ addGlobalEventListener('submit', '[data-profile-settings-form]', async e => {
     const resp = await fetch(url, {
       method: 'POST',
       headers: {
-        'Content-Type': 'applicaiton/json'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({ changedName })
     })
     
-    console.log(resp);
-    return;
     if(resp.redirected === true) {
       location.reload();
       return;
     } 
-    const data = await resp.json();
-    if(data.redirectTo == null) return;
-    location.href = data.redirectTo;
+    const data = resp && (await resp.json());
+    if(data.status !== 'ok') {
+      $('[data-error-notify-msg]').textContent = data.msg;
+      $('.error_notify').classList.add('show');
+      return;
+    }
+    location.reload();
 
   } catch (err) {
     console.log(err);
   }
 })
 
-// settings: account deletion
-addGlobalEventListener('click', '[data-settings-delete-account-btn]', async e => {
-  const url = `/profile-settings/deleteAccount`;
+// settings: account deletion prompt
+addGlobalEventListener('click', '[data-settings-delete-account-btn]', e => {
+  document.body.dataset.scrolly = 'false';
+  $('[data-account-delete-modal]').showModal();
+});
+addGlobalEventListener('click', '[data-account-delete-modal-close]', e => {
+  document.body.dataset.scrolly = 'true';
+  $('[data-account-delete-modal]').close();
+});
+
+// settings: account deletion *form submit* 
+addGlobalEventListener('submit', '.delete__account', async e => {
+  e.preventDefault();
+  const url = e.target.getAttribute('action');
 
   try {
     const resp = await fetch(url, { method: 'POST' });
-    
     console.log(resp);
-    return;
+    
     if(resp.redirected === true) {
       location.reload();
       return;
     } 
-    const data = await resp.json();
+    
+    const data = resp && (await resp.json());
+    if(data.status !== 'ok') {
+      $('[data-error-notify-msg]').textContent = data.msg;
+      $('.error_notify').classList.add('show');
+      return;
+    }
+
     if(data.redirectTo == null) return;
     location.href = data.redirectTo;
 
@@ -404,16 +434,21 @@ addGlobalEventListener('click', '[data-settings-delete-account-btn]', async e =>
 //----</profile_settings section>
 
 
+// close error notify
+addGlobalEventListener('click', '[data-error-notify-close]', e => {
+  e.target.parentElement.classList.remove('show');
+})
 
 
 // for selecting projects
-addGlobalEventListener('click', '[data-project-list-items]',
-e => {
-  for (const item of $$('[data-project-list-items]')) {
-    item.classList.remove('selected');
-  }
-  e.target.classList.add('selected');
-})
+// addGlobalEventListener('click', '[data-project-list-items]',
+// e => {
+//   for (const item of $$('[data-project-list-items]')) {
+//     item.classList.remove('selected');
+//   }
+//   e.target.classList.add('selected');
+// })
+
 
 // for (const item of $$('[data-project-list-items]')) {
 //   item.addEventListener('click', e => {
@@ -431,7 +466,7 @@ e => {
 
 
 //----<profy_main header>
-$('[data-project-options-icon]').addEventListener('click', e => {
+addGlobalEventListener('click', '[data-project-options-icon]', e => {
   e.target.blur();
   if(!$('[data-project-options-dropdown]').classList.contains('open')) {
     $('[data-project-options-dropdown]').classList.add('open');
@@ -459,7 +494,7 @@ e => {
 //----</profy_main header>
 
 
-// imp home navigation
+// url navigations
 addGlobalEventListener('click', '[data-nav]', 
   e => window.location.href = e.target.dataset.nav 
 )
@@ -472,15 +507,17 @@ window.addEventListener('load', () => {
     item.style.setProperty('--clr-box', clr);
   }
 
-  for(const item of $$('[data-label-list-item]')) {
-    const clr = randomBoxClr();
-    item.style.setProperty('--rndm-clr', clr);
-  }
-
 
   if($('.profy__home') != null) {
     $('[data-home-greet-time]').textContent = getHomeDate();
-    $('[data-home-greet-msg]').textContent = `${greetUser()},`;
+    $('[data-home-greet-msg]').textContent = `${greetUser()}, `;
+  }
+
+  if($('.profy__projects') !== null) {
+    for(const item of $$('.project')) {
+      const clr = randomBoxClr();
+      item.style.setProperty('--clr-box', clr);
+    }
   }
 
 
