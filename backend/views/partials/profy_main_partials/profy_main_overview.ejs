@@ -1,0 +1,164 @@
+<% const project = (pageInfo.project !== null) ? pageInfo.project[0] : null %>
+
+<section class="profy__main__section--overview">
+  <!-- project/665267352/overview/edit -->
+  <form class="section--overview__form" method="post" data-overview-field-change="">
+    <!-- name & date wrapper -->
+    <div class="section--overview__form__name-date--wrap">
+      <section class="section--overview__form--name">
+        <label for="name_info">
+          Project name
+          <input class="section--overview__form--name__field" type="text" name="projectName" id="name_info"
+            value="<%= project.projectOverview.name %>" data-overview-field="name" readonly />
+        </label>
+
+        <section class="overview__change-btn">
+          <button class="overview__edit-btn" type="button" data-overview-edit-btn>
+            Rename
+          </button>
+          <button class="overview__cancel-btn" type="button" data-overview-cancel-btn>
+            Cancel
+          </button>
+          <button id="overview-save-btn" type="submit" data-overview-save-btn>
+            Save
+          </button>
+        </section>
+      </section>
+
+      <section class="section--overview__form--date-wrap">
+        <label class="proposed-schedule-txt">
+          Proposed Schedule
+        </label>
+
+        <div class="section--overview__form--date">
+          <label>
+            Start Date
+            <!-- max = end date -->
+            <input class="section--overview__form--date__field" type="date" name="startDate"
+              data-overview-field="startDate" readonly
+              value="<%= project.projectOverview.startDate %>" max="<%= project.projectOverview.endDate %>" />
+              <!-- data-overview-field="startDate" value="2022-08-01" max="" readonly /> -->
+          </label>
+
+          <section class="overview__change-btn">
+            <button class="overview__edit-btn" type="button" data-overview-edit-btn>
+              Modify
+            </button>
+            <button class="overview__cancel-btn" type="button" data-overview-cancel-btn>
+              Cancel
+            </button>
+            <button id="overview-save-btn" type="submit" data-overview-save-btn>
+              Save
+            </button>
+          </section>
+        </div>
+
+        <div class="section--overview__form--date">
+          <label title="can't precede start date">
+            Due Date
+            <!-- min = start date -->
+            <input class="section--overview__form--date__field" name="endDate" type="date"
+              data-overview-field="endDate" readonly
+              value="<%= project.projectOverview.endDate %>" min="<%= project.projectOverview.startDate %>" />
+              <!-- data-overview-field="endDate" value="2022-12-31" min="" readonly /> -->
+          </label>
+
+          <section class="overview__change-btn">
+            <button class="overview__edit-btn" type="button" data-overview-edit-btn>
+              Modify
+            </button>
+            <button class="overview__cancel-btn" type="button" data-overview-cancel-btn>
+              Cancel
+            </button>
+            <button id="overview-save-btn" type="submit" data-overview-save-btn>
+              Save
+            </button>
+          </section>
+        </div>
+      </section>
+    </div>
+
+    <section class="section--overview__form--goals">
+      <label>
+        Goals of your project
+        <textarea class="section--overview__form--goals__field" type="text" name="projectGoals"
+          placeholder="About your project" data-overview-field="goals"
+          readonly><%= (project.projectOverview.goals) ? project.projectOverview.goals : '' %></textarea>
+      </label>
+
+      <section class="overview__change-btn">
+        <button class="overview__edit-btn" type="button" data-overview-edit-btn>
+          Modify goal
+        </button>
+        <button class="overview__cancel-btn" type="button" data-overview-cancel-btn>
+          Cancel
+        </button>
+        <button id="overview-save-btn" type="submit" data-overview-save-btn>
+          Save
+        </button>
+      </section>
+    </section>
+
+  </form>
+
+  <section class="section--overview__progress">
+
+    <div class="section--overview__progress__time-elasped">
+      <div class="section--overview__progress__time-elasped--txt">
+        Time Elasped
+      </div>
+      <section class="section--overview__progress__time-elasped--circle">
+
+        <div class="circle">
+          <svg>
+            <circle class="circleTrack" cx="80" cy="80" r="70"></circle>
+            <circle class="circleThumb circleThumb--time" cx="80" cy="80" r="70"></circle>
+          </svg>
+        </div>
+
+        <section data-time-progress>
+          <div>
+            ≈ <span data-time-progress-value>0</span> %
+          </div>
+          <div>
+            <span data-time-progress-daysLeft>
+              0
+            </span>
+            day(s) left
+          </div>
+        </section>
+
+      </section>
+    </div>
+
+    <div class="section--overview__progress__work-done">
+      <div class="section--overview__progress__work-done--txt">
+        Work Completed
+      </div>
+      <section class="section--overview__progress__work-done--circle">
+
+        <div class="circle">
+          <svg>
+            <circle class="circleTrack" cx="80" cy="80" r="70"></circle>
+            <circle class="circleThumb circleThumb--work" cx="80" cy="80" r="70"></circle>
+          </svg>
+        </div>
+
+        <section data-work-progress>
+          <div>
+            ≈ <span data-work-progress-value>0</span> %
+          </div>
+          <div>
+            <span data-work-progress-daysLeft>
+              0
+            </span>
+            task(s) left
+          </div>
+        </section>
+
+      </section>
+    </div>
+
+  </section>
+
+</section>

@@ -1,0 +1,55 @@
+
+<div class="profy__labels" data-section>
+
+  <div class="profy__labels__header">
+    <p class="profy__labels__header__txt">
+      Labels
+    </p>
+
+    <div data-add-item="label" title="create new label">
+      <svg xmlns="http://www.w3.org/2000/svg" width="0.88em" height="1em" preserveAspectRatio="xMidYMid meet"
+        viewBox="0 0 448 512">
+        <rect x="0" y="0" width="448" height="512" fill="none" stroke="none"></rect>
+        <path fill="currentColor"
+          d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32v144H48c-17.7 0-32 14.3-32 32s14.3 32 32 32h144v144c0 17.7 14.3 32 32 32s32-14.3 32-32V288h144c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z">
+        </path>
+      </svg>
+
+      <p>New Label</p>
+    </div>
+  </div>
+
+  <form class="newItemForm new-labelForm hidden" method="post" action="/labels/create" data-item-name="label">
+    <input type="text" name="newLabelName" maxlength="20" placeholder="new label name" required title="Enter valid label name">
+
+    <div class="field_empty">! Enter valid label name</div>
+
+    <div class="btns-wrapper">
+      <button type="button" data-newitem-btn-cancel> Cancel </button>
+      <button type="submit" data-newitem-btn-save> Save </button>
+    </div>
+  </form>
+
+  <div class="profy__labels__list">
+
+    <% if(pageInfo.allLabels !== null) { %>
+
+      <% for(const item of pageInfo.allLabels) { %> 
+        
+        <div class="label" data-label-id="<%= item._id %>" 
+          style="--rndm-clr:<%= item.color %>">
+          <div class="label__name">
+            <%= item.name %>
+          </div>
+          <div data-label-delete-icon> &#10006; </div>
+        </div>
+
+      <% } %> 
+
+    <% } %> 
+
+  </div>
+
+  <%- include('./error_notify.ejs') %>
+  
+</div>

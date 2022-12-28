@@ -14,12 +14,14 @@
   <link rel="stylesheet" href="../frontend/public/css/homeStyles.css">
   <!-- Custom JS -->
   <script src="../frontend/public/js/home.root.js" type="module"></script>
-  <script src="../frontend/public/js/home.children.js" type="module"></script>
+  <script src="../frontend/public/js/home.overview.js" type="module"></script>
+  <script src="../frontend/public/js/home.ideas.js" type="module"></script>
+  <script src="../frontend/public/js/home.kanban.js" type="module"></script>
 </head>
 
 <!-- <body data-theme="<%=locals.user.userTheme%>"> -->
 
-<body data-theme="dark" data-scrollY="false">
+<body data-theme="dark" data-scrolly="true">
 
   <div class="profy">
 
@@ -107,7 +109,7 @@
                 <path fill="none" d="M0 0h36v36H0z" />
               </svg>
             </span>
-            <span class="profy__titlebar__settings--txt">Settings</span>
+            <span class="profy__titlebar__settings--txt">Profile settings</span>
           </section>
 
           <form class="profy__titlebar__signoutForm" action="/signout" method="post" data-account-options>
@@ -163,7 +165,9 @@
 
     </header>
 
-    <main class="profy__main">
+
+
+    <main class="profy__main" data-project-id="64521482861" data-section>
 
       <div class="profy__main__path-wrap">
         <div class="profy__main__path inactive">
@@ -202,7 +206,9 @@
 
         <section class="profy__main__header__options">
           <div class="project__options__dropdown" data-project-options-dropdown>
-            <section class="project__options__dropdown--share" data-project-options>
+            <section class="project__options__dropdown--share" data-project-options="shareableLink"
+              data-option-action="/projects/gen-sharelink">
+
               <span class="project__options__dropdown--share--icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
                   viewBox="0 0 20 20">
@@ -212,11 +218,14 @@
                 </svg>
               </span>
               <span class="project__options__dropdown--share--txt">
-                Share with link
+                Share
               </span>
+
             </section>
 
-            <section class="project__options__dropdown--delete" data-project-options>
+            <section class="project__options__dropdown--delete" data-project-options="delete"
+              data-option-action="/projects/delete">
+
               <span class="project__options__dropdown--delete--icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
                   viewBox="0 0 24 24">
@@ -228,11 +237,88 @@
               <span class="project__options__dropdown--delete--txt">
                 Delete project
               </span>
+
             </section>
           </div>
 
           <div data-project-options-backdrop aria-hidden="true" aria-label="project options dropdown backdrop"></div>
         </section>
+
+        <!-- share project modal -->
+        <dialog data-project-share-modal>
+          <form class="share__project" action="" method="post">
+            <div class="share__project__header">
+              <p class="share__project__header--txt"> Share project </p>
+              <div class="share__project__header--cancelIcon" data-project-share-modal-close>
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 15 15">
+                  <rect x="0" y="0" width="15" height="15" fill="none" stroke="none" />
+                  <path fill="currentColor"
+                    d="M3.64 2.27L7.5 6.13l3.84-3.84A.92.92 0 0 1 12 2a1 1 0 0 1 1 1a.9.9 0 0 1-.27.66L8.84 7.5l3.89 3.89A.9.9 0 0 1 13 12a1 1 0 0 1-1 1a.92.92 0 0 1-.69-.27L7.5 8.87l-3.85 3.85A.92.92 0 0 1 3 13a1 1 0 0 1-1-1a.9.9 0 0 1 .27-.66L6.16 7.5L2.27 3.61A.9.9 0 0 1 2 3a1 1 0 0 1 1-1c.24.003.47.1.64.27Z" />
+                </svg>
+              </div>
+            </div>
+
+            <div class="share__project__description">
+              <p class="share__project__description__txt">
+                Anyone with the shared link can access your project
+              </p>
+              <div class="share__project__btns">
+                <button type="submit" data-share-link-submitter="getShareLink">
+                  Get link
+                </button>
+              </div>
+
+              <section data-project-share-wrapper>
+                <p class="share__project__description__txt">
+                  Shareable Link:
+                </p>
+                <div class="project__share-link-wrap">
+                  <div data-project-share-link></div>
+                  <span data-project-share-link-copy> copy </span>
+                </div>
+
+                <p class="share__project__description__txt">
+                  You can choose to invalidate shared link, so other people can't access it
+                </p>
+                <div class="share__project__btns">
+                  <button type="submit" data-share-link-submitter="makeShareLinkPrivate">
+                    Make project private
+                  </button>
+                </div>
+              </section>
+            </div>
+
+          </form>
+        </dialog>
+
+        <!-- delete project modal -->
+        <dialog data-project-delete-modal>
+          <form class="delete__project" action="" method="post">
+            <div class="delete__project__header">
+              <p class="delete__project__header--txt"> Delete project </p>
+              <div class="delete__project__header--cancelIcon" data-project-delete-modal-close>
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 15 15">
+                  <rect x="0" y="0" width="15" height="15" fill="none" stroke="none" />
+                  <path fill="currentColor"
+                    d="M3.64 2.27L7.5 6.13l3.84-3.84A.92.92 0 0 1 12 2a1 1 0 0 1 1 1a.9.9 0 0 1-.27.66L8.84 7.5l3.89 3.89A.9.9 0 0 1 13 12a1 1 0 0 1-1 1a.92.92 0 0 1-.69-.27L7.5 8.87l-3.85 3.85A.92.92 0 0 1 3 13a1 1 0 0 1-1-1a.9.9 0 0 1 .27-.66L6.16 7.5L2.27 3.61A.9.9 0 0 1 2 3a1 1 0 0 1 1-1c.24.003.47.1.64.27Z" />
+                </svg>
+              </div>
+            </div>
+
+            <div class="delete__project__description">
+              <p class="delete__project__description__txt">
+                Are you sure you want to delete this project?
+              </p>
+
+              <div class="delete__project__description__btns">
+                <button type="button" data-project-delete-modal-close>Cancel</button>
+                <button type="submit">Delete</button>
+              </div>
+            </div>
+          </form>
+        </dialog>
 
       </section>
 
@@ -286,15 +372,15 @@
 
         <!-- overview -->
         <section class="profy__main__section--overview">
-
-          <form class="section--overview__form" method="post" action="/project/overview/info">
+          <!-- project/665267352/overview/edit -->
+          <form class="section--overview__form" method="post" data-overview-field-change="">
             <!-- name & date wrapper -->
             <div class="section--overview__form__name-date--wrap">
               <section class="section--overview__form--name">
                 <label for="name_info">
                   Project name
                   <input class="section--overview__form--name__field" type="text" name="projectName" id="name_info"
-                    value="Swinging Utopia" data-overview-field readonly />
+                    value="Swinging Utopia" data-overview-field="name" readonly />
                 </label>
 
                 <section class="overview__change-btn">
@@ -318,8 +404,9 @@
                 <div class="section--overview__form--date">
                   <label>
                     Start Date
-                    <input class="section--overview__form--date__field" type="date" name="startDate" value="2022-11-01"
-                      data-overview-field data-overview-start-date readonly />
+                    <!-- max = end date -->
+                    <input class="section--overview__form--date__field" type="date" name="startDate"
+                      data-overview-field="startDate" value="2022-08-01" max="" readonly />
                   </label>
 
                   <section class="overview__change-btn">
@@ -336,13 +423,11 @@
                 </div>
 
                 <div class="section--overview__form--date">
-                  <label>
+                  <label title="can't precede start date">
                     Due Date
-                    <!-- <span class="duedate-note" title="due date can't precede start date">
-                        (can't precede start date)
-                      </span> -->
-                    <input class="section--overview__form--date__field" name="endDate" type="date" data-overview-field
-                      value="2022-12-31" data-overview-end-date readonly />
+                    <!-- min = start date -->
+                    <input class="section--overview__form--date__field" name="endDate" type="date"
+                      data-overview-field="endDate" value="2022-12-31" min="" readonly />
                   </label>
 
                   <section class="overview__change-btn">
@@ -364,7 +449,7 @@
               <label>
                 Goals of your project
                 <textarea class="section--overview__form--goals__field" type="text" name="projectGoals"
-                  placeholder="About your project" data-overview-field
+                  placeholder="About your project" data-overview-field="goals"
                   readonly>This project is focused on nothing thanks there maybe something more into this than what the fuck am i thinkingn</textarea>
               </label>
 
@@ -400,11 +485,11 @@
 
                 <section data-time-progress>
                   <div>
-                    ≈ <span data-time-progress-value>73</span> %
+                    ≈ <span data-time-progress-value>0</span> %
                   </div>
                   <div>
                     <span data-time-progress-daysLeft>
-                      2
+                      0
                     </span>
                     day(s) left
                   </div>
@@ -428,11 +513,11 @@
 
                 <section data-work-progress>
                   <div>
-                    ≈ <span data-work-progress-value>57</span> %
+                    ≈ <span data-work-progress-value>0</span> %
                   </div>
                   <div>
                     <span data-work-progress-daysLeft>
-                      10
+                      0
                     </span>
                     task(s) left
                   </div>
@@ -469,7 +554,7 @@
               Organize your ideas in one place with description and illustrations
             </section>
 
-            <form class="ideas-form" action="/tets" method="post">
+            <form class="ideas-form" action="/idea/create" method="post">
 
               <div class="ideas-form__description">
                 <textarea class="ideas-form__description--field" required placeholder="your idea's description"
@@ -492,6 +577,15 @@
 
                 <div class="ideas-form__imgUpload__preview" data-imgUpload-preview-wrap>
                   <img src="" alt="" class="ideas-form__imgUpload__preview--src" data-imgUpload-preview-src>
+
+                  <div data-idea-imgUpload-preview-closebtn>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 15 15">
+                      <rect x="0" y="0" width="15" height="15" fill="none" stroke="none" />
+                      <path fill="currentColor"
+                        d="M3.64 2.27L7.5 6.13l3.84-3.84A.92.92 0 0 1 12 2a1 1 0 0 1 1 1a.9.9 0 0 1-.27.66L8.84 7.5l3.89 3.89A.9.9 0 0 1 13 12a1 1 0 0 1-1 1a.92.92 0 0 1-.69-.27L7.5 8.87l-3.85 3.85A.92.92 0 0 1 3 13a1 1 0 0 1-1-1a.9.9 0 0 1 .27-.66L6.16 7.5L2.27 3.61A.9.9 0 0 1 2 3a1 1 0 0 1 1-1c.24.003.47.1.64.27Z" />
+                    </svg>
+                  </div>
                 </div>
               </div>
 
@@ -530,9 +624,9 @@
               </div>
 
               <section class="idea__img">
-                <!-- data-idea-imgUrl="src-upload" -->
+                <!-- <img class="idea__img--src" data-idea-imgUrl="srcUpload" -->
                 <img class="idea__img--src" data-idea-imgUrl="srcUrl"
-                  src="https://cdn.dribbble.com/users/142973/screenshots/15829912/media/39f9848a69401d1e81b447562148a2a1.jpg?compress=1&resize=1000x750&vertical=top"
+                  src="https://images.pexels.com/photos/14430249/pexels-photo-14430249.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                   alt="image">
               </section>
             </section>
@@ -566,7 +660,8 @@
                   argument before proceeding.
                 </section>
               </label>
-              <section class="idea__img src">
+
+              <section class="idea__img">
                 <img class="idea__img--src" data-idea-imgUrl="srcUpload"
                   src="https://cdn.dribbble.com/users/142973/screenshots/15829912/media/39f9848a69401d1e81b447562148a2a1.jpg?compress=1&resize=1000x750&vertical=top"
                   alt="image">
@@ -602,6 +697,7 @@
                   argument before proceeding.
                 </section>
               </label>
+
               <section class="idea__img src">
                 <img class="idea__img--src" data-idea-imgUrl="srcUrl"
                   src="https://cdn.dribbble.com/users/142973/screenshots/15829912/media/39f9848a69401d1e81b447562148a2a1.jpg?compress=1&resize=1000x750&vertical=top"
@@ -611,11 +707,11 @@
 
 
             <!-- edit modal -->
-            <dialog data-ideaEdit-modal>
-              <form class="edit__idea" action="/edit/idea" method="post">
+            <dialog data-idea-edit-modal>
+              <form class="edit__idea" action="/edit/627547254" method="post">
                 <div class="edit__idea__header">
                   <p class="edit__idea__header--txt"> Edit idea </p>
-                  <div class="edit__idea__header--cancelIcon" data-ideaEdit-modal-close>
+                  <div class="edit__idea__header--cancelIcon" data-idea-edit-modal-close>
                     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
                       viewBox="0 0 15 15">
                       <rect x="0" y="0" width="15" height="15" fill="none" stroke="none" />
@@ -664,11 +760,11 @@
               </form>
             </dialog>
             <!-- delete modal -->
-            <dialog data-ideaDelete-modal>
+            <dialog data-idea-delete-modal>
               <form class="delete__idea" action="/delete/idea" method="post">
                 <div class="delete__idea__header">
                   <p class="delete__idea__header--txt"> Delete idea </p>
-                  <div class="delete__idea__header--cancelIcon" data-ideaDelete-modal-close>
+                  <div class="delete__idea__header--cancelIcon" data-idea-delete-modal-close>
                     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
                       viewBox="0 0 15 15">
                       <rect x="0" y="0" width="15" height="15" fill="none" stroke="none" />
@@ -684,12 +780,13 @@
                   </p>
 
                   <div class="delete__idea__description__btns">
-                    <button type="button" data-ideaDelete-modal-close>Cancel</button>
+                    <button type="button" data-idea-delete-modal-close>Cancel</button>
                     <button type="submit">Delete</button>
                   </div>
                 </div>
               </form>
             </dialog>
+
           </div>
 
         </section>
@@ -702,13 +799,9 @@
           <div class="kanban-section" data-kanban-section="todo">
             <section class="kanban-head">
               <div class="kanban-head__info">
-                <div class="kanban-head__info--name">
-                  To do
-                </div>
-                <div class="kanban-head__info--number">
-                  5
-                </div>
-                <div class="kanban-head__info--reveal">
+                <div class="kanban-head__info--name"> To do </div>
+                <div class="kanban-head__info--number"> 5 </div>
+                <div class="kanban-head__info--reveal" data-hide-kanban-section>
                   <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
                     viewBox="0 0 1024 1024">
                     <rect x="0" y="0" width="1024" height="1024" fill="none" stroke="none" />
@@ -718,7 +811,7 @@
                 </div>
               </div>
 
-              <div data-kanban-add="todo">
+              <div data-create-kanban="todo">
                 <svg xmlns="http://www.w3.org/2000/svg" width="0.88em" height="1em" preserveAspectRatio="xMidYMid meet"
                   viewBox="0 0 448 512">
                   <rect x="0" y="0" width="448" height="512" fill="none" stroke="none" />
@@ -730,19 +823,28 @@
 
             <section class="kanban-list kanban-list--todo">
               <!-- for each kanban todo item -->
-              <div class="kanban-list__item">
+              <div class="kanban-list__item" data-kanban-item-id="26451902">
                 <div class="kanban-list__item__head">
-
                   <section class="kanban-list__item__head--labels">
-                    <div class="kanban-item__label">Valorant</div>
-                    <div class="kanban-item__label">Website</div>
+                    <div class="kanban-item__label" style="--clr-label: #00aeff;">
+                      Valorant
+                    </div>
+                    <div class="kanban-item__label" style="--clr-label: #00aeff;">
+                      Website
+                    </div>
+                    <div class="kanban-item__label" style="--clr-label: #00aeff;">
+                      Bily nas
+                    </div>
+                    <div class="kanban-item__label" style="--clr-label: #00aeff;">
+                      lnakld
+                    </div>
                   </section>
 
 
                   <div class="kanban-list__item__head--options-wrap">
                     <div data-kanban-item-option-icon role="button">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
-                        viewBox="0 0 1024 1024">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                        preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024">
                         <rect x="0" y="0" width="1024" height="1024" fill="none" stroke="none" />
                         <path fill="currentColor"
                           d="M388.8 896.4v-27.198c.6-2.2 1.6-4.2 2-6.4c8.8-57.2 56.4-102.4 112.199-106.2c62.4-4.4 115.2 31.199 132.4 89.199c2.2 7.6 3.8 15.6 5.8 23.4v27.2c-.6 1.8-1.6 3.399-1.8 5.399c-8.6 52.8-46.6 93-98.6 104.4c-4 .8-8 2-12 3h-27.2c-1.8-.6-3.6-1.6-5.4-1.8c-52-8.4-91.599-45.4-103.6-96.8c-1.2-5-2.6-9.6-3.8-14.2zm252.4-768.797l-.001 27.202c-.6 2.2-1.6 4.2-1.8 6.4c-9 57.6-56.8 102.6-113.2 106.2c-62.2 4-114.8-32-131.8-90.2c-2.2-7.401-3.8-15-5.6-22.401v-27.2c.6-1.8 1.6-3.4 2-5.2c9.6-52 39.8-86 90.2-102.2c6.6-2.2 13.6-3.4 20.4-5.2h27.2c1.8.6 3.6 1.6 5.4 1.8c52.2 8.6 91.6 45.4 103.6 96.8c1.201 4.8 2.401 9.4 3.601 13.999zm-.001 370.801v27.2c-.6 2.2-1.6 4.2-2 6.4c-9 57.4-58.6 103.6-114.6 106c-63 2.8-116.4-35.2-131.4-93.8c-1.6-6.2-3-12.4-4.4-18.6v-27.2c.6-2.2 1.6-4.2 2-6.4c8.8-57.4 58.6-103.601 114.6-106.2c63-3 116.4 35.2 131.4 93.8c1.6 6.4 3 12.6 4.4 18.8z" />
@@ -752,6 +854,9 @@
                     <div class="kanban-item__options" aria-hidden="true">
                       <div data-kanban-item-option="edit">Edit</div>
                       <div data-kanban-item-option="delete">Delete</div>
+                      <div data-kanban-item-option data-kanban-move-to="todo">
+                        Move to Todo
+                      </div>
                       <div data-kanban-item-option data-kanban-move-to="inProgress">
                         Move to In Progress
                       </div>
@@ -762,18 +867,16 @@
                   </div>
                 </div>
 
-                <div class="kanban-list__item__title">
+                <div class="kanban-list__item__title" data-kanban-title>
                   Pages "Ideas" and "Overview" and do this andshit abfakibfbafkibakfba
                 </div>
-                <div class="kanban-list__item__description">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, consequuntur libero perspiciatis ea beatae exercitationem, nihil veritatis amet eligendi eveniet facilis blanditiis sapiente.
+                <div class="kanban-list__item__description" data-kanban-description>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, consequuntur libero perspiciatis ea
+                  beatae exercitationem, nihil veritatis amet eligendi eveniet facilis blanditiis sapiente.
                 </div>
               </div>
-              
-
             </section>
           </div>
-
 
           <!-- kanban in-progress -->
           <div class="kanban-section" data-kanban-section="inProgress">
@@ -785,7 +888,7 @@
                 <div class="kanban-head__info--number">
                   9
                 </div>
-                <div class="kanban-head__info--reveal">
+                <div class="kanban-head__info--reveal" data-hide-kanban-section>
                   <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
                     viewBox="0 0 1024 1024">
                     <rect x="0" y="0" width="1024" height="1024" fill="none" stroke="none" />
@@ -795,7 +898,7 @@
                 </div>
               </div>
 
-              <div data-kanban-add="todo">
+              <div data-create-kanban="inProgress">
                 <svg xmlns="http://www.w3.org/2000/svg" width="0.88em" height="1em" preserveAspectRatio="xMidYMid meet"
                   viewBox="0 0 448 512">
                   <rect x="0" y="0" width="448" height="512" fill="none" stroke="none" />
@@ -806,67 +909,52 @@
             </section>
 
             <section class="kanban-list kanban-list--inProgress">
-              <!-- for each kanban todo item -->
-              <div class="kanban-list__item">
+              <div class="kanban-list__item" data-kanban-item-id="90252175">
                 <div class="kanban-list__item__head">
-
                   <section class="kanban-list__item__head--labels">
-                    <div class="kanban-item__label">Valorant</div>
-                    <div class="kanban-item__label">Website</div>
+
+                    <div class="kanban-item__label" style="--clr-label: #00aeff;">
+                      Website
+                    </div>
+
+                    <div class="kanban-item__label" style="--clr-label: #00aeff;">
+                      lnakld
+                    </div>
                   </section>
 
-
                   <div class="kanban-list__item__head--options-wrap">
-                    <div data-kanban-item-option-icon>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
-                        viewBox="0 0 1024 1024">
+                    <div data-kanban-item-option-icon role="button">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                        preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024">
                         <rect x="0" y="0" width="1024" height="1024" fill="none" stroke="none" />
                         <path fill="currentColor"
                           d="M388.8 896.4v-27.198c.6-2.2 1.6-4.2 2-6.4c8.8-57.2 56.4-102.4 112.199-106.2c62.4-4.4 115.2 31.199 132.4 89.199c2.2 7.6 3.8 15.6 5.8 23.4v27.2c-.6 1.8-1.6 3.399-1.8 5.399c-8.6 52.8-46.6 93-98.6 104.4c-4 .8-8 2-12 3h-27.2c-1.8-.6-3.6-1.6-5.4-1.8c-52-8.4-91.599-45.4-103.6-96.8c-1.2-5-2.6-9.6-3.8-14.2zm252.4-768.797l-.001 27.202c-.6 2.2-1.6 4.2-1.8 6.4c-9 57.6-56.8 102.6-113.2 106.2c-62.2 4-114.8-32-131.8-90.2c-2.2-7.401-3.8-15-5.6-22.401v-27.2c.6-1.8 1.6-3.4 2-5.2c9.6-52 39.8-86 90.2-102.2c6.6-2.2 13.6-3.4 20.4-5.2h27.2c1.8.6 3.6 1.6 5.4 1.8c52.2 8.6 91.6 45.4 103.6 96.8c1.201 4.8 2.401 9.4 3.601 13.999zm-.001 370.801v27.2c-.6 2.2-1.6 4.2-2 6.4c-9 57.4-58.6 103.6-114.6 106c-63 2.8-116.4-35.2-131.4-93.8c-1.6-6.2-3-12.4-4.4-18.6v-27.2c.6-2.2 1.6-4.2 2-6.4c8.8-57.4 58.6-103.601 114.6-106.2c63-3 116.4 35.2 131.4 93.8c1.6 6.4 3 12.6 4.4 18.8z" />
                       </svg>
                     </div>
 
-                  </div>
-                </div>
-
-                <div class="kanban-list__item__title">
-                  Pages "Ideas" and "Overview"
-                </div>
-                <div class="kanban-list__item__description">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo, tempore?
-                </div>
-              </div>
-              <div class="kanban-list__item">
-                <div class="kanban-list__item__head">
-
-                  <section class="kanban-list__item__head--labels">
-                    <div class="kanban-item__label">Swinging Utopia</div>
-                    <div class="kanban-item__label">Website</div>
-
-                  </section>
-
-
-                  <div class="kanban-list__item__head--options-wrap">
-                    <div data-kanban-item-option-icon>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
-                        viewBox="0 0 1024 1024">
-                        <rect x="0" y="0" width="1024" height="1024" fill="none" stroke="none" />
-                        <path fill="currentColor"
-                          d="M388.8 896.4v-27.198c.6-2.2 1.6-4.2 2-6.4c8.8-57.2 56.4-102.4 112.199-106.2c62.4-4.4 115.2 31.199 132.4 89.199c2.2 7.6 3.8 15.6 5.8 23.4v27.2c-.6 1.8-1.6 3.399-1.8 5.399c-8.6 52.8-46.6 93-98.6 104.4c-4 .8-8 2-12 3h-27.2c-1.8-.6-3.6-1.6-5.4-1.8c-52-8.4-91.599-45.4-103.6-96.8c-1.2-5-2.6-9.6-3.8-14.2zm252.4-768.797l-.001 27.202c-.6 2.2-1.6 4.2-1.8 6.4c-9 57.6-56.8 102.6-113.2 106.2c-62.2 4-114.8-32-131.8-90.2c-2.2-7.401-3.8-15-5.6-22.401v-27.2c.6-1.8 1.6-3.4 2-5.2c9.6-52 39.8-86 90.2-102.2c6.6-2.2 13.6-3.4 20.4-5.2h27.2c1.8.6 3.6 1.6 5.4 1.8c52.2 8.6 91.6 45.4 103.6 96.8c1.201 4.8 2.401 9.4 3.601 13.999zm-.001 370.801v27.2c-.6 2.2-1.6 4.2-2 6.4c-9 57.4-58.6 103.6-114.6 106c-63 2.8-116.4-35.2-131.4-93.8c-1.6-6.2-3-12.4-4.4-18.6v-27.2c.6-2.2 1.6-4.2 2-6.4c8.8-57.4 58.6-103.601 114.6-106.2c63-3 116.4 35.2 131.4 93.8c1.6 6.4 3 12.6 4.4 18.8z" />
-                      </svg>
+                    <div class="kanban-item__options" aria-hidden="true">
+                      <div data-kanban-item-option="edit">Edit</div>
+                      <div data-kanban-item-option="delete">Delete</div>
+                      <div data-kanban-item-option data-kanban-move-to="todo">
+                        Move to Todo
+                      </div>
+                      <div data-kanban-item-option data-kanban-move-to="inProgress">
+                        Move to In Progress
+                      </div>
+                      <div data-kanban-item-option data-kanban-move-to="completed">
+                        Move to Completed
+                      </div>
                     </div>
-
                   </div>
                 </div>
 
-                <div class="kanban-list__item__title">
-                  Pages "Ideas" and "Overview"
+                <div class="kanban-list__item__title" data-kanban-title>
+                  The various pages can have shareable items
                 </div>
-                <div class="kanban-list__item__description">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo, tempore?
+                <div class="kanban-list__item__description" data-kanban-description>
+                  No noframes lorem and this and that bro
                 </div>
               </div>
-
             </section>
           </div>
 
@@ -880,7 +968,7 @@
                 <div class="kanban-head__info--number">
                   12
                 </div>
-                <div class="kanban-head__info--reveal">
+                <div class="kanban-head__info--reveal" data-hide-kanban-section>
                   <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
                     viewBox="0 0 1024 1024">
                     <rect x="0" y="0" width="1024" height="1024" fill="none" stroke="none" />
@@ -890,7 +978,7 @@
                 </div>
               </div>
 
-              <div data-kanban-add="todo">
+              <div data-create-kanban="completed">
                 <svg xmlns="http://www.w3.org/2000/svg" width="0.88em" height="1em" preserveAspectRatio="xMidYMid meet"
                   viewBox="0 0 448 512">
                   <rect x="0" y="0" width="448" height="512" fill="none" stroke="none" />
@@ -901,78 +989,552 @@
             </section>
 
             <section class="kanban-list kanban-list--completed">
-              <!-- for each kanban todo item -->
-              <div class="kanban-list__item">
-                <div class="kanban-list__item__head">
 
+              <div class="kanban-list__item" data-kanban-item-id="68726426">
+                <div class="kanban-list__item__head">
                   <section class="kanban-list__item__head--labels">
-                    <div class="kanban-item__label">Valorant</div>
-                    <div class="kanban-item__label">Website</div>
+
+                    <div class="kanban-item__label" style="--clr-label: #00aeff;">
+                      Project anafn
+                    </div>
+                    <div class="kanban-item__label" style="--clr-label: #00aeff;">
+                      abfafa
+                    </div>
+
                   </section>
 
-
                   <div class="kanban-list__item__head--options-wrap">
-                    <div data-kanban-item-option-icon>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
-                        viewBox="0 0 1024 1024">
+                    <div data-kanban-item-option-icon role="button">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                        preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024">
                         <rect x="0" y="0" width="1024" height="1024" fill="none" stroke="none" />
                         <path fill="currentColor"
                           d="M388.8 896.4v-27.198c.6-2.2 1.6-4.2 2-6.4c8.8-57.2 56.4-102.4 112.199-106.2c62.4-4.4 115.2 31.199 132.4 89.199c2.2 7.6 3.8 15.6 5.8 23.4v27.2c-.6 1.8-1.6 3.399-1.8 5.399c-8.6 52.8-46.6 93-98.6 104.4c-4 .8-8 2-12 3h-27.2c-1.8-.6-3.6-1.6-5.4-1.8c-52-8.4-91.599-45.4-103.6-96.8c-1.2-5-2.6-9.6-3.8-14.2zm252.4-768.797l-.001 27.202c-.6 2.2-1.6 4.2-1.8 6.4c-9 57.6-56.8 102.6-113.2 106.2c-62.2 4-114.8-32-131.8-90.2c-2.2-7.401-3.8-15-5.6-22.401v-27.2c.6-1.8 1.6-3.4 2-5.2c9.6-52 39.8-86 90.2-102.2c6.6-2.2 13.6-3.4 20.4-5.2h27.2c1.8.6 3.6 1.6 5.4 1.8c52.2 8.6 91.6 45.4 103.6 96.8c1.201 4.8 2.401 9.4 3.601 13.999zm-.001 370.801v27.2c-.6 2.2-1.6 4.2-2 6.4c-9 57.4-58.6 103.6-114.6 106c-63 2.8-116.4-35.2-131.4-93.8c-1.6-6.2-3-12.4-4.4-18.6v-27.2c.6-2.2 1.6-4.2 2-6.4c8.8-57.4 58.6-103.601 114.6-106.2c63-3 116.4 35.2 131.4 93.8c1.6 6.4 3 12.6 4.4 18.8z" />
                       </svg>
                     </div>
 
-                  </div>
-                </div>
-
-                <div class="kanban-list__item__title">
-                  Pages "Ideas" and "Overview"
-                </div>
-                <div class="kanban-list__item__description">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo, tempore?
-                </div>
-              </div>
-              <div class="kanban-list__item">
-                <div class="kanban-list__item__head">
-
-                  <section class="kanban-list__item__head--labels">
-                    <div class="kanban-item__label">Swinging Utopia</div>
-                    <div class="kanban-item__label">Website</div>
-                    <!-- <div class="kanban-item__label">Valorant</div>
-                    <div class="kanban-item__label">Piafa</div>
-                    <div class="kanban-item__label">assam</div> -->
-                  </section>
-
-
-                  <div class="kanban-list__item__head--options-wrap">
-                    <div data-kanban-item-option-icon>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
-                        viewBox="0 0 1024 1024">
-                        <rect x="0" y="0" width="1024" height="1024" fill="none" stroke="none" />
-                        <path fill="currentColor"
-                          d="M388.8 896.4v-27.198c.6-2.2 1.6-4.2 2-6.4c8.8-57.2 56.4-102.4 112.199-106.2c62.4-4.4 115.2 31.199 132.4 89.199c2.2 7.6 3.8 15.6 5.8 23.4v27.2c-.6 1.8-1.6 3.399-1.8 5.399c-8.6 52.8-46.6 93-98.6 104.4c-4 .8-8 2-12 3h-27.2c-1.8-.6-3.6-1.6-5.4-1.8c-52-8.4-91.599-45.4-103.6-96.8c-1.2-5-2.6-9.6-3.8-14.2zm252.4-768.797l-.001 27.202c-.6 2.2-1.6 4.2-1.8 6.4c-9 57.6-56.8 102.6-113.2 106.2c-62.2 4-114.8-32-131.8-90.2c-2.2-7.401-3.8-15-5.6-22.401v-27.2c.6-1.8 1.6-3.4 2-5.2c9.6-52 39.8-86 90.2-102.2c6.6-2.2 13.6-3.4 20.4-5.2h27.2c1.8.6 3.6 1.6 5.4 1.8c52.2 8.6 91.6 45.4 103.6 96.8c1.201 4.8 2.401 9.4 3.601 13.999zm-.001 370.801v27.2c-.6 2.2-1.6 4.2-2 6.4c-9 57.4-58.6 103.6-114.6 106c-63 2.8-116.4-35.2-131.4-93.8c-1.6-6.2-3-12.4-4.4-18.6v-27.2c.6-2.2 1.6-4.2 2-6.4c8.8-57.4 58.6-103.601 114.6-106.2c63-3 116.4 35.2 131.4 93.8c1.6 6.4 3 12.6 4.4 18.8z" />
-                      </svg>
+                    <div class="kanban-item__options" aria-hidden="true">
+                      <div data-kanban-item-option="edit">Edit</div>
+                      <div data-kanban-item-option="delete">Delete</div>
+                      <div data-kanban-item-option data-kanban-move-to="todo">
+                        Move to Todo
+                      </div>
+                      <div data-kanban-item-option data-kanban-move-to="inProgress">
+                        Move to In Progress
+                      </div>
+                      <div data-kanban-item-option data-kanban-move-to="completed">
+                        Move to Completed
+                      </div>
                     </div>
-
                   </div>
                 </div>
 
-                <div class="kanban-list__item__title">
-                  Pages "Ideas" and "Overview"
+                <div class="kanban-list__item__title" data-kanban-title>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto, quia?
                 </div>
-                <div class="kanban-list__item__description">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo, tempore?
+                <div class="kanban-list__item__description" data-kanban-description>
+                  the pages cant have many charset according to someone out there
                 </div>
               </div>
 
             </section>
           </div>
 
+
+          <!-- edit/create kanban -->
+          <dialog data-kanban-edit-modal>
+            <form class="edit__kanban" action="" method="post">
+              <div class="edit__kanban__header">
+                <p class="edit__kanban__header--txt"> Edit kanban </p>
+                <div class="edit__kanban__header--cancelIcon" data-kanban-edit-modal-close>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                    viewBox="0 0 15 15">
+                    <rect x="0" y="0" width="15" height="15" fill="none" stroke="none" />
+                    <path fill="currentColor"
+                      d="M3.64 2.27L7.5 6.13l3.84-3.84A.92.92 0 0 1 12 2a1 1 0 0 1 1 1a.9.9 0 0 1-.27.66L8.84 7.5l3.89 3.89A.9.9 0 0 1 13 12a1 1 0 0 1-1 1a.92.92 0 0 1-.69-.27L7.5 8.87l-3.85 3.85A.92.92 0 0 1 3 13a1 1 0 0 1-1-1a.9.9 0 0 1 .27-.66L6.16 7.5L2.27 3.61A.9.9 0 0 1 2 3a1 1 0 0 1 1-1c.24.003.47.1.64.27Z" />
+                  </svg>
+                </div>
+              </div>
+
+              <p data-existing-labels-txt> Existing Labels </p>
+              <div class="edit__kanban__existing-labels"> </div>
+              <template id="template_existing-label">
+                <div class="existing-label__item" style="background-color: var(--clr-existing-label, #F9825D)">
+                  <span class="existing-label__item--name"></span>
+                  <span class="existing-label__item--cross" data-kanban-edit-existing-label-delete
+                    style="cursor: pointer;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 15 15" style="pointer-events: none;">
+                      <rect x="0" y="0" width="15" height="15" fill="none" stroke="none"></rect>
+                      <path fill="currentColor"
+                        d="M3.64 2.27L7.5 6.13l3.84-3.84A.92.92 0 0 1 12 2a1 1 0 0 1 1 1a.9.9 0 0 1-.27.66L8.84 7.5l3.89 3.89A.9.9 0 0 1 13 12a1 1 0 0 1-1 1a.92.92 0 0 1-.69-.27L7.5 8.87l-3.85 3.85A.92.92 0 0 1 3 13a1 1 0 0 1-1-1a.9.9 0 0 1 .27-.66L6.16 7.5L2.27 3.61A.9.9 0 0 1 2 3a1 1 0 0 1 1-1c.24.003.47.1.64.27Z">
+                      </path>
+                    </svg>
+                  </span>
+                </div>
+              </template>
+
+
+              <p data-rest-labels-txt> Other Labels </p>
+              <div class="edit__kanban__rest-labels"> </div>
+              <template id="template_rest-label">
+                <div class="rest-label__item" style="background-color: var(--clr-rest-label, #F95D77)">
+                  <span class="rest-label__item--name"></span>
+                  <span class="rest-label__item--plus" data-kanban-edit-rest-label-add style="cursor: pointer;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="0.88em" height="1em"
+                      preserveAspectRatio="xMidYMid meet" viewBox="0 0 448 512" style="pointer-events: none;">
+                      <rect x="0" y="0" width="448" height="512" fill="none" stroke="none"></rect>
+                      <path fill="currentColor"
+                        d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32v144H48c-17.7 0-32 14.3-32 32s14.3 32 32 32h144v144c0 17.7 14.3 32 32 32s32-14.3 32-32V288h144c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z">
+                      </path>
+                    </svg>
+                  </span>
+                </div>
+              </template>
+
+
+              <label class="edit__kanban__title">
+                <input class="edit__kanban__title__content" type="text" placeholder="kanban title"
+                  data-kanban-edit-title autofocus required />
+              </label>
+
+              <label class="edit__kanban__description">
+                <textarea class="edit__kanban__description__content" placeholder="kanban description"
+                  data-kanban-edit-description required></textarea>
+              </label>
+
+
+              <div class="edit__kanban__save">
+                <button class="edit__kanban__save-btn" type="submit">
+                  Save
+                </button>
+              </div>
+            </form>
+          </dialog>
+
+          <!-- delete kanban -->
+          <dialog data-kanban-delete-modal>
+            <form class="delete__kanban" action="" method="post">
+              <div class="delete__kanban__header">
+                <p class="delete__kanban__header--txt"> Delete kanban </p>
+                <div class="delete__kanban__header--cancelIcon" data-kanban-delete-modal-close>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                    viewBox="0 0 15 15">
+                    <rect x="0" y="0" width="15" height="15" fill="none" stroke="none" />
+                    <path fill="currentColor"
+                      d="M3.64 2.27L7.5 6.13l3.84-3.84A.92.92 0 0 1 12 2a1 1 0 0 1 1 1a.9.9 0 0 1-.27.66L8.84 7.5l3.89 3.89A.9.9 0 0 1 13 12a1 1 0 0 1-1 1a.92.92 0 0 1-.69-.27L7.5 8.87l-3.85 3.85A.92.92 0 0 1 3 13a1 1 0 0 1-1-1a.9.9 0 0 1 .27-.66L6.16 7.5L2.27 3.61A.9.9 0 0 1 2 3a1 1 0 0 1 1-1c.24.003.47.1.64.27Z" />
+                  </svg>
+                </div>
+              </div>
+
+              <div class="delete__kanban__description">
+                <p class="delete__kanban__description__txt">
+                  Are you sure you want to delete this kanban item?
+                </p>
+
+                <div class="delete__kanban__description__btns">
+                  <button type="button" data-kanban-delete-modal-close>Cancel</button>
+                  <button type="submit">Delete</button>
+                </div>
+              </div>
+            </form>
+          </dialog>
+
         </section>
+
       </div>
     </main>
 
-    <aside class="profy__sidepanel">
+    <!-- <other__sections> -->
+    <section class="profy__home" data-section>
+      <div class="profy__home__greet">
+        <div data-home-greet-time>
+          Thursday, July 12
+        </div>
 
+        <div>
+          <span data-home-greet-msg>
+            Good Evening
+          </span>
+          <span data-home-greet-name>
+            William
+          </span>
+        </div>
+      </div>
+
+      <div class="profy__home__nearing-duedate-txt">
+        Here are some projects that are nearing due date :
+      </div>
+
+      <div class="profy__home__project-list">
+
+        <div class="home-project">
+          <div class="home-project__name">
+            Swinging Utopia
+          </div>
+          <div class="home-project__goals">
+            The main focus of this project is to test something
+            that u have to do by yourself. Lorem ipsum dolor sit
+            amet consectetur adipisicing elit. Iure, provident?
+          </div>
+
+          <div class="home-project__work-progress">
+            <progress class="home-project__work-progress__bar" value="40" max="100"></progress>
+            <div class="home-project__work-progress__txt"> <span data-home-project-work-progress>40</span>% </div>
+          </div>
+
+          <div class="home-project__due-date-wrapper">
+            📅 Due : <span data-home-project-due-date>30.12.2022</span>
+          </div>
+        </div>
+
+        <div class="home-project">
+          <div class="home-project__name">
+            abfafa lnakld
+          </div>
+          <div class="home-project__goals">
+            The main focus of this project is to test something
+            that u have to do by yourself. Lorem ipsum dolor sit
+            amet consectetur adipisicing elit. Iure, provident?
+          </div>
+
+          <div class="home-project__work-progress">
+            <progress class="home-project__work-progress__bar" value="40" max="100"></progress>
+            <div class="home-project__work-progress__txt"> <span data-home-project-work-progress>40</span>% </div>
+          </div>
+
+          <div class="home-project__due-date-wrapper">
+            📅 Due : <span data-home-project-due-date>30.12.2022</span>
+          </div>
+        </div>
+
+        <div class="home-project">
+          <div class="home-project__name">
+            Addressing home
+          </div>
+          <div class="home-project__goals">
+            The main focus of this project is to test something
+            that u have to do by yourself. Lorem ipsum dolor sit
+            amet consectetur adipisicing elit. Iure, provident?
+          </div>
+
+          <div class="home-project__work-progress">
+            <progress class="home-project__work-progress__bar" value="40" max="100"></progress>
+            <div class="home-project__work-progress__txt"> <span data-home-project-work-progress>40</span>% </div>
+          </div>
+
+          <div class="home-project__due-date-wrapper">
+            📅 Due : <span data-home-project-due-date>30.12.2022</span>
+          </div>
+        </div>
+
+        <div class="home-project">
+          <div class="home-project__name">
+            Bily Nas
+          </div>
+          <div class="home-project__goals">
+            The main focus of this project is to test something
+            that u have to do by yourself. Lorem ipsum dolor sit
+            amet consectetur adipisicing elit. Iure, provident?
+          </div>
+
+          <div class="home-project__work-progress">
+            <progress class="home-project__work-progress__bar" value="40" max="100"></progress>
+            <div class="home-project__work-progress__txt"> <span data-home-project-work-progress>40</span>% </div>
+          </div>
+
+          <div class="home-project__due-date-wrapper">
+            📅 Due : <span data-home-project-due-date>30.12.2022</span>
+          </div>
+        </div>
+
+        <div class="home-project">
+          <div class="home-project__name">
+            XD
+          </div>
+          <div class="home-project__goals">
+            The main focus of this project is to test something
+            that u have to do by yourself. Lorem ipsum dolor sit
+            amet consectetur adipisicing elit. Iure, provident?
+          </div>
+
+          <div class="home-project__work-progress">
+            <progress class="home-project__work-progress__bar" value="40" max="100"></progress>
+            <div class="home-project__work-progress__txt"> <span data-home-project-work-progress>40</span>% </div>
+          </div>
+
+          <div class="home-project__due-date-wrapper">
+            📅 Due : <span data-home-project-due-date>30.12.2022</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="profy__settings" data-section>
+      <div class="profy__settings__txt">
+        <p class="profy__settings__txt-heading">
+          Profile settings
+        </p> 
+        <p class="profy__settings__txt-description">
+          Update your photo and personal details here
+        </p> 
+      </div>
+
+
+      <form class="profy__settings__personal-details" method="POST" action="" data-profile-settings-form>
+
+        <div class="details__profile-pic">
+          <p class="details__profile-pic--txt">
+            Your photo
+          </p>
+
+          <div data-pfp-and-pfpupload-wrap>
+            <div data-details-profile-pic-wrap data-active-profile-pic="dummy">
+
+              <img data-details-profile-pic="real" src="https://images.unsplash.com/photo-1590031905406-f18a426d772d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1244&q=80" alt="profile pic">
+  
+              <span data-details-profile-pic="dummy">
+                RG
+              </span>
+  
+            </div>
+  
+            <div class="details__profile-pic--upload-wrap">
+              <input type="file" accept="image/*" data-profile-pic-upload-field>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="details__name">
+          <div class="details__name--txt">
+            Name
+          </div>
+
+          <div data-details-name-wrap>
+            <input class="details__name--field" type="text" name="settingsName" placeholder="Full Name"
+            value="Ritesh Ghosh" data-settings-details-field readonly required/>
+
+            <section class="profile-name__change-btn">
+              <button class="profile-name__edit-btn" type="button" data-profile-name-edit-btn>
+                &#9998;
+              </button>
+              <button class="profile-name__cancel-btn" type="button" data-profile-name-cancel-btn>
+                &#10006;
+              </button>
+              <button id="profile-name-save-btn" type="submit" data-profile-name-save-btn>
+                &#10004;
+              </button>
+            </section>
+          </div>
+
+        </div>
+
+        <div class="details__email">
+          <div class="details__email--txt">
+            Email address
+          </div>
+
+          <div data-details-email-wrap>
+            <div class="details__email--field" data-settings-details-field>
+              something@niqqa.com
+            </div>
+          </div>
+        </div>
+
+        <div class="details__password">
+          <div class="details__password--txt">
+            Password
+          </div>
+
+          <div data-details-password-wrap>
+            <input class="details__password--field" type="password" placeholder="password"
+            value="doingMath@21" data-settings-details-field readonly required/>
+
+            <div data-settings-show-password>show</div>
+          </div>
+        </div>
+        
+        <div class="details__delete-account">
+          <div class="details__delete-account--txt">
+            Delete Account
+          </div>
+
+          <div data-details-delete-accountBtn-wrap>
+            <p data-settings-delete-account-txt>
+              Once you delete your account, there is no going back. Please be certain
+            </p>
+
+            <button type="button" data-settings-delete-account-btn>
+              Delete your account
+            </button>
+          </div>
+        </div>
+
+      </form>
+
+    </section>
+
+
+    <div class="profy__projects" data-section>
+
+      <div class="profy__projects__header">
+        <p class="profy__projects__header__txt">
+          Projects
+        </p>
+  
+        <div data-add-item="project">
+          <svg xmlns="http://www.w3.org/2000/svg" width="0.88em" height="1em" preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 448 512">
+            <rect x="0" y="0" width="448" height="512" fill="none" stroke="none"></rect>
+            <path fill="currentColor"
+              d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32v144H48c-17.7 0-32 14.3-32 32s14.3 32 32 32h144v144c0 17.7 14.3 32 32 32s32-14.3 32-32V288h144c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z">
+            </path>
+          </svg>
+  
+          <p>New Project</p>
+        </div>
+      </div>
+  
+      <form class="newItemForm new-projectForm hidden" method="post" action="/projects/create" data-item-name="project">
+        <input type="text" name="newProjectName" maxlength="20" placeholder="new project name" required="" title="Enter valid project name">
+
+        <div class="field_empty">! Enter valid project name</div>
+
+        <div class="btns-wrapper">
+          <button type="button" data-newitem-btn-cancel> Cancel </button>
+          <button type="submit" data-newitem-btn-save> Save </button>
+        </div>
+      </form>
+
+      <div class="profy__projects__list">
+
+        <div class="project">
+          <div class="project__name">
+            Meeting someone
+          </div>
+          <div class="project__goals">
+            Lorem ipsum dolor sit amet consectetur adipisicing
+            elit. Laboriosam pariatur nam magni in cumque iure. 
+            Dolore saepe repellendus dolorem hic.
+          </div>
+
+          <div class="project__work-progress">
+            <progress class="project__work-progress__bar" value="78" max="100"></progress>
+            <div class="project__work-progress__txt"> <span data-project-work-progress>78</span>% </div>
+          </div>
+
+          <div class="project__due-date-wrapper">
+            📅 Due : <span data-project-due-date>28.10.2022</span>
+          </div>
+        </div>
+        
+        <div class="project">
+          <div class="project__name">
+            Meeting someone
+          </div>
+          <div class="project__goals">
+            Lorem ipsum dolor sit amet consectetur adipisicing
+            elit. Laboriosam pariatur nam magni in cumque iure. 
+            Dolore saepe repellendus dolorem hic.
+          </div>
+
+          <div class="project__work-progress">
+            <progress class="project__work-progress__bar" value="78" max="100"></progress>
+            <div class="project__work-progress__txt"> <span data-project-work-progress>78</span>% </div>
+          </div>
+
+          <div class="project__due-date-wrapper">
+            📅 Due : <span data-project-due-date>28.10.2022</span>
+          </div>
+        </div>
+        
+        <div class="project">
+          <div class="project__name">
+            Meeting someone
+          </div>
+          <div class="project__goals">
+            Lorem ipsum dolor sit amet consectetur adipisicing
+            elit. Laboriosam pariatur nam magni in cumque iure. 
+            Dolore saepe repellendus dolorem hic.
+          </div>
+
+          <div class="project__work-progress">
+            <progress class="project__work-progress__bar" value="78" max="100"></progress>
+            <div class="project__work-progress__txt"> <span data-project-work-progress>78</span>% </div>
+          </div>
+
+          <div class="project__due-date-wrapper">
+            📅 Due : <span data-project-due-date>28.10.2022</span>
+          </div>
+        </div>
+
+      </div>
+  
+    </div>
+
+    <div class="profy__labels" data-section>
+
+      <div class="profy__labels__header">
+        <p class="profy__labels__header__txt">
+          Labels
+        </p>
+  
+        <div data-add-item="label">
+          <svg xmlns="http://www.w3.org/2000/svg" width="0.88em" height="1em" preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 448 512">
+            <rect x="0" y="0" width="448" height="512" fill="none" stroke="none"></rect>
+            <path fill="currentColor"
+              d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32v144H48c-17.7 0-32 14.3-32 32s14.3 32 32 32h144v144c0 17.7 14.3 32 32 32s32-14.3 32-32V288h144c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z">
+            </path>
+          </svg>
+  
+          <p>New Label</p>
+        </div>
+      </div>
+  
+      <form class="newItemForm new-labelForm hidden" method="post" action="/labels/create" data-item-name="label">
+        <input type="text" name="newLabelName" maxlength="20" placeholder="new label name" required title="Enter valid label name">
+
+        <div class="field_empty">! Enter valid label name</div>
+
+        <div class="btns-wrapper">
+          <button type="button" data-newitem-btn-cancel> Cancel </button>
+          <button type="submit" data-newitem-btn-save> Save </button>
+        </div>
+      </form>
+
+      <div class="profy__labels__list">
+
+        <div class="label" data-label-id="6236286843">
+          <div class="label__name">
+            Swinging Utopiaroly
+          </div>
+          <div data-label-delete-icon> &#10006; </div>
+        </div>
+
+        <div class="label" data-label-id="8426362863">
+          <div class="label__name">
+            Wednesday
+          </div>
+          <div data-label-delete-icon> &#10006; </div>
+        </div>
+
+        <div class="label" data-label-id="2636286843">
+          <div class="label__name">
+            November Uprising
+          </div>
+          <div data-label-delete-icon> &#10006; </div>
+        </div>
+
+      </div>
+
+      
+    </div>
+    <!-- </other__sections> -->
+
+
+    <aside class="profy__sidepanel">
       <nav class="profy__sidepanel__nav">
         <section class="profy__sidepanel__nav--home" data-nav="/">
           <span class="profy__sidepanel__nav--home__icon">
@@ -991,24 +1553,13 @@
 
         <section class="profy__sidepanel__nav--projects">
           <section class="profy__sidepanel__nav--projects-container">
-            <div class="profy__sidepanel__nav--projects-wrapper">
-              <span class="profy__sidepanel__nav--projects-wrapper__txt">
-                Projects
-              </span>
-
-              <span class="profy__sidepanel__nav--projects-wrapper__icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
-                  viewBox="0 0 24 24">
-                  <rect x="0" y="0" width="24" height="24" fill="none" stroke="none" />
-                  <path fill="currentColor"
-                    d="M4 11h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1zm10 0h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1zM4 21h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1zm13 0c2.206 0 4-1.794 4-4s-1.794-4-4-4s-4 1.794-4 4s1.794 4 4 4z" />
-                </svg>
-              </span>
-            </div>
+            <span class="profy__sidepanel__nav--projects-container__txt">
+              Projects
+            </span>
 
             <span class="profy__sidepanel__nav--projects-container__add-icon" data-add-item="project">
               <svg xmlns="http://www.w3.org/2000/svg" width="0.88em" height="1em" preserveAspectRatio="xMidYMid meet"
-                viewBox="0 0 448 512">
+                viewBox="0 0 448 512" style="pointer-events: none;">
                 <rect x="0" y="0" width="448" height="512" fill="none" stroke="none" />
                 <path fill="currentColor"
                   d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32v144H48c-17.7 0-32 14.3-32 32s14.3 32 32 32h144v144c0 17.7 14.3 32 32 32s32-14.3 32-32V288h144c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
@@ -1016,8 +1567,12 @@
             </span>
           </section>
 
-          <form class="newItemForm new-projectForm hidden" method="post" action="/projects/create">
-            <input type="text" name="newProjectName" maxlength="20" placeholder="new project name" required>
+          <form class="newItemForm new-projectForm hidden" method="post" action="/projects/create"
+            data-item-name="project">
+            <input type="text" name="newProjectName" maxlength="20" placeholder="new project name" required
+              title="Enter valid project name">
+
+            <div class="field_empty">! Enter valid project name</div>
 
             <div class="btns-wrapper">
               <button type="button" data-newItem-btn-cancel> Cancel </button>
@@ -1090,12 +1645,10 @@
               <span class="profy__sidepanel__nav--labels-wrapper__txt">
                 Labels
               </span>
-              <!-- <span class="profy__sidepanel__nav--labels-wrapper__downarrow-icon"></span> -->
 
               <span class="profy__sidepanel__nav--labels-wrapper__length" data-labels-length>
                 0
               </span>
-
             </div>
 
             <span class="profy__sidepanel__nav--labels-container__add-icon" data-add-item="label">
@@ -1108,8 +1661,11 @@
             </span>
           </section>
 
-          <form class="newItemForm new-labelForm hidden" method="post" action="/labels/create">
-            <input type="text" name="newLabelName" placeholder="new label name" required>
+          <form class="newItemForm new-labelForm hidden" method="post" action="/labels/create" data-item-name="label">
+            <input type="text" name="newLabelName" maxlength="20" placeholder="new label name" required
+              title="Enter valid label name">
+
+            <div class="field_empty">! Enter valid label name</div>
 
             <div class="btns-wrapper">
               <button type="button" data-newItem-btn-cancel> Cancel </button>
@@ -1118,186 +1674,238 @@
           </form>
 
           <ul class="profy__sidepanel__nav--labels-list" data-label-list>
-            <li class="profy__sidepanel__nav--labels-listItem" data-label-list-item>
-              <span class="profy__sidepanel__nav--labels-listItem--icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
-                  viewBox="0 0 24 24">
-                  <rect x="0" y="0" width="24" height="24" fill="none" stroke="none" />
-                  <path fill="currentColor"
-                    d="M5.94 18.99H15c.65 0 1.26-.31 1.63-.84l3.95-5.57a.99.99 0 0 0 0-1.16l-3.96-5.58A1.95 1.95 0 0 0 15 5H5.94c-.81 0-1.28.93-.81 1.59L9 12l-3.87 5.41c-.47.66 0 1.58.81 1.58z" />
-                </svg>
-              </span>
-
+            <li class="profy__sidepanel__nav--labels-listItem" data-label-list-item data-label-id="542262621">
               <span class="profy__sidepanel__nav--labels-listItem--name">
                 Valorant
               </span>
-            </li>
-            <li class="profy__sidepanel__nav--labels-listItem" title="Swinging Utopia" data-label-list-item>
-              <span class="profy__sidepanel__nav--labels-listItem--icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
-                  viewBox="0 0 24 24">
-                  <rect x="0" y="0" width="24" height="24" fill="none" stroke="none" />
-                  <path fill="currentColor"
-                    d="M5.94 18.99H15c.65 0 1.26-.31 1.63-.84l3.95-5.57a.99.99 0 0 0 0-1.16l-3.96-5.58A1.95 1.95 0 0 0 15 5H5.94c-.81 0-1.28.93-.81 1.59L9 12l-3.87 5.41c-.47.66 0 1.58.81 1.58z" />
-                </svg>
-              </span>
 
+              <div style="cursor: pointer" data-label-delete-icon>
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 15 15" style="pointer-events: none;">
+                  <rect x="0" y="0" width="15" height="15" fill="none" stroke="none" />
+                  <path fill="currentColor"
+                    d="M3.64 2.27L7.5 6.13l3.84-3.84A.92.92 0 0 1 12 2a1 1 0 0 1 1 1a.9.9 0 0 1-.27.66L8.84 7.5l3.89 3.89A.9.9 0 0 1 13 12a1 1 0 0 1-1 1a.92.92 0 0 1-.69-.27L7.5 8.87l-3.85 3.85A.92.92 0 0 1 3 13a1 1 0 0 1-1-1a.9.9 0 0 1 .27-.66L6.16 7.5L2.27 3.61A.9.9 0 0 1 2 3a1 1 0 0 1 1-1c.24.003.47.1.64.27Z" />
+                </svg>
+              </div>
+            </li>
+            <li class="profy__sidepanel__nav--labels-listItem" title="Swinging Utopia" data-label-list-item
+              data-label-id="1247257545">
               <span class="profy__sidepanel__nav--labels-listItem--name">
                 Swinging Utopia
               </span>
-            </li>
-            <li class="profy__sidepanel__nav--labels-listItem" title="Bily nas" data-label-list-item>
-              <span class="profy__sidepanel__nav--labels-listItem--icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
-                  viewBox="0 0 24 24">
-                  <rect x="0" y="0" width="24" height="24" fill="none" stroke="none" />
-                  <path fill="currentColor"
-                    d="M5.94 18.99H15c.65 0 1.26-.31 1.63-.84l3.95-5.57a.99.99 0 0 0 0-1.16l-3.96-5.58A1.95 1.95 0 0 0 15 5H5.94c-.81 0-1.28.93-.81 1.59L9 12l-3.87 5.41c-.47.66 0 1.58.81 1.58z" />
-                </svg>
-              </span>
 
+              <div style="cursor: pointer" data-label-delete-icon>
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 15 15" style="pointer-events: none;">
+                  <rect x="0" y="0" width="15" height="15" fill="none" stroke="none" />
+                  <path fill="currentColor"
+                    d="M3.64 2.27L7.5 6.13l3.84-3.84A.92.92 0 0 1 12 2a1 1 0 0 1 1 1a.9.9 0 0 1-.27.66L8.84 7.5l3.89 3.89A.9.9 0 0 1 13 12a1 1 0 0 1-1 1a.92.92 0 0 1-.69-.27L7.5 8.87l-3.85 3.85A.92.92 0 0 1 3 13a1 1 0 0 1-1-1a.9.9 0 0 1 .27-.66L6.16 7.5L2.27 3.61A.9.9 0 0 1 2 3a1 1 0 0 1 1-1c.24.003.47.1.64.27Z" />
+                </svg>
+              </div>
+            </li>
+            <li class="profy__sidepanel__nav--labels-listItem" title="Bily nas" data-label-list-item
+              data-label-id="247997545">
               <span class="profy__sidepanel__nav--labels-listItem--name">
                 Bily nas
               </span>
-            </li>
-            <li class="profy__sidepanel__nav--labels-listItem" data-label-list-item>
-              <span class="profy__sidepanel__nav--labels-listItem--icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
-                  viewBox="0 0 24 24">
-                  <rect x="0" y="0" width="24" height="24" fill="none" stroke="none" />
-                  <path fill="currentColor"
-                    d="M5.94 18.99H15c.65 0 1.26-.31 1.63-.84l3.95-5.57a.99.99 0 0 0 0-1.16l-3.96-5.58A1.95 1.95 0 0 0 15 5H5.94c-.81 0-1.28.93-.81 1.59L9 12l-3.87 5.41c-.47.66 0 1.58.81 1.58z" />
-                </svg>
-              </span>
 
+              <div style="cursor: pointer" data-label-delete-icon>
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 15 15" style="pointer-events: none;">
+                  <rect x="0" y="0" width="15" height="15" fill="none" stroke="none" />
+                  <path fill="currentColor"
+                    d="M3.64 2.27L7.5 6.13l3.84-3.84A.92.92 0 0 1 12 2a1 1 0 0 1 1 1a.9.9 0 0 1-.27.66L8.84 7.5l3.89 3.89A.9.9 0 0 1 13 12a1 1 0 0 1-1 1a.92.92 0 0 1-.69-.27L7.5 8.87l-3.85 3.85A.92.92 0 0 1 3 13a1 1 0 0 1-1-1a.9.9 0 0 1 .27-.66L6.16 7.5L2.27 3.61A.9.9 0 0 1 2 3a1 1 0 0 1 1-1c.24.003.47.1.64.27Z" />
+                </svg>
+              </div>
+            </li>
+            <li class="profy__sidepanel__nav--labels-listItem" data-label-list-item data-label-id="3247257545">
               <span class="profy__sidepanel__nav--labels-listItem--name">
                 abfafa lnakld
               </span>
-            </li>
-            <li class="profy__sidepanel__nav--labels-listItem" data-label-list-item>
-              <span class="profy__sidepanel__nav--labels-listItem--icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
-                  viewBox="0 0 24 24">
-                  <rect x="0" y="0" width="24" height="24" fill="none" stroke="none" />
-                  <path fill="currentColor"
-                    d="M5.94 18.99H15c.65 0 1.26-.31 1.63-.84l3.95-5.57a.99.99 0 0 0 0-1.16l-3.96-5.58A1.95 1.95 0 0 0 15 5H5.94c-.81 0-1.28.93-.81 1.59L9 12l-3.87 5.41c-.47.66 0 1.58.81 1.58z" />
-                </svg>
-              </span>
 
+              <div style="cursor: pointer" data-label-delete-icon>
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 15 15" style="pointer-events: none;">
+                  <rect x="0" y="0" width="15" height="15" fill="none" stroke="none" />
+                  <path fill="currentColor"
+                    d="M3.64 2.27L7.5 6.13l3.84-3.84A.92.92 0 0 1 12 2a1 1 0 0 1 1 1a.9.9 0 0 1-.27.66L8.84 7.5l3.89 3.89A.9.9 0 0 1 13 12a1 1 0 0 1-1 1a.92.92 0 0 1-.69-.27L7.5 8.87l-3.85 3.85A.92.92 0 0 1 3 13a1 1 0 0 1-1-1a.9.9 0 0 1 .27-.66L6.16 7.5L2.27 3.61A.9.9 0 0 1 2 3a1 1 0 0 1 1-1c.24.003.47.1.64.27Z" />
+                </svg>
+              </div>
+            </li>
+            <li class="profy__sidepanel__nav--labels-listItem" data-label-list-item data-label-id="4247257545">
               <span class="profy__sidepanel__nav--labels-listItem--name">
                 Project anafn
               </span>
-            </li>
-            <li class="profy__sidepanel__nav--labels-listItem" data-label-list-item>
-              <span class="profy__sidepanel__nav--labels-listItem--icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
-                  viewBox="0 0 24 24">
-                  <rect x="0" y="0" width="24" height="24" fill="none" stroke="none" />
-                  <path fill="currentColor"
-                    d="M5.94 18.99H15c.65 0 1.26-.31 1.63-.84l3.95-5.57a.99.99 0 0 0 0-1.16l-3.96-5.58A1.95 1.95 0 0 0 15 5H5.94c-.81 0-1.28.93-.81 1.59L9 12l-3.87 5.41c-.47.66 0 1.58.81 1.58z" />
-                </svg>
-              </span>
 
+              <div style="cursor: pointer" data-label-delete-icon>
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 15 15" style="pointer-events: none;">
+                  <rect x="0" y="0" width="15" height="15" fill="none" stroke="none" />
+                  <path fill="currentColor"
+                    d="M3.64 2.27L7.5 6.13l3.84-3.84A.92.92 0 0 1 12 2a1 1 0 0 1 1 1a.9.9 0 0 1-.27.66L8.84 7.5l3.89 3.89A.9.9 0 0 1 13 12a1 1 0 0 1-1 1a.92.92 0 0 1-.69-.27L7.5 8.87l-3.85 3.85A.92.92 0 0 1 3 13a1 1 0 0 1-1-1a.9.9 0 0 1 .27-.66L6.16 7.5L2.27 3.61A.9.9 0 0 1 2 3a1 1 0 0 1 1-1c.24.003.47.1.64.27Z" />
+                </svg>
+              </div>
+            </li>
+            <li class="profy__sidepanel__nav--labels-listItem" data-label-list-item data-label-id="5247257545">
               <span class="profy__sidepanel__nav--labels-listItem--name">
                 Swinging Utopia
               </span>
-            </li>
-            <li class="profy__sidepanel__nav--labels-listItem" data-label-list-item>
-              <span class="profy__sidepanel__nav--labels-listItem--icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
-                  viewBox="0 0 24 24">
-                  <rect x="0" y="0" width="24" height="24" fill="none" stroke="none" />
-                  <path fill="currentColor"
-                    d="M5.94 18.99H15c.65 0 1.26-.31 1.63-.84l3.95-5.57a.99.99 0 0 0 0-1.16l-3.96-5.58A1.95 1.95 0 0 0 15 5H5.94c-.81 0-1.28.93-.81 1.59L9 12l-3.87 5.41c-.47.66 0 1.58.81 1.58z" />
-                </svg>
-              </span>
 
+              <div style="cursor: pointer" data-label-delete-icon>
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 15 15" style="pointer-events: none;">
+                  <rect x="0" y="0" width="15" height="15" fill="none" stroke="none" />
+                  <path fill="currentColor"
+                    d="M3.64 2.27L7.5 6.13l3.84-3.84A.92.92 0 0 1 12 2a1 1 0 0 1 1 1a.9.9 0 0 1-.27.66L8.84 7.5l3.89 3.89A.9.9 0 0 1 13 12a1 1 0 0 1-1 1a.92.92 0 0 1-.69-.27L7.5 8.87l-3.85 3.85A.92.92 0 0 1 3 13a1 1 0 0 1-1-1a.9.9 0 0 1 .27-.66L6.16 7.5L2.27 3.61A.9.9 0 0 1 2 3a1 1 0 0 1 1-1c.24.003.47.1.64.27Z" />
+                </svg>
+              </div>
+            </li>
+            <li class="profy__sidepanel__nav--labels-listItem" data-label-list-item data-label-id="6247257545">
               <span class="profy__sidepanel__nav--labels-listItem--name">
                 lnakld
               </span>
-            </li>
-            <li class="profy__sidepanel__nav--labels-listItem" data-label-list-item>
-              <span class="profy__sidepanel__nav--labels-listItem--icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
-                  viewBox="0 0 24 24">
-                  <rect x="0" y="0" width="24" height="24" fill="none" stroke="none" />
-                  <path fill="currentColor"
-                    d="M5.94 18.99H15c.65 0 1.26-.31 1.63-.84l3.95-5.57a.99.99 0 0 0 0-1.16l-3.96-5.58A1.95 1.95 0 0 0 15 5H5.94c-.81 0-1.28.93-.81 1.59L9 12l-3.87 5.41c-.47.66 0 1.58.81 1.58z" />
-                </svg>
-              </span>
 
+              <div style="cursor: pointer" data-label-delete-icon>
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 15 15" style="pointer-events: none;">
+                  <rect x="0" y="0" width="15" height="15" fill="none" stroke="none" />
+                  <path fill="currentColor"
+                    d="M3.64 2.27L7.5 6.13l3.84-3.84A.92.92 0 0 1 12 2a1 1 0 0 1 1 1a.9.9 0 0 1-.27.66L8.84 7.5l3.89 3.89A.9.9 0 0 1 13 12a1 1 0 0 1-1 1a.92.92 0 0 1-.69-.27L7.5 8.87l-3.85 3.85A.92.92 0 0 1 3 13a1 1 0 0 1-1-1a.9.9 0 0 1 .27-.66L6.16 7.5L2.27 3.61A.9.9 0 0 1 2 3a1 1 0 0 1 1-1c.24.003.47.1.64.27Z" />
+                </svg>
+              </div>
+            </li>
+            <li class="profy__sidepanel__nav--labels-listItem" data-label-list-item data-label-id="7247257545">
               <span class="profy__sidepanel__nav--labels-listItem--name">
                 Project anafn
               </span>
-            </li>
-            <li class="profy__sidepanel__nav--labels-listItem" data-label-list-item>
-              <span class="profy__sidepanel__nav--labels-listItem--icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
-                  viewBox="0 0 24 24">
-                  <rect x="0" y="0" width="24" height="24" fill="none" stroke="none" />
-                  <path fill="currentColor"
-                    d="M5.94 18.99H15c.65 0 1.26-.31 1.63-.84l3.95-5.57a.99.99 0 0 0 0-1.16l-3.96-5.58A1.95 1.95 0 0 0 15 5H5.94c-.81 0-1.28.93-.81 1.59L9 12l-3.87 5.41c-.47.66 0 1.58.81 1.58z" />
-                </svg>
-              </span>
 
+              <div style="cursor: pointer" data-label-delete-icon>
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 15 15" style="pointer-events: none;">
+                  <rect x="0" y="0" width="15" height="15" fill="none" stroke="none" />
+                  <path fill="currentColor"
+                    d="M3.64 2.27L7.5 6.13l3.84-3.84A.92.92 0 0 1 12 2a1 1 0 0 1 1 1a.9.9 0 0 1-.27.66L8.84 7.5l3.89 3.89A.9.9 0 0 1 13 12a1 1 0 0 1-1 1a.92.92 0 0 1-.69-.27L7.5 8.87l-3.85 3.85A.92.92 0 0 1 3 13a1 1 0 0 1-1-1a.9.9 0 0 1 .27-.66L6.16 7.5L2.27 3.61A.9.9 0 0 1 2 3a1 1 0 0 1 1-1c.24.003.47.1.64.27Z" />
+                </svg>
+              </div>
+            </li>
+            <li class="profy__sidepanel__nav--labels-listItem" data-label-list-item data-label-id="8247257545">
               <span class="profy__sidepanel__nav--labels-listItem--name">
                 abfafa
               </span>
-            </li>
-            <li class="profy__sidepanel__nav--labels-listItem" data-label-list-item>
-              <span class="profy__sidepanel__nav--labels-listItem--icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
-                  viewBox="0 0 24 24">
-                  <rect x="0" y="0" width="24" height="24" fill="none" stroke="none" />
-                  <path fill="currentColor"
-                    d="M5.94 18.99H15c.65 0 1.26-.31 1.63-.84l3.95-5.57a.99.99 0 0 0 0-1.16l-3.96-5.58A1.95 1.95 0 0 0 15 5H5.94c-.81 0-1.28.93-.81 1.59L9 12l-3.87 5.41c-.47.66 0 1.58.81 1.58z" />
-                </svg>
-              </span>
 
+              <div style="cursor: pointer" data-label-delete-icon>
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 15 15" style="pointer-events: none;">
+                  <rect x="0" y="0" width="15" height="15" fill="none" stroke="none" />
+                  <path fill="currentColor"
+                    d="M3.64 2.27L7.5 6.13l3.84-3.84A.92.92 0 0 1 12 2a1 1 0 0 1 1 1a.9.9 0 0 1-.27.66L8.84 7.5l3.89 3.89A.9.9 0 0 1 13 12a1 1 0 0 1-1 1a.92.92 0 0 1-.69-.27L7.5 8.87l-3.85 3.85A.92.92 0 0 1 3 13a1 1 0 0 1-1-1a.9.9 0 0 1 .27-.66L6.16 7.5L2.27 3.61A.9.9 0 0 1 2 3a1 1 0 0 1 1-1c.24.003.47.1.64.27Z" />
+                </svg>
+              </div>
+            </li>
+            <li class="profy__sidepanel__nav--labels-listItem" data-label-list-item data-label-id="9247257545">
               <span class="profy__sidepanel__nav--labels-listItem--name">
                 Project anafn
               </span>
+
+              <div style="cursor: pointer" data-label-delete-icon>
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 15 15" style="pointer-events: none;">
+                  <rect x="0" y="0" width="15" height="15" fill="none" stroke="none" />
+                  <path fill="currentColor"
+                    d="M3.64 2.27L7.5 6.13l3.84-3.84A.92.92 0 0 1 12 2a1 1 0 0 1 1 1a.9.9 0 0 1-.27.66L8.84 7.5l3.89 3.89A.9.9 0 0 1 13 12a1 1 0 0 1-1 1a.92.92 0 0 1-.69-.27L7.5 8.87l-3.85 3.85A.92.92 0 0 1 3 13a1 1 0 0 1-1-1a.9.9 0 0 1 .27-.66L6.16 7.5L2.27 3.61A.9.9 0 0 1 2 3a1 1 0 0 1 1-1c.24.003.47.1.64.27Z" />
+                </svg>
+              </div>
             </li>
           </ul>
-
         </section>
+          
+
       </nav>
-
-      <!-- to create project & labels -->
-      <div class="profy__sidepanel__create">
-        <section class="profy__sidepanel__create__project">
-          <span class="profy__sidepanel__create__project--icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="0.88em" height="1em" preserveAspectRatio="xMidYMid meet"
-              viewBox="0 0 448 512">
-              <rect x="0" y="0" width="448" height="512" fill="none" stroke="none" />
-              <path fill="currentColor"
-                d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32v144H48c-17.7 0-32 14.3-32 32s14.3 32 32 32h144v144c0 17.7 14.3 32 32 32s32-14.3 32-32V288h144c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
-            </svg>
-          </span>
-          <span class="profy__sidepanel__create__project--txt">
-            New Project
-          </span>
-        </section>
-
-        <section class="profy__sidepanel__create__label">
-          <span class="profy__sidepanel__create__label--icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="0.88em" height="1em" preserveAspectRatio="xMidYMid meet"
-              viewBox="0 0 448 512">
-              <rect x="0" y="0" width="448" height="512" fill="none" stroke="none" />
-              <path fill="currentColor"
-                d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32v144H48c-17.7 0-32 14.3-32 32s14.3 32 32 32h144v144c0 17.7 14.3 32 32 32s32-14.3 32-32V288h144c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
-            </svg>
-          </span>
-          <span class="profy__sidepanel__create__label--txt">
-            New Label
-          </span>
-        </section>
-      </div>
-
     </aside>
 
+    <!-- delete label modal -->
+    <dialog data-label-delete-modal>
+      <form class="delete__label" action="" method="post">
+        <div class="delete__label__header">
+          <p class="delete__label__header--txt"> Delete label </p>
+          <div class="delete__label__header--cancelIcon" data-label-delete-modal-close>
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+              viewBox="0 0 15 15">
+              <rect x="0" y="0" width="15" height="15" fill="none" stroke="none" />
+              <path fill="currentColor"
+                d="M3.64 2.27L7.5 6.13l3.84-3.84A.92.92 0 0 1 12 2a1 1 0 0 1 1 1a.9.9 0 0 1-.27.66L8.84 7.5l3.89 3.89A.9.9 0 0 1 13 12a1 1 0 0 1-1 1a.92.92 0 0 1-.69-.27L7.5 8.87l-3.85 3.85A.92.92 0 0 1 3 13a1 1 0 0 1-1-1a.9.9 0 0 1 .27-.66L6.16 7.5L2.27 3.61A.9.9 0 0 1 2 3a1 1 0 0 1 1-1c.24.003.47.1.64.27Z" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="delete__label__description">
+          <div class="delete__label__description__txt">
+            Are you sure you want to delete <span data-label-delete-name></span> label ?
+          </div>
+
+          <div class="delete__label__description__btns">
+            <button type="button" data-label-delete-modal-close>Cancel</button>
+            <button type="submit">Delete</button>
+          </div>
+        </div>
+      </form>
+    </dialog>
 
   </div>
+
+
+  <footer class="bottompanel">
+
+    <div class="bottompanel__item selected" data-nav="/">
+      <div class="bottompanel__item--icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+          viewBox="0 0 32 32">
+          <rect x="0" y="0" width="32" height="32" fill="none" stroke="none" />
+          <path fill="currentColor"
+            d="M16.81 4.3a1.25 1.25 0 0 0-1.62 0l-9.75 8.288a1.25 1.25 0 0 0-.44.953V26.5a.5.5 0 0 0 .5.5h5a.5.5 0 0 0 .5-.5v-7a2.5 2.5 0 0 1 2.5-2.5H18a2.5 2.5 0 0 1 2.5 2.5v7a.5.5 0 0 0 .5.5h5.5a.5.5 0 0 0 .5-.5V13.54a1.25 1.25 0 0 0-.44-.952l-9.75-8.287Zm-2.915-1.523a3.25 3.25 0 0 1 4.21 0l9.75 8.287A3.25 3.25 0 0 1 29 13.54V26.5a2.5 2.5 0 0 1-2.5 2.5H21a2.5 2.5 0 0 1-2.5-2.5v-7a.5.5 0 0 0-.5-.5h-4.5a.5.5 0 0 0-.5.5v7a2.5 2.5 0 0 1-2.5 2.5h-5A2.5 2.5 0 0 1 3 26.5V13.54a3.25 3.25 0 0 1 1.145-2.476l9.75-8.287Z" />
+        </svg>
+      </div>
+
+      <div class="bottompanel__item--name">
+        Home
+      </div>
+    </div>
+
+
+    <div class="bottompanel__item " data-nav="/projects">
+      <div class="bottompanel__item--icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+          viewBox="0 0 24 24">
+          <rect x="0" y="0" width="24" height="24" fill="none" stroke="none" />
+          <path fill="currentColor"
+            d="M10 3H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zM9 9H5V5h4v4zm11-6h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zm-1 6h-4V5h4v4zm-9 4H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1zm-1 6H5v-4h4v4zm8-6c-2.206 0-4 1.794-4 4s1.794 4 4 4s4-1.794 4-4s-1.794-4-4-4zm0 6c-1.103 0-2-.897-2-2s.897-2 2-2s2 .897 2 2s-.897 2-2 2z" />
+        </svg>
+      </div>
+
+      <div class="bottompanel__item--name">
+        Projects
+      </div>
+    </div>
+
+
+    <div class="bottompanel__item" data-nav="/labels">
+      <div class="bottompanel__item--icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+          viewBox="0 0 16 16">
+          <rect x="0" y="0" width="16" height="16" fill="none" stroke="none" />
+          <path fill="currentColor" fill-rule="evenodd"
+            d="M6.427.512A1.75 1.75 0 0 1 7.664 0H13v3h3v5.335c0 .465-.185.91-.513 1.239L9.573 15.48a1.75 1.75 0 0 1-2.473 0l-2.293-2.293l-1.293-1.293l-3-3a1.75 1.75 0 0 1 0-2.475L6.428.512ZM11.5 1.5V3h-.836a1.75 1.75 0 0 0-1.237.512L3.514 9.419c-.06.06-.115.123-.165.19L1.574 7.833a.25.25 0 0 1 0-.353l5.913-5.907a.25.25 0 0 1 .177-.073H11.5ZM5.866 12.126l-1.292-1.293a.25.25 0 0 1 0-.353l5.913-5.907a.25.25 0 0 1 .177-.073H14.5v3.835a.25.25 0 0 1-.073.177L8.513 14.42a.25.25 0 0 1-.353 0l-2.294-2.293ZM12 8a1 1 0 1 0 0-2a1 1 0 0 0 0 2Z"
+            clip-rule="evenodd" />
+        </svg>
+      </div>
+
+      <div class="bottompanel__item--name">
+        Labels
+      </div>
+    </div>
+
+  </footer>
+
 </body>
 
 </html>

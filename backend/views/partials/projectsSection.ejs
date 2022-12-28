@@ -1,0 +1,68 @@
+
+<div class="profy__projects" data-section>
+
+  <div class="profy__projects__header">
+    <p class="profy__projects__header__txt">
+      Projects
+    </p>
+
+    <div data-add-item="project" title="create new project">
+      <svg xmlns="http://www.w3.org/2000/svg" width="0.88em" height="1em" preserveAspectRatio="xMidYMid meet"
+        viewBox="0 0 448 512">
+        <rect x="0" y="0" width="448" height="512" fill="none" stroke="none"></rect>
+        <path fill="currentColor"
+          d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32v144H48c-17.7 0-32 14.3-32 32s14.3 32 32 32h144v144c0 17.7 14.3 32 32 32s32-14.3 32-32V288h144c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z">
+        </path>
+      </svg>
+
+      <p>New Project</p>
+    </div>
+  </div>
+
+  <form class="newItemForm new-projectForm hidden" method="post" action="/projects/create" data-item-name="project">
+    <input type="text" name="newProjectName" maxlength="20" placeholder="new project name" required="" title="Enter valid project name">
+
+    <div class="field_empty">! Enter valid project name</div>
+
+    <div class="btns-wrapper">
+      <button type="button" data-newitem-btn-cancel> Cancel </button>
+      <button type="submit" data-newitem-btn-save> Save </button>
+    </div>
+  </form>
+
+  <div class="profy__projects__list">
+
+    <% if(pageInfo.allProjects !== null) { %>
+
+      <% for(const item of pageInfo.allProjects) { %>
+
+        <div class="project" title="<%= item.projectOverview.name %>" data-nav="/project/<%= item._id %>/overview">
+          <div class="project__name">
+            <%= item.projectOverview.name %>
+          </div>
+          <div class="project__goals">
+            <%= (item.projectOverview.goals) ? item.projectOverview.goals : " " %>
+          </div>
+    
+          <div class="project__work-progress">
+            <progress class="project__work-progress__bar" value="78" max="100"></progress>
+            <div class="project__work-progress__txt"> <span data-project-work-progress>78</span>% </div>
+          </div>
+    
+          <div class="project__due-date-wrapper">
+            📅 Due : 
+            <span data-project-due-date>
+              <%= (item.projectOverview.endDate) ? item.projectOverview.endDate : "date not set" %>
+            </span>
+          </div>
+        </div>
+
+      <% } %>
+
+    <% } %>
+
+  </div>
+
+  <%- include('./error_notify.ejs') %>
+
+</div>

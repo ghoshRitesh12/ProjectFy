@@ -1,0 +1,135 @@
+
+<section class="profy__settings" data-section>
+  <div class="profy__settings__txt">
+    <p class="profy__settings__txt-heading">
+      Profile settings
+    </p> 
+    <p class="profy__settings__txt-description">
+      Update your photo and personal details here
+    </p> 
+  </div>
+
+
+  <form class="profy__settings__personal-details" method="POST" action="" data-profile-settings-form>
+
+    <div class="details__profile-pic">
+      <p class="details__profile-pic--txt">
+        Your photo
+      </p>
+
+      <div data-pfp-and-pfpupload-wrap>
+
+        <% if(pageInfo.profilePic !== null) { %> 
+
+        <div data-details-profile-pic-wrap data-active-profile-pic="real">
+
+          <img data-details-profile-pic="real" src="<%= pageInfo.profilePic %>" 
+            alt="<%= `${pageInfo.userName.split(' ')[0]}'s profile pic` %>">
+            <!-- src="https://images.unsplash.com/photo-1590031905406-f18a426d772d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1244&q=80" alt="profile pic"> -->
+
+        </div>
+
+        <% } else { %> 
+          
+        <div data-details-profile-pic-wrap data-active-profile-pic="dummy">
+          <span data-details-profile-pic="dummy">
+            <%= `${pageInfo.userName.split(' ')[0][0]}${pageInfo.userName.split(' ')[1][0]}` %>
+          </span>
+        </div>
+
+        <% } %> 
+
+        <div class="details__profile-pic--upload-wrap">
+          <input type="file" accept="image/*" data-profile-pic-upload-field>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="details__name">
+      <div class="details__name--txt">
+        Name
+      </div>
+
+      <div data-details-name-wrap>
+        <input class="details__name--field" type="text" name="settingsName" 
+          value="<%= pageInfo.userName %>" data-settings-details-field 
+          placeholder="Full Name" readonly required/>
+
+        <section class="profile-name__change-btn">
+          <button class="profile-name__edit-btn" type="button" data-profile-name-edit-btn>
+            &#9998;
+          </button>
+          <button class="profile-name__cancel-btn" type="button" data-profile-name-cancel-btn>
+            &#10006;
+          </button>
+          <button id="profile-name-save-btn" type="submit" data-profile-name-save-btn>
+            &#10004;
+          </button>
+        </section>
+      </div>
+
+    </div> 
+
+    <div class="details__email">
+      <div class="details__email--txt">
+        Email address
+      </div>
+
+      <div data-details-email-wrap>
+        <div class="details__email--field" data-settings-details-field>
+          <%= pageInfo.userEmail %>
+          <!-- something@niqqa.com -->
+        </div>
+      </div>
+    </div>
+
+    <div class="details__delete-account">
+      <div class="details__delete-account--txt">
+        Delete Account
+      </div>
+
+      <div data-details-delete-accountBtn-wrap>
+        <p data-settings-delete-account-txt>
+          All your data will be lost once you delete your account, there is no going back. Please be certain
+        </p>
+
+        <button type="submit" data-settings-delete-account-btn>
+          Delete your account
+        </button>
+      </div>
+    </div>
+
+  </form>
+
+
+  <!-- account delete modal -->
+  <dialog data-account-delete-modal>
+    <form class="delete__account" action="/profile-settings/deleteAccount" method="post">
+      <div class="delete__account__header">
+        <p class="delete__account__header--txt"> Delete account </p>
+        <div class="delete__account__header--cancelIcon" data-account-delete-modal-close="">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 15 15">
+            <rect x="0" y="0" width="15" height="15" fill="none" stroke="none"></rect>
+            <path fill="currentColor" d="M3.64 2.27L7.5 6.13l3.84-3.84A.92.92 0 0 1 12 2a1 1 0 0 1 1 1a.9.9 0 0 1-.27.66L8.84 7.5l3.89 3.89A.9.9 0 0 1 13 12a1 1 0 0 1-1 1a.92.92 0 0 1-.69-.27L7.5 8.87l-3.85 3.85A.92.92 0 0 1 3 13a1 1 0 0 1-1-1a.9.9 0 0 1 .27-.66L6.16 7.5L2.27 3.61A.9.9 0 0 1 2 3a1 1 0 0 1 1-1c.24.003.47.1.64.27Z"></path>
+          </svg>
+        </div>
+      </div>
+
+      <div class="delete__account__description">
+        <p class="delete__account__description__txt">
+          Please be certain. Are you sure you want to delete your account ?
+        </p>
+
+        <div class="delete__account__description__btns">
+          <button type="button" data-account-delete-modal-close>Cancel</button>
+          <button type="submit">Delete</button>
+        </div>
+      </div>
+    </form>
+  </dialog>
+
+
+  <%- include('./error_notify.ejs') %>
+
+</section>
