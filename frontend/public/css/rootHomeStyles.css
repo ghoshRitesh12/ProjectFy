@@ -613,7 +613,6 @@ body ::selection {
   margin-inline: 0.5rem 1.2rem;
   isolation: isolate;
   border-radius: 50%;
-  background-color: var(--clr-sidebar-bg);
 }
 @media (min-width: 40em) {
   .profy__titlebar__account__wrapper {
@@ -631,9 +630,10 @@ body ::selection {
   transition: 0.05s ease;
   outline-offset: 0.5px;
   outline: 2px solid transparent;
+  background-color: var(--clr-sidebar-bg);
 }
 .profy__titlebar__account:hover {
-  outline: 2px solid var(--clr-logo-project);
+  outline: 2px solid var(--prim-btn-clr);
 }
 .profy__titlebar__account--img {
   display: grid;
@@ -651,6 +651,17 @@ body ::selection {
   .profy__titlebar__account--img-src {
     --size: 2.2rem ;
   }
+}
+.profy__titlebar__account--img-dummy {
+  display: grid;
+  place-items: center;
+  --size: 2.2rem;
+  width: var(--size);
+  height: var(--size);
+  pointer-events: none;
+  color: var(--clr-primary-bg);
+  font-size: 1.17rem;
+  background-color: rgb(255, 92, 146);
 }
 .profy__titlebar__account--name {
   display: block;
@@ -707,29 +718,25 @@ body ::selection {
   display: grid;
   place-items: center;
   position: relative;
-  cursor: pointer;
   border-radius: 50%;
   overflow: hidden;
-}
-.profy__titlebar__account--dropdown__info--img::after {
-  content: "";
-  position: absolute;
-  aspect-ratio: 1;
-  width: 100%;
-  background: url(../images/uploadImageIcon.svg) no-repeat center;
-  background-color: rgba(0, 0, 0, 0.3);
-  pointer-events: none;
-  transition: 0.1s ease;
-  opacity: 0;
-}
-.profy__titlebar__account--dropdown__info--img:hover::after {
-  opacity: 1;
 }
 .profy__titlebar__account--dropdown__info--img-src {
   --size: 2.5rem;
   width: var(--size);
   height: var(--size);
   pointer-events: none;
+}
+.profy__titlebar__account--dropdown__info--img-dummy {
+  display: grid;
+  place-items: center;
+  --size: 2.5rem;
+  width: var(--size);
+  height: var(--size);
+  pointer-events: none;
+  color: var(--clr-primary-bg);
+  font-size: 1.2rem;
+  background-color: rgb(255, 92, 146);
 }
 .profy__titlebar__account--dropdown__info--name {
   display: block;
@@ -744,6 +751,18 @@ body ::selection {
   overflow: hidden;
   text-overflow: ellipsis;
   cursor: text;
+}
+.profy__titlebar__account__signin {
+  display: block;
+  color: var(--clr-primary-txt);
+  font-size: 1.05rem;
+  font-weight: 500;
+  padding: 0.3em 1em;
+  border-radius: 1rem;
+  background-color: var(--clr-secondary-bg);
+  color: var(--prim-btn-clr);
+  background-color: var(--prim-btn-clr-bg);
+  cursor: pointer;
 }
 .profy__titlebar [data-account-dropdown-backdrop] {
   opacity: 0;

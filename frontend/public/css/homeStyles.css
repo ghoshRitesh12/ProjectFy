@@ -585,8 +585,8 @@ textarea {
   border-radius: 0.5rem;
   text-transform: uppercase;
   color: var(--clr-inactive-txt);
-  background-color: var(--clr-sidebar-bg);
-  border: 2px solid var(--clr-primary-bg);
+  background-color: var(--clr-secondary-bg);
+  border: 1px solid var(--clr-separator-brdr);
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -1251,7 +1251,7 @@ textarea {
 .profy__main__section--ideas--ideasContainer {
   flex: 1;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
   gap: 2.5rem 2rem;
 }
 .profy__main__section--ideas--ideasContainer .idea {
@@ -1716,6 +1716,7 @@ textarea {
     display: grid;
     grid-template-columns: repeat(3, minmax(17rem, 1fr));
     gap: 2rem;
+    margin-block: auto;
   }
 }
 @media (min-width: 64em) {
@@ -1726,9 +1727,9 @@ textarea {
 .profy__main__section--kanban .kanban-section {
   flex: 1 1;
   margin-inline: auto;
-  margin-bottom: auto;
   max-width: 20rem;
-  min-width: 17rem;
+  width: 100%;
+  margin-bottom: auto;
   font-size: 16px;
   border-radius: 0.7rem;
   transition: 0.2s ease max-height;
@@ -1738,6 +1739,9 @@ textarea {
   max-height: 2rem;
 }
 @media (min-width: 40em) {
+  .profy__main__section--kanban .kanban-section {
+    padding-bottom: 3rem;
+  }
   .profy__main__section--kanban .kanban-section.collapse {
     overflow: visible;
     max-height: -webkit-fit-content;
@@ -1825,10 +1829,13 @@ textarea {
 .profy__main__section--kanban .kanban-section[data-kanban-section=completed] [data-kanban-move-to=completed] {
   display: none;
 }
+.profy__main__section--kanban .kanban-section .kanban-list {
+  position: relative;
+  z-index: 72;
+  isolation: isolate;
+}
 .profy__main__section--kanban .kanban-section .kanban-list__item {
   position: relative;
-  isolation: isolate;
-  z-index: 72;
   margin-top: 0.7rem;
   padding: 1em;
   background-color: var(--clr-sidebar-bg);
@@ -1848,12 +1855,15 @@ textarea {
   flex-wrap: wrap;
   gap: 0.5rem;
 }
+.profy__main__section--kanban .kanban-section .kanban-list__item__head--labels:empty {
+  display: none;
+}
 .profy__main__section--kanban .kanban-section .kanban-list__item__head .kanban-item__label {
-  color: #222;
+  color: #111;
   background-color: var(--clr-label, #00aeff);
   font-size: 0.85rem;
   border-radius: 2rem;
-  padding: 0.2em 1em;
+  padding: 0.3em 1em;
   font-weight: 500;
 }
 .profy__main__section--kanban .kanban-section .kanban-list__item__head--options-wrap {
@@ -1870,9 +1880,10 @@ textarea {
   pointer-events: none;
 }
 .profy__main__section--kanban .kanban-section .kanban-list__item__head .kanban-item__options {
+  display: block;
   position: absolute;
   right: 0;
-  z-index: 82;
+  z-index: 101;
   isolation: isolate;
   margin: 0.8rem 1rem 0 0;
   padding-block: 0.3rem;
@@ -1905,7 +1916,7 @@ textarea {
 }
 .profy__main__section--kanban .kanban-section .kanban-list__item__title {
   color: var(--clr-primary-txt);
-  font-size: 1.05rem;
+  font-size: 1.1rem;
 }
 .profy__main__section--kanban .kanban-section .kanban-list__item__description {
   margin-top: 0.3rem;
@@ -1984,14 +1995,14 @@ textarea {
 .profy__main__section--kanban .edit__kanban__existing-labels {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.2rem;
   position: relative;
   margin-block: 0.2rem 0.7rem;
   padding: 0.5rem 0.7rem;
   max-width: 100%;
   width: 100%;
   overflow-x: auto;
-  background-color: var(--clr-primary-bg);
+  background-color: var(--clr-secondary-bg);
   scrollbar-width: none;
 }
 .profy__main__section--kanban .edit__kanban__existing-labels::-webkit-scrollbar {
@@ -2009,20 +2020,20 @@ textarea {
   flex-shrink: 0;
   display: flex;
   align-items: center;
-  gap: 0.3rem;
+  gap: 0.4rem;
   font-size: 0.9rem;
   padding: 0.2em 0em 0.2em 0.8em;
   border-radius: 2rem;
   overflow: hidden;
 }
 .profy__main__section--kanban .edit__kanban__existing-labels .existing-label__item--name {
-  color: #111;
+  color: #000;
   font-weight: 500;
 }
 .profy__main__section--kanban .edit__kanban__existing-labels .existing-label__item--cross {
   color: #333;
   font-size: 1rem;
-  padding: 0.2em 0.4em 0.2em 0.2em;
+  padding: 0.3em 0.4em 0.3em 0.2em;
 }
 .profy__main__section--kanban .edit__kanban [data-rest-labels-txt] {
   padding-inline: 0.7em;
@@ -2031,14 +2042,14 @@ textarea {
 .profy__main__section--kanban .edit__kanban__rest-labels {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.2rem;
   position: relative;
   margin-block: 0.2rem 0.7rem;
   padding: 0.5rem 0.7rem;
   max-width: 100%;
   width: 100%;
   overflow-x: auto;
-  background-color: var(--clr-primary-bg);
+  background-color: var(--clr-secondary-bg);
   scrollbar-width: none;
 }
 .profy__main__section--kanban .edit__kanban__rest-labels::-webkit-scrollbar {
@@ -2056,20 +2067,20 @@ textarea {
   flex-shrink: 0;
   display: flex;
   align-items: center;
-  gap: 0.3rem;
+  gap: 0.4rem;
   font-size: 0.9rem;
   padding: 0.2em 0em 0.2em 0.8em;
   border-radius: 2rem;
   overflow: hidden;
 }
 .profy__main__section--kanban .edit__kanban__rest-labels .rest-label__item--name {
-  color: #111;
+  color: #000;
   font-weight: 500;
 }
 .profy__main__section--kanban .edit__kanban__rest-labels .rest-label__item--plus {
   font-size: 1rem;
   color: #222;
-  padding: 0.2em 0.5em 0.2em 0.3em;
+  padding: 0.3em 0.5em 0.3em 0.3em;
 }
 .profy__main__section--kanban .edit__kanban__title {
   display: block;
@@ -2084,7 +2095,7 @@ textarea {
   padding: 0.4em 0.6em;
   max-width: 100%;
   width: 100%;
-  background-color: var(--clr-primary-bg);
+  background-color: var(--clr-secondary-bg);
   color: var(--clr-primary-txt);
   border: none;
   cursor: text;
@@ -2113,7 +2124,7 @@ textarea {
   max-height: 7rem;
   overflow: hidden auto;
   resize: none;
-  background-color: var(--clr-primary-bg);
+  background-color: var(--clr-secondary-bg);
   color: var(--clr-primary-txt);
   border: none;
   cursor: text;
@@ -2317,11 +2328,11 @@ textarea {
   }
 }
 .profy__home .home-project {
-  --random-clr: hsl(2 64% 60%);
   position: relative;
   isolation: isolate;
   padding: 0.6em 0.9em;
   margin-inline: 0.5rem;
+  margin-block: 0 auto;
   border-radius: 0.8rem;
   font-family: "Roboto", sans-serif;
   cursor: pointer;
@@ -2343,7 +2354,7 @@ textarea {
   pointer-events: none;
   transition: 0.3s ease;
   border-radius: 0.8rem;
-  background-color: var(--random-clr, hsl(0deg, 64%, 60%));
+  background-color: var(--clr-box, hsl(0deg, 64%, 60%));
 }
 .profy__home .home-project__name {
   font-size: clamp(1.4rem, 3vmin, 2.7rem);
@@ -2389,12 +2400,12 @@ textarea {
   background-color: #fdfdfd;
 }
 .profy__home .home-project__work-progress__bar[value]::-moz-progress-bar {
-  background-color: var(--random-clr, hsl(0deg, 64%, 60%));
+  background-color: var(--clr-box, hsl(0deg, 64%, 60%));
   border-radius: 1rem;
 }
 .profy__home .home-project__work-progress__bar[value]::-webkit-progress-value {
   border-radius: 1rem;
-  background-color: var(--random-clr, hsl(0deg, 64%, 60%));
+  background-color: var(--clr-box, hsl(0deg, 64%, 60%));
 }
 .profy__home .home-project__work-progress__txt {
   color: var(--clr-secondary-txt);
@@ -2504,6 +2515,7 @@ textarea {
   display: none;
   place-items: center;
   min-height: inherit;
+  max-height: var(--size);
   max-width: 100%;
   width: 100%;
   -o-object-fit: cover;
@@ -2514,7 +2526,7 @@ textarea {
 .profy__settings .details__profile-pic [data-details-profile-pic-wrap] [data-details-profile-pic=dummy] {
   background-color: rgb(255, 92, 146);
   color: var(--clr-primary-bg);
-  font-size: clamp(1.2rem, 3vmin, 1.5rem);
+  font-size: 1.5rem;
 }
 .profy__settings .details__profile-pic--upload-wrap [data-profile-pic-upload-field] {
   display: block;
@@ -3015,6 +3027,7 @@ textarea {
   isolation: isolate;
   padding: 0.6em 0.9em;
   margin-inline: 0.5rem;
+  margin-block: 0 auto;
   border-radius: 0.8rem;
   font-family: "Roboto", sans-serif;
   cursor: pointer;
