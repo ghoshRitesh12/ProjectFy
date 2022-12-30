@@ -1,4 +1,4 @@
-import { $, $$, addGlobalEventListener } from './utility.js';
+import { $, $$, addGlobalEventListener, getIdeaDate } from './utility.js';
 
 //----<profy_ideas form_section>
 addGlobalEventListener('input', '[data-ideasForm-imgUrl]', e => {
@@ -20,12 +20,10 @@ addGlobalEventListener('click', '.reveal', e => {
 
 // idea img upload 
 addGlobalEventListener('change', '[data-ideasForm-imgUpload]', e => {
-  $('.ideas-form').setAttribute('enctype', 'multipart/form-data');
   const file = e.target.files[0];
   $('.ideas-form__imgUrl').classList.toggle('notouch', file);
 
   if(file == null) {
-    $('.ideas-form').removeAttribute('enctype');
     $('[data-imgUpload-preview-wrap]').style.display = null;
     e.target.value = '';
     return;
@@ -54,6 +52,94 @@ addGlobalEventListener('click', '[data-idea-imgUpload-preview-closebtn]', e => {
   $('[data-imgUpload-preview-src]').setAttribute('src', '');
   $('[data-imgUpload-preview-src]').setAttribute('alt', '');
   $('.ideas-form__imgUrl').classList.remove('notouch');
+})
+
+
+const getUploadedImgUrl = async (uploadedFile) => {
+  const API_KEY = '961614778299451';
+  const CLOUD_NAME = 'dkyd3fcba';
+  const cloudinaryUrl = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
+  try {
+    const signatureResponse = await fetch('/api/v1/get-signature', {
+      method: 'POST'
+    });
+    const parsedData = await signatureResponse.json();
+
+    const formData = new FormData();
+    formData.append('file', uploadedFile);
+    formData.append('api_key', API_KEY);
+    formData.append('signature', parsedData.signature);
+    formData.append('timestamp', parsedData.timestamp);
+
+    const cloudinaryResponse = await fetch(cloudinaryUrl, {
+      method: 'POST',
+      body: formData
+    });
+
+    const cloudData = await cloudinaryResponse.json();
+    return {
+      url: cloudData.secure_url,
+      imageId: cloudData.public_id
+    };
+
+  } catch (err) {
+    console.log(err);    
+  }
+}
+// create idea *form submit*
+addGlobalEventListener('submit', '.ideas-form', async e => {
+  e.preventDefault();
+  $('.ideas-form__submit--btn').textContent = '...Creating idea';
+  const url = `${location.href}${e.target.getAttribute('action')}`;
+
+  const creationDate = getIdeaDate();
+  const ideaDescription = $('[data-ideasForm-description]').value;
+  const isImgAUrl = ($('[data-ideasForm-imgUpload]').files.length <= 0) ? true : false;
+  const imgUrl = $('[data-ideasForm-imgUrl]').value;
+
+  const ideaInfo = {
+    creationDate,
+    ideaDescription,
+    isImgAUrl,
+    imgUrl,
+    imgUpload: null,
+    hostedImgId: null
+  }
+
+  try {
+    if(!isImgAUrl) {
+      const file = $('[data-ideasForm-imgUpload]').files[0];
+      const imgUploadInfo = await getUploadedImgUrl(file)
+
+      ideaInfo.imgUrl = null;
+      ideaInfo.imgUpload = imgUploadInfo.url;
+      ideaInfo.hostedImgId = imgUploadInfo.imageId;
+    }
+
+    const resp = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(ideaInfo)
+    })
+
+    if(resp.redirected === true) {
+      location.reload();
+      return;
+    } 
+
+    $('.ideas-form__submit--btn').textContent = 'Create idea';
+
+    const data = resp && (await resp.json());
+    if(data.status !== 'ok') {
+      $('[data-error-notify-msg]').textContent = data.msg;
+      $('.error_notify').classList.add('show');
+      return;
+    }
+    location.reload();
+
+  } catch (error) {
+    console.log(error);
+  }
 })
 
 //----</profy_ideas form_section>
@@ -87,20 +173,21 @@ addGlobalEventListener('click', '[data-idea-options="edit"]', e => {
   const ideaDesc = ideaEl.querySelector('[data-idea-description]').innerText;
   $('[data-idea-edit-description]').value = ideaDesc;
 
+  const formAction = `${location.href}/edit/${ideaEl.dataset.ideaId}`;
+  $('.edit__idea').setAttribute('action', formAction);
+
   const ideaImg = ideaEl.querySelector('[data-idea-imgUrl]');
   const ideaImgVal = ideaImg.dataset.ideaImgurl;
   const ideaImgType = {
     srcUrl() { 
       $('.edit__idea__img').classList.remove('upload');
       $('.edit__idea__img').classList.add('url');
-      $('.edit__idea').removeAttribute('enctype');
       $('[data-idea-edit-imgUrl]').value = ideaImg.getAttribute('src');
     },
     srcUpload() {
       $('.edit__idea__img').classList.remove('url');
       $('.edit__idea__img').classList.add('upload');
-      $('[data-idea-edit-imgUpload-preview]').classList.remove('hide');
-      $('.edit__idea').setAttribute('enctype', 'multipart/form-data');
+      // $('[data-idea-edit-imgUpload-preview]').classList.remove('hide');
       $('[data-idea-edit-imgUpload]').setAttribute('src', ideaImg.getAttribute('src'));
     }
   }
@@ -115,40 +202,102 @@ addGlobalEventListener('click', '[data-idea-edit-modal-close]', e => {
   $('[data-idea-edit-imgUrl]').value = '';
   $('[data-idea-edit-imgUpload]').setAttribute('src','');
   
+  $('.edit__idea').setAttribute('action', '');
   document.body.dataset.scrolly = 'true';
   $('[data-idea-edit-modal]').close();
 })
 
-// close edit preview img
-addGlobalEventListener('click', '[data-idea-edit-imgUpload-preview-closebtn]', e => {
-  const parentEl = e.target.parentElement;
-  parentEl.classList.add('hide');
+// edit idea *form submit*
+addGlobalEventListener('submit', '.edit__idea', async e => {
+  e.preventDefault();
+  const url = e.target.getAttribute('action');
+  const ideaDescription = $('[data-idea-edit-description]').value;
+  const imgUrlValue = $('[data-idea-edit-imgurl]').value;
+  const imgUrl = imgUrlValue ? imgUrlValue : null;
 
-  // upload new img after closing existing
-  const fileInput = parentEl.nextElementSibling;
-  fileInput.value = '';
-  fileInput.classList.remove('notouch');
-  fileInput.setAttribute('required', '');
-})
-
-// idea edit img upload
-addGlobalEventListener('change', '[data-idea-edit-imgUpload-btn]', e => {
-  const file = e.target.files[0];
-  if(file == null) {
-    $('[data-idea-edit-imgUpload-preview]').classList.add('hide'); 
-    e.target.value = '';
-    return;
+  const ideaInfo = {
+    ideaDescription,
+    imgUrl
   }
+
+  try {
+    const resp = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(ideaInfo)
+    })
   
-  $('[data-idea-edit-imgUpload-preview]').classList.remove('hide'); 
-  const reader = new FileReader();
-  reader.addEventListener('load', e => $('[data-idea-edit-imgUpload]').setAttribute('src', e.target.result))
-  reader.readAsDataURL(file);
+    if(resp.redirected === true) {
+      location.reload();
+      return;
+    } 
+  
+    const data = resp && (await resp.json());
+    if(data.status !== 'ok') {
+      $('[data-error-notify-msg]').textContent = data.msg;
+      $('.error_notify').classList.add('show');
+      return;
+    }
+    location.reload(); 
+  } catch (err) {
+    console.log(err);
+  }
 })
+
+
 
 // idea delete option
-addGlobalEventListener('click', '[data-idea-options="delete"]', e => $('[data-idea-delete-modal]').showModal())
-addGlobalEventListener('click', '[data-idea-delete-modal-close]', e => $('[data-idea-delete-modal]').close())
+addGlobalEventListener('click', '[data-idea-options="delete"]', e => {
+  const ideaItem = e.target.closest('.idea');
+  const ideaItemId = ideaItem.dataset.ideaId;
+  const formAction = `${location.href}/delete/${ideaItemId}`;
+  $('.delete__idea').setAttribute('action', formAction);
+
+  console.log(ideaItemId);
+
+  document.body.dataset.scrolly = 'false';
+  $('[data-idea-delete-modal]').showModal();
+})
+addGlobalEventListener('click', '[data-idea-delete-modal-close]', e =>  {
+  $('.delete__idea').setAttribute('action', '');
+
+  document.body.dataset.scrolly = 'true';
+  $('[data-idea-delete-modal]').close()
+})
+
+// delete idea *form submit*
+addGlobalEventListener('submit', '.delete__idea', async e => {
+  e.preventDefault();
+  const url = e.target.getAttribute('action');
+
+  $('.delete__idea__description__btns [type="submit"]').textContent = '...Deleting idea';
+
+  try {
+    const resp = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+    })
+
+    if(resp.redirected === true) {
+      location.reload();
+      return;
+    } 
+
+    $('.delete__idea__description__btns [type="submit"]').textContent = 'Delete';
+
+    const data = resp && (await resp.json());
+    if(data.status !== 'ok') {
+      $('[data-error-notify-msg]').textContent = data.msg;
+      $('.error_notify').classList.add('show');
+      return;
+    }
+    location.reload();
+
+  } catch (err) {
+    console.log(err)
+  }
+})
 
 //----</profy_ideas idea_section>
 
+export { getUploadedImgUrl };

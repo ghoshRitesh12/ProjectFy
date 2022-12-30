@@ -47,9 +47,14 @@ addGlobalEventListener('click', '[data-kanban-move-to]', async e => {
       location.reload();
       return;
     } 
-    const data = await resp.json();
-    if(data.redirectTo == null) return;
-    location.href = data.redirectTo;
+
+    const data = resp && (await resp.json());
+    if(data.status !== 'ok') {
+      $('[data-error-notify-msg]').textContent = data.msg;
+      $('.error_notify').classList.add('show');
+      return;
+    }
+    location.reload();
 
   } catch (err) {
     console.log(err)
@@ -65,13 +70,15 @@ addGlobalEventListener('click', '[data-create-kanban]', async e => {
   $('[data-rest-labels-txt]').innerText = 'All Labels';
 
   const allLabels = [...$$('[data-label-list-item]')].map(j => { 
-    return { 'text': j.innerText, 'el': j } 
+    return { 'text': j.innerText, 'el': j, 'id': j.dataset.labelId } 
   });
+
   for(const i of allLabels) {
     const labelColor = getComputedStyle(i.el).getPropertyValue('--rndm-clr');
     const restLabel = $('#template_rest-label').content.cloneNode(true).children[0];
     restLabel.style.setProperty('--clr-rest-label', labelColor);
     restLabel.querySelector('.rest-label__item--name').textContent = i.text;
+    restLabel.setAttribute('data-rest-label-id', i.id);
     $('.edit__kanban__rest-labels').append(restLabel);
   }
 
@@ -89,29 +96,39 @@ addGlobalEventListener('click', '[data-kanban-item-option="edit"]', async e => {
   $('[data-rest-labels-txt]').innerText = 'Other Labels';
 
   const allLabels = [...$$('[data-label-list-item]')].map(j => { 
-    return { 'text': j.innerText, 'el': j } 
+    return { 'text': j.innerText, 'el': j, 'id': j.dataset.labelId } 
   });
   const itemLabels = [...kanbanItem.querySelectorAll('.kanban-item__label')].map(i => { 
-    return { 'text': i.textContent, 'el': i } 
+    return { 'text': i.textContent, 'el': i, 'id': i.dataset.kanbanLabelId } 
   });
+  
+  const simpleItemLabels = itemLabels.map(i => i.text.trim());
   const restLabels = allLabels.filter(item => {
-    const iL = itemLabels.map(i => i.text.trim());
-    if(!iL.includes(item.text.trim())) 
-      return { 'text': item.textContent, 'el': item }
+    if(!simpleItemLabels.includes(item.text.trim())) 
+      return { 'el': item }
   });
 
+
+  // for Existing labels
   for(const i of itemLabels) {
     const labelColor = getComputedStyle(i.el).getPropertyValue('--clr-label') || '#00AEFF';
+
     const existingLabel = $('#template_existing-label').content.cloneNode(true).children[0];
     existingLabel.style.setProperty('--clr-existing-label', labelColor);
     existingLabel.querySelector('.existing-label__item--name').textContent = i.text;
+    existingLabel.setAttribute('data-existing-label-id', i.id);
+
     $('.edit__kanban__existing-labels').append(existingLabel);
   }
+  // for Other Labels
   for(const i of restLabels) {
     const labelColor = getComputedStyle(i.el).getPropertyValue('--rndm-clr');
+
     const restLabel = $('#template_rest-label').content.cloneNode(true).children[0];
     restLabel.style.setProperty('--clr-rest-label', labelColor);
     restLabel.querySelector('.rest-label__item--name').textContent = i.text;
+    restLabel.setAttribute('data-rest-label-id', i.id);
+
     $('.edit__kanban__rest-labels').append(restLabel);
   }
 
@@ -138,12 +155,14 @@ addGlobalEventListener('click', '[data-kanban-edit-modal-close]', e => {
 addGlobalEventListener('click', '[data-kanban-edit-existing-label-delete]',
 e => {
   const currentLabel = e.target.parentElement;
+  const currentLabelId = currentLabel.dataset.existingLabelId;
   const currentLabelName = e.target.previousElementSibling.innerText;
   const labelColor = getComputedStyle(currentLabel).getPropertyValue('--clr-existing-label') || '#00AEFF';
   
   const restLabel = $('#template_rest-label').content.cloneNode(true).children[0];
   restLabel.querySelector('.rest-label__item--name').innerText = currentLabelName;
   restLabel.style.setProperty('--clr-rest-label', labelColor);
+  restLabel.setAttribute('data-rest-label-id', currentLabelId);
   $('.edit__kanban__rest-labels').append(restLabel);
 
   restLabel.parentElement.scrollLeft = restLabel.parentElement.scrollWidth;
@@ -153,12 +172,14 @@ e => {
 addGlobalEventListener('click', '[data-kanban-edit-rest-label-add]',
 e => {
   const currentLabel = e.target.parentElement;
+  const currentLabelId = currentLabel.dataset.restLabelId;
   const currentLabelName = e.target.previousElementSibling.innerText;
   const labelColor = getComputedStyle(currentLabel).getPropertyValue('--clr-rest-label') || '#00AEFF';
 
   const existingLabel = $('#template_existing-label').content.cloneNode(true).children[0];
   existingLabel.querySelector('.existing-label__item--name').innerText = currentLabelName;
   existingLabel.style.setProperty('--clr-existing-label', labelColor);
+  existingLabel.setAttribute('data-existing-label-id', currentLabelId);
   $('.edit__kanban__existing-labels').append(existingLabel);
 
   existingLabel.parentElement.scrollLeft = existingLabel.parentElement.scrollWidth;
@@ -192,10 +213,7 @@ addGlobalEventListener('submit', '.edit__kanban', async e => {
   const kanbanTitle = e.target.querySelector('[data-kanban-edit-title]').value.trim();
   const kanbanDescription = e.target.querySelector('[data-kanban-edit-description]').value.trim();
   const kanbanLabels = [...$$('.existing-label__item')].map(i => {
-    return {
-      name: i.querySelector('.existing-label__item--name').textContent.trim(),
-      color: getComputedStyle(i).getPropertyValue('--clr-existing-label')
-    }
+    return `${i.dataset.existingLabelId}`
   })
   const kanbanItemInfo = {
     kanbanTitle,
@@ -216,9 +234,14 @@ addGlobalEventListener('submit', '.edit__kanban', async e => {
       location.reload();
       return;
     } 
-    const data = await resp.json();
-    if(data.redirectTo == null) return;
-    location.href = data.redirectTo;
+
+    const data = resp && (await resp.json());
+    if(data.status !== 'ok') {
+      $('[data-error-notify-msg]').textContent = data.msg;
+      $('.error_notify').classList.add('show');
+      return;
+    }
+    location.reload();
 
   } catch (err) {
     console.log(err.message);
@@ -238,11 +261,17 @@ addGlobalEventListener('submit', '.delete__kanban', async e => {
       location.reload();
       return;
     } 
-    const data = await resp.json();
-    if(data.redirectTo == null) return;
-    location.href = data.redirectTo;
+
+    const data = resp && (await resp.json());
+    if(data.status !== 'ok') {
+      $('[data-error-notify-msg]').textContent = data.msg;
+      $('.error_notify').classList.add('show');
+      return;
+    }
+    location.reload();
 
   } catch (err) {
+    location.reload();
     console.log(err.message);
   }
 })

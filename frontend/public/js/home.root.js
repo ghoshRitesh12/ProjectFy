@@ -1,11 +1,12 @@
 import { 
   $, $$, addGlobalEventListener, randomBoxClr, 
-  greetUser, getHomeDate  
+  greetUser, getHomeDate, convertDbDate  
 } from './utility.js';
 
+import { getUploadedImgUrl } from './home.ideas.js'; 
 
 // account
-$('[data-account]').addEventListener('click', e => {
+addGlobalEventListener('click', '[data-account]', e => {
   e.target.blur();
   if(!$('[data-account-dropdown]').classList.contains('open')) {
     $('[data-account-dropdown]').classList.add('open');
@@ -431,6 +432,48 @@ addGlobalEventListener('submit', '.delete__account', async e => {
   }
 })
 
+addGlobalEventListener('change', '[data-profile-pic-upload-field]', async e => {
+  const file = e.target.files[0];
+  const url = `${location.href}/profile-pic`
+
+  if(file == null) {
+    e.target.value = '';
+    return;
+  }
+
+  const imgUploadInfo = await getUploadedImgUrl(file);
+  const profilePicInfo = {
+    picUrl: imgUploadInfo.url,
+    picId: imgUploadInfo.imageId
+  }
+
+  try {
+    const resp = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(profilePicInfo)
+    })
+
+    if(resp.redirected === true) {
+      location.reload();
+      return;
+    } 
+
+    const data = resp && (await resp.json());
+    if(data.status !== 'ok') {
+      $('[data-error-notify-msg]').textContent = data.msg;
+      $('.error_notify').classList.add('show');
+      return;
+    }
+    location.reload();
+    
+  } catch (err) {
+    console.log(err); 
+  }
+})
+
 //----</profile_settings section>
 
 
@@ -511,6 +554,12 @@ window.addEventListener('load', () => {
   if($('.profy__home') != null) {
     $('[data-home-greet-time]').textContent = getHomeDate();
     $('[data-home-greet-msg]').textContent = `${greetUser()}, `;
+
+    for(const item of $$('.home-project')) {
+      const clr = randomBoxClr();
+      item.style.setProperty('--clr-box', clr);
+    }
+    
   }
 
   if($('.profy__projects') !== null) {
@@ -519,6 +568,7 @@ window.addEventListener('load', () => {
       item.style.setProperty('--clr-box', clr);
     }
   }
+
 
 
 })

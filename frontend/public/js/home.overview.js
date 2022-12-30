@@ -109,10 +109,13 @@ window.addEventListener('load', () => {
 
   if($('.profy__main__section--overview') !== null) {
     // Work Completed: complete-45 total-70
-    const wC = workCompleted(78, 100);
-    $('[data-work-progress-value]').innerText = wC.work;
-    $('.circleThumb--work').style.setProperty('--value', wC.work);
-    $('[data-work-progress-daysLeft]').innerText = wC.tasks;
+    const completedTasks = $('[data-work-progress]').dataset.workProgress.split(",")[0];
+    const totalTasks = $('[data-work-progress]').dataset.workProgress.split(",")[1];
+
+    const work = workCompleted(completedTasks, totalTasks);
+    $('[data-work-progress-value]').innerText = work.done;
+    $('.circleThumb--work').style.setProperty('--value', work.done);
+    $('[data-work-progress-daysLeft]').innerText = work.left;
   }
 })
 

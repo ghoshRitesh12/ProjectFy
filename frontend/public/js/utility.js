@@ -14,13 +14,13 @@ const randomBoxClr = () => {
 }
 
 
-const elaspedTime = (endDate, startDate) => {
+const elaspedTime = (endDate=0, startDate) => {
   const DAY_IN_MS = (24 * 60 * 60 * 1000);
   const todaysDate = `${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDate()}`;
   const endDInMs = new Date(endDate).getTime();
   const startDInMs = new Date(startDate).getTime();
   let todayDInMs = new Date(todaysDate).getTime();
-  // console.log('Start Date:', startDate,'\nEnd Date:', endDate);
+
 
   const totalTimeDiff = endDInMs - startDInMs;
   const totalDays = totalTimeDiff / DAY_IN_MS;
@@ -30,7 +30,8 @@ const elaspedTime = (endDate, startDate) => {
   
   const currentTimeDiff = todayDInMs - startDInMs;
   const daysPassed = currentTimeDiff / DAY_IN_MS;
-  const daysLeft = totalDays - daysPassed;
+  let daysLeft = totalDays - daysPassed;
+  daysLeft = isNaN(daysLeft) ? 0 : daysLeft;
   
   let timeElasped = Math.round((daysPassed / totalDays) * 100);
   timeElasped = isNaN(timeElasped) ? 100 : timeElasped;
@@ -52,8 +53,8 @@ const workCompleted = (completedTasks, totalTasks) => {
   const tasksLeft = totalTasks - completedTasks;
 
   return {
-    work: workDone,
-    tasks: tasksLeft
+    done: workDone,
+    left: tasksLeft
   };
 }
 
@@ -63,8 +64,9 @@ function greetUser() {
 
   if (hour < 12) return 'Good Morning 🌞';
   else if (hour >= 12 && hour <= 16) return 'Good Afternoon 🌵';
-  else if (hour >= 16 && hour <= 24) return 'Good Evening 🌃';
+  else if (hour >= 16 && hour <= 24) return 'Good Evening 🌆';
 }
+
 
 function getHomeDate() {
   const days = [
@@ -80,11 +82,23 @@ function getHomeDate() {
   return `${days[d.getDay()]}, ${months[d.getMonth()]} ${d.getDate()}`;
 }
 
-const convertDbDate = date => `${date.split('-').reverse().join('-').replace('-', '.')}`;
+
+function getIdeaDate() {
+  const months = [
+    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
+    'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'
+  ];
+
+  const d = new Date();
+  return `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+}
+
+
+const convertDbDate = date => `${date.split('-').reverse().join('-')}`;
 
 export { 
   $, $$, addGlobalEventListener, 
   randomBoxClr, elaspedTime, workCompleted, 
-  greetUser, getHomeDate, convertDbDate
+  greetUser, getHomeDate, convertDbDate, getIdeaDate
 };
 
