@@ -35,28 +35,38 @@
   </section>
 
   <section class="profy__titlebar__account__wrapper">
-    <div class="profy__titlebar__account" role="button" tabindex="-1" data-account>
+
+    <% if(pageInfo.userName !== null) { %>
+
+    <div class="profy__titlebar__account" role="button" data-account>
       <div class="profy__titlebar__account--img">
-        <img class="profy__titlebar__account--img-src"
-          src='https://yt3.ggpht.com/pKWFpweWfKOduyYR1zUosjzpMiudCx_rb8AKJdBLVOtYkQi4xSrtkDoQ6v7aQtkscj7mEV6S=s88-c-k-c0x00ffffff-no-rj-mo' />
+        <% if(pageInfo.profilePic !== null) { %> 
+          <img class="profy__titlebar__account--img-src"
+          src='<%= pageInfo.profilePic %>' alt="titlebar profile pic"/>
+        <% } else { %> 
+          <div class="profy__titlebar__account--img-dummy">
+            <%= `${pageInfo.userName.split(' ')[0][0]}` %>
+          </div>
+        <% } %> 
+        <!-- https://yt3.ggpht.com/pKWFpweWfKOduyYR1zUosjzpMiudCx_rb8AKJdBLVOtYkQi4xSrtkDoQ6v7aQtkscj7mEV6S=s88-c-k-c0x00ffffff-no-rj-mo -->
       </div>
-      <!-- <div class="profy__titlebar__account--name">
-        <# if(!pageInfo.userName) { %>
-          login button
-        <# } %>
-      </div> -->
     </div>
-
-
+  
     <!-- accounts dropdown -->
     <div class="profy__titlebar__account--dropdown" data-account-dropdown>
       <div class="profy__titlebar__account--dropdown__info">
         <div class="profy__titlebar__account--dropdown__info--img">
-          <img class="profy__titlebar__account--dropdown__info--img-src"
-            src='https://yt3.ggpht.com/pKWFpweWfKOduyYR1zUosjzpMiudCx_rb8AKJdBLVOtYkQi4xSrtkDoQ6v7aQtkscj7mEV6S=s88-c-k-c0x00ffffff-no-rj-mo' />
-        </div>
 
-        <!-- <input type="file" accept="image/*" name="profileImage"> -->
+          <% if(pageInfo.profilePic !== null) { %> 
+            <img class="profy__titlebar__account--dropdown__info--img-src"
+              src='<%= pageInfo.profilePic %>' alt="dropdown profile pic"/>
+          <% } else { %> 
+            <div class="profy__titlebar__account--dropdown__info--img-dummy">
+              <%= `${pageInfo.userName.split(' ')[0][0]}` %>
+            </div>
+          <% } %> 
+
+        </div>
 
         <div class="profy__titlebar__account--dropdown__info--name">
           <%= pageInfo.userName %>
@@ -128,6 +138,14 @@
 
     </div>
     <div aria-hidden="true" aria-label="accountDropdownBackdrop" data-account-dropdown-backdrop></div>
+
+    <% } else { %>
+
+    <div class="profy__titlebar__account__signin" data-nav="/signin">
+      Sign in
+    </div>
+
+    <% } %>
 
   </section>
 

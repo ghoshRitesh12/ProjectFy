@@ -1,3 +1,4 @@
+<% const dueProjects = (pageInfo.dueProjects !== null) ? pageInfo.dueProjects : null %>
 
 <section class="profy__home" data-section>
   <div class="profy__home__greet">
@@ -22,105 +23,37 @@
 
   <div class="profy__home__project-list">
 
-    <div class="home-project">
-      <div class="home-project__name">
-        Swinging Utopia
-      </div>
-      <div class="home-project__goals">
-        The main focus of this project is to test something
-        that u have to do by yourself. Lorem ipsum dolor sit
-        amet consectetur adipisicing elit. Iure, provident?
-      </div>
+    <% if(dueProjects !== null) %> 
 
-      <div class="home-project__work-progress">
-        <progress class="home-project__work-progress__bar" value="40" max="100"></progress>
-        <div class="home-project__work-progress__txt"> <span data-home-project-work-progress>40</span>% </div>
-      </div>
+      <% for(const item of dueProjects) { %>
+        <% const completed = item.projectOverview.completedTasks; %>
+        <% const total = item.projectOverview.totalTasks; %>
+        <% let workDone = Math.round((completed / total) * 100); %>
+        <% workDone = isFinite(workDone) ? workDone : 0; %>
 
-      <div class="home-project__due-date-wrapper">
-        📅 Due : <span data-home-project-due-date>30.12.2022</span>
-      </div>
-    </div>
+        <div class="home-project" title="<%= item.projectOverview.name %>" data-nav="/project/<%= item._id %>/overview">
+          <div class="home-project__name">
+            <%= item.projectOverview.name %>
+          </div>
+          <div class="home-project__goals">
+            <%= (item.projectOverview.goals) ? item.projectOverview.goals : " " %>
+          </div>
+    
+          <div class="home-project__work-progress">
+            <progress class="home-project__work-progress__bar" value="<%= workDone %>" max="100"></progress>
+            <div class="home-project__work-progress__txt"> <span data-home-project-work-progress><%= workDone %></span>% </div>
+          </div>
+    
+          <div class="home-project__due-date-wrapper">
+            📅 Due : &nbsp;
+              <span data-home-project-due-date>
+                <% const date = (item.projectOverview.endDate) ? item.projectOverview.endDate : "date not set" %>
+                <%= (date !== 'date not set') ? `${date.split('-').reverse().join('-')}` : date %>
+              </span>
+          </div>
+        </div>
 
-    <div class="home-project">
-      <div class="home-project__name">
-        abfafa lnakld
-      </div>
-      <div class="home-project__goals">
-        The main focus of this project is to test something
-        that u have to do by yourself. Lorem ipsum dolor sit
-        amet consectetur adipisicing elit. Iure, provident?
-      </div>
-
-      <div class="home-project__work-progress">
-        <progress class="home-project__work-progress__bar" value="40" max="100"></progress>
-        <div class="home-project__work-progress__txt"> <span data-home-project-work-progress>40</span>% </div>
-      </div>
-
-      <div class="home-project__due-date-wrapper">
-        📅 Due : <span data-home-project-due-date>30.12.2022</span>
-      </div>
-    </div>
-
-    <div class="home-project">
-      <div class="home-project__name">
-        Addressing home
-      </div>
-      <div class="home-project__goals">
-        The main focus of this project is to test something
-        that u have to do by yourself. Lorem ipsum dolor sit
-        amet consectetur adipisicing elit. Iure, provident?
-      </div>
-
-      <div class="home-project__work-progress">
-        <progress class="home-project__work-progress__bar" value="40" max="100"></progress>
-        <div class="home-project__work-progress__txt"> <span data-home-project-work-progress>40</span>% </div>
-      </div>
-
-      <div class="home-project__due-date-wrapper">
-        📅 Due : <span data-home-project-due-date>30.12.2022</span>
-      </div>
-    </div>
-
-    <div class="home-project">
-      <div class="home-project__name">
-        Bily Nas
-      </div>
-      <div class="home-project__goals">
-        The main focus of this project is to test something
-        that u have to do by yourself. Lorem ipsum dolor sit
-        amet consectetur adipisicing elit. Iure, provident?
-      </div>
-
-      <div class="home-project__work-progress">
-        <progress class="home-project__work-progress__bar" value="40" max="100"></progress>
-        <div class="home-project__work-progress__txt"> <span data-home-project-work-progress>40</span>% </div>
-      </div>
-
-      <div class="home-project__due-date-wrapper">
-        📅 Due : <span data-home-project-due-date>30.12.2022</span>
-      </div>
-    </div>
-
-    <div class="home-project">
-      <div class="home-project__name">
-        XD
-      </div>
-      <div class="home-project__goals">
-        The main focus of this project is to test something
-        that u have to do by yourself. Lorem ipsum dolor sit
-        amet consectetur adipisicing elit. Iure, provident?
-      </div>
-
-      <div class="home-project__work-progress">
-        <progress class="home-project__work-progress__bar" value="40" max="100"></progress>
-        <div class="home-project__work-progress__txt"> <span data-home-project-work-progress>40</span>% </div>
-      </div>
-
-      <div class="home-project__due-date-wrapper">
-        📅 Due : <span data-home-project-due-date>30.12.2022</span>
-      </div>
-    </div>
+      <% } %>
 
   </div>
 

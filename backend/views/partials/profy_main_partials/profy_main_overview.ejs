@@ -144,7 +144,8 @@
           </svg>
         </div>
 
-        <section data-work-progress>
+        <section 
+          data-work-progress="<%=`${project.projectOverview.completedTasks}, ${project.projectOverview.totalTasks}`%>">
           <div>
             ≈ <span data-work-progress-value>0</span> %
           </div>

@@ -35,6 +35,11 @@
     <% if(pageInfo.allProjects !== null) { %>
 
       <% for(const item of pageInfo.allProjects) { %>
+        <% const completed = item.projectOverview.completedTasks; %>
+        <% const total = item.projectOverview.totalTasks; %>
+        <% let workDone = Math.round((completed / total) * 100); %>
+        <% workDone = isFinite(workDone) ? workDone : 0; %>
+
 
         <div class="project" title="<%= item.projectOverview.name %>" data-nav="/project/<%= item._id %>/overview">
           <div class="project__name">
@@ -45,14 +50,15 @@
           </div>
     
           <div class="project__work-progress">
-            <progress class="project__work-progress__bar" value="78" max="100"></progress>
-            <div class="project__work-progress__txt"> <span data-project-work-progress>78</span>% </div>
+            <progress class="project__work-progress__bar" value="<%= workDone %>" max="100"></progress>
+            <div class="project__work-progress__txt"> <span data-project-work-progress><%= workDone %></span>% </div>
           </div>
     
           <div class="project__due-date-wrapper">
-            📅 Due : 
+            📅 Due : &nbsp;
             <span data-project-due-date>
-              <%= (item.projectOverview.endDate) ? item.projectOverview.endDate : "date not set" %>
+              <% const date = (item.projectOverview.endDate) ? item.projectOverview.endDate : "date not set" %>
+              <%= (date !== 'date not set') ? `${date.split('-').reverse().join('-')}` : date %>
             </span>
           </div>
         </div>

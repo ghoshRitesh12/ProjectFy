@@ -23,11 +23,11 @@
       Organize your ideas in one place with description and illustrations
     </section>
 
-    <form class="ideas-form" action="/ideas/create" method="post">
+    <form class="ideas-form" action="/create" method="post">
 
       <div class="ideas-form__description">
         <textarea class="ideas-form__description--field" required placeholder="your idea's description"
-          name="ideaDescription"></textarea>
+          data-ideasForm-description name="ideaDescription"></textarea>
       </div>
 
       <div class="ideas-form__imgUrl">
@@ -72,7 +72,7 @@
 
       <% for(const item of projectIdeas) { %>
 
-        <section class="idea">
+        <section class="idea" data-idea-id="<%= item._id %>">
           <section class="idea__options--wrap">
             <div class="idea__options--icon" data-idea-options-icon>
               <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
@@ -104,7 +104,7 @@
             <% if(item.isImgAUrl === false) { %>
 
               <img class="idea__img--src" data-idea-imgUrl="srcUpload"
-              src="<%= item.imgUpload  %>" alt="image">
+              src="<%= item.imgUpload  %>" alt="image" data-img-upload-id="<%= item.hostedImgId  %>">
 
             <% } else { %>
 
@@ -122,8 +122,10 @@
 
     <% } %>
 
+
+
     <dialog data-idea-edit-modal>
-      <form class="edit__idea" action="/edit/627547254" method="post">
+      <form class="edit__idea" action="" method="post">
         <div class="edit__idea__header">
           <p class="edit__idea__header--txt"> Edit idea </p>
           <div class="edit__idea__header--cancelIcon" data-idea-edit-modal-close>
@@ -151,18 +153,8 @@
               <img class="edit__idea__img--upload--preview--src" src="" alt="edit image preview"
                 data-idea-edit-imgUpload>
 
-              <div data-idea-edit-imgUpload-preview-closebtn>
-                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
-                  preserveAspectRatio="xMidYMid meet" viewBox="0 0 15 15">
-                  <rect x="0" y="0" width="15" height="15" fill="none" stroke="none" />
-                  <path fill="currentColor"
-                    d="M3.64 2.27L7.5 6.13l3.84-3.84A.92.92 0 0 1 12 2a1 1 0 0 1 1 1a.9.9 0 0 1-.27.66L8.84 7.5l3.89 3.89A.9.9 0 0 1 13 12a1 1 0 0 1-1 1a.92.92 0 0 1-.69-.27L7.5 8.87l-3.85 3.85A.92.92 0 0 1 3 13a1 1 0 0 1-1-1a.9.9 0 0 1 .27-.66L6.16 7.5L2.27 3.61A.9.9 0 0 1 2 3a1 1 0 0 1 1-1c.24.003.47.1.64.27Z" />
-                </svg>
-              </div>
             </div>
 
-            <input data-idea-edit-imgUpload-btn class="edit__idea__img--upload--btn notouch" type="file" name=""
-              accept="image/*">
           </div>
         </section>
 
@@ -176,7 +168,7 @@
     </dialog>
 
     <dialog data-idea-delete-modal>
-      <form class="delete__idea" action="/delete/idea" method="post">
+      <form class="delete__idea" action="" method="post">
         <div class="delete__idea__header">
           <p class="delete__idea__header--txt"> Delete idea </p>
           <div class="delete__idea__header--cancelIcon" data-idea-delete-modal-close>
