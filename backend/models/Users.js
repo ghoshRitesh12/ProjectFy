@@ -11,7 +11,7 @@ const labelsObj = {
 }
 
 const userSchema = new mongoose.Schema({
-  name: {
+  name: { 
     type: String,
     trim: true,
     required: true
@@ -31,18 +31,11 @@ const userSchema = new mongoose.Schema({
     immutable: true,
     unique: true
   },
-  password: {
-    type: String,
-    trim: true,
-    required: true
-  },
-  refreshToken : {
-    type: String, 
-    trim: true,
-    default: ""
-  },
+  password: { type: String, trim: true, required: true },
+  refreshToken : { type: String, trim: true, default: "" },
   verified:  { type: Boolean, default: false },
   profileImg: { type: String, trim: true, default: null },
+  profileImgId: { type: String, default: null },
   userTheme: { type: String, default: 'light' },
   projects: [projectsObj],
   labels: [labelsObj]

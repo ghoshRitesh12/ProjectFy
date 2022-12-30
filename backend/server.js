@@ -5,7 +5,6 @@ const path = require('path');
 const PORT = process.env.PORT || 4000;
 
 const cookieParser = require('cookie-parser');
-const device = require('express-device');
 const connectDB = require('./config/connectDB');
 
 // routers
@@ -32,7 +31,6 @@ app.set('view engine', 'ejs');
 // built-in middlewares
 app.use(cookieParser());
 app.use(express.json());
-app.use(device.capture());
 app.use(express.static(path.resolve(__dirname, '..', 'frontend', 'public')));
 // app.use('/project', express.static(path.resolve(__dirname, '..', 'frontend', 'public')));
 app.use(express.urlencoded({ extended: false }));

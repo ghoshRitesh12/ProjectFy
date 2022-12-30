@@ -30,30 +30,31 @@ const getProject = async (req, res) => {
     const foundUser = await Users.findOne({ uuid: userId }, userFields);
     
     const allProjects = (await foundUser.populate({ 
-      path: 'projects', 
-      select: 'projectOverview.name' 
+      path: 'projects', select: 'projectOverview.name' 
     })).projects;
-    
     if(![...allProjects].map(i => `${i._id}`).includes(projectID)) 
     return res.render('404');
     
     pageInfo.allProjects = [...allProjects];
 
-    const projectFields = ['projectOverview', 'isPublic', 'createdBy', populateSubSection]
-    const project = (await foundUser.populate({ 
-      path: 'projects', 
-      select: [...new Set(projectFields)], 
-      match: { _id: projectID } 
-    })).projects;
-    // console.log(project);
-
     const allLabels = (await foundUser.populate('labels')).labels;
-
-    pageInfo.project = project;
     pageInfo.allLabels = [...allLabels];
+
     pageInfo.theme = foundUser.userTheme;
     pageInfo.profilePic = foundUser.profileImg;
     pageInfo.userName = foundUser.name;
+
+    const projectFields = ['projectOverview', 'isPublic', 'createdBy', populateSubSection];
+
+    const project = (await foundUser.populate({ 
+      path: 'projects', select: [...new Set(projectFields)], 
+      match: { _id: projectID },
+      populate: (populateSubSection === 'projectKanban') ? { path: 'projectKanban.labels' } : null
+
+    })).projects;
+  
+    pageInfo.project = project;
+    // console.log(project[0].projectIdeas);
 
     res.render('main', { pageInfo });
 

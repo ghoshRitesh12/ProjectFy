@@ -1,6 +1,6 @@
 const Users = require('../models/Users');
 const Projects = require('../models/Projects');
-const Labels = require('../models/Labels');
+const cloudinary = require('cloudinary').v2;
 
 const pageInfo = {
   section: 'profile-settings',
@@ -42,7 +42,6 @@ const getProfileSettings = async (req, res) => {
   }
 }
 
-
 const profileNameChange = async (req, res) => {
   const userId = req.uuid;
 
@@ -51,6 +50,15 @@ const profileNameChange = async (req, res) => {
     if(!changedName) throw new Error('changed name not present');
 
     const foundUser = await Users.findOne({ uuid: userId }, 'name');
+    if(!foundUser) {
+      res.json({
+        'status': 'ok',
+        'msg': 'Profile name update failed',
+        'redirectTo': null
+      })
+      return;
+    }
+
     foundUser.name = changedName.trim();
     await foundUser.save();
 
@@ -117,4 +125,44 @@ const deleteAccount = async (req, res) => {
   }
 }
 
-module.exports = { getProfileSettings, profileNameChange, deleteAccount };
+const changeProfilePic = async (req, res) => {
+  const userId = req.uuid;
+  const { picUrl, picId } = req.body;
+
+  const userFields = ['profileImg', 'profileImgId'];
+
+  try {
+    const foundUser = await Users.findOne({ uuid: userId }, userFields);
+    if(!foundUser) {
+      res.json({
+        'status': 'not ok',
+        'msg': `Profile pic update failed`,
+        'redirectTo': null
+      })
+      return;
+    }
+
+    if(foundUser.profileImgId !== null)
+      cloudinary.uploader.destroy(foundUser.profileImgId);
+
+    foundUser.profileImg = picUrl;
+    foundUser.profileImgId = picId;
+    await foundUser.save();
+
+    res.json({
+      'status': 'ok',
+      'msg': `Profile pic updated`,
+      'redirectTo': null
+    })
+
+  } catch (err) {
+    console.log(err);
+    res.json({
+      'status': 'not ok',
+      'msg': `Profile pic update failed`,
+      'redirectTo': null
+    })
+  }
+}
+
+module.exports = { getProfileSettings, profileNameChange, deleteAccount, changeProfilePic };

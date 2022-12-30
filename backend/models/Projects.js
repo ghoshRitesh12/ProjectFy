@@ -21,19 +21,23 @@ const projectSchema = new mongoose.Schema({
     name: { type: String, required: true, trim: true },
     startDate: { type: String },
     endDate: { type: String },
-    goals: { type: String, trim: true, default: '' }
+    goals: { type: String, trim: true, default: '' },
+    completedTasks: { type: Number, default: 0 },
+    totalTasks: { type: Number, default: 0 }
   },
   projectIdeas: [{
     date: { type: String },
     description: { type: String, trim: true },
     imgUrl: { type: String, trim: true, default: null },
     imgUpload: { type: String, trim: true, default: null },
-    isImgAUrl: { type: Boolean, default: true }
+    isImgAUrl: { type: Boolean, default: true },
+    hostedImgId: { type: String, default: null }
   }],
   projectKanban: [{
+    id: { type: String, },
     category: { type: String },
-    title: { type: String, trim: true },
-    description: { type: String, trim: true },
+    title: { type: String, trim: true, default: null },
+    description: { type: String, trim: true, default: null },
     labels: [labelsObj]
   }]
 }, { collection: collectionName });
