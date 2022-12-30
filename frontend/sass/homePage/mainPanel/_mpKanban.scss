@@ -17,6 +17,7 @@
     display: grid;
     grid-template-columns: repeat(3, minmax(17rem, 1fr));
     gap: 2rem;
+    margin-block: auto;
   }
   @include breakpoint(large) { padding-block: 3em; }
 
@@ -27,10 +28,11 @@
     flex: 1 1;
     
     margin-inline: auto;
-    margin-bottom: auto;
     max-width: 20rem;
-    min-width: 17rem;
+    width: 100%;
+    // min-width: 18rem;
     
+    margin-bottom: auto;
     font-size: 16px;
     border-radius: .7rem;
     transition: .2s ease max-height;
@@ -41,6 +43,7 @@
       max-height: 2rem; 
     }
     @include breakpoint(medium) {
+      padding-bottom: 3rem;
       &.collapse {
         overflow: visible;
         max-height: fit-content;
@@ -134,11 +137,12 @@
     }
 
     & .kanban-list {
+      position: relative;
+      z-index: 72;
+      isolation: isolate;
 
       &__item {
         position: relative;
-        isolation: isolate;
-        z-index: 72;
 
         margin-top: .7rem;
         padding: 1em;
@@ -159,15 +163,17 @@
             display: flex;
             flex-wrap: wrap;
             gap: .5rem;
+
+            &:empty { display: none; }
           }
           & .kanban-item__label {
             // --clr-label: #00aeff;
-            color: #222;
+            color: #111;
             background-color: var(--clr-label, #00aeff);
 
             font-size: .85rem;
             border-radius: 2rem;
-            padding: .2em 1em;
+            padding: .3em 1em;
             font-weight: 500;
           }
 
@@ -186,9 +192,10 @@
 
           }
           & .kanban-item__options {
+            display: block;
             position: absolute;
             right: 0;
-            z-index: 82;
+            z-index: 101;
             isolation: isolate;
 
             margin: .8rem 1rem 0 0;
@@ -227,7 +234,7 @@
 
         &__title {
           color: var(--clr-primary-txt);
-          font-size: 1.05rem;
+          font-size: 1.1rem;
         }
         &__description {
           margin-top: .3rem;
@@ -310,7 +317,7 @@
     &__existing-labels {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 1.2rem;
 
       position: relative;
       margin-block: .2rem .7rem;
@@ -318,7 +325,7 @@
       max-width: 100%;
       width: 100%;
       overflow-x: auto;
-      background-color: var(--clr-primary-bg);
+      background-color: var(--clr-secondary-bg);
       
       scrollbar-width: none;
       &::-webkit-scrollbar { display: none; }
@@ -331,7 +338,7 @@
         flex-shrink: 0;
         display: flex;
         align-items: center;
-        gap: .3rem;
+        gap: .4rem;
 
         font-size: .9rem;
         padding: .2em 0em .2em .8em;
@@ -340,11 +347,11 @@
         overflow: hidden;
 
 
-        &--name { color: #111; font-weight: 500; }
+        &--name { color: #000; font-weight: 500; }
         &--cross { 
           color: #333;
           font-size: 1rem;
-          padding: .2em .4em .2em .2em;
+          padding: .3em .4em .3em .2em;
           // outline: 1px solid black;
         }
       }
@@ -358,7 +365,7 @@
     &__rest-labels {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 1.2rem;
 
       position: relative;
       margin-block: .2rem .7rem;
@@ -366,7 +373,7 @@
       max-width: 100%;
       width: 100%;
       overflow-x: auto;
-      background-color: var(--clr-primary-bg);
+      background-color: var(--clr-secondary-bg);
       
       scrollbar-width: none;
       &::-webkit-scrollbar { display: none; }
@@ -379,7 +386,7 @@
         flex-shrink: 0;
         display: flex;
         align-items: center;
-        gap: .3rem;
+        gap: .4rem;
 
         font-size: .9rem;
         padding: .2em 0em .2em .8em;
@@ -388,11 +395,11 @@
         overflow: hidden;
 
 
-        &--name { color: #111; font-weight: 500; }
+        &--name { color: #000; font-weight: 500; }
         &--plus { 
           font-size: 1rem;
           color: #222;
-          padding: .2em .5em .2em .3em;
+          padding: .3em .5em .3em .3em;
           // outline: 1px solid black;
         }
       }
@@ -412,7 +419,7 @@
         max-width: 100%;
         width: 100%;
 
-        background-color: var(--clr-primary-bg);
+        background-color: var(--clr-secondary-bg);
         color: var(--clr-primary-txt);
         border: none;
         cursor: text;
@@ -448,7 +455,7 @@
         overflow: hidden auto;
         resize: none;
 
-        background-color: var(--clr-primary-bg);
+        background-color: var(--clr-secondary-bg);
         color: var(--clr-primary-txt);
         border: none;
         cursor: text;

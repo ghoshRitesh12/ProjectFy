@@ -108,6 +108,7 @@
         place-items: center;
 
         min-height: inherit;
+        max-height: var(--size);
         max-width: 100%;
         width: 100%;
         object-fit: cover;
@@ -119,7 +120,7 @@
       & [data-details-profile-pic="dummy"] {
         background-color: rgb(255, 92, 146);
         color: var(--clr-primary-bg);
-        font-size: clamp(1.2rem, 3vmin, 1.5rem);
+        font-size: 1.5rem;
       }
 
     }

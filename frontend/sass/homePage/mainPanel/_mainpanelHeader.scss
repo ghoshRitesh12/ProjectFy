@@ -410,8 +410,8 @@
         border-radius: $borders;
         text-transform: uppercase;
         color: var(--clr-inactive-txt);
-        background-color: var(--clr-sidebar-bg);
-        border: 2px solid var(--clr-primary-bg);
+        background-color: var(--clr-secondary-bg);
+        border: 1px solid var(--clr-separator-brdr);
         user-select: none;
         cursor: pointer;
         & > * { pointer-events: none; }

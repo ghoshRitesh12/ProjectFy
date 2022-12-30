@@ -70,11 +70,11 @@
     @include breakpoint(large) { margin-top: 4rem; }
   }
   & .home-project {
-    --random-clr: hsl(2 64% 60%);
     position: relative;
     isolation: isolate;
     padding: .6em .9em;
     margin-inline: .5rem;
+    margin-block: 0 auto;
 
     border-radius: .8rem;    
     font-family: $font-secondary-r;
@@ -97,7 +97,7 @@
       pointer-events: none;
       transition: .3s ease;
       border-radius: .8rem;
-      background-color: var(--random-clr, hsl(0 64% 60%));
+      background-color: var(--clr-box, hsl(0 64% 60%));
     }
 
 
@@ -155,12 +155,12 @@
           }
 
           &::-moz-progress-bar {
-            background-color: var(--random-clr, hsl(0 64% 60%));
+            background-color: var(--clr-box, hsl(0 64% 60%));
             border-radius: 1rem;
           }
           &::-webkit-progress-value {
             border-radius: 1rem;
-            background-color: var(--random-clr, hsl(0 64% 60%));
+            background-color: var(--clr-box, hsl(0 64% 60%));
           }
         }
       }
