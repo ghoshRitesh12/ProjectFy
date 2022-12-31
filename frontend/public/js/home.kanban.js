@@ -252,7 +252,6 @@ addGlobalEventListener('submit', '.edit__kanban', async e => {
 addGlobalEventListener('submit', '.delete__kanban', async e => {
   e.preventDefault();
   const url = `${location.href}/${e.target.getAttribute('action')}`; 
-  console.log(url);
 
   try {
     const resp = await fetch(url, { method: 'POST' });

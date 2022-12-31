@@ -146,8 +146,6 @@ addGlobalEventListener('submit', '.ideas-form', async e => {
 
 
 
-
-
 //----<profy_ideas idea_section>
 // project idea options icon
 addGlobalEventListener('click', '[data-idea-options-icon]', e => {
@@ -252,8 +250,6 @@ addGlobalEventListener('click', '[data-idea-options="delete"]', e => {
   const ideaItemId = ideaItem.dataset.ideaId;
   const formAction = `${location.href}/delete/${ideaItemId}`;
   $('.delete__idea').setAttribute('action', formAction);
-
-  console.log(ideaItemId);
 
   document.body.dataset.scrolly = 'false';
   $('[data-idea-delete-modal]').showModal();

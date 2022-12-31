@@ -449,6 +449,10 @@ body ::selection {
   }
 }
 .profy__titlebar__searchbar {
+  display: flex;
+  align-items: center;
+  gap: 0.12rem;
+  position: relative;
   font-size: 1rem;
   width: 100%;
   transition: 0.1s ease max-width;
@@ -461,21 +465,17 @@ body ::selection {
     margin-inline: auto;
     max-width: 30ch;
     padding-right: 0;
-    outline: 1px solid var(--clr-separator-brdr);
-  }
-  .profy__titlebar__searchbar:focus-within {
-    outline: 1px solid var(--clr-logo-project);
+    outline: none;
   }
 }
 @media (min-width: 64em) {
   .profy__titlebar__searchbar {
-    max-width: 35ch;
+    max-width: 40ch;
   }
 }
 .profy__titlebar__searchbar--field {
-  margin-inline: auto;
   padding-block: 0.6em;
-  padding-inline: 1.1em 0.8em;
+  padding-inline: 1.1em 3em;
   max-width: 100%;
   width: 100%;
   font-family: "Roboto", sans-serif;
@@ -483,7 +483,8 @@ body ::selection {
   background-color: var(--clr-ternary-bg);
   outline: none;
   border: none;
-  border-radius: 2rem;
+  border-radius: 2rem 0 0 2rem;
+  transition: 0.1s ease;
 }
 .profy__titlebar__searchbar--field::-moz-placeholder {
   color: var(--clr-inactive-txt);
@@ -496,8 +497,111 @@ body ::selection {
 }
 @media (min-width: 40em) {
   .profy__titlebar__searchbar--field {
+    outline: 1px solid var(--clr-separator-brdr);
     padding-block: 0.35em;
   }
+  .profy__titlebar__searchbar--field:focus {
+    outline: 1px solid var(--clr-logo-project);
+  }
+}
+.profy__titlebar__searchbar [data-search-field-close] {
+  display: none;
+  position: absolute;
+  isolation: isolate;
+  right: 2.5rem;
+  color: var(--clr-primary-icon);
+  padding: 0.4em 0.5em;
+  margin-right: 0.7rem;
+  cursor: pointer;
+}
+@media (min-width: 40em) {
+  .profy__titlebar__searchbar [data-search-field-close] {
+    padding: 0.3em 0.6em;
+  }
+}
+.profy__titlebar__searchbar [data-search-field-close].show {
+  display: block;
+}
+.profy__titlebar__searchbar [data-search-field-close] > * {
+  pointer-events: none;
+}
+.profy__titlebar__searchbar--submit-btn {
+  display: none;
+  padding-inline: 0.4em;
+  font-size: 1.35rem;
+  border: none;
+  border-radius: 0 2rem 2rem 0;
+  color: var(--clr-primary-icon);
+  background-color: var(--clr-ternary-bg);
+  background-color: var(--clr-separator-brdr);
+  outline: 1px solid var(--clr-separator-brdr);
+  cursor: pointer;
+}
+@media (min-width: 40em) {
+  .profy__titlebar__searchbar--submit-btn {
+    display: block;
+    padding-block: 0.3em;
+  }
+}
+.profy__titlebar__searchbar--submit-btn > * {
+  display: block;
+  pointer-events: none;
+}
+.profy__titlebar__searchbar .search_results-wrapper {
+  position: absolute;
+  top: 3.5rem;
+  isolation: isolate;
+  z-index: 120;
+  max-width: 100%;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 1rem;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.profy__titlebar__searchbar .search_results-wrapper.show {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+}
+@media (min-width: 40em) {
+  .profy__titlebar__searchbar .search_results-wrapper {
+    top: 3rem;
+  }
+}
+.profy__titlebar__searchbar .search_results-wrapper .search_results {
+  display: block;
+  margin-inline: 0.2rem 2.4rem;
+  padding-block: 0.7em;
+  border-radius: 1rem;
+  border: 1px solid var(--clr-separator-brdr);
+  background-color: #fff;
+  font-style: "Roboto", sans-serif;
+  transition: 0.2s ease;
+}
+.profy__titlebar__searchbar .search_results-wrapper .search_result {
+  padding-block: 0.4em;
+  padding-inline: 1.15em 1em;
+  font-size: 1rem;
+  color: #484848;
+  font-weight: 600;
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+.profy__titlebar__searchbar .search_results-wrapper .search_result .in_txt {
+  color: var(--clr-inactive-txt);
+  color: #777;
+  font-size: 0.9rem;
+}
+.profy__titlebar__searchbar .search_results-wrapper .search_result:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.profy__titlebar__searchbar .search_results-wrapper .search_result.no-cursor {
+  cursor: auto;
+}
+.profy__titlebar__searchbar .search_results-wrapper .search_result > * {
+  pointer-events: none;
 }
 .profy__titlebar__mode {
   display: flex;

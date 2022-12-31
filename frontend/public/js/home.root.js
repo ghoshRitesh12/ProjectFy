@@ -5,6 +5,7 @@ import {
 
 import { getUploadedImgUrl } from './home.ideas.js'; 
 
+
 // account
 addGlobalEventListener('click', '[data-account]', e => {
   e.target.blur();
@@ -29,13 +30,14 @@ addGlobalEventListener('click', '[data-account-options]', e => {
   $('[data-account-dropdown-backdrop]').setAttribute('aria-hidden', 'true');
 })
 
+//----<profy_titlebar>
 
 // theme toggler
 addGlobalEventListener('click', '[data-mode]', async e => {
   const mode = e.target.dataset.mode;
   try {
     if($('body').dataset.theme === mode) 
-      return;
+    return;
     
     $('body').dataset.theme = mode;
     await fetch('/api/v1/themechange', {
@@ -44,11 +46,87 @@ addGlobalEventListener('click', '[data-mode]', async e => {
       body: JSON.stringify({ 'themeChangedTo': mode })
     });
     location.reload();
-
+    
   } catch (err) {
-    location.href = '/';
+    location.reload();
   }
 })
+
+const populateSearchResults = (results, searchedQuery) => {
+  $('.search_results').innerHTML = '';
+
+  if(results == null) {
+    const resultItem = $('#search_result-template').content.cloneNode(true).children[0];
+    resultItem.querySelector('.search_result--query').textContent = searchedQuery;
+    resultItem.removeAttribute('data-nav');
+    resultItem.classList.add('no-cursor');
+    resultItem.querySelector('.in_txt').textContent = 'not found';
+
+    $('.search_results').append(resultItem);
+    $('.search_results-wrapper').classList.add('show');
+    return;
+  }
+
+  for(const result of results) {
+    const resultUrl = `/project/${result.id}/overview`;
+
+    const resultItem = $('#search_result-template').content.cloneNode(true).children[0];
+    resultItem.querySelector('.search_result--query').textContent = searchedQuery;
+    resultItem.querySelector('.search_result--project').textContent = result.name;
+    resultItem.setAttribute('data-nav', resultUrl);
+
+    $('.search_results').append(resultItem);
+  }
+  $('.search_results-wrapper').classList.add('show');
+
+}
+
+// search submit event
+addGlobalEventListener('submit', '[data-search-form]', async e => {
+  e.preventDefault();
+  const query = $('[data-search-input]').value.trim();
+  if(query === '') return;
+  
+  const formAction = `${e.target.getAttribute('action')}/${query}`;
+  try {
+    const resp = await fetch(formAction, { method: 'POST' });
+    const data = resp && (await resp.json());
+
+    populateSearchResults(
+      data.results,
+      data.searchedQuery
+    );
+
+  } catch (err) {
+    location.reload();
+  }
+})
+
+addGlobalEventListener('input', '[data-search-input]', e => {
+  const value = e.target.value;
+  $('[data-search-field-close]').classList.toggle('show', value);
+
+
+  if(value === '') {
+    $('.search_results-wrapper').classList.remove('show');
+  }
+  
+
+  // if($('.search_results').children <= 0) {
+  // }
+
+  // console.dir($('.search_results'));
+
+})
+
+addGlobalEventListener('click', '[data-search-field-close]', e => {
+  $('.search_results').innerHTML = '';
+  $('[data-search-field-close]').classList.remove('show');
+  $('.search_results-wrapper').classList.remove('show');
+  $('[data-search-input]').value = '';
+})
+
+//----</profy_titlebar>
 
 
 
@@ -157,7 +235,6 @@ addGlobalEventListener('click', '[data-project-options]', e => {
   const projectId = e.target.closest('.profy__main').dataset.projectId;
   const projectOption = e.target.dataset.projectOptions;
   const optionUrl = `${e.target.dataset.optionAction}/${projectId}`;
-  console.log({ projectId, projectOption, optionUrl });
   document.body.dataset.scrolly = 'false';
 
   if(projectOption === "delete") {
@@ -173,7 +250,6 @@ addGlobalEventListener('click', '[data-project-options]', e => {
   $('[data-project-share-modal]').showModal();
 })
 
-
 // share: project share *form submit*
 addGlobalEventListener('submit', '.share__project', async e => {
   e.preventDefault();
@@ -185,7 +261,6 @@ addGlobalEventListener('submit', '.share__project', async e => {
       $('[data-share-link-submitter="getShareLink"]').textContent = 'Just a sec...';
       
       const resp = await fetch(formAction, { method: 'POST' });
-      // console.log('data' in (await resp.json()));
       // const data = await resp.json() || 'http://127.0.0.1:5500/niqqaaXafafafafafafafhquirghqDD/homePage.html';
       const data = await resp.json();
 
@@ -244,7 +319,6 @@ addGlobalEventListener('click', '[data-project-share-modal-close]', e => {
 })
 
 
-
 // delete: delete project form submit
 addGlobalEventListener('submit', '.delete__project', async e => {
   e.preventDefault();
@@ -272,7 +346,6 @@ addGlobalEventListener('click', '[data-project-delete-modal-close]', e => {
   document.body.dataset.scrolly = 'true';
   $('[data-project-delete-modal]').close();
 })
-
 //-----</data project options>
 
 
@@ -320,7 +393,6 @@ addGlobalEventListener('submit', '.delete__label', async e => {
     console.log(err);
   }
 })
-
 //----</labels section>
 
 
@@ -410,7 +482,6 @@ addGlobalEventListener('submit', '.delete__account', async e => {
 
   try {
     const resp = await fetch(url, { method: 'POST' });
-    console.log(resp);
     
     if(resp.redirected === true) {
       location.reload();
@@ -432,6 +503,7 @@ addGlobalEventListener('submit', '.delete__account', async e => {
   }
 })
 
+// settings: profile pic upload
 addGlobalEventListener('change', '[data-profile-pic-upload-field]', async e => {
   const file = e.target.files[0];
   const url = `${location.href}/profile-pic`
@@ -473,39 +545,14 @@ addGlobalEventListener('change', '[data-profile-pic-upload-field]', async e => {
     console.log(err); 
   }
 })
-
 //----</profile_settings section>
+
 
 
 // close error notify
 addGlobalEventListener('click', '[data-error-notify-close]', e => {
   e.target.parentElement.classList.remove('show');
 })
-
-
-// for selecting projects
-// addGlobalEventListener('click', '[data-project-list-items]',
-// e => {
-//   for (const item of $$('[data-project-list-items]')) {
-//     item.classList.remove('selected');
-//   }
-//   e.target.classList.add('selected');
-// })
-
-
-// for (const item of $$('[data-project-list-items]')) {
-//   item.addEventListener('click', e => {
-//     for (const item of $$('[data-project-list-items]')) {
-//       item.classList.remove('selected');
-//     }
-//     e.target.classList.add('selected');
-//   })
-// }
-
-
-
-
-
 
 
 //----<profy_main header>
@@ -550,7 +597,6 @@ window.addEventListener('load', () => {
     item.style.setProperty('--clr-box', clr);
   }
 
-
   if($('.profy__home') != null) {
     $('[data-home-greet-time]').textContent = getHomeDate();
     $('[data-home-greet-msg]').textContent = `${greetUser()}, `;
@@ -559,7 +605,6 @@ window.addEventListener('load', () => {
       const clr = randomBoxClr();
       item.style.setProperty('--clr-box', clr);
     }
-    
   }
 
   if($('.profy__projects') !== null) {
@@ -569,21 +614,7 @@ window.addEventListener('load', () => {
     }
   }
 
-
-
 })
-
-
-// window.addEventListener('resize', e => {
-//   const prevUrl = location.href;
-
-//   if(e.target.innerWidth >= 640) 
-//     location.href = '/';
-//   else 
-//     location.href = prevUrl;
-//   console.log(prevUrl);
-
-// })
 
 
 // -------------------------------------
