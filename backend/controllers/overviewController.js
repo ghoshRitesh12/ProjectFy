@@ -1,6 +1,5 @@
 const Users = require('../models/Users');
 
-
 const userFields = ['projects'];
 
 const modifyOverview = async (req, res) => {

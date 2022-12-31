@@ -25,7 +25,6 @@
 
           <img data-details-profile-pic="real" src="<%= pageInfo.profilePic %>" 
             alt="<%= `${pageInfo.userName.split(' ')[0]}'s profile pic` %>">
-            <!-- src="https://images.unsplash.com/photo-1590031905406-f18a426d772d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1244&q=80" alt="profile pic"> -->
 
         </div>
 
@@ -33,7 +32,7 @@
           
         <div data-details-profile-pic-wrap data-active-profile-pic="dummy">
           <span data-details-profile-pic="dummy">
-            <%= `${pageInfo.userName.split(' ')[0][0]}${pageInfo.userName.split(' ')[1][0]}` %>
+            <%= `${pageInfo.userName.split(' ')[0][0]}${pageInfo.userName.split(' ')[1][0]}`.toUpperCase() %>
           </span>
         </div>
 

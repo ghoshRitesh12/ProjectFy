@@ -75,17 +75,20 @@ const handleSignup = async (req, res) => {
           return res.redirect('/signup');
         } 
 
-        const confirmUrl = `http://localhost:4000/confirmation/${emailToken}`
+        const confirmUrl = `${req.protocol}://${req.get('host')}/confirmation/${emailToken}`
 
         // await makes it slow
         sendEmail({
           receiver: emailId,
-          subject: 'Confirmation Email',
+          subject: 'ProjectFy Account Confirmation Email',
           html: `
-          <h3 style="font-family: sans-serif; color: #333">
-            Please click this link to confirm your account: 
-            <br/> <a href="${confirmUrl}">${confirmUrl}</a>
-            <br/> Link valid upto 10 mins from arrival
+          <h3 style="font-family: sans-serif; background-color: #333; 
+            max-width: fit-content; padding: 32px; color: #eee; border-radius: 16px;">
+            Click the link below to confirm your ProjectFy account
+            <a href="${confirmUrl}" style="color: #59caff">Link to confirm your account</a>
+            <br/>
+            <br/> 
+            Link valid upto 10 mins from arrival
           </h3>
           `
         });

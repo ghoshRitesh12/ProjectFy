@@ -4,7 +4,7 @@ const cloudinary = require('cloudinary').v2;
 
 const pageInfo = {
   section: 'profile-settings',
-  subSection: null,
+  subSection: null, contentEditable: true,
 
   project: null, projectId: null, dueProjects: null,
 

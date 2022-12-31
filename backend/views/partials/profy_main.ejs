@@ -1,7 +1,7 @@
 
 <% const project = (pageInfo.project !== null) ? pageInfo.project[0] : null %>
 
-<main class="profy__main" data-project-id="<%= project._id %>" data-section>
+<main class="profy__main" data-project-id="<%= (project._id !== null) ? project._id : null %>" data-section>
 
   <% if(pageInfo.project !== null) { %>
   

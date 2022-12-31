@@ -3,7 +3,7 @@ const Labels = require('../models/Labels');
 
 const pageInfo = {
   section: 'labels',
-  subSection: null,
+  subSection: null, contentEditable: true,
 
   project: null, projectId: null, dueProjects: null,
 
@@ -21,13 +21,13 @@ const getAllLabels = async (req, res) => {
     const foundUser = await Users.findOne({ uuid: userId }, userFields);
     const allLabels = (await foundUser.populate('labels')).labels;   
     
-    pageInfo.allLabels = [...allLabels];
+    pageInfo.allLabels = ([...allLabels].length>0) ? [...allLabels] : null
     pageInfo.theme = foundUser.userTheme;
     pageInfo.profilePic = foundUser.profileImg;
     pageInfo.userName = foundUser.name;
 
     return res.render('main', { pageInfo });
-
+    
   } catch (err) {
     console.log(err);
   }

@@ -3,7 +3,7 @@ const Projects = require('../models/Projects');
 
 const pageInfo = {
   section: 'projects',
-  subSection: null,
+  subSection: null, contentEditable: true,
 
   project: null, projectId: null, dueProjects: null,
 
@@ -21,7 +21,7 @@ const getAllProjects = async (req, res) => {
     const foundUser = await Users.findOne({ uuid: userId }, userFields);
     const allProjects = (await foundUser.populate('projects')).projects;
     
-    pageInfo.allProjects = [...allProjects];
+    pageInfo.allProjects = ([...allProjects].length>0) ? [...allProjects] : null;
     pageInfo.theme = foundUser.userTheme;
     pageInfo.profilePic = foundUser.profileImg;
     pageInfo.userName = foundUser.name;

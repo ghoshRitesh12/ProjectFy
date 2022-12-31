@@ -3,7 +3,7 @@ const Projects = require('../models/Projects');
 
 const pageInfo = {
   section: 'project',
-  subSection: null,
+  subSection: null, contentEditable: true,
 
   project: null, projectId: null, dueProjects: null,
 

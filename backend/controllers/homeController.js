@@ -2,7 +2,7 @@ const Users = require('../models/Users');
 
 const pageInfo = {
   section: 'home',
-  subSection: null,
+  subSection: null, contentEditable: true,
 
   project: null, projectId: null, dueProjects: null,
 
@@ -50,12 +50,13 @@ const getHome = async (req, res) => {
     pageInfo.allLabels = [...allLabels];
 
     const dueProjects = await getDueProjects(allProjects);
-    pageInfo.dueProjects = dueProjects;
+    pageInfo.dueProjects = (dueProjects.length>0) ? dueProjects : null;
 
     res.render('main', { pageInfo });
     
   } catch (err) {
     console.log(err);
+    pageInfo.dueProjects = null;
     res.render('main', { pageInfo });
   }
 }
