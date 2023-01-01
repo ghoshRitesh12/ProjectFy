@@ -99,7 +99,7 @@ addGlobalEventListener('click', '[data-kanban-item-option="edit"]', async e => {
     return { 'text': j.innerText, 'el': j, 'id': j.dataset.labelId } 
   });
   const itemLabels = [...kanbanItem.querySelectorAll('.kanban-item__label')].map(i => { 
-    return { 'text': i.textContent, 'el': i, 'id': i.dataset.kanbanLabelId } 
+    return { 'text': i.innerText, 'el': i, 'id': i.dataset.kanbanLabelId } 
   });
   
   const simpleItemLabels = itemLabels.map(i => i.text.trim());
