@@ -14,13 +14,19 @@ const randomBoxClr = () => {
 }
 
 
-const elaspedTime = (endDate=0, startDate) => {
+const elaspedTime = (endDate, startDate) => {
   const DAY_IN_MS = (24 * 60 * 60 * 1000);
   const todaysDate = `${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDate()}`;
   const endDInMs = new Date(endDate).getTime();
   const startDInMs = new Date(startDate).getTime();
   let todayDInMs = new Date(todaysDate).getTime();
 
+  if(endDate === 0) {
+    return {
+      time: 0,
+      days: 0
+    };
+  }
 
   const totalTimeDiff = endDInMs - startDInMs;
   const totalDays = totalTimeDiff / DAY_IN_MS;
