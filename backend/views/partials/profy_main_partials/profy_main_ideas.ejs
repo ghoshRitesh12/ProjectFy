@@ -2,68 +2,74 @@
 
 <section class="profy__main__section--ideas">
 
-  <div class="profy__main__section--ideas--formContainer" data-ideas-form>
-    <div class="reveal" title="show or hide form">
-      <div class="reveal__txt hide">
-        <span class="reveal__txt--show"> Show </span>
-        <span class="reveal__txt--hide"> Hide </span>
-        form
-      </div>
-      <div class="reveal__icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
-          viewBox="0 0 1024 1024">
-          <rect x="0" y="0" width="1024" height="1024" fill="none" stroke="none" />
-          <path fill="currentColor"
-            d="M104.704 685.248a64 64 0 0 0 90.496 0l316.8-316.8l316.8 316.8a64 64 0 0 0 90.496-90.496L557.248 232.704a64 64 0 0 0-90.496 0L104.704 594.752a64 64 0 0 0 0 90.496z" />
-        </svg>
-      </div>
-    </div>
+  <% if(pageInfo.contentEditable !== false) { %>
 
-    <section class="ideas-illustrate-txt">
-      Organize your ideas in one place with description and illustrations
-    </section>
-
-    <form class="ideas-form" action="/create" method="post">
-
-      <div class="ideas-form__description">
-        <textarea class="ideas-form__description--field" required placeholder="your idea's description"
-          data-ideasForm-description name="ideaDescription"></textarea>
-      </div>
-
-      <div class="ideas-form__imgUrl">
-        <input class="ideas-form__imgUrl--field" type="url" placeholder="paste image link here"
-          name="ideaImgUrl" data-ideasForm-imgUrl>
-
-      </div>
-
-      <div class="ideas-form__imgUpload">
-        <section class="linkOrUpload-txt">
-          OR upload an image
-        </section>
-
-        <input class="ideas-form__imgUpload--field" data-ideasForm-imgUpload type="file" accept="image/*"
-          name="ideaImgUpload">
-
-        <div class="ideas-form__imgUpload__preview" data-imgUpload-preview-wrap>
-          <img src="" alt="" class="ideas-form__imgUpload__preview--src" data-imgUpload-preview-src>
-
-          <div data-idea-imgUpload-preview-closebtn>
-            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
-              viewBox="0 0 15 15">
-              <rect x="0" y="0" width="15" height="15" fill="none" stroke="none" />
-              <path fill="currentColor"
-                d="M3.64 2.27L7.5 6.13l3.84-3.84A.92.92 0 0 1 12 2a1 1 0 0 1 1 1a.9.9 0 0 1-.27.66L8.84 7.5l3.89 3.89A.9.9 0 0 1 13 12a1 1 0 0 1-1 1a.92.92 0 0 1-.69-.27L7.5 8.87l-3.85 3.85A.92.92 0 0 1 3 13a1 1 0 0 1-1-1a.9.9 0 0 1 .27-.66L6.16 7.5L2.27 3.61A.9.9 0 0 1 2 3a1 1 0 0 1 1-1c.24.003.47.1.64.27Z" />
-            </svg>
-          </div>
+    <div class="profy__main__section--ideas--formContainer" data-ideas-form>
+      <div class="reveal" title="show or hide form">
+        <div class="reveal__txt hide">
+          <span class="reveal__txt--show"> Show </span>
+          <span class="reveal__txt--hide"> Hide </span>
+          form
+        </div>
+        <div class="reveal__icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 1024 1024">
+            <rect x="0" y="0" width="1024" height="1024" fill="none" stroke="none" />
+            <path fill="currentColor"
+              d="M104.704 685.248a64 64 0 0 0 90.496 0l316.8-316.8l316.8 316.8a64 64 0 0 0 90.496-90.496L557.248 232.704a64 64 0 0 0-90.496 0L104.704 594.752a64 64 0 0 0 0 90.496z" />
+          </svg>
         </div>
       </div>
-
-      <section class="ideas-form__submit">
-        <button class="ideas-form__submit--btn" type="submit">Create idea</button>
+  
+      <section class="ideas-illustrate-txt">
+        Organize your ideas in one place with description and illustrations
       </section>
+  
+      <form class="ideas-form" action="/create" method="post">
+  
+        <div class="ideas-form__description">
+          <textarea class="ideas-form__description--field" required placeholder="your idea's description"
+            data-ideasForm-description name="ideaDescription"></textarea>
+        </div>
+  
+        <div class="ideas-form__imgUrl">
+          <input class="ideas-form__imgUrl--field" type="url" placeholder="paste image link here"
+            name="ideaImgUrl" data-ideasForm-imgUrl>
+  
+        </div>
+  
+        <div class="ideas-form__imgUpload">
+          <section class="linkOrUpload-txt">
+            OR upload an image
+          </section>
+  
+          <input class="ideas-form__imgUpload--field" data-ideasForm-imgUpload type="file" accept="image/*"
+            name="ideaImgUpload">
+  
+          <div class="ideas-form__imgUpload__preview" data-imgUpload-preview-wrap>
+            <img src="" alt="" class="ideas-form__imgUpload__preview--src" data-imgUpload-preview-src>
+  
+            <div data-idea-imgUpload-preview-closebtn>
+              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 15 15">
+                <rect x="0" y="0" width="15" height="15" fill="none" stroke="none" />
+                <path fill="currentColor"
+                  d="M3.64 2.27L7.5 6.13l3.84-3.84A.92.92 0 0 1 12 2a1 1 0 0 1 1 1a.9.9 0 0 1-.27.66L8.84 7.5l3.89 3.89A.9.9 0 0 1 13 12a1 1 0 0 1-1 1a.92.92 0 0 1-.69-.27L7.5 8.87l-3.85 3.85A.92.92 0 0 1 3 13a1 1 0 0 1-1-1a.9.9 0 0 1 .27-.66L6.16 7.5L2.27 3.61A.9.9 0 0 1 2 3a1 1 0 0 1 1-1c.24.003.47.1.64.27Z" />
+              </svg>
+            </div>
+          </div>
+        </div>
+  
+        <section class="ideas-form__submit">
+          <button class="ideas-form__submit--btn" type="submit">Create idea</button>
+        </section>
+  
+      </form>
+    </div>
 
-    </form>
-  </div>
+  <% } %>
+
+  
 
   <div class="profy__main__section--ideas--ideasContainer">
 
@@ -73,20 +79,26 @@
       <% for(const item of projectIdeas) { %>
 
         <section class="idea" data-idea-id="<%= item._id %>">
-          <section class="idea__options--wrap">
-            <div class="idea__options--icon" data-idea-options-icon>
-              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
-                viewBox="0 0 1024 1024">
-                <rect x="0" y="0" width="1024" height="1024" fill="none" stroke="none" />
-                <path fill="currentColor"
-                  d="M388.8 896.4v-27.198c.6-2.2 1.6-4.2 2-6.4c8.8-57.2 56.4-102.4 112.199-106.2c62.4-4.4 115.2 31.199 132.4 89.199c2.2 7.6 3.8 15.6 5.8 23.4v27.2c-.6 1.8-1.6 3.399-1.8 5.399c-8.6 52.8-46.6 93-98.6 104.4c-4 .8-8 2-12 3h-27.2c-1.8-.6-3.6-1.6-5.4-1.8c-52-8.4-91.599-45.4-103.6-96.8c-1.2-5-2.6-9.6-3.8-14.2zm252.4-768.797l-.001 27.202c-.6 2.2-1.6 4.2-1.8 6.4c-9 57.6-56.8 102.6-113.2 106.2c-62.2 4-114.8-32-131.8-90.2c-2.2-7.401-3.8-15-5.6-22.401v-27.2c.6-1.8 1.6-3.4 2-5.2c9.6-52 39.8-86 90.2-102.2c6.6-2.2 13.6-3.4 20.4-5.2h27.2c1.8.6 3.6 1.6 5.4 1.8c52.2 8.6 91.6 45.4 103.6 96.8c1.201 4.8 2.401 9.4 3.601 13.999zm-.001 370.801v27.2c-.6 2.2-1.6 4.2-2 6.4c-9 57.4-58.6 103.6-114.6 106c-63 2.8-116.4-35.2-131.4-93.8c-1.6-6.2-3-12.4-4.4-18.6v-27.2c.6-2.2 1.6-4.2 2-6.4c8.8-57.4 58.6-103.601 114.6-106.2c63-3 116.4 35.2 131.4 93.8c1.6 6.4 3 12.6 4.4 18.8z" />
-              </svg>
-            </div>
-            <div class="idea__options" aria-hidden="true">
-              <div class="idea__options--edit" data-idea-options="edit">Edit</div>
-              <div class="idea__options--delete" data-idea-options="delete">Delete</div>
-            </div>
-          </section>
+
+          <% if(pageInfo.contentEditable !== false) { %>
+
+            <section class="idea__options--wrap">
+              <div class="idea__options--icon" data-idea-options-icon>
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 1024 1024">
+                  <rect x="0" y="0" width="1024" height="1024" fill="none" stroke="none" />
+                  <path fill="currentColor"
+                    d="M388.8 896.4v-27.198c.6-2.2 1.6-4.2 2-6.4c8.8-57.2 56.4-102.4 112.199-106.2c62.4-4.4 115.2 31.199 132.4 89.199c2.2 7.6 3.8 15.6 5.8 23.4v27.2c-.6 1.8-1.6 3.399-1.8 5.399c-8.6 52.8-46.6 93-98.6 104.4c-4 .8-8 2-12 3h-27.2c-1.8-.6-3.6-1.6-5.4-1.8c-52-8.4-91.599-45.4-103.6-96.8c-1.2-5-2.6-9.6-3.8-14.2zm252.4-768.797l-.001 27.202c-.6 2.2-1.6 4.2-1.8 6.4c-9 57.6-56.8 102.6-113.2 106.2c-62.2 4-114.8-32-131.8-90.2c-2.2-7.401-3.8-15-5.6-22.401v-27.2c.6-1.8 1.6-3.4 2-5.2c9.6-52 39.8-86 90.2-102.2c6.6-2.2 13.6-3.4 20.4-5.2h27.2c1.8.6 3.6 1.6 5.4 1.8c52.2 8.6 91.6 45.4 103.6 96.8c1.201 4.8 2.401 9.4 3.601 13.999zm-.001 370.801v27.2c-.6 2.2-1.6 4.2-2 6.4c-9 57.4-58.6 103.6-114.6 106c-63 2.8-116.4-35.2-131.4-93.8c-1.6-6.2-3-12.4-4.4-18.6v-27.2c.6-2.2 1.6-4.2 2-6.4c8.8-57.4 58.6-103.601 114.6-106.2c63-3 116.4 35.2 131.4 93.8c1.6 6.4 3 12.6 4.4 18.8z" />
+                </svg>
+              </div>
+              <div class="idea__options" aria-hidden="true">
+                <div class="idea__options--edit" data-idea-options="edit">Edit idea</div>
+                <div class="idea__options--delete" data-idea-options="delete">Delete idea</div>
+              </div>
+            </section>
+
+          <% } %>
+          
     
           <div class="idea__description">
             <div class="idea__description__date" title="<%= item.date %>">

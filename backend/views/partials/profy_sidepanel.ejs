@@ -29,54 +29,64 @@
           Projects
         </span>
 
-        <span class="profy__sidepanel__nav--projects-container__add-icon" data-add-item="project" title="create new project">
-          <svg xmlns="http://www.w3.org/2000/svg" width="0.88em" height="1em" preserveAspectRatio="xMidYMid meet"
-            viewBox="0 0 448 512" style="pointer-events: none;">
-            <rect x="0" y="0" width="448" height="512" fill="none" stroke="none" />
-            <path fill="currentColor"
-              d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32v144H48c-17.7 0-32 14.3-32 32s14.3 32 32 32h144v144c0 17.7 14.3 32 32 32s32-14.3 32-32V288h144c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
-          </svg>
-        </span>
+        <% if(pageInfo.contentEditable !== false) { %>
+
+          <span class="profy__sidepanel__nav--projects-container__add-icon" data-add-item="project" title="create new project">
+            <svg xmlns="http://www.w3.org/2000/svg" width="0.88em" height="1em" preserveAspectRatio="xMidYMid meet"
+              viewBox="0 0 448 512" style="pointer-events: none;">
+              <rect x="0" y="0" width="448" height="512" fill="none" stroke="none" />
+              <path fill="currentColor"
+                d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32v144H48c-17.7 0-32 14.3-32 32s14.3 32 32 32h144v144c0 17.7 14.3 32 32 32s32-14.3 32-32V288h144c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
+            </svg>
+          </span>
+        
+        <% } %> 
+
       </section>
 
-      <form class="newItemForm new-projectForm hidden" method="post" action="/projects/create"
-        data-item-name="project">
-        <input type="text" name="newProjectName" maxlength="20" placeholder="new project name" required
-          title="Enter valid project name">
+      <% if(pageInfo.contentEditable !== false) { %>
 
-        <div class="field_empty">! Enter valid project name</div>
+        <form class="newItemForm new-projectForm hidden" method="post" action="/projects/create"
+          data-item-name="project">
+          <input type="text" name="newProjectName" maxlength="20" placeholder="new project name" required
+            title="Enter valid project name">
+  
+          <div class="field_empty">! Enter valid project name</div>
+  
+          <div class="btns-wrapper">
+            <button type="button" data-newItem-btn-cancel> Cancel </button>
+            <button type="submit" data-newItem-btn-save> Save </button>
+          </div>
+        </form>
 
-        <div class="btns-wrapper">
-          <button type="button" data-newItem-btn-cancel> Cancel </button>
-          <button type="submit" data-newItem-btn-save> Save </button>
-        </div>
-      </form>
-
-      <ul class="profy__sidepanel__nav--projects-list" data-project-list>
-
-        <% if(pageInfo.allProjects !== null) { %>
-
-          <% for(const item of pageInfo.allProjects) { %>
-            
-            <% if(pageInfo.projectId === `${item._id}`) { %>
-            <li class="profy__sidepanel__nav--projects-listItem selected" data-nav="/project/<%= item._id %>/overview"
-              title="<%= item.projectOverview.name %>" data-project-list-items>
-            <% } else { %>
-            <li class="profy__sidepanel__nav--projects-listItem" data-nav="/project/<%= item._id %>/overview"
-              title="<%= item.projectOverview.name %>" data-project-list-items>
-            <% } %>
-
-              <span class="profy__sidepanel__nav--projects-listItem_name">
-                <%= item.projectOverview.name %>
-              </span>
+        <ul class="profy__sidepanel__nav--projects-list" data-project-list>
+  
+          <% if(pageInfo.allProjects !== null) { %>
+  
+            <% for(const item of pageInfo.allProjects) { %>
               
-            </li>
-          
+              <% if(pageInfo.projectId === `${item._id}`) { %>
+              <li class="profy__sidepanel__nav--projects-listItem selected" data-nav="/project/<%= item._id %>/overview"
+                title="<%= item.projectOverview.name %>" data-project-list-items>
+              <% } else { %>
+              <li class="profy__sidepanel__nav--projects-listItem" data-nav="/project/<%= item._id %>/overview"
+                title="<%= item.projectOverview.name %>" data-project-list-items>
+              <% } %>
+  
+                <span class="profy__sidepanel__nav--projects-listItem_name">
+                  <%= item.projectOverview.name %>
+                </span>
+                
+              </li>
+            
+            <% } %>
+  
           <% } %>
+  
+        </ul>
 
-        <% } %>
+      <% } %> 
 
-      </ul>
     </section>
 
     <!-- labels -->
@@ -88,53 +98,63 @@
           </span>
         </div>
 
-        <span class="profy__sidepanel__nav--labels-container__add-icon" data-add-item="label" title="create new label">
-          <svg xmlns="http://www.w3.org/2000/svg" width="0.88em" height="1em" preserveAspectRatio="xMidYMid meet"
-            viewBox="0 0 448 512">
-            <rect x="0" y="0" width="448" height="512" fill="none" stroke="none" />
-            <path fill="currentColor"
-              d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32v144H48c-17.7 0-32 14.3-32 32s14.3 32 32 32h144v144c0 17.7 14.3 32 32 32s32-14.3 32-32V288h144c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
-          </svg>
-        </span>
+        <% if(pageInfo.contentEditable !== false) { %>
+
+          <span class="profy__sidepanel__nav--labels-container__add-icon" data-add-item="label" title="create new label">
+            <svg xmlns="http://www.w3.org/2000/svg" width="0.88em" height="1em" preserveAspectRatio="xMidYMid meet"
+              viewBox="0 0 448 512">
+              <rect x="0" y="0" width="448" height="512" fill="none" stroke="none" />
+              <path fill="currentColor"
+                d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32v144H48c-17.7 0-32 14.3-32 32s14.3 32 32 32h144v144c0 17.7 14.3 32 32 32s32-14.3 32-32V288h144c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
+            </svg>
+          </span>
+        
+        <% } %> 
+
       </section>
 
-      <form class="newItemForm new-labelForm hidden" method="post" action="/labels/create" data-item-name="label">
-        <input type="text" name="newLabelName" maxlength="20" placeholder="new label name" required
-          title="Enter valid label name">
+      <% if(pageInfo.contentEditable !== false) { %>
 
-        <div class="field_empty">! Enter valid label name</div>
+        <form class="newItemForm new-labelForm hidden" method="post" action="/labels/create" data-item-name="label">
+          <input type="text" name="newLabelName" maxlength="20" placeholder="new label name" required
+            title="Enter valid label name">
+  
+          <div class="field_empty">! Enter valid label name</div>
+  
+          <div class="btns-wrapper">
+            <button type="button" data-newItem-btn-cancel> Cancel </button>
+            <button type="submit" data-newItem-btn-save> Save </button>
+          </div>
+        </form>
 
-        <div class="btns-wrapper">
-          <button type="button" data-newItem-btn-cancel> Cancel </button>
-          <button type="submit" data-newItem-btn-save> Save </button>
-        </div>
-      </form>
-
-      <ul class="profy__sidepanel__nav--labels-list" data-label-list>
-
-        <% if(pageInfo.allLabels !== null) { %>
-
-          <% for(const item of pageInfo.allLabels) { %> 
-            
-            <li class="profy__sidepanel__nav--labels-listItem" data-label-id="<%= item._id %>" data-label-list-item
-              style="--rndm-clr:<%= item.color %>" title="<%= item.name %>">
-
-              <span class="profy__sidepanel__nav--labels-listItem--name">
-                <%= item.name %>
-              </span>
-    
-              <div style="cursor: pointer" data-label-delete-icon>
-                <span style="pointer-events: none;">
-                  &#10006;
+        <ul class="profy__sidepanel__nav--labels-list" data-label-list>
+  
+          <% if(pageInfo.allLabels !== null) { %>
+  
+            <% for(const item of pageInfo.allLabels) { %> 
+              
+              <li class="profy__sidepanel__nav--labels-listItem" data-label-id="<%= item._id %>" data-label-list-item
+                style="--rndm-clr:<%= item.color %>" title="<%= item.name %>">
+  
+                <span class="profy__sidepanel__nav--labels-listItem--name">
+                  <%= item.name %>
                 </span>
-              </div>
-            </li>
-    
+      
+                <div style="cursor: pointer" data-label-delete-icon>
+                  <span style="pointer-events: none;">
+                    &#10006;
+                  </span>
+                </div>
+              </li>
+      
+            <% } %> 
+      
           <% } %> 
-    
-        <% } %> 
-        
-      </ul>
+          
+        </ul>
+
+      <% } %> 
+
 
     </section>
       

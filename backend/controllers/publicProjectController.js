@@ -11,69 +11,44 @@ const pageInfo = {
   userName: null, theme: null, profilePic: null
 };
 
-const userFields = ['name', 'userTheme', 'profileImg', 'projects', 'labels'];
+const allSubSections = ['overview', 'ideas', 'kanban'];
 
-// '/project/:projectID/:subSection'
+
+// '/public/project/:projectID/:subSection'
 const getPublicProject = async (req, res) => {
-  const userId = req.uuid;
   const { projectID, subSection } = req.params;
-  pageInfo.projectId = projectID;
-  pageInfo.subSection = subSection;
 
-  res.json({
-    'message': 'Happy New Year 2023 💕',
-    'context': 'this route is under construction'
-  })
-  return;
+  if(!allSubSections.includes(subSection)) return res.render('404');
+  pageInfo.subSection = subSection;
+  pageInfo.projectId = projectID;
+
+  const populateSubSection = `project${subSection.replace(subSection[0], subSection[0].toUpperCase())}`;
+
+  const projectFields = ['projectOverview', 'isPublic', 'createdBy', populateSubSection];
 
   try {
-    const foundUser = await Users.findOne({ uuid: userId }, userFields);
+    const foundProject = await Projects.findById(projectID, [...new Set(projectFields)]);
 
-    if(!foundUser) {
-      pageInfo.theme = 'dark';
-      pageInfo.profilePic = null;
-      pageInfo.userName = null;
-
-      pageInfo.allProjects = null;
-      pageInfo.allLabels = null;
-
-      const foundProject = await Projects.findById(projectID);
-      if(foundProject.isPublic !== true) {
-        res.render('404');
-        return;
-      }
-
-      pageInfo.project = foundProject;
-
-      console.log(pageInfo);
-
-      res.render('main', { pageInfo });
-      return;
-    }
-    
-    pageInfo.theme = (foundUser.userTheme != null) ? foundUser.userTheme : 'dark';
-    pageInfo.profilePic = (foundUser.profileImg !== null) ? foundUser.foundUser.profileImg : null;
-    pageInfo.userName = (foundUser.name !== null) ? foundUser.name : null;
-
-    const allProjects = (await foundUser.populate('projects', 'projectOverview')).projects;
-    const allLabels = (await foundUser.populate('labels')).labels;
-    
-    pageInfo.allProjects = ([...allProjects].length>0) ? [...allProjects] : null;
-    pageInfo.allLabels = ([...allLabels].length>0) ? [...allLabels] : null;
-
-    const foundProject = await Projects.findById(projectID);
+    if(!foundProject) return res.render('404');
     if(foundProject.isPublic !== true) {
       res.render('404');
       return;
     }
 
-    pageInfo.project = foundProject;
-    console.log(pageInfo);
+    pageInfo.project = [foundProject];
 
+    if(populateSubSection === 'projectKanban') {
+      const project = (await foundProject.populate({ path: 'projectKanban.labels' }));
+      pageInfo.project = [project];
+    }
+
+    pageInfo.theme = 'dark';
+    
     res.render('main', { pageInfo });
     
   } catch (err) {
     console.log(err);
+    res.render('404');
   }
 }
 

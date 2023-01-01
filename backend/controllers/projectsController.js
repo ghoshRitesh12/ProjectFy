@@ -48,6 +48,7 @@ const createProject = async (req, res) => {
         startDate: projectStartDate
       }
     };
+
     const newProject = await Projects.create(newProjectInfo);
 
     const existingProjects = [...foundUser.projects];

@@ -1,8 +1,11 @@
 
 <% const project = (pageInfo.project !== null) ? pageInfo.project[0] : null %>
 
+<% if(pageInfo.contentEditable !== false) { %>
 <main class="profy__main" data-project-id="<%= (project._id !== null) ? project._id : null %>" data-section>
-
+<% } else { %> 
+<main class="profy__main">
+<% }  %> 
   <% if(pageInfo.project !== null) { %>
   
     <div class="profy__main__path-wrap">
@@ -28,149 +31,155 @@
       <div class="profy__main__header__name--createdBy">
         <span> Created by </span>
         <div class="__wrap">
-          <!-- <span data-project-createdBy>Hubert Blaine Wolfeschlegel</span> -->
           <span data-project-createdBy>
             <%= project.createdBy %>
           </span>
         </div>
       </div>
     </div>
-    <div class="profy__main__header__options--icon" data-project-options-icon>
-      <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
-        viewBox="0 0 16 16" style="pointer-events: none;">
-        <rect x="0" y="0" width="16" height="16" fill="none" stroke="none" />
-        <path fill="currentColor"
-          d="M6 9a2 2 0 0 1 1.937 1.5H13.5a.5.5 0 0 1 .09.992l-.09.008l-5.563.001a2 2 0 0 1-3.874 0L2.5 11.5a.5.5 0 0 1-.09-.992l.09-.008h1.563A2 2 0 0 1 6 9Zm4-6a2 2 0 0 1 1.937 1.5H13.5a.5.5 0 0 1 .09.992l-.09.008l-1.563.001a2 2 0 0 1-3.874 0L2.5 5.5a.5.5 0 0 1-.09-.992L2.5 4.5h5.563A2 2 0 0 1 10 3Z" />
-      </svg>
-    </div>
 
-    <section class="profy__main__header__options">
-      <div class="project__options__dropdown" data-project-options-dropdown>
-        <section class="project__options__dropdown--share" data-project-options="shareableLink"
-          data-option-action="/projects/gen-sharelink">
+    <% if(pageInfo.contentEditable !== false) { %>
 
-          <span class="project__options__dropdown--share--icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
-              viewBox="0 0 20 20">
-              <rect x="0" y="0" width="20" height="20" fill="none" stroke="none" />
-              <path fill="currentColor"
-                d="M15 13.442c-.633 0-1.204.246-1.637.642l-5.938-3.463c.046-.188.075-.384.075-.584s-.029-.395-.075-.583L13.3 6.025A2.48 2.48 0 0 0 15 6.7c1.379 0 2.5-1.121 2.5-2.5S16.379 1.7 15 1.7s-2.5 1.121-2.5 2.5c0 .2.029.396.075.583L6.7 8.212A2.485 2.485 0 0 0 5 7.537c-1.379 0-2.5 1.121-2.5 2.5s1.121 2.5 2.5 2.5a2.48 2.48 0 0 0 1.7-.675l5.938 3.463a2.339 2.339 0 0 0-.067.546A2.428 2.428 0 1 0 15 13.442z" />
-            </svg>
-          </span>
-          <span class="project__options__dropdown--share--txt">
-            Share
-          </span>
-
-        </section>
-
-        <section class="project__options__dropdown--delete" data-project-options="delete"
-          data-option-action="/projects/delete">
-
-          <span class="project__options__dropdown--delete--icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
-              viewBox="0 0 24 24">
-              <rect x="0" y="0" width="24" height="24" fill="none" stroke="none"></rect>
-              <path fill="currentColor"
-                d="M19 4h-3.5l-1-1h-5l-1 1H5v2h14M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6v12Z"></path>
-            </svg>
-          </span>
-          <span class="project__options__dropdown--delete--txt">
-            Delete project
-          </span>
-
-        </section>
+      <div class="profy__main__header__options--icon" data-project-options-icon>
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+          viewBox="0 0 16 16" style="pointer-events: none;">
+          <rect x="0" y="0" width="16" height="16" fill="none" stroke="none" />
+          <path fill="currentColor"
+            d="M6 9a2 2 0 0 1 1.937 1.5H13.5a.5.5 0 0 1 .09.992l-.09.008l-5.563.001a2 2 0 0 1-3.874 0L2.5 11.5a.5.5 0 0 1-.09-.992l.09-.008h1.563A2 2 0 0 1 6 9Zm4-6a2 2 0 0 1 1.937 1.5H13.5a.5.5 0 0 1 .09.992l-.09.008l-1.563.001a2 2 0 0 1-3.874 0L2.5 5.5a.5.5 0 0 1-.09-.992L2.5 4.5h5.563A2 2 0 0 1 10 3Z" />
+        </svg>
       </div>
-
-      <div data-project-options-backdrop aria-hidden="true" aria-label="project options dropdown backdrop"></div>
-    </section>
-
-    <!-- share project modal -->
-    <dialog data-project-share-modal>
-      <form class="share__project" action="" method="post">
-        <div class="share__project__header">
-          <p class="share__project__header--txt"> Share project </p>
-          <div class="share__project__header--cancelIcon" data-project-share-modal-close>
-            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
-              viewBox="0 0 15 15">
-              <rect x="0" y="0" width="15" height="15" fill="none" stroke="none" />
-              <path fill="currentColor"
-                d="M3.64 2.27L7.5 6.13l3.84-3.84A.92.92 0 0 1 12 2a1 1 0 0 1 1 1a.9.9 0 0 1-.27.66L8.84 7.5l3.89 3.89A.9.9 0 0 1 13 12a1 1 0 0 1-1 1a.92.92 0 0 1-.69-.27L7.5 8.87l-3.85 3.85A.92.92 0 0 1 3 13a1 1 0 0 1-1-1a.9.9 0 0 1 .27-.66L6.16 7.5L2.27 3.61A.9.9 0 0 1 2 3a1 1 0 0 1 1-1c.24.003.47.1.64.27Z" />
-            </svg>
-          </div>
-        </div>
-
-        <div class="share__project__description">
-          <p class="share__project__description__txt">
-            Anyone with the shared link can access your project
-          </p>
-          <div class="share__project__btns">
-            <button type="submit" data-share-link-submitter="getShareLink">
-              Get link
-            </button>
-          </div>
-
-          <section data-project-share-wrapper>
-            <p class="share__project__description__txt">
-              Shareable Link:
-            </p>
-            <div class="project__share-link-wrap">
-              <div data-project-share-link></div>
-              <span data-project-share-link-copy> copy </span>
-            </div>
-
-            <p class="share__project__description__txt">
-              You can choose to invalidate shared link, so other people can't access it
-            </p>
-            <div class="share__project__btns">
-              <button type="submit" data-share-link-submitter="makeShareLinkPrivate">
-                Make project private
-              </button>
-            </div>
+  
+      <section class="profy__main__header__options">
+        <div class="project__options__dropdown" data-project-options-dropdown>
+          <section class="project__options__dropdown--share" data-project-options="shareableLink"
+            data-option-action="/projects/gen-sharelink">
+  
+            <span class="project__options__dropdown--share--icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 20 20">
+                <rect x="0" y="0" width="20" height="20" fill="none" stroke="none" />
+                <path fill="currentColor"
+                  d="M15 13.442c-.633 0-1.204.246-1.637.642l-5.938-3.463c.046-.188.075-.384.075-.584s-.029-.395-.075-.583L13.3 6.025A2.48 2.48 0 0 0 15 6.7c1.379 0 2.5-1.121 2.5-2.5S16.379 1.7 15 1.7s-2.5 1.121-2.5 2.5c0 .2.029.396.075.583L6.7 8.212A2.485 2.485 0 0 0 5 7.537c-1.379 0-2.5 1.121-2.5 2.5s1.121 2.5 2.5 2.5a2.48 2.48 0 0 0 1.7-.675l5.938 3.463a2.339 2.339 0 0 0-.067.546A2.428 2.428 0 1 0 15 13.442z" />
+              </svg>
+            </span>
+            <span class="project__options__dropdown--share--txt">
+              Share
+            </span>
+  
+          </section>
+  
+          <section class="project__options__dropdown--delete" data-project-options="delete"
+            data-option-action="/projects/delete">
+  
+            <span class="project__options__dropdown--delete--icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 24 24">
+                <rect x="0" y="0" width="24" height="24" fill="none" stroke="none"></rect>
+                <path fill="currentColor"
+                  d="M19 4h-3.5l-1-1h-5l-1 1H5v2h14M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6v12Z"></path>
+              </svg>
+            </span>
+            <span class="project__options__dropdown--delete--txt">
+              Delete project
+            </span>
+  
           </section>
         </div>
-
-      </form>
-    </dialog>
-
-    <!-- delete project modal -->
-    <dialog data-project-delete-modal>
-      <form class="delete__project" action="" method="post">
-        <div class="delete__project__header">
-          <p class="delete__project__header--txt"> Delete project </p>
-          <div class="delete__project__header--cancelIcon" data-project-delete-modal-close>
-            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
-              viewBox="0 0 15 15">
-              <rect x="0" y="0" width="15" height="15" fill="none" stroke="none" />
-              <path fill="currentColor"
-                d="M3.64 2.27L7.5 6.13l3.84-3.84A.92.92 0 0 1 12 2a1 1 0 0 1 1 1a.9.9 0 0 1-.27.66L8.84 7.5l3.89 3.89A.9.9 0 0 1 13 12a1 1 0 0 1-1 1a.92.92 0 0 1-.69-.27L7.5 8.87l-3.85 3.85A.92.92 0 0 1 3 13a1 1 0 0 1-1-1a.9.9 0 0 1 .27-.66L6.16 7.5L2.27 3.61A.9.9 0 0 1 2 3a1 1 0 0 1 1-1c.24.003.47.1.64.27Z" />
-            </svg>
+  
+        <div data-project-options-backdrop aria-hidden="true" aria-label="project options dropdown backdrop"></div>
+      </section>
+  
+      <!-- share project modal -->
+      <dialog data-project-share-modal>
+        <form class="share__project" action="" method="post">
+          <div class="share__project__header">
+            <p class="share__project__header--txt"> Share project </p>
+            <div class="share__project__header--cancelIcon" data-project-share-modal-close>
+              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 15 15">
+                <rect x="0" y="0" width="15" height="15" fill="none" stroke="none" />
+                <path fill="currentColor"
+                  d="M3.64 2.27L7.5 6.13l3.84-3.84A.92.92 0 0 1 12 2a1 1 0 0 1 1 1a.9.9 0 0 1-.27.66L8.84 7.5l3.89 3.89A.9.9 0 0 1 13 12a1 1 0 0 1-1 1a.92.92 0 0 1-.69-.27L7.5 8.87l-3.85 3.85A.92.92 0 0 1 3 13a1 1 0 0 1-1-1a.9.9 0 0 1 .27-.66L6.16 7.5L2.27 3.61A.9.9 0 0 1 2 3a1 1 0 0 1 1-1c.24.003.47.1.64.27Z" />
+              </svg>
+            </div>
           </div>
-        </div>
-
-        <div class="delete__project__description">
-          <p class="delete__project__description__txt">
-            Are you sure you want to delete this project?
-          </p>
-
-          <div class="delete__project__description__btns">
-            <button type="button" data-project-delete-modal-close>Cancel</button>
-            <button type="submit">Delete</button>
+  
+          <div class="share__project__description">
+            <p class="share__project__description__txt">
+              Anyone with the shared link can access your project
+            </p>
+            <div class="share__project__btns">
+              <button type="submit" data-share-link-submitter="getShareLink">
+                Get link
+              </button>
+            </div>
+  
+            <section data-project-share-wrapper>
+              <p class="share__project__description__txt">
+                Shareable Link:
+              </p>
+              <div class="project__share-link-wrap">
+                <div data-project-share-link></div>
+                <span data-project-share-link-copy> copy </span>
+              </div>
+  
+              <p class="share__project__description__txt">
+                You can choose to invalidate shared link, so other people can't access it
+              </p>
+              <div class="share__project__btns">
+                <button type="submit" data-share-link-submitter="makeShareLinkPrivate">
+                  Make project private
+                </button>
+              </div>
+            </section>
           </div>
-        </div>
-      </form>
-    </dialog>
+  
+        </form>
+      </dialog>
+  
+      <!-- delete project modal -->
+      <dialog data-project-delete-modal>
+        <form class="delete__project" action="" method="post">
+          <div class="delete__project__header">
+            <p class="delete__project__header--txt"> Delete project </p>
+            <div class="delete__project__header--cancelIcon" data-project-delete-modal-close>
+              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 15 15">
+                <rect x="0" y="0" width="15" height="15" fill="none" stroke="none" />
+                <path fill="currentColor"
+                  d="M3.64 2.27L7.5 6.13l3.84-3.84A.92.92 0 0 1 12 2a1 1 0 0 1 1 1a.9.9 0 0 1-.27.66L8.84 7.5l3.89 3.89A.9.9 0 0 1 13 12a1 1 0 0 1-1 1a.92.92 0 0 1-.69-.27L7.5 8.87l-3.85 3.85A.92.92 0 0 1 3 13a1 1 0 0 1-1-1a.9.9 0 0 1 .27-.66L6.16 7.5L2.27 3.61A.9.9 0 0 1 2 3a1 1 0 0 1 1-1c.24.003.47.1.64.27Z" />
+              </svg>
+            </div>
+          </div>
+  
+          <div class="delete__project__description">
+            <p class="delete__project__description__txt">
+              Are you sure you want to delete this project?
+            </p>
+  
+            <div class="delete__project__description__btns">
+              <button type="button" data-project-delete-modal-close>Cancel</button>
+              <button type="submit">Delete</button>
+            </div>
+          </div>
+        </form>
+      </dialog>
+
+    <% } %> 
 
   </section>
+
+  <% const route = (pageInfo.contentEditable) ? "/project" : "/public/project" %>
 
   <div class="profy__main__section" data-active-project-section="overview">
     <div class="profy__main__section__options">
 
       <% if(pageInfo.subSection === "overview") { %> 
       <div class="profy__main__section__options--overview selected" data-project-section-options="overview"
-        data-nav="/project/<%= project._id %>/overview">
+        data-nav="<%= route %>/<%= project._id %>/overview">
       <% } else { %> 
       <div class="profy__main__section__options--overview" data-project-section-options="overview"
-        data-nav="/project/<%= project._id %>/overview">
+        data-nav="<%= route %>/<%= project._id %>/overview">
       <% } %> 
         <span data-project-section-options-icon>
           <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
@@ -189,10 +198,10 @@
 
       <% if(pageInfo.subSection === "ideas") { %> 
       <div class="profy__main__section__options--ideas selected" data-project-section-options="ideas"
-        data-nav="/project/<%= project._id %>/ideas">
+        data-nav="<%= route %>/<%= project._id %>/ideas">
       <% } else { %> 
       <div class="profy__main__section__options--ideas" data-project-section-options="ideas"
-        data-nav="/project/<%= project._id %>/ideas">
+        data-nav="<%= route %>/<%= project._id %>/ideas">
       <% } %>
         <span data-project-section-options-icon>
           <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
@@ -210,10 +219,10 @@
 
       <% if(pageInfo.subSection === "kanban") { %> 
       <div class="profy__main__section__options--kanban selected" data-project-section-options="kanban"
-        data-nav="/project/<%= project._id %>/kanban">
+        data-nav="<%= route %>/<%= project._id %>/kanban">
       <% } else { %> 
       <div class="profy__main__section__options--kanban" data-project-section-options="kanban"
-        data-nav="/project/<%= project._id %>/kanban">
+        data-nav="<%= route %>/<%= project._id %>/kanban">
       <% } %>
         <span data-project-section-options-icon>
           <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"

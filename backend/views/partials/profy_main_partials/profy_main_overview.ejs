@@ -1,7 +1,6 @@
 <% const project = (pageInfo.project !== null) ? pageInfo.project[0] : null %>
 
 <section class="profy__main__section--overview">
-  <!-- project/665267352/overview/edit -->
   <form class="section--overview__form" method="post" data-overview-field-change="">
     <!-- name & date wrapper -->
     <div class="section--overview__form__name-date--wrap">
@@ -12,17 +11,22 @@
             value="<%= project.projectOverview.name %>" data-overview-field="name" readonly />
         </label>
 
-        <section class="overview__change-btn">
-          <button class="overview__edit-btn" type="button" data-overview-edit-btn>
-            Rename
-          </button>
-          <button class="overview__cancel-btn" type="button" data-overview-cancel-btn>
-            Cancel
-          </button>
-          <button id="overview-save-btn" type="submit" data-overview-save-btn>
-            Save
-          </button>
-        </section>
+        <% if(pageInfo.contentEditable !== false) { %>
+
+          <section class="overview__change-btn">
+            <button class="overview__edit-btn" type="button" data-overview-edit-btn>
+              Rename
+            </button>
+            <button class="overview__cancel-btn" type="button" data-overview-cancel-btn>
+              Cancel
+            </button>
+            <button id="overview-save-btn" type="submit" data-overview-save-btn>
+              Save
+            </button>
+          </section>
+
+        <% } %> 
+
       </section>
 
       <section class="section--overview__form--date-wrap">
@@ -33,47 +37,53 @@
         <div class="section--overview__form--date">
           <label>
             Start Date
-            <!-- max = end date -->
             <input class="section--overview__form--date__field" type="date" name="startDate"
               data-overview-field="startDate" readonly
               value="<%= project.projectOverview.startDate %>" max="<%= project.projectOverview.endDate %>" />
-              <!-- data-overview-field="startDate" value="2022-08-01" max="" readonly /> -->
           </label>
 
-          <section class="overview__change-btn">
-            <button class="overview__edit-btn" type="button" data-overview-edit-btn>
-              Modify
-            </button>
-            <button class="overview__cancel-btn" type="button" data-overview-cancel-btn>
-              Cancel
-            </button>
-            <button id="overview-save-btn" type="submit" data-overview-save-btn>
-              Save
-            </button>
-          </section>
+          <% if(pageInfo.contentEditable !== false) { %>
+
+            <section class="overview__change-btn">
+              <button class="overview__edit-btn" type="button" data-overview-edit-btn>
+                Modify
+              </button>
+              <button class="overview__cancel-btn" type="button" data-overview-cancel-btn>
+                Cancel
+              </button>
+              <button id="overview-save-btn" type="submit" data-overview-save-btn>
+                Save
+              </button>
+            </section>
+
+          <% } %> 
+
         </div>
 
         <div class="section--overview__form--date">
           <label title="can't precede start date">
             Due Date
-            <!-- min = start date -->
             <input class="section--overview__form--date__field" name="endDate" type="date"
               data-overview-field="endDate" readonly
               value="<%= project.projectOverview.endDate %>" min="<%= project.projectOverview.startDate %>" />
-              <!-- data-overview-field="endDate" value="2022-12-31" min="" readonly /> -->
           </label>
 
-          <section class="overview__change-btn">
-            <button class="overview__edit-btn" type="button" data-overview-edit-btn>
-              Modify
-            </button>
-            <button class="overview__cancel-btn" type="button" data-overview-cancel-btn>
-              Cancel
-            </button>
-            <button id="overview-save-btn" type="submit" data-overview-save-btn>
-              Save
-            </button>
-          </section>
+          <% if(pageInfo.contentEditable !== false) { %>
+
+            <section class="overview__change-btn">
+              <button class="overview__edit-btn" type="button" data-overview-edit-btn>
+                Modify
+              </button>
+              <button class="overview__cancel-btn" type="button" data-overview-cancel-btn>
+                Cancel
+              </button>
+              <button id="overview-save-btn" type="submit" data-overview-save-btn>
+                Save
+              </button>
+            </section>
+
+          <% } %> 
+
         </div>
       </section>
     </div>
@@ -86,17 +96,22 @@
           readonly><%= (project.projectOverview.goals) ? project.projectOverview.goals : '' %></textarea>
       </label>
 
-      <section class="overview__change-btn">
-        <button class="overview__edit-btn" type="button" data-overview-edit-btn>
-          Modify goal
-        </button>
-        <button class="overview__cancel-btn" type="button" data-overview-cancel-btn>
-          Cancel
-        </button>
-        <button id="overview-save-btn" type="submit" data-overview-save-btn>
-          Save
-        </button>
-      </section>
+      <% if(pageInfo.contentEditable !== false) { %>
+
+        <section class="overview__change-btn">
+          <button class="overview__edit-btn" type="button" data-overview-edit-btn>
+            Modify goal
+          </button>
+          <button class="overview__cancel-btn" type="button" data-overview-cancel-btn>
+            Cancel
+          </button>
+          <button id="overview-save-btn" type="submit" data-overview-save-btn>
+            Save
+          </button>
+        </section>
+
+      <% } %> 
+
     </section>
 
   </form>
