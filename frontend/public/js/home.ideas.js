@@ -127,7 +127,7 @@ addGlobalEventListener('submit', '.ideas-form', async e => {
       return;
     } 
 
-    $('.ideas-form__submit--btn').textContent = 'Create idea';
+    $('.ideas-form__submit--btn').textContent = '...Just a sec';
 
     const data = resp && (await resp.json());
     if(data.status !== 'ok') {
@@ -140,6 +140,11 @@ addGlobalEventListener('submit', '.ideas-form', async e => {
   } catch (error) {
     console.log(error);
   }
+})
+
+window.addEventListener('load', e => {
+  if($('.profy__main__section--ideas') !== null)
+    $('.ideas-form__submit--btn').textContent = 'Create idea';
 })
 
 //----</profy_ideas form_section>
@@ -246,6 +251,7 @@ addGlobalEventListener('submit', '.edit__idea', async e => {
 
 // idea delete option
 addGlobalEventListener('click', '[data-idea-options="delete"]', e => {
+  $('.delete__idea__description__btns [type="submit"]').textContent = 'Delete';
   const ideaItem = e.target.closest('.idea');
   const ideaItemId = ideaItem.dataset.ideaId;
   const formAction = `${location.href}/delete/${ideaItemId}`;
@@ -279,7 +285,7 @@ addGlobalEventListener('submit', '.delete__idea', async e => {
       return;
     } 
 
-    $('.delete__idea__description__btns [type="submit"]').textContent = 'Delete';
+    $('.delete__idea__description__btns [type="submit"]').textContent = '...Just a sec';
 
     const data = resp && (await resp.json());
     if(data.status !== 'ok') {
