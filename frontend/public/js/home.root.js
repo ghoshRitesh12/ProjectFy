@@ -52,6 +52,20 @@ addGlobalEventListener('click', '[data-mode]', async e => {
   }
 })
 
+
+// get search results ready ajax req
+addGlobalEventListener('input', '[data-search-input]', async e => {
+  try {
+    const url = `/api/v1/ready-query-src`;
+    const resp = await fetch(url, { method: 'POST' });
+    console.log(resp);
+
+  } catch (err) {
+    console.log(err)
+  }
+}, { once: true })
+
+
 const populateSearchResults = (results, searchedQuery) => {
   $('.search_results').innerHTML = '';
 
@@ -80,7 +94,6 @@ const populateSearchResults = (results, searchedQuery) => {
   $('.search_results-wrapper').classList.add('show');
 
 }
-
 // search submit event
 addGlobalEventListener('submit', '[data-search-form]', async e => {
   e.preventDefault();
@@ -102,21 +115,15 @@ addGlobalEventListener('submit', '[data-search-form]', async e => {
   }
 })
 
+
+// search field input event
 addGlobalEventListener('input', '[data-search-input]', e => {
   const value = e.target.value;
   $('[data-search-field-close]').classList.toggle('show', value);
 
-
   if(value === '') {
     $('.search_results-wrapper').classList.remove('show');
   }
-  
-
-  // if($('.search_results').children <= 0) {
-  // }
-
-  // console.dir($('.search_results'));
-
 })
 
 addGlobalEventListener('click', '[data-search-field-close]', e => {
@@ -158,6 +165,8 @@ addGlobalEventListener('click', '[data-newItem-btn-cancel]', e => {
   itemForm.classList.add('hidden');
 })
 
+const addZero = time => time<=9 ? `0${time}`: time;
+
 // form submit event to create projects and labels
 addGlobalEventListener('submit', '.newItemForm', async e => {
   e.preventDefault();
@@ -167,7 +176,7 @@ addGlobalEventListener('submit', '.newItemForm', async e => {
 
   const itemAction = {
     project() {
-      const currentDate = `${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDate()}`;
+      const currentDate = `${new Date().getFullYear()}-${addZero(new Date().getMonth()+1)}-${addZero(new Date().getDate())}`;
       const projectName = e.target.querySelector('input[name="newProjectName"]').value.trim();
       const projectStartDate = currentDate;
       if(projectName === '') {
@@ -201,7 +210,7 @@ addGlobalEventListener('submit', '.newItemForm', async e => {
   }
 
   const itemInfo = itemAction[itemType]();
-  if(itemInfo == null) return;
+  if(itemInfo === null) return;
 
   try {
     const resp = await fetch(formAction, {
