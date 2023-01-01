@@ -10,7 +10,7 @@
 
   overflow: auto hidden;
   
-  padding-block: 2em 6em;
+  padding-block: 2em 12em;
 
   @include breakpoint(medium) {
     // display: none;
@@ -24,13 +24,10 @@
 
 
   & .kanban-section {
-    // flex: 0 1 19rem;
     flex: 1 1;
-    
     margin-inline: auto;
     max-width: 20rem;
     width: 100%;
-    // min-width: 18rem;
     
     margin-bottom: auto;
     font-size: 16px;
@@ -61,8 +58,6 @@
 
         font-size: clamp(.98rem, 3.2vmin, 1.1rem);
 
-        // font-family: $font-primary-u;
-        // border: 1px solid salmon;
         &--name { 
           position: relative;
           margin-left: .3rem;
@@ -143,12 +138,10 @@
 
       &__item {
         position: relative;
-
         margin-top: .7rem;
         padding: 1em;
         background-color: var(--clr-sidebar-bg);
         border-radius: $borders;
-        // overflow-x: hidden;
 
         &__head {
           display: flex;
@@ -183,7 +176,7 @@
             margin-left: auto;
           }
           & [data-kanban-item-option-icon] {
-            font-size: .9rem;
+            font-size: 1rem;
             padding: .3em .1em .7em .6em;
             cursor: pointer;
             color: var(--clr-primary-icon);
@@ -199,7 +192,7 @@
             isolation: isolate;
 
             margin: .8rem 1rem 0 0;
-            padding-block: .3rem;
+            padding-block: .5rem;
             background-color: var(--clr-primary-bg);
             border: 1px solid var(--clr-separator-brdr);
             overflow: hidden;
@@ -217,7 +210,7 @@
 
             
             & [data-kanban-item-option] {
-              padding: .4em 1em;
+              padding: .5em 1em;
               font-size: .95rem;
               cursor: pointer;
               transition: .1s ease;
@@ -297,11 +290,13 @@
         font-size: 1.1rem;
       }
       &--cancelIcon {
-        display: block;
+        display: grid;
+        place-items: center;
+
         margin-inline: auto 0;
-        padding: .3em;
         font-size: 1.1rem;
         
+        padding: .45em;
         background-color: var(--clr-separator-brdr);
         color: var(--clr-inactive-txt);
         border-radius: 50%;
@@ -415,7 +410,7 @@
 
       &__content {
         display: block;
-        padding: .4em .6em;
+        padding: .5em .6em;
         max-width: 100%;
         width: 100%;
 
@@ -432,7 +427,6 @@
           outline: 2px solid var(--clr-separator-brdr);
         }
       }
-
     }
 
     &__description {
@@ -475,14 +469,13 @@
     }
 
     &__save {
-      font-size: 1rem;
-      margin-block: 1.5rem 1rem;
+      font-size: 1.02rem;
+      margin-block: 2rem 1rem;
       margin-inline: 0 .8rem;
-      // border: 1px solid white;
 
       &-btn {
         display: block;
-        padding: .35em 2em;
+        padding: .4em 2em;
 
         margin-inline: auto 0;
 
@@ -521,31 +514,36 @@
 
     overflow: hidden;
     border-radius: .8rem;
+    // background-color: var(--clr-primary-bg);
     background-color: var(--clr-sidebar-bg);
     border: 1px solid var(--clr-separator-brdr);
 
     &__header {
       display: flex;
       align-items: center;
+
       padding-block: .5em;
       padding-inline: 1em;
       border-bottom: 1px solid var(--clr-separator-brdr);
 
       &--txt {
         margin-left: auto;
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         word-spacing: .2rem;
         color: var(--clr-primary-txt);
       }
       &--cancelIcon {
-        display: block;
+        display: grid;
+        place-items: center;
+
         margin-inline: auto 0;
-        padding: .3em;
         font-size: 1.1rem;
+        
+        padding: .45em;
+        background-color: var(--clr-separator-brdr);
+        color: var(--clr-inactive-txt);
         border-radius: 50%;
         cursor: pointer;
-        color: var(--clr-inactive-txt);
-        background-color: var(--clr-separator-brdr);
         & > * { pointer-events: none; }
       }
     }
@@ -554,7 +552,7 @@
       display: block;
       position: relative;
 
-      margin-block: .8rem 1rem;
+      margin-block: 1rem;
       padding-inline: 1rem;
       max-width: 100%;
       width: 100%;
@@ -566,11 +564,12 @@
       }
       &__btns {
         display: block;
+        font-size: 1.02rem;
         max-width: fit-content;
         margin-left: auto;
         
         & button {
-          padding: .25em .8em;
+          padding: .4em .8em;
           border-radius: $borders;
           background-color: transparent;
           color: var(--clr-primary-txt);

@@ -200,14 +200,17 @@ body {
         color: var(--clr-primary-txt);
       }
       &--cancelIcon {
-        display: block;
+        display: grid;
+        place-items: center;
+
         margin-inline: auto 0;
-        padding: .3em;
         font-size: 1.1rem;
+        
+        padding: .45em;
+        background-color: var(--clr-separator-brdr);
+        color: var(--clr-inactive-txt);
         border-radius: 50%;
         cursor: pointer;
-        color: var(--clr-inactive-txt);
-        background-color: var(--clr-separator-brdr);
         & > * { pointer-events: none; }
       }
     }
@@ -216,23 +219,24 @@ body {
       display: block;
       position: relative;
 
-      margin-block: .8rem 1rem;
+      margin-block: 1rem;
       padding-inline: 1rem;
       max-width: 100%;
       width: 100%;
 
       &__txt {
-        line-height: 1.7;
+        line-height: 1.6;
         color: var(--clr-primary-txt);
-        margin-bottom: .7rem;
+        margin-bottom: 1rem;
       }
       &__btns {
         display: block;
+        font-size: 1.02rem;
         max-width: fit-content;
         margin-left: auto;
         
         & button {
-          padding: .25em .8em;
+          padding: .4em .8em;
           border-radius: $borders;
           background-color: transparent;
           color: var(--clr-primary-txt);
