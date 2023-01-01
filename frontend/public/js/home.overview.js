@@ -98,12 +98,12 @@ window.addEventListener('load', () => {
 
   if($('.profy__main__section--overview') !== null) {
     const eT = elaspedTime(
-      $('[data-overview-field="endDate"]').value,
+      $('[data-overview-field="endDate"]').value || 0,
       $('[data-overview-field="startDate"]').value
     );
     $('[data-time-progress-value]').innerText = eT.time;
     $('.circleThumb--time').style.setProperty('--value', eT.time);
-    $('[data-time-progress-daysLeft]').innerText = eT.days;
+    $('[data-time-progress-daysLeft]').innerText = Math.floor(eT.days);
   }
 
 
