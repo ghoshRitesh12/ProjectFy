@@ -249,7 +249,7 @@ textarea {
   min-width: 0;
   position: absolute;
   z-index: 802;
-  top: 4.2rem;
+  top: 4.5rem;
   right: 0;
   isolation: isolate;
   padding: 0.7em 0;
@@ -262,7 +262,7 @@ textarea {
       -ms-user-select: none;
           user-select: none;
   overflow: hidden;
-  --option-size: clamp(.9rem, 3.2vmin, 1rem);
+  --option-size: clamp(1rem, 3.2vmin, 1rem);
 }
 @media (min-width: 40em) {
   .profy__main__header__options .project__options__dropdown {
@@ -391,14 +391,15 @@ textarea {
   color: var(--clr-primary-txt);
 }
 .profy__main__header .delete__project__header--cancelIcon {
-  display: block;
+  display: grid;
+  place-items: center;
   margin-inline: auto 0;
-  padding: 0.3em;
   font-size: 1.1rem;
+  padding: 0.45em;
+  background-color: var(--clr-separator-brdr);
+  color: var(--clr-inactive-txt);
   border-radius: 50%;
   cursor: pointer;
-  color: var(--clr-inactive-txt);
-  background-color: var(--clr-separator-brdr);
 }
 .profy__main__header .delete__project__header--cancelIcon > * {
   pointer-events: none;
@@ -406,7 +407,7 @@ textarea {
 .profy__main__header .delete__project__description {
   display: block;
   position: relative;
-  margin-block: 0.8rem 1rem;
+  margin-block: 1rem;
   padding-inline: 1rem;
   max-width: 100%;
   width: 100%;
@@ -418,13 +419,14 @@ textarea {
 }
 .profy__main__header .delete__project__description__btns {
   display: block;
+  font-size: 1.02rem;
   max-width: -webkit-fit-content;
   max-width: -moz-fit-content;
   max-width: fit-content;
   margin-left: auto;
 }
 .profy__main__header .delete__project__description__btns button {
-  padding: 0.25em 0.8em;
+  padding: 0.4em 0.8em;
   border-radius: 0.5rem;
   background-color: transparent;
   color: var(--clr-primary-txt);
@@ -489,14 +491,15 @@ textarea {
   color: var(--clr-primary-txt);
 }
 .profy__main__header .share__project__header--cancelIcon {
-  display: block;
+  display: grid;
+  place-items: center;
   margin-inline: auto 0;
-  padding: 0.3em;
   font-size: 1.1rem;
+  padding: 0.45em;
+  background-color: var(--clr-separator-brdr);
+  color: var(--clr-inactive-txt);
   border-radius: 50%;
   cursor: pointer;
-  color: var(--clr-inactive-txt);
-  background-color: var(--clr-separator-brdr);
 }
 .profy__main__header .share__project__header--cancelIcon > * {
   pointer-events: none;
@@ -518,10 +521,10 @@ textarea {
   max-width: -webkit-fit-content;
   max-width: -moz-fit-content;
   max-width: fit-content;
-  margin: 0 0 1rem auto;
+  margin: 0.2rem 0 1rem auto;
 }
 .profy__main__header .share__project__btns button {
-  padding: 0.25em 0.8em;
+  padding: 0.4em 0.8em;
   border-radius: 0.5rem;
   background-color: transparent;
   color: var(--clr-primary-txt);
@@ -563,8 +566,9 @@ textarea {
   display: flex;
 }
 .profy__main__header .share__project .project__share-link-wrap [data-project-share-link] {
-  padding: 0.7em 1.2em 0.7em 1em;
-  font-size: 0.85rem;
+  padding-block: 0.85em;
+  padding-inline: 1.2em 1em;
+  font-size: 0.9rem;
   white-space: nowrap;
   overflow: auto hidden;
   color: var(--clr-primary-txt);
@@ -577,7 +581,7 @@ textarea {
   min-width: -webkit-fit-content;
   min-width: -moz-fit-content;
   min-width: fit-content;
-  padding: 0.5em 1em;
+  padding: 0.7em 1em;
   margin-right: 0.05rem;
   font-size: 0.8rem;
   font-weight: 500;
@@ -1017,7 +1021,7 @@ textarea {
   flex-wrap: wrap;
   gap: 3rem;
   justify-content: center;
-  padding-block: 2em 5em;
+  padding-block: 2em 7em;
 }
 @media (min-width: 40em) {
   .profy__main__section--ideas {
@@ -1070,8 +1074,10 @@ textarea {
   transition: 0.1s ease;
   outline: 1px solid var(--clr-separator-brdr);
 }
-.profy__main__section--ideas--formContainer .reveal:hover {
-  background-color: var(--clr-separator-brdr);
+@media (min-width: 40em) {
+  .profy__main__section--ideas--formContainer .reveal:hover {
+    background-color: var(--clr-separator-brdr);
+  }
 }
 .profy__main__section--ideas--formContainer .reveal > * {
   pointer-events: none;
@@ -1281,6 +1287,7 @@ textarea {
   max-width: -moz-fit-content;
   max-width: fit-content;
   cursor: pointer;
+  font-size: 1.08rem;
   color: var(--clr-primary-icon);
 }
 .profy__main__section--ideas--ideasContainer .idea .idea__options--wrap .idea__options--icon > * {
@@ -1289,7 +1296,7 @@ textarea {
 .profy__main__section--ideas--ideasContainer .idea .idea__options--wrap .idea__options {
   position: absolute;
   right: 0;
-  margin: 3rem 0.5rem 0 0;
+  margin: 3.5rem 0.9rem 0 0;
   padding-block: 0.4rem;
   overflow: hidden;
   border-radius: 0.5rem;
@@ -1306,7 +1313,7 @@ textarea {
   transform: translateY(0);
 }
 .profy__main__section--ideas--ideasContainer .idea .idea__options--wrap .idea__options--edit, .profy__main__section--ideas--ideasContainer .idea .idea__options--wrap .idea__options--delete {
-  padding-block: 0.3em;
+  padding-block: 0.5em;
   padding-inline: 1em 1.5em;
   cursor: pointer;
   transition: 0.1s ease;
@@ -1436,10 +1443,11 @@ textarea {
   font-size: 1.1rem;
 }
 .profy__main__section--ideas--ideasContainer .edit__idea__header--cancelIcon {
-  display: block;
+  display: grid;
+  place-items: center;
   margin-inline: auto 0;
   font-size: 1.1rem;
-  padding: 0.3em;
+  padding: 0.45em;
   background-color: var(--clr-separator-brdr);
   color: var(--clr-inactive-txt);
   border-radius: 50%;
@@ -1451,7 +1459,7 @@ textarea {
 .profy__main__section--ideas--ideasContainer .edit__idea__description {
   display: block;
   position: relative;
-  margin-block: 0.8rem 1.2rem;
+  margin-block: 1.2rem;
   padding-inline: 0.7rem;
   max-width: 100%;
   width: 100%;
@@ -1497,7 +1505,7 @@ textarea {
   display: block;
 }
 .profy__main__section--ideas--ideasContainer .edit__idea__img--url {
-  padding: 0.4em 0.8em;
+  padding: 0.5em 0.8em;
   width: 100%;
   border-radius: 0.5rem;
   color: var(--clr-primary-txt);
@@ -1586,13 +1594,13 @@ textarea {
   outline: 2px solid var(--clr-separator-brdr);
 }
 .profy__main__section--ideas--ideasContainer .edit__idea__save {
-  font-size: 1rem;
+  font-size: 1.02rem;
   margin-block: 2rem 1rem;
   margin-inline: 0 0.8rem;
 }
 .profy__main__section--ideas--ideasContainer .edit__idea__save-btn {
   display: block;
-  padding: 0.35em 2em;
+  padding: 0.4em 2em;
   margin-inline: auto 0;
   color: var(--prim-btn-clr);
   background-color: var(--prim-btn-clr-bg);
@@ -1649,14 +1657,15 @@ textarea {
   color: var(--clr-primary-txt);
 }
 .profy__main__section--ideas--ideasContainer .delete__idea__header--cancelIcon {
-  display: block;
+  display: grid;
+  place-items: center;
   margin-inline: auto 0;
-  padding: 0.3em;
   font-size: 1.1rem;
+  padding: 0.45em;
+  background-color: var(--clr-separator-brdr);
+  color: var(--clr-inactive-txt);
   border-radius: 50%;
   cursor: pointer;
-  color: var(--clr-inactive-txt);
-  background-color: var(--clr-separator-brdr);
 }
 .profy__main__section--ideas--ideasContainer .delete__idea__header--cancelIcon > * {
   pointer-events: none;
@@ -1664,25 +1673,26 @@ textarea {
 .profy__main__section--ideas--ideasContainer .delete__idea__description {
   display: block;
   position: relative;
-  margin-block: 0.8rem 1rem;
+  margin-block: 1rem;
   padding-inline: 1rem;
   max-width: 100%;
   width: 100%;
 }
 .profy__main__section--ideas--ideasContainer .delete__idea__description__txt {
-  line-height: 1.7;
+  line-height: 1.6;
   color: var(--clr-primary-txt);
-  margin-bottom: 0.7rem;
+  margin-bottom: 1rem;
 }
 .profy__main__section--ideas--ideasContainer .delete__idea__description__btns {
   display: block;
+  font-size: 1.02rem;
   max-width: -webkit-fit-content;
   max-width: -moz-fit-content;
   max-width: fit-content;
   margin-left: auto;
 }
 .profy__main__section--ideas--ideasContainer .delete__idea__description__btns button {
-  padding: 0.25em 0.8em;
+  padding: 0.4em 0.8em;
   border-radius: 0.5rem;
   background-color: transparent;
   color: var(--clr-primary-txt);
@@ -1709,7 +1719,7 @@ textarea {
   flex-direction: column;
   gap: 3rem;
   overflow: auto hidden;
-  padding-block: 2em 6em;
+  padding-block: 2em 12em;
 }
 @media (min-width: 40em) {
   .profy__main__section--kanban {
@@ -1871,7 +1881,7 @@ textarea {
   margin-left: auto;
 }
 .profy__main__section--kanban .kanban-section .kanban-list__item__head [data-kanban-item-option-icon] {
-  font-size: 0.9rem;
+  font-size: 1rem;
   padding: 0.3em 0.1em 0.7em 0.6em;
   cursor: pointer;
   color: var(--clr-primary-icon);
@@ -1886,7 +1896,7 @@ textarea {
   z-index: 101;
   isolation: isolate;
   margin: 0.8rem 1rem 0 0;
-  padding-block: 0.3rem;
+  padding-block: 0.5rem;
   background-color: var(--clr-primary-bg);
   border: 1px solid var(--clr-separator-brdr);
   overflow: hidden;
@@ -1902,7 +1912,7 @@ textarea {
   transform: translateY(0);
 }
 .profy__main__section--kanban .kanban-section .kanban-list__item__head .kanban-item__options [data-kanban-item-option] {
-  padding: 0.4em 1em;
+  padding: 0.5em 1em;
   font-size: 0.95rem;
   cursor: pointer;
   transition: 0.1s ease;
@@ -1976,10 +1986,11 @@ textarea {
   font-size: 1.1rem;
 }
 .profy__main__section--kanban .edit__kanban__header--cancelIcon {
-  display: block;
+  display: grid;
+  place-items: center;
   margin-inline: auto 0;
-  padding: 0.3em;
   font-size: 1.1rem;
+  padding: 0.45em;
   background-color: var(--clr-separator-brdr);
   color: var(--clr-inactive-txt);
   border-radius: 50%;
@@ -2092,7 +2103,7 @@ textarea {
 }
 .profy__main__section--kanban .edit__kanban__title__content {
   display: block;
-  padding: 0.4em 0.6em;
+  padding: 0.5em 0.6em;
   max-width: 100%;
   width: 100%;
   background-color: var(--clr-secondary-bg);
@@ -2141,13 +2152,13 @@ textarea {
   background-color: var(--clr-ternary-bg);
 }
 .profy__main__section--kanban .edit__kanban__save {
-  font-size: 1rem;
-  margin-block: 1.5rem 1rem;
+  font-size: 1.02rem;
+  margin-block: 2rem 1rem;
   margin-inline: 0 0.8rem;
 }
 .profy__main__section--kanban .edit__kanban__save-btn {
   display: block;
-  padding: 0.35em 2em;
+  padding: 0.4em 2em;
   margin-inline: auto 0;
   color: var(--prim-btn-clr);
   background-color: var(--prim-btn-clr-bg);
@@ -2199,19 +2210,20 @@ textarea {
 }
 .profy__main__section--kanban .delete__kanban__header--txt {
   margin-left: auto;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   word-spacing: 0.2rem;
   color: var(--clr-primary-txt);
 }
 .profy__main__section--kanban .delete__kanban__header--cancelIcon {
-  display: block;
+  display: grid;
+  place-items: center;
   margin-inline: auto 0;
-  padding: 0.3em;
   font-size: 1.1rem;
+  padding: 0.45em;
+  background-color: var(--clr-separator-brdr);
+  color: var(--clr-inactive-txt);
   border-radius: 50%;
   cursor: pointer;
-  color: var(--clr-inactive-txt);
-  background-color: var(--clr-separator-brdr);
 }
 .profy__main__section--kanban .delete__kanban__header--cancelIcon > * {
   pointer-events: none;
@@ -2219,7 +2231,7 @@ textarea {
 .profy__main__section--kanban .delete__kanban__description {
   display: block;
   position: relative;
-  margin-block: 0.8rem 1rem;
+  margin-block: 1rem;
   padding-inline: 1rem;
   max-width: 100%;
   width: 100%;
@@ -2231,13 +2243,14 @@ textarea {
 }
 .profy__main__section--kanban .delete__kanban__description__btns {
   display: block;
+  font-size: 1.02rem;
   max-width: -webkit-fit-content;
   max-width: -moz-fit-content;
   max-width: fit-content;
   margin-left: auto;
 }
 .profy__main__section--kanban .delete__kanban__description__btns button {
-  padding: 0.25em 0.8em;
+  padding: 0.4em 0.8em;
   border-radius: 0.5rem;
   background-color: transparent;
   color: var(--clr-primary-txt);
@@ -2666,7 +2679,7 @@ textarea {
   width: 100%;
 }
 .profy__settings .details__email [data-details-email-wrap]::before {
-  content: "✉";
+  content: "📧";
   display: block;
   position: absolute;
   top: 50%;
@@ -2678,7 +2691,7 @@ textarea {
 }
 .profy__settings .details__email [data-details-email-wrap] [data-settings-details-field] {
   width: 100%;
-  padding-inline: 2.5em 0;
+  padding-inline: 2.7em 0;
 }
 .profy__settings .details__password {
   display: flex;
@@ -2834,14 +2847,15 @@ textarea {
   color: var(--clr-primary-txt);
 }
 .profy__settings .delete__account__header--cancelIcon {
-  display: block;
+  display: grid;
+  place-items: center;
   margin-inline: auto 0;
-  padding: 0.3em;
   font-size: 1.1rem;
+  padding: 0.45em;
+  background-color: var(--clr-separator-brdr);
+  color: var(--clr-inactive-txt);
   border-radius: 50%;
   cursor: pointer;
-  color: var(--clr-inactive-txt);
-  background-color: var(--clr-separator-brdr);
 }
 .profy__settings .delete__account__header--cancelIcon > * {
   pointer-events: none;
@@ -2849,25 +2863,26 @@ textarea {
 .profy__settings .delete__account__description {
   display: block;
   position: relative;
-  margin-block: 0.8rem 1rem;
+  margin-block: 1rem;
   padding-inline: 1rem;
   max-width: 100%;
   width: 100%;
 }
 .profy__settings .delete__account__description__txt {
-  line-height: 1.5;
+  line-height: 1.7;
   color: var(--clr-primary-txt);
   margin-bottom: 0.7rem;
 }
 .profy__settings .delete__account__description__btns {
   display: block;
+  font-size: 1.02rem;
   max-width: -webkit-fit-content;
   max-width: -moz-fit-content;
   max-width: fit-content;
   margin-left: auto;
 }
 .profy__settings .delete__account__description__btns button {
-  padding: 0.25em 0.8em;
+  padding: 0.4em 0.8em;
   border-radius: 0.5rem;
   background-color: transparent;
   color: var(--clr-primary-txt);
@@ -2993,7 +3008,7 @@ textarea {
   max-width: fit-content;
 }
 .profy__projects .newItemForm .btns-wrapper button {
-  padding: 0.28em 0.8em;
+  padding: 0.4em 0.8em;
   border-radius: 0.7rem;
   border: none;
   color: var(--clr-primary-txt);
@@ -3228,7 +3243,7 @@ textarea {
   max-width: fit-content;
 }
 .profy__labels .newItemForm .btns-wrapper button {
-  padding: 0.28em 0.8em;
+  padding: 0.4em 0.8em;
   border-radius: 0.7rem;
   border: none;
   color: var(--clr-primary-txt);
@@ -3319,4 +3334,4 @@ textarea {
 }
 .profy__labels .label [data-label-delete-icon] > * {
   pointer-events: none;
-}/*# sourceMappingURL=homeStyles.css.map */pingURL=homeStyles.css.map */
+}/*# sourceMappingURL=homeStyles.css.map */

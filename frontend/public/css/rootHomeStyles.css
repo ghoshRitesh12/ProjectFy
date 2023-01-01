@@ -280,14 +280,15 @@ body ::selection {
   color: var(--clr-primary-txt);
 }
 .profy .delete__label__header--cancelIcon {
-  display: block;
+  display: grid;
+  place-items: center;
   margin-inline: auto 0;
-  padding: 0.3em;
   font-size: 1.1rem;
+  padding: 0.45em;
+  background-color: var(--clr-separator-brdr);
+  color: var(--clr-inactive-txt);
   border-radius: 50%;
   cursor: pointer;
-  color: var(--clr-inactive-txt);
-  background-color: var(--clr-separator-brdr);
 }
 .profy .delete__label__header--cancelIcon > * {
   pointer-events: none;
@@ -295,25 +296,26 @@ body ::selection {
 .profy .delete__label__description {
   display: block;
   position: relative;
-  margin-block: 0.8rem 1rem;
+  margin-block: 1rem;
   padding-inline: 1rem;
   max-width: 100%;
   width: 100%;
 }
 .profy .delete__label__description__txt {
-  line-height: 1.7;
+  line-height: 1.6;
   color: var(--clr-primary-txt);
-  margin-bottom: 0.7rem;
+  margin-bottom: 1rem;
 }
 .profy .delete__label__description__btns {
   display: block;
+  font-size: 1.02rem;
   max-width: -webkit-fit-content;
   max-width: -moz-fit-content;
   max-width: fit-content;
   margin-left: auto;
 }
 .profy .delete__label__description__btns button {
-  padding: 0.25em 0.8em;
+  padding: 0.4em 0.8em;
   border-radius: 0.5rem;
   background-color: transparent;
   color: var(--clr-primary-txt);
@@ -985,7 +987,7 @@ body ::selection {
   display: none;
 }
 .profy__sidepanel__nav .newItemForm input[type=text] {
-  padding: 0.3em 1em;
+  padding: 0.4em 1em;
   border: none;
   border-radius: 0.5rem;
   color: var(--clr-primary-txt);
@@ -1015,7 +1017,7 @@ body ::selection {
   max-width: fit-content;
 }
 .profy__sidepanel__nav .newItemForm .btns-wrapper button {
-  padding: 0.12em 0.7em;
+  padding: 0.3em 0.7em;
   border-radius: 0.5rem;
   border: none;
   color: var(--clr-primary-txt);
