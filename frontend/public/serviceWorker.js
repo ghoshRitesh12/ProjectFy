@@ -1,5 +1,6 @@
 const CACHE_NAME = "ProjectFy";
 const assets = [
+  '/',
   '/fonts/roboto-v30-latin-500.woff', '/fonts/roboto-v30-latin-500.woff2',
   '/fonts/roboto-v30-latin-regular.woff', '/fonts/roboto-v30-latin-regular.woff2',
   '/fonts/ubuntu-v20-latin-500.woff', '/fonts/ubuntu-v20-latin-500.woff2',
@@ -24,15 +25,15 @@ self.addEventListener('install', (e) => {
 
 // Listen for requests
 self.addEventListener('fetch', (e) => {
-  e.respondWith(
-    fetch(e.request).then(response => response)
-  );
-
   // e.respondWith(
-  //   caches.match(e.request).then(response => {
-  //     return response || fetch(e.request);
-  //   })
+  //   fetch(e.request).then(response => response)
   // );
+
+  e.respondWith(
+    caches.match(e.request).then(response => {
+      return response || fetch(e.request);
+    })
+  );
 
 });
 
