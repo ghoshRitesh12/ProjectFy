@@ -20,11 +20,12 @@ self.addEventListener('install', (e) => {
 
 // Listen for requests
 self.addEventListener('fetch', (e) => {
-  e.respondWith(
-    fetch(e.request).then(response => {
-      return response;
-    })
-  );
+  // e.respondWith(
+  //   fetch(e.request).then(response => {
+  //     console.log(response);
+  //     return response;
+  //   })
+  // );
 
   // e.respondWith(
   //   caches.match(e.request).then(response => {
