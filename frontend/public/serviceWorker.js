@@ -39,14 +39,14 @@ self.addEventListener('fetch', (e) => {
 
 
 // Activation
-self.addEventListener('activate', (e) => {
-  e.waitUntil(
-    caches.keys().then(keys => { 
-      return Promise.all(keys
-        .filter(key => key !== CACHE_NAME)
-        .map(key => caches.delete(key))
-      )
-    })
-  )
-});
+// self.addEventListener('activate', (e) => {
+//   e.waitUntil(
+//     caches.keys().then(keys => { 
+//       return Promise.all(keys
+//         .filter(key => key !== CACHE_NAME)
+//         .map(key => caches.delete(key))
+//       )
+//     })
+//   )
+// });
 
