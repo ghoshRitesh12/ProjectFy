@@ -83,12 +83,21 @@ const handleSignup = async (req, res) => {
           subject: 'ProjectFy Account Confirmation Email',
           html: `
           <h3 style="font-family: sans-serif; background-color: #333; 
-            max-width: fit-content; padding: 32px; color: #eee; border-radius: 16px;">
-            Click the link below to confirm your ProjectFy account
-            <a href="${confirmUrl}" style="color: #59caff">Link to confirm your account</a>
+            max-width: fit-content; padding: 32px; color: #eee; border-radius: 16px;
+            word-wrap: break-word; font-weight: 400;">
+
+            <div> Hi ${emailId} </div>
             <br/>
+            <div> Thank you for registering with ProjectFy </div>
+            <br/>
+            <div> Click on the following link to confirm your email address: </div>
+            <div> Link valid upto 10 mins from arrival </div>
+            <br/>
+            <div> <a href="${confirmUrl}" style="color: #59caff">${confirmUrl}</a> </div>
             <br/> 
-            Link valid upto 10 mins from arrival
+            <div> Thanks, </div>   
+            <div> Team ProjectFy </div>
+
           </h3>
           `
         });

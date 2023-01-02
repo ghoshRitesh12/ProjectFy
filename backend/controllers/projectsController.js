@@ -1,5 +1,6 @@
 const Users = require('../models/Users');
 const Projects = require('../models/Projects');
+const cloudinary = require('cloudinary').v2;
 
 const pageInfo = {
   section: 'projects',
@@ -75,10 +76,25 @@ const createProject = async (req, res) => {
 const deleteProject = async (req, res) => {
   const userId = req.uuid;
   const { projectID } = req.params;
-  // const projectID = '63a3fe179271da597ce48701';
 
   try {
     const foundUser = await Users.findOne({ uuid: userId });
+
+    const foundProject = await Projects.findById(projectID);
+    if(!foundProject) {
+      res.json({
+        'status': 'not ok',
+        'msg': 'project deletion unsuccessful',
+        'redirectTo': null
+      });
+      return;
+    }
+
+    // deleting hosted images 
+    for await (const idea of foundProject.projectIdeas) {
+      if(idea.hostedImgId !== null)
+        cloudinary.uploader.destroy(idea.hostedImgId);
+    }
 
     const existingProjects = foundUser.projects.map(i => `${i._id}`);
     const filteredProjects = existingProjects.filter(proId => proId !== projectID);
@@ -88,7 +104,7 @@ const deleteProject = async (req, res) => {
     await Projects.deleteOne({ _id: projectID });    
 
     return res.json({
-      'status': 'ok',
+      'status': 'not ok',
       'msg': 'project deletion successful',
       'redirectTo': '/'
     });

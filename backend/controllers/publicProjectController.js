@@ -1,5 +1,4 @@
 const Projects = require('../models/Projects');
-const Users = require('../models/Users');
 
 const pageInfo = {
   section: 'project',

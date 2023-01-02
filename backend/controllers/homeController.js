@@ -23,7 +23,7 @@ function getDueProjects(projects) {
       const dueTime = new Date(endDate).getTime();
       const timeLeft = (dueTime - today) / DAY_IN_MS;
       
-      if (timeLeft <= 7 || timeLeft <= 15) return item;
+      if (timeLeft <= 7 || timeLeft <= 15 || timeLeft <= 30) return item;
     });
     
     (dueProjects.length>0) ? resolve([...dueProjects]) : reject('No due projects');
@@ -42,7 +42,6 @@ const getHome = async (req, res) => {
     pageInfo.profilePic = foundUser.profileImg;
     pageInfo.userName = foundUser.name;
     
-    
     const allProjects = (await foundUser.populate('projects', 'projectOverview')).projects;
     const allLabels = (await foundUser.populate('labels')).labels;
     
@@ -55,7 +54,6 @@ const getHome = async (req, res) => {
     res.render('main', { pageInfo });
     
   } catch (err) {
-    console.log(err);
     pageInfo.dueProjects = null;
     res.render('main', { pageInfo });
   }

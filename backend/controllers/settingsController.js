@@ -1,4 +1,5 @@
 const Users = require('../models/Users');
+const Labels = require('../models/Labels');
 const Projects = require('../models/Projects');
 const cloudinary = require('cloudinary').v2;
 
@@ -80,48 +81,45 @@ const profileNameChange = async (req, res) => {
 
 const deleteAccount = async (req, res) => {
   const userId = req.uuid;
-  
   const deletionFields = ['profileImg', 'projects', 'labels'];
 
   try {
     const foundUser = await Users.findOne({ uuid: userId }, deletionFields);
 
-    // res.clearCookie(
-    //   'refresh_token',
-    //   { httpOnly: true }
-    // )
-    // res.clearCookie(
-    //   'access_token',
-    //   { httpOnly: true }
-    // )
+    res.clearCookie(
+      'refresh_token',
+      { httpOnly: true }
+    )
+    res.clearCookie(
+      'access_token',
+      { httpOnly: true }
+    )
     
-    // throw new Error();
-    // const allLabels = [...foundUser.labels].map(i => `${i._id}`);
-    // console.log(allLabels);
-    // await Labels.deleteMany({ _id: { $in: allLabels } });
+    res.sendStatus(204);
 
-    // await Users.deleteOne({ uuid: userId });
+    // deleting user profile pic
+    await cloudinary.uploader.destroy(foundUser.profileImgId);
 
-    res.json({
-      'status': 'not ok',
-      'msg': 'Account deleted',
-      'redirectTo': '/'
+    const projects = (await foundUser.populate('projects')).projects;
+    
+    const allProjects = projects.map(project => {
+      for (const idea of project.projectIdeas) {
+        if(idea.hostedImgId !== null)
+          cloudinary.uploader.destroy(idea.hostedImgId);
+      }
+      return `${project._id}`;
     })
+    
+    await Projects.deleteMany({ _id: { $in: allProjects } });
 
+    const allLabels = [...foundUser.labels].map(i => `${i._id}`);
+    await Labels.deleteMany({ _id: { $in: allLabels } });
 
-    // send req to an ur api to delete 
-      // profile img
-      // project's ideas images
-      // labels
-
+    await Users.deleteOne({ uuid: userId });
 
   } catch (err) {
     console.log(err.message); 
-    res.json({
-      'status': 'not ok',
-      'msg': 'Account deletion failed',
-      'redirectTo': null
-    })
+    res.sendStatus(400);
   }
 }
 
