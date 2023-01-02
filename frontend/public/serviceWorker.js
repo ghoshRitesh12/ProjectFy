@@ -24,15 +24,15 @@ self.addEventListener('install', (e) => {
 
 // Listen for requests
 self.addEventListener('fetch', (e) => {
-  // e.respondWith(
-  //   fetch(e.request).then(response => response)
-  // );
-
   e.respondWith(
-    caches.match(e.request).then(response => {
-      return response || fetch(e.request);
-    })
+    fetch(e.request).then(response => response)
   );
+
+  // e.respondWith(
+  //   caches.match(e.request).then(response => {
+  //     return response || fetch(e.request);
+  //   })
+  // );
 
 });
 
