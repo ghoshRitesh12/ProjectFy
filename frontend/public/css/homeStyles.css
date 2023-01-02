@@ -215,7 +215,7 @@ textarea {
   gap: 0.5rem;
   flex-wrap: wrap;
   margin-inline: 0 auto;
-  font-size: clamp(0.85rem, 3vmin, 1.05rem);
+  font-size: clamp(0.95rem, 3vmin, 1.05rem);
   color: var(--clr-primary-txt);
 }
 .profy__main__header__name--createdBy .__wrap {
@@ -2800,6 +2800,27 @@ textarea {
 }
 .profy__settings [data-settings-details-field]:read-only:focus {
   outline: 1px solid var(--clr-separator-brdr);
+}
+.profy__settings .__dev {
+  margin-top: 2rem;
+  font-size: 0.95rem;
+  color: var(--clr-primary-txt);
+}
+@media (min-width: 40em) {
+  .profy__settings .__dev {
+    margin-top: 4rem;
+  }
+}
+.profy__settings .__dev_socials {
+  margin-left: 0.2rem;
+  color: var(--clr-logo-project);
+  padding-bottom: 0.2em;
+  border-bottom: 1px dotted transparent;
+  transition: 0.2s ease;
+}
+.profy__settings .__dev_socials:hover {
+  color: var(--clr-primary-txt);
+  border-bottom: 1px dotted var(--prim-btn-clr);
 }
 .profy__settings [data-account-delete-modal] {
   position: fixed;

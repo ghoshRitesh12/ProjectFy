@@ -1,9 +1,15 @@
-import { 
-  $, $$, addGlobalEventListener, randomBoxClr, 
-  greetUser, getHomeDate, convertDbDate  
-} from './utility.js';
-
+import { $, $$, addGlobalEventListener, randomBoxClr, greetUser, getHomeDate } from './utility.js';
 import { getUploadedImgUrl } from './home.ideas.js'; 
+
+
+if("serviceWorker" in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register("/serviceWorker.js")
+      .catch(err => console.log(err))
+  });
+} else {
+  console.error("Application not supported");
+}
 
 
 // account
@@ -54,7 +60,7 @@ addGlobalEventListener('click', '[data-mode]', async e => {
 
 
 // get search results ready ajax req
-addGlobalEventListener('input', '[data-search-input]', async e => {
+$('[data-search-input]').addEventListener('input', async e => {
   try {
     const url = `/api/v1/ready-query-src`;
     const resp = await fetch(url, { method: 'POST' });
@@ -496,16 +502,7 @@ addGlobalEventListener('submit', '.delete__account', async e => {
       location.reload();
       return;
     } 
-    
-    const data = resp && (await resp.json());
-    if(data.status !== 'ok') {
-      $('[data-error-notify-msg]').textContent = data.msg;
-      $('.error_notify').classList.add('show');
-      return;
-    }
-
-    if(data.redirectTo == null) return;
-    location.href = data.redirectTo;
+    location.reload();
 
   } catch (err) {
     console.log(err);
