@@ -47,7 +47,7 @@
       flex-wrap: wrap;
 
       margin-inline: 0 auto;
-      font-size: clamp(.85rem, 3vmin, 1.05rem);
+      font-size: clamp(.95rem, 3vmin, 1.05rem);
       color: var(--clr-primary-txt);
       & .__wrap {
         display: flex;

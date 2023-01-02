@@ -423,6 +423,28 @@
   }
 
 
+  & .__dev {
+    margin-top: 2rem;
+    font-size: .95rem;
+    color: var(--clr-primary-txt);
+    
+    @include breakpoint(medium) { margin-top: 4rem; }
+    
+    &_socials {
+      margin-left: .2rem;
+      color: var(--clr-logo-project);
+      padding-bottom: .2em;
+      border-bottom: 1px dotted transparent;
+      transition: .2s ease;
+
+      &:hover {
+        color: var(--clr-primary-txt);
+        border-bottom: 1px dotted var(--prim-btn-clr);
+      }
+    }
+  }
+
+
   // account delete modal
   & [data-account-delete-modal] {
     position: fixed;
