@@ -1,6 +1,6 @@
 const Users = require('../../models/Users');
 
-const query = { src: null };
+const query = { src: [] };
 
 const readyResults = (projects) => {
   return new Promise((resolve, reject) => {
@@ -35,13 +35,14 @@ const readyResults = (projects) => {
 }
 
 const getQueryResults = (searchQuery) => {
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
+    searchQuery = searchQuery.toLowerCase();
+    
     const results = [...query.src].map(item => {
-      if(item.src.includes(searchQuery.toLowerCase())) {
+      if(item.src.includes(searchQuery)) {
         return { id: item.id, name: item.name }
       }
-    }).filter(i => i != null);    
-
+    }).filter(i => i != null);
 
     if(results.length<=0) {
       reject('No results found');
@@ -66,7 +67,6 @@ const readyQueryResults = async (req, res) => {
     res.sendStatus(400);
   }
 }
-
 
 const handleQuery = async (req, res) => {
   const userId = req.uuid;
@@ -94,7 +94,6 @@ const handleQuery = async (req, res) => {
     })
 
   } catch (error) {
-    console.log(error);
     res.json({
       'status': 'not ok',
       'msg': 'Search unsuccessful',

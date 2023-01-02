@@ -5,24 +5,32 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- <title> ProjectFy </title> -->
+  <meta name="description" content="ProjectFy helps you to create and manage your each individual projects, you can gather your ideas in one place, monitor and manage your progress"/>
+  <meta name="theme-color" content="#181818">
   <title> 
     ProjectFy <%= (pageInfo.project !== null) ? ` | ${pageInfo.project[0].projectOverview.name}` : '' %>
   </title>
-  <!-- Favicon -->
-  <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="/css/rootHomeStyles.css">
 
-  <!-- <#- include('./partials/rootHome_style.ejs') %> -->
+  <link rel="shortcut icon" href="/images/favicon-192x192.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="/images/favicon-192x192.png" type="image/x-icon">
   
+  <link rel="manifest" href="/manifest.json">
 
+  <link rel="stylesheet" href="/css/rootHomeStyles.css">
+  <!-- <#- include('./partials/rootHome_style.ejs') %> -->
   <link rel="stylesheet" href="/css/homeStyles.css">
-  <!-- Custom JS -->
+
   <script src="/js/home.root.js" type="module"></script>
-  <script src="/js/home.overview.js" type="module"></script>
-  <script src="/js/home.ideas.js" type="module"></script>
-  <script src="/js/home.kanban.js" type="module"></script>
+  <% if(['overview', 'ideas', 'kanban'].includes(pageInfo.subSection)) { %>
+  <% const src = `/js/home.${pageInfo.subSection}.js` %>
+  <script src="<%= src %>" type="module"></script>
+  <% } %>
+
+  <%# 
+    <!-- <script src="/js/home.overview.js" type="module"></script> -->
+    <!-- <script src="/js/home.ideas.js" type="module"></script> -->
+    <!-- <script src="/js/home.kanban.js" type="module"></script> -->
+  %>
 </head>
 
 
