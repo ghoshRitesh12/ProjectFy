@@ -12,7 +12,8 @@ const handleSignout = async (req, res) => {
       { httpOnly: true }
     )
 
-    return res.redirect('/');
+    // return res.redirect('/');
+    return res.redirect('/signin');
   }
 
   try {
@@ -29,7 +30,8 @@ const handleSignout = async (req, res) => {
       { httpOnly: true }
     )
 
-    res.redirect('/');
+    // res.redirect('/');
+    res.redirect('/signin');
 
   } catch (error) {
     res.redirect('/');
