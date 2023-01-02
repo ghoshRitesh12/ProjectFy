@@ -2,8 +2,10 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const path = require('path');
+const https = require('https');
 const PORT = process.env.PORT || 4000;
 
+const compression = require('compression');
 const cookieParser = require('cookie-parser');
 const connectDB = require('./config/connectDB');
 
@@ -31,6 +33,7 @@ app.set('view engine', 'ejs');
 // built-in middlewares
 app.use(cookieParser());
 app.use(express.json());
+app.use(compression());
 app.use(express.static(path.resolve(__dirname, '..', 'frontend', 'public')));
 // app.use('/project', express.static(path.resolve(__dirname, '..', 'frontend', 'public')));
 app.use(express.urlencoded({ extended: false }));
@@ -45,6 +48,7 @@ app.use(express.urlencoded({ extended: false }));
   app.use('/confirmation', confirmEmailRouter);
   app.use('/refresh', refreshTokenRouter);
   app.use('/public', publicProjectRouter);
+  app.get('/inactive', (_, res) => res.sendStatus(200));
   app.use(userAuth);
   app.use('/', homeRouter);
   app.use('/profile-settings', profileSettingsRouter);
@@ -57,5 +61,11 @@ app.use(express.urlencoded({ extended: false }));
   app.all('*', (req, res) => res.render('404'));
 
   app.listen(PORT, () => console.log(`Server at http://localhost:${PORT}`));
+
+
+  setInterval(() => { // don't sleep
+    console.log('INTERVAL',new Date().toLocaleString());
+    https.get('https://projectfy.onrender.com/inactive');
+  }, 420000);
 
 })();
