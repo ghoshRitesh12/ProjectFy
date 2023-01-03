@@ -28,6 +28,8 @@ const getProject = async (req, res) => {
 
   try {
     const foundUser = await Users.findOne({ uuid: userId }, userFields);
+    if(!foundUser) return res.render('404');
+
     
     const allProjects = (await foundUser.populate({ 
       path: 'projects', select: 'projectOverview.name' 
