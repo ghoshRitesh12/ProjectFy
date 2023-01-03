@@ -5,13 +5,13 @@
     {
       "src": "/images/favicon-512x512.svg",
       "type": "image/svg+xml",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "maskable"
     },
     {
       "src": "/images/favicon-192x192.png",
       "type": "image/png",
-      "sizes": "192x192",
-      "purpose": "maskable"
+      "sizes": "192x192"
     },
     {
       "src": "./images/favicon-512x512.png",
