@@ -9,7 +9,9 @@
     <div>
       <span data-home-greet-msg></span>
       <span data-home-greet-name>
+        <% if(pageInfo.userName !== null) { %>
         <%= `${pageInfo.userName.split(" ")[0]}` %>
+        <% } %>
       </span>
     </div>
   </div>
