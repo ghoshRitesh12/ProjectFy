@@ -152,6 +152,9 @@ addGlobalEventListener('click', '[data-add-item]', e => {
   for(const item of $$('.newItemForm')) { 
     item.classList.add('hidden');
   }
+  for(const i of $$('[data-newitem-btn-save]')) {
+    i.textContent = 'Create';
+  }
 
   newItemForm.classList.remove('hidden');
   newItemForm.firstElementChild.focus();
@@ -218,6 +221,10 @@ addGlobalEventListener('submit', '.newItemForm', async e => {
   const itemInfo = itemAction[itemType]();
   if(itemInfo === null) return;
 
+  for(const i of $$('[data-newitem-btn-save]')) {
+    i.textContent = '...Creating';
+  }
+
   try {
     const resp = await fetch(formAction, {
       method: 'POST',
@@ -228,7 +235,12 @@ addGlobalEventListener('submit', '.newItemForm', async e => {
     if(resp.redirected === true) {
       location.reload();
       return;
-    } 
+    }
+
+    for(const i of $$('[data-newitem-btn-save]')) {
+      i.textContent = '...Just a sec';
+    }
+
     const data = await resp.json();
     const redirectTo = data && data.redirectTo;
     if(redirectTo == null) {
