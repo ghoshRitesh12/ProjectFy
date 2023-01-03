@@ -126,10 +126,12 @@ const genShareLink = async (req, res) => {
   try {
     const foundProject = await Projects.findById(projectID);
 
+    const publicUrl = `${(req.protocol === 'http') ? 'https' : 'http'}://${req.get('host')}/public/project/${projectID}`;
+
     if(foundProject.isPublic === true) {
       res.status(200).json({
         'status': 'ok',
-        'msg': `${req.protocol}://${req.get('host')}/public/project/${projectID}`
+        'msg': publicUrl
       });
       return;
     }
@@ -139,7 +141,7 @@ const genShareLink = async (req, res) => {
 
     res.status(200).json({
       'status': 'ok',
-      'msg': `${req.protocol}://${req.get('host')}/public/project/${projectID}`
+      'msg': publicUrl
     });
 
   } catch (err) {

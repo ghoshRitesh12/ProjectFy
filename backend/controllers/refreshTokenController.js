@@ -29,7 +29,10 @@ const handleRefreshToken = async (req, res) => {
         res.cookie(
           'access_token',
           `Bearer ${newAccessToken}`,
-          { httpOnly: true, maxAge: 15 * 60 * 1000 }
+          { 
+            httpOnly: true, maxAge: 15 * 60 * 1000,
+            secure: true 
+          }
         )
   
         if(!pth) return res.redirect('back');

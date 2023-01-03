@@ -69,7 +69,7 @@ const handleSignin = async (req, res) => {
             return res.redirect('/signin');
           }
 
-          const confirmUrl = `${req.protocol}://${req.get('host')}/confirmation/${newEmailToken}`;
+          const confirmUrl = `${(req.protocol === 'http') ? 'https' : 'http'}://${req.get('host')}/confirmation/${newEmailToken}`;
           sendEmail({
             receiver: emailId,
             subject: 'ProjectFy Account Re-Confirmation Email',
@@ -118,12 +118,18 @@ const handleSignin = async (req, res) => {
     res.cookie(
       'access_token',
       `Bearer ${accessToken}`,
-      { httpOnly: true, maxAge: 15 * 60 * 1000 }
+      { 
+        httpOnly: true, maxAge: 15 * 60 * 1000,
+        secure: true
+      }
     )
     res.cookie(
       'refresh_token',
       refreshToken,
-      { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 }
+      { 
+        httpOnly: true, maxAge: 24 * 60 * 60 * 1000, 
+        secure: true 
+      }
     )
 
     return res.redirect('/');

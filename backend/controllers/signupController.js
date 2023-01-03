@@ -75,7 +75,7 @@ const handleSignup = async (req, res) => {
           return res.redirect('/signup');
         } 
 
-        const confirmUrl = `${req.protocol}://${req.get('host')}/confirmation/${emailToken}`
+        const confirmUrl = `${(req.protocol === 'http') ? 'https' : 'http'}://${req.get('host')}/confirmation/${emailToken}`
 
         // await makes it slow
         sendEmail({
