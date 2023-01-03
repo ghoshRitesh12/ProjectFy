@@ -46,8 +46,11 @@ addGlobalEventListener('submit', '.section--overview__form', async e => {
   const changedElementName = e.target.dataset.overviewFieldChange;
   const formAction = `${location.href}/edit/${changedElementName}`;
   const changedElement = e.target.querySelector(`[data-overview-field="${changedElementName}"]`);
-  // const changedElementValue = (changedElement.type !== "textarea") ? changedElement.value.trim() : changedElement.textContent.trim();
   const changedElementValue = changedElement.value.trim();
+
+  for(const i of $$('.overview-save-btn')) {
+    i.textContent = '...Saving';
+  }
 
   try {
     const resp = await fetch(formAction, {
@@ -62,6 +65,11 @@ addGlobalEventListener('submit', '.section--overview__form', async e => {
       location.reload();
       return;
     } 
+
+    for(const i of $$('.overview-save-btn')) {
+      i.textContent = '...Saving';
+    }
+
 
     const data = resp && (await resp.json());
     if(data.status !== 'ok') {
@@ -93,7 +101,7 @@ addGlobalEventListener('change', '[data-overview-field="endDate"]', e => {
 
 
 // overview timeElasped & workDone 
-window.addEventListener('load', () => {
+window.addEventListener('DOMContentLoaded', () => {
   // Time Elasped
 
   if($('.profy__main__section--overview') !== null) {

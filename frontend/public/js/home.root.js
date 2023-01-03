@@ -152,7 +152,7 @@ addGlobalEventListener('click', '[data-add-item]', e => {
   for(const item of $$('.newItemForm')) { 
     item.classList.add('hidden');
   }
-  
+
   newItemForm.classList.remove('hidden');
   newItemForm.firstElementChild.focus();
 })
@@ -253,6 +253,7 @@ addGlobalEventListener('click', '[data-project-options]', e => {
   document.body.dataset.scrolly = 'false';
 
   if(projectOption === "delete") {
+    $('.delete__project__description__btns [type="submit"]').textContent = 'Delete';
     $('.delete__project').setAttribute('action', optionUrl);
     $('[data-project-delete-modal]').showModal();
     return;
@@ -339,12 +340,16 @@ addGlobalEventListener('submit', '.delete__project', async e => {
   e.preventDefault();
   const formAction = e.target.getAttribute('action');
 
+  $('.delete__project__description__btns [type="submit"]').textContent = '...Deleting';
+
   try {
     const resp = await fetch(formAction, { method: 'POST' });
     if(resp.redirected === true) {
       location.reload();
       return;
     }
+
+    $('.delete__project__description__btns [type="submit"]').textContent = '...Just a sec';
 
     const data = await resp.json();
     if(data.redirectTo == null) return;
@@ -376,6 +381,8 @@ addGlobalEventListener('click', '[data-label-delete-icon]', e => {
   $('.delete__label').setAttribute('action', formAction);
   $('[data-label-delete-name]').textContent = labelName;
 
+  $('.delete__label__description__btns [type="submit"]').textContent = 'Delete';
+
   document.body.dataset.scrolly = 'false';
   $('[data-label-delete-modal]').showModal();
 })
@@ -392,6 +399,8 @@ addGlobalEventListener('submit', '.delete__label', async e => {
   e.preventDefault();
   const url = e.target.getAttribute('action');
 
+  $('.delete__label__description__btns [type="submit"]').textContent = '...Deleting';
+
   try {
     const resp = await fetch(url, { method: 'POST' }); 
 
@@ -399,6 +408,8 @@ addGlobalEventListener('submit', '.delete__label', async e => {
       location.reload();
       return;
     } 
+
+    $('.delete__label__description__btns [type="submit"]').textContent = '...Just a sec';
 
     const data = await resp.json();
     const redirectTo = data && data.redirectTo;
@@ -482,6 +493,7 @@ addGlobalEventListener('submit', '[data-profile-settings-form]', async e => {
 
 // settings: account deletion prompt
 addGlobalEventListener('click', '[data-settings-delete-account-btn]', e => {
+  $('.delete__account__description__btns [type="submit"]').textContent = 'Delete';
   document.body.dataset.scrolly = 'false';
   $('[data-account-delete-modal]').showModal();
 });
@@ -495,6 +507,8 @@ addGlobalEventListener('submit', '.delete__account', async e => {
   e.preventDefault();
   const url = e.target.getAttribute('action');
 
+  $('.delete__account__description__btns [type="submit"]').textContent = '...Deleting';
+
   try {
     const resp = await fetch(url, { method: 'POST' });
     
@@ -502,6 +516,9 @@ addGlobalEventListener('submit', '.delete__account', async e => {
       location.reload();
       return;
     } 
+
+    $('.delete__account__description__btns [type="submit"]').textContent = '...Just a sec';
+
     location.reload();
 
   } catch (err) {
@@ -518,6 +535,8 @@ addGlobalEventListener('change', '[data-profile-pic-upload-field]', async e => {
     e.target.value = '';
     return;
   }
+
+  $('[data-preloader]').classList.add('show');
 
   const imgUploadInfo = await getUploadedImgUrl(file);
   const profilePicInfo = {
@@ -537,7 +556,7 @@ addGlobalEventListener('change', '[data-profile-pic-upload-field]', async e => {
     if(resp.redirected === true) {
       location.reload();
       return;
-    } 
+    }
 
     const data = resp && (await resp.json());
     if(data.status !== 'ok') {
@@ -545,6 +564,8 @@ addGlobalEventListener('change', '[data-profile-pic-upload-field]', async e => {
       $('.error_notify').classList.add('show');
       return;
     }
+
+    $('[data-preloader]').classList.remove('show');
     location.reload();
     
   } catch (err) {
@@ -597,7 +618,7 @@ addGlobalEventListener('click', '[data-nav]',
 
 
 
-window.addEventListener('load', () => {
+window.addEventListener('DOMContentLoaded', () => {
   for(const item of $$('[data-project-list-items]')) {
     const clr = randomBoxClr();
     item.style.setProperty('--clr-box', clr);

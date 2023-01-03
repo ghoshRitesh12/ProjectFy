@@ -81,6 +81,7 @@ addGlobalEventListener('click', '[data-create-kanban]', async e => {
     restLabel.setAttribute('data-rest-label-id', i.id);
     $('.edit__kanban__rest-labels').append(restLabel);
   }
+  $('.edit__kanban__save-btn').textContent = 'Create';
 
   document.body.dataset.scrolly = 'false';
   $('[data-kanban-edit-modal]').showModal();
@@ -95,8 +96,10 @@ addGlobalEventListener('click', '[data-kanban-item-option="edit"]', async e => {
   $('.edit__kanban__header--txt').innerText = 'Edit kanban';
   $('[data-rest-labels-txt]').innerText = 'Other Labels';
 
+  console.dir($('[data-label-list-item]').children[0]);
+
   const allLabels = [...$$('[data-label-list-item]')].map(j => { 
-    return { 'text': j.innerText, 'el': j, 'id': j.dataset.labelId } 
+    return { 'text': j.children[0].innerText, 'el': j, 'id': j.dataset.labelId } 
   });
   const itemLabels = [...kanbanItem.querySelectorAll('.kanban-item__label')].map(i => { 
     return { 'text': i.innerText, 'el': i, 'id': i.dataset.kanbanLabelId } 
@@ -136,6 +139,8 @@ addGlobalEventListener('click', '[data-kanban-item-option="edit"]', async e => {
   const kanbanItemDescription = kanbanItem.querySelector('[data-kanban-description]').innerText;
   $('[data-kanban-edit-title]').value = kanbanItemTitle;
   $('[data-kanban-edit-description]').value = kanbanItemDescription;
+
+  $('.edit__kanban__save-btn').textContent = 'Save';
 
   document.body.dataset.scrolly = 'false';
   $('[data-kanban-edit-modal]').showModal();
@@ -189,6 +194,7 @@ e => {
 
 // kanban delete option
 addGlobalEventListener('click', '[data-kanban-item-option="delete"]', e => {
+  $('.delete__kanban__description__btns [type="submit"]').textContent = 'Delete';
   const kanbanSection = e.target.closest('.kanban-section').dataset.kanbanSection;
   const kanbanItem = e.target.closest('.kanban-list__item');
   const formAction = `${kanbanSection}/delete/${kanbanItem.dataset.kanbanItemId}`; 
@@ -221,6 +227,8 @@ addGlobalEventListener('submit', '.edit__kanban', async e => {
     kanbanLabels
   };
 
+  $('.edit__kanban__save-btn').textContent = '...Saving';
+
   try {
     const resp = await fetch(url, {
       method: 'POST',
@@ -234,6 +242,8 @@ addGlobalEventListener('submit', '.edit__kanban', async e => {
       location.reload();
       return;
     } 
+
+    $('.edit__kanban__save-btn').textContent = '...Just a sec';
 
     const data = resp && (await resp.json());
     if(data.status !== 'ok') {
@@ -254,12 +264,16 @@ addGlobalEventListener('submit', '.delete__kanban', async e => {
   const url = `${location.href}/${e.target.getAttribute('action')}`; 
 
   try {
+    $('.delete__kanban__description__btns [type="submit"]').textContent = '...Deleting'
+
     const resp = await fetch(url, { method: 'POST' });
     
     if(resp.redirected === true) {
       location.reload();
       return;
     } 
+
+    $('.delete__kanban__description__btns [type="submit"]').textContent = '...Just a sec'
 
     const data = resp && (await resp.json());
     if(data.status !== 'ok') {

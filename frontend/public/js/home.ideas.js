@@ -196,7 +196,7 @@ addGlobalEventListener('click', '[data-idea-options="edit"]', e => {
   }
   ideaImgType[ideaImgVal]();
 
-
+  $('.edit__idea__save-btn').textContent = 'Save';
   document.body.dataset.scrolly = 'false';
   $('[data-idea-edit-modal]').showModal();
 })
@@ -223,6 +223,8 @@ addGlobalEventListener('submit', '.edit__idea', async e => {
     imgUrl
   }
 
+  $('.edit__idea__save-btn').textContent = '...Saving';
+
   try {
     const resp = await fetch(url, {
       method: 'POST',
@@ -234,7 +236,9 @@ addGlobalEventListener('submit', '.edit__idea', async e => {
       location.reload();
       return;
     } 
-  
+    
+    $('.edit__idea__save-btn').textContent = '...Just a sec';
+
     const data = resp && (await resp.json());
     if(data.status !== 'ok') {
       $('[data-error-notify-msg]').textContent = data.msg;
