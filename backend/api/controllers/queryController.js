@@ -39,9 +39,11 @@ const getQueryResults = (searchQuery) => {
     searchQuery = searchQuery.toLowerCase();
     
     const results = [...query.src].map(item => {
-      if(item.src.includes(searchQuery)) {
+      const string = item.src.join(" ");
+      if(string.includes(searchQuery)) {
         return { id: item.id, name: item.name }
       }
+
     }).filter(i => i != null);
 
     if(results.length<=0) {
