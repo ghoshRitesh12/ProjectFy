@@ -18,8 +18,8 @@
     grid-template-columns: repeat(3, minmax(17rem, 1fr));
     gap: 2rem;
     margin-block: auto;
+    padding-block: 3em 8em;
   }
-  @include breakpoint(large) { padding-block: 3em; }
 
 
 
