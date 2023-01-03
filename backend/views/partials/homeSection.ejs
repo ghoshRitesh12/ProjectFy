@@ -7,21 +7,19 @@
     </div>
 
     <div>
-      <span data-home-greet-msg>
-        Good Evening
-      </span>
+      <span data-home-greet-msg></span>
       <span data-home-greet-name>
         <%= `${pageInfo.userName.split(" ")[0]}` %>
-        <!-- William -->
       </span>
     </div>
   </div>
 
   <div class="profy__home__nearing-duedate-txt">
     <% if(dueProjects !== null) { %> 
-      Here are some projects that are nearing due date :
+      Here are some projects that are nearing due date :)
     <% } else { %> 
       Projects that are nearing due date show up here :)
+      <div> Set due dates on existing projects </div>
     <% } %> 
   </div>
 

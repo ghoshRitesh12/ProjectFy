@@ -13,12 +13,17 @@
 
   <link rel="shortcut icon" href="/images/favicon2-192x192.png" type="image/x-icon">
   <link rel="apple-touch-icon" href="/images/favicon-192x192.png" type="image/x-icon">
+
+  <link rel="preload" href="/fonts/ubuntu-v20-latin-500.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/ubuntu-v20-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/roboto-v30-latin-500.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/roboto-v30-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
   
   <link rel="manifest" href="/manifest.json">
 
-  <!-- <link rel="stylesheet" href="/css/rootHomeStyles.css"> -->
   <%- include('./partials/rootHome_style.ejs') %>
-  <link rel="stylesheet" href="/css/homeStyles.css">
+  <link rel="preload stylesheet" href="/css/homeStyles.css" as="style" crossorigin="anonymous">
+  <!-- <link rel="stylesheet" href="/css/homeStyles.css"> -->
 
   <script src="/js/home.root.js" type="module"></script>
   <% if(['overview', 'ideas', 'kanban'].includes(pageInfo.subSection)) { %>
@@ -26,11 +31,6 @@
   <script src="<%= src %>" type="module"></script>
   <% } %>
 
-  <%# 
-    <!-- <script src="/js/home.overview.js" type="module"></script> -->
-    <!-- <script src="/js/home.ideas.js" type="module"></script> -->
-    <!-- <script src="/js/home.kanban.js" type="module"></script> -->
-  %>
 </head>
 
 
