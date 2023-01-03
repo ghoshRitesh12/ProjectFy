@@ -1727,11 +1727,7 @@ textarea {
     grid-template-columns: repeat(3, minmax(17rem, 1fr));
     gap: 2rem;
     margin-block: auto;
-  }
-}
-@media (min-width: 64em) {
-  .profy__main__section--kanban {
-    padding-block: 3em;
+    padding-block: 3em 8em;
   }
 }
 .profy__main__section--kanban .kanban-section {
@@ -2921,6 +2917,45 @@ textarea {
 }
 .profy__settings .delete__account__description__btns button[type=submit]:hover {
   background-color: var(--clr-signout-bg-hover);
+}
+.profy__settings [data-preloader] {
+  display: none;
+  place-items: center;
+  position: fixed;
+  inset: 0;
+  isolation: isolate;
+  z-index: 200;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.profy__settings [data-preloader].show {
+  display: grid;
+}
+.profy__settings .loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #FFF;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  -webkit-animation: rotation 1s linear infinite;
+          animation: rotation 1s linear infinite;
+}
+@-webkit-keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .profy__projects {
