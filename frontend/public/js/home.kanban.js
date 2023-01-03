@@ -70,7 +70,7 @@ addGlobalEventListener('click', '[data-create-kanban]', async e => {
   $('[data-rest-labels-txt]').innerText = 'All Labels';
 
   const allLabels = [...$$('[data-label-list-item]')].map(j => { 
-    return { 'text': j.innerText, 'el': j, 'id': j.dataset.labelId } 
+    return { 'text': j.children[0].innerText, 'el': j, 'id': j.dataset.labelId } 
   });
 
   for(const i of allLabels) {
