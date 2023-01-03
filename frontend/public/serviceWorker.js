@@ -1,12 +1,4 @@
 const CACHE_NAME = "ProjectFy";
-// const assets = [
-//   '/',
-//   '/images/favicon-192x192.png', '/images/favicon-512x512.png', '/images/favicon-512x512.svg',
-//   '/css/homeStyles.css', '/css/rootHomeStyles.css',
-//   '/js/home.overview.js', '/js/home.ideas.js', '/js/home.kanban.js',
-//   '/js/home.root.js', '/js/signinPage.js', '/js/signupPage.js', '/js/utility.js'
-// ];
-
 const assets = [];
 
 // Install
@@ -32,7 +24,6 @@ self.addEventListener('fetch', (e) => {
   //     return response || fetch(e.request);
   //   })
   // );
-
 });
 
 
