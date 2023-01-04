@@ -22,7 +22,7 @@ const readyResults = (projects) => {
       return {
         id: `${i._id}`, 
         name: `${i.projectOverview.name}`,
-        src: [...name, ...goals, ...spreadIdeas, ...spreadKanbans]
+        src: [...name, ...goals, ...spreadIdeas, ...spreadKanbans].join(" ")
       }
     });
 
@@ -39,8 +39,7 @@ const getQueryResults = (searchQuery) => {
     searchQuery = searchQuery.toLowerCase();
     
     const results = [...query.src].map(item => {
-      const string = item.src.join(" ");
-      if(string.includes(searchQuery)) {
+      if(item.src.includes(searchQuery)) {
         return { id: item.id, name: item.name }
       }
 

@@ -35,7 +35,6 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(compression());
 app.use(express.static(path.resolve(__dirname, '..', 'frontend', 'public')));
-// app.use('/project', express.static(path.resolve(__dirname, '..', 'frontend', 'public')));
 app.use(express.urlencoded({ extended: false }));
 
 
