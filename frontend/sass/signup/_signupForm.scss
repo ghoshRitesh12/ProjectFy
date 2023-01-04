@@ -1,5 +1,26 @@
 @use '../components/' as *;
 
+
+.profy__logo {
+  position: relative;  
+  
+  isolation: isolate;
+  z-index: 112;
+  max-width: fit-content;
+  
+  margin-inline: 0 auto;
+  margin-block: 0 2rem;
+  
+  transition: .2s ease;
+  
+  @include breakpoint(medium) {
+    position: absolute;
+    top: 2rem; 
+    margin-inline: auto;
+  }
+}
+
+
 .signup__form-header {
   margin-bottom: 2.5rem;
   color: #444;

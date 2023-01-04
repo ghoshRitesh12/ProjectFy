@@ -18,20 +18,23 @@ addGlobalEventListener('click', '[data-account]', e => {
   if(!$('[data-account-dropdown]').classList.contains('open')) {
     $('[data-account-dropdown]').classList.add('open');
     $('[data-account-dropdown-backdrop]').setAttribute('aria-hidden', 'false');
+    document.body.dataset.scrolly = 'false';
     return;
   } 
-
+  
+  document.body.dataset.scrolly = 'true';
   $('[data-account-dropdown]').classList.remove('open');
   $('[data-account-dropdown-backdrop]').setAttribute('aria-hidden', 'true');
-  
 })
 // account-dropdown-backdrop
 addGlobalEventListener('click', '[data-account-dropdown-backdrop]', e => {
+  document.body.dataset.scrolly = 'true';
   e.target.setAttribute('aria-hidden', 'true');
   $('[data-account-dropdown]').classList.remove('open');
 })
 // data-account-options toggle
 addGlobalEventListener('click', '[data-account-options]', e => {
+  document.body.dataset.scrolly = 'false';
   $('[data-account-dropdown]').classList.remove('open');
   $('[data-account-dropdown-backdrop]').setAttribute('aria-hidden', 'true');
 })
@@ -270,7 +273,6 @@ addGlobalEventListener('click', '[data-project-options]', e => {
     $('[data-project-delete-modal]').showModal();
     return;
   }
-  
   // for share
   $('[data-share-link-submitter="makeShareLinkPrivate"]').textContent = 'Make project private';
   $('[data-share-link-submitter="getShareLink"]').textContent = 'Get link';
@@ -600,13 +602,13 @@ addGlobalEventListener('click', '[data-project-options-icon]', e => {
   if(!$('[data-project-options-dropdown]').classList.contains('open')) {
     $('[data-project-options-dropdown]').classList.add('open');
     $('[data-project-options-backdrop]').setAttribute('aria-hidden', 'false');
-    // document.body.style.overflowY = 'hidden';
+    document.body.dataset.scrolly = 'false';
     return;
   } 
 
   $('[data-project-options-dropdown]').classList.remove('open');
   $('[data-project-options-backdrop]').setAttribute('aria-hidden', 'true');
-  // document.body.style.overflowY = 'auto';
+  document.body.dataset.scrolly = 'true';
 })
 addGlobalEventListener('click', '[data-project-options]', 
 e => {
@@ -618,7 +620,7 @@ addGlobalEventListener('click', '[data-project-options-backdrop]',
 e => {
   e.target.setAttribute('aria-hidden', 'true');
   $('[data-project-options-dropdown]').classList.remove('open');
-  // document.body.style.overflowY = 'auto';
+  document.body.dataset.scrolly = 'true';
 })
 //----</profy_main header>
 

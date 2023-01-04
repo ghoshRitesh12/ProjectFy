@@ -1,5 +1,26 @@
 @use '../components/' as *;
 
+.profy__logo {
+  position: relative;  
+  
+  isolation: isolate;
+  z-index: 112;
+  max-width: fit-content;
+  
+  margin-inline: 0 auto;
+  margin-block: 0 2rem;
+  
+  transition: .2s ease;
+  
+  @include breakpoint(medium) {
+    position: absolute;
+    top: 2rem; 
+    margin-inline: auto;
+  }
+
+}
+
+
 .signin__form-header {
   margin-bottom: 2.5rem;
   color: #444;
@@ -21,6 +42,7 @@
 }
 
 .signin__form-wrapper {
+  // position: relative;
   flex: 1 1 80%;
   padding: 1.3rem;
   width: 100%;

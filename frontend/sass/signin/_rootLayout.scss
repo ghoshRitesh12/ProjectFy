@@ -56,7 +56,10 @@ body {
   align-items: center;
   flex-direction: column-reverse;
   gap: 0rem;
+  
   position: relative;
+  isolation: isolate;
+  z-index: 100;
 
   background-color: #00aeff;
 

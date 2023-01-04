@@ -167,6 +167,25 @@ body ::selection {
   }
 }
 
+.profy__logo {
+  position: relative;
+  isolation: isolate;
+  z-index: 112;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  margin-inline: 0 auto;
+  margin-block: 0 2rem;
+  transition: 0.2s ease;
+}
+@media (min-width: 40em) {
+  .profy__logo {
+    position: absolute;
+    top: 2rem;
+    margin-inline: auto;
+  }
+}
+
 .signup__form-header {
   margin-bottom: 2.5rem;
   color: #444;
@@ -432,7 +451,7 @@ body ::selection {
 
 .signup__banner {
   display: block;
-  margin-top: -40%;
+  margin-top: -45%;
   flex: 0 1 20%;
   padding: 0;
   background: linear-gradient(to bottom, #00aeff, #a985ff 80%);

@@ -164,6 +164,8 @@ body ::selection {
   flex-direction: column-reverse;
   gap: 0rem;
   position: relative;
+  isolation: isolate;
+  z-index: 100;
   background-color: #00aeff;
   min-height: inherit;
 }
@@ -182,6 +184,25 @@ body ::selection {
   .signin {
     gap: 2.5rem;
     padding: 0 0rem 0 2rem;
+  }
+}
+
+.profy__logo {
+  position: relative;
+  isolation: isolate;
+  z-index: 112;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  margin-inline: 0 auto;
+  margin-block: 0 2rem;
+  transition: 0.2s ease;
+}
+@media (min-width: 40em) {
+  .profy__logo {
+    position: absolute;
+    top: 2rem;
+    margin-inline: auto;
   }
 }
 
@@ -413,7 +434,7 @@ body ::selection {
 
 .signin__banner {
   display: block;
-  margin-top: -40%;
+  margin-top: -45%;
   flex: 0 1 20%;
   padding: 0;
   background-image: linear-gradient(to bottom, #a985ff 58%, #00aeff);
