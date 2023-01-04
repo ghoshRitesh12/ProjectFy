@@ -104,7 +104,7 @@ const deleteProject = async (req, res) => {
     await Projects.deleteOne({ _id: projectID });    
 
     return res.json({
-      'status': 'not ok',
+      'status': 'ok',
       'msg': 'project deletion successful',
       'redirectTo': '/'
     });

@@ -88,11 +88,11 @@ const deleteAccount = async (req, res) => {
 
     res.clearCookie(
       'refresh_token',
-      { httpOnly: true }
+      { httpOnly: true, secure: true }
     )
     res.clearCookie(
       'access_token',
-      { httpOnly: true }
+      { httpOnly: true, secure: true }
     )
     
     res.sendStatus(204);

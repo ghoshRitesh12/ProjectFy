@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema({
     unique: true
   },
   password: { type: String, trim: true, required: true },
-  refreshToken : { type: String, trim: true, default: "" },
+  refreshToken : { type: String, trim: true, default: null },
   verified:  { type: Boolean, default: false },
   profileImg: { type: String, trim: true, default: null },
   profileImgId: { type: String, default: null },

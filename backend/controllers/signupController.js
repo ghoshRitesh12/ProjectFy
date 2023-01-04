@@ -86,7 +86,7 @@ const handleSignup = async (req, res) => {
             max-width: fit-content; padding: 32px; color: #eee; border-radius: 16px;
             word-wrap: break-word; font-weight: 400;">
 
-            <div> Hi ${emailId} </div>
+            <div> Hi <span style="color: #59caff">${emailId}</span> </div>
             <br/>
             <div> Thank you for registering with ProjectFy </div>
             <br/>
