@@ -81,7 +81,7 @@ const profileNameChange = async (req, res) => {
 
 const deleteAccount = async (req, res) => {
   const userId = req.uuid;
-  const deletionFields = ['profileImg', 'projects', 'labels'];
+  const deletionFields = ['profileImgId', 'projects', 'labels'];
 
   try {
     const foundUser = await Users.findOne({ uuid: userId }, deletionFields);
@@ -98,7 +98,8 @@ const deleteAccount = async (req, res) => {
     res.sendStatus(204);
 
     // deleting user profile pic
-    await cloudinary.uploader.destroy(foundUser.profileImgId);
+    if(foundUser.profileImgId !== null)
+      cloudinary.uploader.destroy(foundUser.profileImgId);
 
     const projects = (await foundUser.populate('projects')).projects;
     
@@ -116,6 +117,8 @@ const deleteAccount = async (req, res) => {
     await Labels.deleteMany({ _id: { $in: allLabels } });
 
     await Users.deleteOne({ uuid: userId });
+
+    console.log(foundUser);
 
   } catch (err) {
     console.log(err.message); 
