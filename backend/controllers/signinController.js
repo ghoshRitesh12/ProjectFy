@@ -132,7 +132,8 @@ const handleSignin = async (req, res) => {
       }
     )
 
-    return res.redirect('/');
+    res.redirect('/');
+    return;
     
   } catch (err) {
     console.log(err.message);
