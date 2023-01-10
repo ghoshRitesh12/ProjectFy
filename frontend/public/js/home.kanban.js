@@ -96,8 +96,6 @@ addGlobalEventListener('click', '[data-kanban-item-option="edit"]', async e => {
   $('.edit__kanban__header--txt').innerText = 'Edit kanban';
   $('[data-rest-labels-txt]').innerText = 'Other Labels';
 
-  console.dir($('[data-label-list-item]').children[0]);
-
   const allLabels = [...$$('[data-label-list-item]')].map(j => { 
     return { 'text': j.children[0].innerText, 'el': j, 'id': j.dataset.labelId } 
   });
