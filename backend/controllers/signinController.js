@@ -42,7 +42,7 @@ const handleSignin = async (req, res) => {
     if(!foundUser) {
       info.emailId = emailId;
       info.pwd = password;
-      info.error = 'In-valid credentials' ;
+      info.error = 'In-valid credentials.' ;
       return res.redirect('/signin');
     }
 
@@ -136,7 +136,7 @@ const handleSignin = async (req, res) => {
     return;
     
   } catch (err) {
-    console.log(err.message);
+    console.log(err);
     res.redirect('/signin');
   }
 }

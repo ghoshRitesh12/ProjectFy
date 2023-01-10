@@ -19,7 +19,9 @@ const getAllLabels = async (req, res) => {
 
   try {
     const foundUser = await Users.findOne({ uuid: userId }, userFields);
-    const allLabels = (await foundUser.populate('labels')).labels;   
+    const allLabels = (await foundUser.populate({ 
+      path: 'labels', options: { sort: { '_id': -1 } }
+    })).labels;   
     
     pageInfo.allLabels = ([...allLabels].length>0) ? [...allLabels] : null
     pageInfo.theme = foundUser.userTheme;

@@ -20,7 +20,9 @@ const getAllProjects = async (req, res) => {
   
   try {
     const foundUser = await Users.findOne({ uuid: userId }, userFields);
-    const allProjects = (await foundUser.populate('projects')).projects;
+    const allProjects = (await foundUser.populate({ 
+      path: 'projects', options: { sort: { '_id': -1 } }
+    })).projects;
     
     pageInfo.allProjects = ([...allProjects].length>0) ? [...allProjects] : null;
     pageInfo.theme = foundUser.userTheme;

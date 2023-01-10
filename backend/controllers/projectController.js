@@ -32,14 +32,17 @@ const getProject = async (req, res) => {
 
     
     const allProjects = (await foundUser.populate({ 
-      path: 'projects', select: 'projectOverview.name' 
+      path: 'projects', select: 'projectOverview.name',
+      options: { sort: { '_id': -1 } }
     })).projects;
     if(![...allProjects].map(i => `${i._id}`).includes(projectID)) 
     return res.render('404');
     
     pageInfo.allProjects = [...allProjects];
 
-    const allLabels = (await foundUser.populate('labels')).labels;
+    const allLabels = (await foundUser.populate({ 
+      path: 'labels', options: { sort: { '_id': -1 } }
+    })).labels;
     pageInfo.allLabels = [...allLabels];
 
     pageInfo.theme = foundUser.userTheme;
@@ -52,10 +55,13 @@ const getProject = async (req, res) => {
       path: 'projects', select: [...new Set(projectFields)], 
       match: { _id: projectID },
       populate: (populateSubSection === 'projectKanban') ? { path: 'projectKanban.labels' } : null
+    })).projects[0];
 
-    })).projects;
-  
-    pageInfo.project = project;
+    // console.log(project);
+
+
+
+    pageInfo.project = [project];
     // console.log(project[0].projectIdeas);
 
     res.render('main', { pageInfo });

@@ -61,16 +61,18 @@ const createKanban = async (req, res) => {
 
     const existingKanbans = [...foundProject.projectKanban];
     const allKanbans = [...existingKanbans, kanbanItemInfo];
-    foundProject.projectKanban = allKanbans;    
+    foundProject.projectKanban = allKanbans.sort((a, b) => (`${a._id}` > `${b._id}` ? -1 : 1));    
     await foundProject.save();
 
-    await calcAndSetTasks(projectID);
+    console.log(allKanbans);
 
     res.json({
       'status': 'ok',
       'msg': `Created kanban item`,
       'redirectTo': null
     })
+    
+    await calcAndSetTasks(projectID);
 
   } catch (err) {
     console.log(err);
@@ -123,15 +125,14 @@ const editKanban = async (req, res) => {
     foundProjectKanban.description = req.body.kanbanDescription;
     foundProjectKanban.labels = req.body.kanbanLabels;
     await foundProject.save();
-
-    await calcAndSetTasks(projectID);
-
+    
     res.json({
       'status': 'ok',
       'msg': `Modified kanban item`,
       'redirectTo': null
     })
-
+    
+    await calcAndSetTasks(projectID);
 
   } catch (err) {
     console.log(err.message);
@@ -184,14 +185,13 @@ const deleteKanban = async (req, res) => {
     foundProject.projectKanban = [...filteredKanbans];
     await foundProject.save();
 
-    await calcAndSetTasks(projectID);
-
     res.json({
       'status': 'ok',
       'msg': `Deleted kanban item`,
       'redirectTo': null
     })
-
+    
+    await calcAndSetTasks(projectID);
 
   } catch (err) {
     console.log(err.message);
@@ -245,14 +245,13 @@ const shiftKanban = async (req, res) => {
     foundProjectKanban.category = sectionToMoveTo;
     await foundProject.save();
 
-    await calcAndSetTasks(projectID);
-
     res.json({
       'status': 'ok',
       'msg': `Shifted kanban item`,
       'redirectTo': null
     })
-
+    
+    await calcAndSetTasks(projectID);
 
   } catch (err) {
     console.log(err.message);

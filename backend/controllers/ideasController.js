@@ -34,7 +34,7 @@ const createIdea = async (req, res) => {
 
     const existingIdeas = [...foundProject.projectIdeas];
     const allIdeas = [...existingIdeas, ideaItemInfo];
-    foundProject.projectIdeas = allIdeas;    
+    foundProject.projectIdeas = allIdeas.sort((a, b) => (`${a._id}` > `${b._id}` ? -1 : 1));    
     await foundProject.save();
 
     res.json({
