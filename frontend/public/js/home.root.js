@@ -67,8 +67,6 @@ $('[data-search-input]').addEventListener('input', async e => {
   try {
     const url = `/api/v1/ready-query-src`;
     const resp = await fetch(url, { method: 'POST' });
-    console.log(resp);
-
   } catch (err) {
     console.log(err)
   }

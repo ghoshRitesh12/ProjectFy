@@ -109,7 +109,7 @@ const handleSignin = async (req, res) => {
     const refreshToken = jwt.sign(
       { "uuid": foundUser.uuid },
       process.env.REFRESH_TOKEN_SECRET,
-      { expiresIn: '1d' }
+      { expiresIn: '15d' }
     );
 
     foundUser.refreshToken = refreshToken;
@@ -127,7 +127,7 @@ const handleSignin = async (req, res) => {
       'refresh_token',
       refreshToken,
       { 
-        httpOnly: true, maxAge: 24 * 60 * 60 * 1000, 
+        httpOnly: true, maxAge: 15 * 24 * 60 * 60 * 1000, 
         secure: true 
       }
     )

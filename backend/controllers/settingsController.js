@@ -121,8 +121,9 @@ const deleteAccount = async (req, res) => {
     console.log(foundUser);
 
   } catch (err) {
-    console.log(err.message); 
-    res.sendStatus(400);
+    res.json({
+      error: err.message
+    }); 
   }
 }
 
