@@ -66,7 +66,7 @@ addGlobalEventListener('click', '[data-mode]', async e => {
 $('[data-search-input]').addEventListener('input', async e => {
   try {
     const url = `/api/v1/ready-query-src`;
-    const resp = await fetch(url, { method: 'POST' });
+    await fetch(url, { method: 'POST' });
   } catch (err) {
     console.log(err)
   }
@@ -107,7 +107,7 @@ addGlobalEventListener('submit', '[data-search-form]', async e => {
   const query = $('[data-search-input]').value.trim();
   if(query === '') return;
   
-  const formAction = `${e.target.getAttribute('action')}/${query}`;
+  const formAction = `${e.target.getAttribute('action')}?q=${query}`;
   try {
     const resp = await fetch(formAction, { method: 'POST' });
     const data = resp && (await resp.json());
@@ -118,6 +118,8 @@ addGlobalEventListener('submit', '[data-search-form]', async e => {
     );
 
   } catch (err) {
+    console.log(err);
+    return;
     location.reload();
   }
 })

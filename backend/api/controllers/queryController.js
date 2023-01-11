@@ -71,7 +71,7 @@ const readyQueryResults = async (req, res) => {
 
 const handleQuery = async (req, res) => {
   const userId = req.uuid;
-  const { query } = req.params;
+  const { q } = req.query;
 
   try {
     const foundUser = await Users.findOne({ uuid: userId }, 'projects');
@@ -80,18 +80,20 @@ const handleQuery = async (req, res) => {
         'status': 'not ok',
         'msg': 'Search unsuccessful',
         'results': null,
-        'searchedQuery': query
+        'searchedQuery': q
       })
       return;
     }
 
-    const queryResults = await getQueryResults(query);
+    const queryResults = await getQueryResults(q);
+
+    console.log(queryResults);
 
     res.json({
       'status': 'ok',
       'msg': 'Search successful',
       'results': queryResults,
-      'searchedQuery': query
+      'searchedQuery': q
     })
 
   } catch (error) {
@@ -99,7 +101,7 @@ const handleQuery = async (req, res) => {
       'status': 'not ok',
       'msg': 'Search unsuccessful',
       'results': null,
-      'searchedQuery': query
+      'searchedQuery': q
     })
   }
 }

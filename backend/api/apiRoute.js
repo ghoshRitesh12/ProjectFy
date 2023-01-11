@@ -9,6 +9,6 @@ router.post('/get-signature', getSignature);
 
 router.post('/ready-query-src', queryController.readyQueryResults);
 
-router.post('/search/:query', queryController.handleQuery);
+router.post('/search', queryController.handleQuery);
 
 module.exports = router;
