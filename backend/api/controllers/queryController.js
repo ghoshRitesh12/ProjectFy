@@ -87,8 +87,6 @@ const handleQuery = async (req, res) => {
 
     const queryResults = await getQueryResults(q);
 
-    console.log(queryResults);
-
     res.json({
       'status': 'ok',
       'msg': 'Search successful',
