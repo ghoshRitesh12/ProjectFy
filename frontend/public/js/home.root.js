@@ -119,7 +119,6 @@ addGlobalEventListener('submit', '[data-search-form]', async e => {
 
   } catch (err) {
     console.log(err);
-    return;
     location.reload();
   }
 })
