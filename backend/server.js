@@ -33,7 +33,7 @@ app.set('view engine', 'ejs');
 // built-in middlewares
 app.use(cookieParser());
 app.use(express.json());
-// app.use(compression());
+app.use(compression());
 app.use(express.static(path.resolve(__dirname, '..', 'frontend', 'public')));
 app.use(express.urlencoded({ extended: false }));
 
@@ -62,9 +62,9 @@ app.use(express.urlencoded({ extended: false }));
   app.listen(PORT, () => console.log(`Server at http://localhost:${PORT}`));
 
 
-  setInterval(() => { // don't sleep
-    console.log('INTERVAL',new Date().toLocaleString());
-    https.get('https://projectfy.onrender.com/inactive');
-  }, 420000);
+  // setInterval(() => { // don't sleep
+  //   console.log('INTERVAL',new Date().toLocaleString());
+  //   https.get('https://projectfy.cyclic.app/inactive');
+  // }, 420000);
 
 })();

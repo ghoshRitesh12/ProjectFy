@@ -6,7 +6,7 @@ __Author:__ Ritesh Ghosh
 
 ***
 
-### 1. Go to [https://projectfy.onrender.com](https://projectfy.onrender.com/) to create a new account and continue.
+### 1. Go to [https://projectfy.cyclic.app/](https://projectfy.cyclic.app/) to create a new account and continue.
 
 
 ### 2. Type your first & second name
