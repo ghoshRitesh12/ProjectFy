@@ -62,9 +62,10 @@ app.use(express.urlencoded({ extended: false }));
   app.listen(PORT, () => console.log(`Server at http://localhost:${PORT}`));
 
 
-  // setInterval(() => { // don't sleep
-  //   console.log('INTERVAL',new Date().toLocaleString());
-  //   https.get('https://projectfy.cyclic.app/inactive');
-  // }, 420000);
+  setInterval(() => { // don't sleep
+    console.log('INTERVAL',new Date().toLocaleString());
+    https.get('https://projectfy.cyclic.app/inactive');
+  }, 420000);
 
 })();
+

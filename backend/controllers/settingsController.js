@@ -23,8 +23,14 @@ const getProfileSettings = async (req, res) => {
   
   try {
     const foundUser = await Users.findOne({ uuid: uuid }, userFields);
-    const allProjects = (await foundUser.populate('projects', 'projectOverview')).projects;
-    const allLabels = (await foundUser.populate('labels')).labels;
+    const allProjects = (await foundUser.populate({ 
+      path: 'projects', select: 'projectOverview',
+      options: { sort: { '_id': -1 } }
+    })).projects;
+    
+    const allLabels = (await foundUser.populate({ 
+      path: 'labels', options: { sort: { '_id': -1 } }
+    })).labels;
 
     pageInfo.allProjects = [...allProjects];
     pageInfo.allLabels = [...allLabels];
