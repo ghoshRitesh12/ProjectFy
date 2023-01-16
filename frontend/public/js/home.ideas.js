@@ -95,7 +95,7 @@ addGlobalEventListener('submit', '.ideas-form', async e => {
   const creationDate = getIdeaDate();
   const ideaDescription = $('[data-ideasForm-description]').value;
   const isImgAUrl = ($('[data-ideasForm-imgUpload]').files.length <= 0) ? true : false;
-  const imgUrl = $('[data-ideasForm-imgUrl]').value;
+  const imgUrl = ($('[data-ideasForm-imgUrl]').value === "") ? null : $('[data-ideasForm-imgUrl]').value;
 
   const ideaInfo = {
     creationDate,
@@ -179,22 +179,24 @@ addGlobalEventListener('click', '[data-idea-options="edit"]', e => {
   const formAction = `${location.href}/edit/${ideaEl.dataset.ideaId}`;
   $('.edit__idea').setAttribute('action', formAction);
 
-  const ideaImg = ideaEl.querySelector('[data-idea-imgUrl]');
-  const ideaImgVal = ideaImg.dataset.ideaImgurl;
-  const ideaImgType = {
-    srcUrl() { 
-      $('.edit__idea__img').classList.remove('upload');
-      $('.edit__idea__img').classList.add('url');
-      $('[data-idea-edit-imgUrl]').value = ideaImg.getAttribute('src');
-    },
-    srcUpload() {
-      $('.edit__idea__img').classList.remove('url');
-      $('.edit__idea__img').classList.add('upload');
-      // $('[data-idea-edit-imgUpload-preview]').classList.remove('hide');
-      $('[data-idea-edit-imgUpload]').setAttribute('src', ideaImg.getAttribute('src'));
+  if(ideaEl.querySelector('.idea__img') !== null) {
+    const ideaImg = ideaEl.querySelector('[data-idea-imgUrl]');
+    const ideaImgVal = ideaImg.dataset.ideaImgurl;
+    const ideaImgType = {
+      srcUrl() { 
+        $('.edit__idea__img').classList.remove('upload');
+        $('.edit__idea__img').classList.add('url');
+        $('[data-idea-edit-imgUrl]').value = ideaImg.getAttribute('src');
+      },
+      srcUpload() {
+        $('.edit__idea__img').classList.remove('url');
+        $('.edit__idea__img').classList.add('upload');
+        // $('[data-idea-edit-imgUpload-preview]').classList.remove('hide');
+        $('[data-idea-edit-imgUpload]').setAttribute('src', ideaImg.getAttribute('src'));
+      }
     }
+    ideaImgType[ideaImgVal]();
   }
-  ideaImgType[ideaImgVal]();
 
   $('.edit__idea__save-btn').textContent = 'Save';
   document.body.dataset.scrolly = 'false';

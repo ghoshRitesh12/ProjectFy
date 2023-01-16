@@ -238,19 +238,22 @@
   &--ideasContainer {
     flex: 1;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
     gap: 2.5rem 2rem;
+    position: relative;
+    isolation: isolate;
+    z-index: 80;
     
     & .idea {
       position: relative;
-      isolation: isolate;
 
       max-width: 20rem;
+      min-width: 18rem;
       margin-bottom: auto;
       margin-inline: auto;
       padding-block: .2em .8em;
 
-      overflow: hidden;
+      // overflow: hidden;
       border-radius: $borders;
       background-color: var(--clr-sidebar-bg);
 
@@ -258,20 +261,21 @@
       & .idea__options--wrap {
         display: block;
         position: relative;
-        isolation: isolate;
-        z-index: 72;
-        // margin-bottom: .5rem;
-        // border: 1px solid red;
+        // isolation: isolate;
+        // z-index: 82;
 
+        
         & .idea__options--icon {
+          // outline: 1px solid salmon;
           display: block;
           position: absolute;
+          isolation: isolate;
+          z-index: 72;
           right: 0;
 
           margin-inline: auto 0;
-          padding: .6em .5em .7em .7em;
+          padding: .6em .5em .7em .5em;
 
-          // outline: 1px solid #999;
           max-width: fit-content;
           cursor: pointer;
           font-size: 1.08rem;
@@ -281,6 +285,8 @@
         // actual options container
         & .idea__options {
           position: absolute;
+          isolation: isolate;
+          z-index: 82;
           right: 0;
           margin: 3.5rem .9rem 0 0;
           padding-block: .4rem;
